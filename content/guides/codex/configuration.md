@@ -2,12 +2,12 @@
 title: configuration
 description: where codex instructions, permissions, tools, and reusable workflows belong.
 products: [codex]
-updatedAt: "2026-08-29T19:04:00-04:00"
-checkedAt: "2026-08-28T00:00:00-04:00"
+updatedAt: "2026-09-07T15:01:58-04:00"
+checkedAt: "2026-09-07T15:01:58-04:00"
 status: current
-completion: excerpt
-evidence: [tested, official-source, analysis]
-sources: [openai-codex-manual, openai-codex-agents-md, openai-codex-skills, openai-codex-plugins, openai-codex-mcp, openai-codex-config, openai-codex-security]
+completion: complete
+evidence: [official-source, analysis]
+sources: [openai-codex-agents-md, openai-codex-config, openai-codex-config-basic, openai-codex-config-advanced, openai-codex-memories, openai-codex-approvals, openai-codex-permissions]
 redirects: []
 voice: evidence
 navigation:
@@ -15,45 +15,100 @@ navigation:
   order: 30
 ---
 
-## configuration has separate jobs
+## put each kind of context in the right place
 
-### AGENTS.md explains the repository
+the configuration gets easier to follow when each file has a job:
 
-- repository instructions and verification commands: `AGENTS.md`
-- reusable workflow and reference material: a skill
-- distributable tools and extensions: a plugin or MCP server
+| thing you want to preserve | place it belongs |
+| --- | --- |
+| repository conventions and verification commands | `AGENTS.md` |
+| personal runtime defaults | `~/.codex/config.toml` |
+| supported settings shared by a trusted project | `.codex/config.toml` |
+| a procedure used for a particular kind of task | a skill |
+| the current bug, desired change, and finish line | the task prompt |
 
-### config.toml chooses defaults
+[`AGENTS.md`](https://learn.chatgpt.com/docs/agent-configuration/agents-md) gives
+the model instructions. config files select runtime behavior. writing “ask
+before using the network” in a paragraph and configuring network restrictions
+have different effects: one guides the agent; the other constrains commands.
 
-- personal defaults: `~/.codex/config.toml`
-- trusted repository settings: `.codex/config.toml`
+## understand what wins
 
-Codex loads project configuration only after the project is trusted. project
-files also cannot override provider, authentication, or profile keys. this
-keeps shared repository configuration narrower than personal account settings.
-the [configuration reference](https://learn.chatgpt.com/docs/config-file/config-reference) describes each value.
+as of September 7, 2026, the documented
+[configuration order](https://learn.chatgpt.com/docs/config-file/config-basic)
+is command line overrides, trusted project configuration, a selected profile,
+user configuration, system defaults, then built in defaults. project settings
+closer to the working directory take precedence over those higher up the tree.
+managed requirements can restrict the values a session may use.
 
-## permissions are two different questions
+Codex skips project `.codex/` layers until the project is trusted. review the
+repository's config, hooks, and rules before granting that trust. some settings,
+including provider and authentication choices, are reserved for configuration
+outside the project. use the
+[reference](https://learn.chatgpt.com/docs/config-file/config-reference) when a
+repository setting appears to be ignored.
 
-### the sandbox defines reach
+### try a temporary override first
 
-filesystem and network access describe what a command can reach. approval
-policy describes when Codex needs your decision before running it. final
-authority to merge, publish, send, pay, or delete remains a separate human
-decision.
+for a local inspection session, start from the repository root:
 
-### approval policy defines interruption
+```sh
+codex --sandbox read-only --ask-for-approval on-request
+```
 
-current Codex releases expose the established `sandbox_mode` and
-`approval_policy` settings alongside newer permission profiles. inspect the
-effective configuration before relying on a profile, especially when a desktop
-app and CLI installation may be on different versions. the [security guide](https://learn.chatgpt.com/docs/security) explains the current controls.
+this sets the sandbox and approval policy for that invocation. it leaves the
+saved config alone. ask Codex to locate the relevant code and explain its
+verification path before deciding whether to start an editing session.
 
-## keep identity and secrets outside the repository
+when several defaults belong together, a
+[profile](https://learn.chatgpt.com/docs/config-file/config-advanced#profiles)
+can collect them. the current format uses a sibling file such as
+`~/.codex/inspect.config.toml`, selected with `codex --profile inspect`:
 
-### credentials belong in external storage
+```toml
+sandbox_mode = "read-only"
+approval_policy = "on-request"
+```
 
-keep stable team rules in version control. keep machine specific paths,
-credentials, and account choices outside the repository. after any handoff
-between terminal, app, editor, or remote machine, confirm the working directory,
-branch, permissions, and verification command before editing.
+trusted project config can override profile values. the explicit command line
+flags above take higher precedence. inspect the active session after switching
+profiles, especially when the app and CLI use different installed versions.
+
+## separate instructions from memory
+
+project instructions should explain what applies now. memory can supply useful
+context from earlier work: a failed approach, a preference, or a pointer to an
+investigation. [local Codex memories](https://learn.chatgpt.com/docs/customization/memories)
+are generated from eligible previous chats when enabled, and updates can arrive
+later.
+
+check remembered facts against the current checkout and the user's latest
+instructions. a memory saying a test uses one command can become stale when
+the project changes package managers. update the canonical project instruction
+so every new task can find the correction.
+
+## permissions describe reach and interruption
+
+the sandbox controls filesystem and network reach for commands. approval
+policy controls when execution needs a decision. `never` means Codex cannot
+ask for a new approval; restricted commands can still fail. it does not grant
+extra access. the [approval guide](https://learn.chatgpt.com/docs/agent-approvals-security)
+explains these combinations.
+
+named [permission profiles](https://learn.chatgpt.com/docs/permissions) provide
+another way to describe filesystem and network policy. they are separate from
+the config profiles above. follow one supported permission configuration
+format, and check the active policy before assuming a directory or destination
+is reachable.
+
+## diagnose the environment before expanding access
+
+when an operation fails, check which host ran it, the working directory, the
+loaded config layer, and the service identity. a missing executable on a remote
+machine needs an environment fix. a request to a service under the wrong
+account needs an identity fix. changing permissions would leave either cause
+unresolved.
+
+keep credentials in the service's authentication flow or an appropriate secret
+store. use config to name the connection and its scope. verify a harmless read
+before depending on it for a write.

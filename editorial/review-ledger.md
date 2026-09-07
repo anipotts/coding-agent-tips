@@ -11,16 +11,215 @@ This file tracks Ani's manual review of every currently public canonical page an
 
 ## review order
 
-1. handbook foundation
-2. Codex
-3. Claude Code
-4. Grok
-5. history
-6. market
-7. method
-8. archive
+1. Grok computer and takeover section
+2. Codex and Claude defaults, workflow examples, and product chapters
+3. credentials and access
+4. shared operating and setup guidance
+5. history and method
+6. final review of hidden chapters and release checks
+
+## full handbook implementation: September 7, 2026
+
+This is the current inventory and supersedes the older audit's unfinished
+outline and excerpt descriptions below. All 24 intended Markdown files now
+contain substantive writing. Seven chapters remain hidden pending Ani's
+review. The existing `outline` metadata on those seven files is the current
+publication gate; it no longer describes their body content.
+
+Writing, factual support, Ani's acceptance, and publication are separate.
+“Source review” means an agent read the relevant primary material against the
+claims. It does not imply a personal product test. These drafts are candidates;
+this implementation request does not approve every newly written sentence.
+
+| Page | Writing | Evidence | Ani review | Route |
+| --- | --- | --- | --- | --- |
+| [Homepage](../content/home.md) | ✅ preserved original | unchanged | preserve, as directed | public |
+| [Operating agents](../content/handbook/operating-agents.md) | 🟦 written | source review | pending | public |
+| [Choosing a setup](../content/handbook/choosing-a-setup.md) | 🟦 written | source review | pending | public |
+| [Credentials and access](../content/handbook/credentials-and-access.md) | 🟦 written | sources + dummy fixture | pending | hidden |
+| [History](../content/handbook/history.md) | 🟦 written | dated primary sources | pending | public |
+| [Method and sources](../content/handbook/method-and-sources.md) | 🟦 written | actual workflow inspected | pending | public |
+| [Codex: overview](../content/guides/codex.md) | 🟦 written | source review | pending; adopted passages preserved | public |
+| [Codex: getting started](../content/guides/codex/getting-started.md) | 🟦 written | sources + local fixture | pending | hidden |
+| [Codex: configuration](../content/guides/codex/configuration.md) | 🟦 written | source review | pending | public |
+| [Codex: workflows](../content/guides/codex/workflows.md) | 🟦 written | source review | pending | hidden |
+| [Codex: extensions](../content/guides/codex/extensions.md) | 🟦 written | source review | pending; adopted passages preserved | public |
+| [Codex: safety](../content/guides/codex/safety.md) | 🟦 written | source review | pending | hidden |
+| [Codex: recommendations](../content/guides/codex/recommendations.md) | 🟦 written | source review | pending | public |
+| [Claude Code: overview](../content/guides/claude-code.md) | 🟦 written | source review | pending; adopted passages preserved | public |
+| [Claude Code: getting started](../content/guides/claude-code/getting-started.md) | 🟦 written | sources + local fixture | pending | hidden |
+| [Claude Code: configuration](../content/guides/claude-code/configuration.md) | 🟦 written | source review | pending | public |
+| [Claude Code: workflows](../content/guides/claude-code/workflows.md) | 🟦 written | source review | pending | hidden |
+| [Claude Code: extensions](../content/guides/claude-code/extensions.md) | 🟦 written | sources + local fixture | pending; adopted passages preserved | public |
+| [Claude Code: safety](../content/guides/claude-code/safety.md) | 🟦 written | source review | pending | hidden |
+| [Claude Code: recommendations](../content/guides/claude-code/recommendations.md) | 🟦 written | source review | pending | public |
+| [Grok: overview](../content/guides/grok.md) | 🟦 written | sources + Ani dictation | computer section next; opening applied | public |
+| [Grok: configuration](../content/guides/grok/configuration.md) | 🟦 written | sources + CLI discovery | pending | public |
+| [Grok: recommendations](../content/guides/grok/recommendations.md) | 🟦 written | source based exercises | pending | public |
+| [Archived Claude tools](../content/archive/claude-code-tools.md) | ✅ preserved compatibility text | 45 cc + 175 lore tests pass | preserve frozen scope | public |
+
+### preserve these passages
+
+- Homepage is byte identical to the starting checkout: SHA256
+  `d226dae5b9f915e44e59b59a0d4b18428a4e7bf81f657513fcc9256a26d89fe0`.
+- Codex's original 3600 × 2260 screenshot and caption remain intact. Responsive
+  WebP derivatives handle inline loading; enlargement uses the original.
+- The three personification asides, Codex coordinator core and introduction,
+  and Claude's reason for interest in Function Hooks remain grounded in Ani's
+  supplied words. Their surrounding new factual prose still needs review.
+- Grok's limited use, X replies joke, tentative “claws” idea, and X/xAI ecosystem
+  meaning remain. The historical boundary ended “X dominant influencer/creator/voice.”
+  The applied replacement ends “the broader X and xAI ecosystem.”
+- The next continuous review block remains “grok bot puts the computer beside
+  the conversation.” The unsupported sentence attributing the exact swipe and
+  cursor sequence to “my own use of the app” was removed. The analogy and
+  documented takeover remain; describing an interface alone does not establish
+  that Ani personally performed each action.
+
+### what still needs Ani
+
+1. Review the Grok computer section: Zoom analogy, cursor/keyboard takeover,
+   and the shared computer explanation. The focused question is pending.
+2. Then review the product chapters one section at a time. Actual Codex/Claude
+   defaults and a concrete reason to switch setups could add personal detail;
+   the current factual guidance makes no invented claim about those defaults.
+3. Review the credentials chapter as source based guidance. Any “why i pay” or
+   “what changed my mind” account needs Ani's own answer before it can be added.
+4. Complete wording review for the shared chapters and the seven hidden chapters.
+   Set each accepted page's review state from an explicit response, then promote
+   the hidden files through the existing content machinery and rerun release checks.
+
+No additional opinion or anecdote is required merely to fill an old heading.
+No mandatory outline remains to start writing. The Grok mobile recording is
+optional: the exact requested footage has not been verified or captured.
+
+### material corrections and reproducible examples
+
+- Unapproved first person claims about preferred surfaces, daily mobile use,
+  personal tests, subscriptions, and password manager purchases were replaced
+  with factual explanations or proposed exercises. Older committed scaffolds
+  remain recoverable from `6f1d025`; this pass's incoming dirty snapshot is
+  `/tmp/coding-agent-tips-before-full-handbook.patch`. Worker originals and
+  source/test packets are in `/tmp/handbook-codex-packet.json`,
+  `/tmp/handbook-claude-packet.json`, `/tmp/handbook-shared-setup-packet.json`,
+  and `/tmp/handbook-shared-claude-packet.json`. These are reference material,
+  not approved voice examples.
+- Codex configuration now uses current profile and precedence documentation.
+  Runtime approval guidance points to agent approvals; Codex Security is
+  separately described as a scanning workflow.
+- Claude's supported hooks, research previews, and Function Hooks proposal are
+  distinguished. The old local preview loader experiment proves no supported
+  interception API and has been removed from public guidance. Its original
+  passage is retained in the Claude packet. Freshness watches now match the
+  actual proposal's `Function Hooks`, `internal proposal`, and `ui.press` terms.
+- On September 7, agent runs exercised the isolated Node examples on Node
+  `v25.8.2`: Codex's two assertions failed before the fix and passed afterward;
+  Claude's corrected exercise passed four assertions. Claude's standalone
+  extension fixture passed two assertions; its hook command returned exit 2
+  with stderr on failure and exit 0 on success. No product model invocation or
+  actual hook event delivery is claimed by those checks.
+- Grok Build `0.2.22`: an agent checked `grok inspect` with a disposable project
+  and separate `GROK_HOME`. Both fixture config files and the rule were found;
+  host compatibility settings were also discovered. This verifies discovery,
+  with no claim to isolated tool enforcement or a model run.
+- Credentials: dummy presence/absence branches passed, with no secret output,
+  network requests, 1Password authentication, or real vault operation.
+- Four unverified ar5iv image embeds were removed from history. The papers and
+  their links remain. Original markup and identified figure candidates are in
+  the shared Claude packet; no third party images were rehosted.
+- `tested` now requires the named tester, environment, version, and limits.
+  Method text describes the actual scheduled detection and optional draft PR
+  workflow. Term matching and link availability do not certify source meaning.
+- Registry versions were checked against npm and the official Claude changelog:
+  Codex `0.153.4`, Claude Code `2.1.263`. Historical test versions stay historical.
+
+### release state
+
+The local publication still has 17 routes; seven completed drafts remain hidden.
+Final integrated validation, performance receipts, and the draft PR are recorded
+here when available. Full launch readiness still requires the wording review
+above. Production has not changed in this pass.
+
+After review: promote only accepted hidden chapters, regenerate and verify all
+24 routes, sign the exact release changes, and check the provider's required
+checks. Use the existing protected PR → main → GitHub Pages path. After release,
+verify the deployed SHA, public routes, search, metadata, and media.
+
+## writing session checklist before the full draft: September 7, 2026
+
+This checklist supersedes stale next actions in the earlier audit. It describes
+authorship and remaining work, separately from deployment. Ani asked to apply
+the writing session's answers and candidate prose to the site. That authorizes
+the targeted amendments below; it does not approve neighboring agent drafts.
+
+Legend: ✅ preserve; 🟦 supplied by Ani and applied with editorial help;
+🟨 existing draft to vet; ⬜ writing still to develop. A preserved passage needs
+no unsolicited rewrite. A new polish can still receive Ani's wording corrections.
+
+| Status | Section | What is established | What remains |
+| --- | --- | --- | --- |
+| ✅ Preserve | Homepage title, introduction, and “why i made this” | Ani's original wording restored after rejecting the two additions; unchanged in this pass. | Leave alone unless Ani requests a specific change. No review of removed text remains. |
+| ✅ Preserve | Codex overview image and caption | Ani supplied the image and directed placement/caption. | Keep the asset and wording; neighboring prose has separate provenance. |
+| 🟦 Applied | Grok introduction: limited use, X replies, social context, claws, ecosystem | Raw manual writing plus explicit answers now polished. Joke and limited-use framing retained. “xapi” resolved to X API; ecosystem affinity replaces a technical infrastructure claim. | Quick read for the new phrasing. No need to repeat the answers. This does not establish use of every comparison product. |
+| 🟦 Applied | Personification paragraph on each overview | Ani explicitly supplied the comparison and asked to apply the candidate. Names and appearance examples remain attributed to his observation. | Leave the underlying opinion alone; refine wording only from Ani's feedback. |
+| 🟦 Applied | Codex extensions: “give work its own context” | Ani's coordinator example is now the main paragraph, with a short overview introduction and link. | Review the agent-written explanation of subagents, status, return updates, and source modification around the example. No further personal anecdote needed for the core point. |
+| 🟦 Applied | Claude extensions: reason for interest in Function Hooks | Ani's interest in changing the harness now introduces the proposal. | Vet the pre-existing technical discussion and any remaining claims about his own defaults. |
+| 🟨 Vet | Grok: “grok bot puts the computer beside the conversation” | Zoom analogy and takeover actions came from Ani. Existing polished paragraphs and shared-computer explanation were authored by an agent. | Read the three subsections: swipe, takeover, shared computer. This is the next continuous manual review point. |
+| 🟨 Vet | Codex and Claude overviews, outside the new personal paragraphs | Existing surfaces, architecture, remote/mobile, and product-boundary prose remains a draft for human review. | Check first-person claims against actual experience. Current metadata or previous publication does not establish acceptance. |
+| 🟨 Vet | Codex and Claude extensions already written | Instructions, skills, MCP, Codex coordination, and Claude hooks now have substantive prose. | Vet explanations and defaults. Function Hooks experiment is explicitly agent-run; model/tool interception remains untested. |
+| 🟨 Vet + ⬜ develop | Configuration and recommendations for all three products | All six pages have text; Codex/Claude pages are excerpts, Grok pages are brief source summaries. | Establish Ani's actual defaults, reasons to switch, and useful limits. Research product facts independently. Grok recommendations must retain limited-use scope. |
+| 🟨 Vet | Shared operating guide and choosing a setup | Existing prose; operating title and first two sections include older unapproved agent rewrites. | Ani vets those changes and the rest of the shared guidance. Preserve rather than assume the earlier rewrite was accepted. |
+| 🟨 Vet | History and method/sources | Existing chronology, setup/market context, and editorial-process claims. | Refresh dated sources/media support; confirm the checking process described actually happens. |
+| ⬜ Develop | Codex: event hooks, packaging, composing extensions | Candidate topics in the blueprint; substantive sections not yet written. | Choose a useful event/example, explain packaging, and show how pieces fit only where reader needs justify it. |
+| ⬜ Develop | Claude: delegation, packaging, composing extensions | Candidate topics remain in the blueprint. | Explain task boundaries and returned results, then packaging/precedence. A personal opinion is optional for a factual section. |
+| ⬜ Start | Getting started, safety, workflows for Codex and Claude; shared credentials/access | Seven files are outlines, hidden from normal publication. | Choose which topics deserve standalone chapters, then write from experience and sources. Agent headings are suggestions. |
+| ✅ Preserve scope | Archived Claude tools | Frozen compatibility material. | Compatibility verification near the documented cutoff; ordinary expansion is outside scope. |
+
+### amendments applied in this pass
+
+- Edited five canonical Markdown files: Grok overview, Codex overview and extensions, Claude overview and extensions. Homepage and unrelated drafts are unchanged.
+- Raw Grok paragraph before polish is preserved verbatim in `/Users/anipotts/.codex/skills/write-with-ani/references/voice-and-calibration.md` under “Grok: raw manual writing”; subsequent dictation remains below in this ledger. That reference is a historical raw sample, not the current question list.
+- The historical manual boundary was the paragraph ending “X dominant influencer/creator/voice.” The replacement ecosystem paragraph now ends “the broader X and xAI ecosystem.” Ani's direction also authorizes the new personification aside. The following H2, “grok bot puts the computer beside the conversation,” remains the next unreviewed block.
+- Changed the broad audience-expectation claim into Ani's product comparison, omitted the unsupported claim of a surge in attention, and made the “claws” claim explicitly tentative. Preserved the named products and point of the comparison.
+- Corrected the Claude experiment attribution from “i tested” to “an agent run for this guide tested.” Original rejected attribution: “on September 5, 2026, i tested the preview path with Claude Code `2.1.261` using a disposable HOME”. This was agent prose, never evidence that Ani performed the test.
+- Registered new primary sources for Bot profiles, X API, Grok/SuperGrok, and Codex open source components. Source checks do not certify personal experience or all other claims in the pages.
+- Delivery: canonical local changes for the normal preview. This pass does not publish the outstanding collection of unreviewed drafts.
+- Verification: content checks passed with zero Astro diagnostics and 88 registered sources; build and site checks passed for 17 canonical routes. Browser inspection confirmed the amended passages on all five routes; the four Codex/Claude routes had no horizontal overflow in the inspected viewport. Homepage is still identical to HEAD. Normal Grok preview refreshed after restarting the stale development server.
+
+## agent audit snapshot
+
+Audit date: September 7, 2026. This is an agent review of all 15 public routes
+and all 101 public H1, H2, and H3 blocks. It does not change any manual review
+state or stand in for Ani's wording approval.
+
+| Route | Blocks | Accuracy and currency | Repetition and voice | Links, media, and presentation | Next editorial pass |
+| --- | ---: | --- | --- | --- | --- |
+| `/` | 2 | Personal claims are clearly framed. Product links are registered; the two X links are Ani-directed cultural examples. | Preserve Ani's original wording. Ani rejected the unsolicited additions on September 7; both passages were restored to the committed original. | Link checks pass. No media. | No homepage rewrite pending; change wording only with explicit direction. |
+| `/handbook/operating-agents/` | 10 | Foundation sources are current enough for this batch; AGENTS.md, CLAUDE.md, and Git worktree behavior were rechecked September 7. | Repeats repository, evidence, authority, and handoff ideas found in both provider overviews. Keep this page as the short shared rule and make the provider chapters carry product-specific behavior. | Link checks and tables pass. No media is required for the first pass. | Batch 1 covers the title and first two sections. |
+| `/handbook/choosing-a-setup/` | 8 | The dated OpenAI and Cursor contract claim needs another check near its proposed November cutoff. Hardware guidance is intentionally qualitative. | Clear evidence voice; several setup rows need more firsthand examples before approval. | Link and table checks pass. No media. | Recheck the dated contract, then review the practical default with Ani. |
+| `/handbook/history/` | 2 | Primary sources support the chronology; every dated event still needs a dedicated freshness pass before approval. | Personal framing is clear and the timeline avoids pretending to be exhaustive. | Links pass. Remote paper and provider images need a final license, attribution, and failure-fallback review. | Source and media provenance pass. |
+| `/handbook/method-and-sources/` | 5 | The evidence labels match the registry. The stated weekly checking process needs confirmation against the actual automation before approval. | Concise and distinct from the guide content. | No inline sources or media; the page relies on the rendered source list. | Verify the real checking workflow, then Ani reviews the trust language. |
+| `/guides/codex/` | 18 | Broad current surface claims were checked August 30 and need routine refresh as the product changes. | Strong firsthand material, with repeated repository and authority guidance that should defer to the operating foundation. | Links pass. The single Ani-owned introduction image is recorded and placed correctly. | Refresh product facts, then trim shared guidance without losing personal examples. |
+| `/guides/codex/configuration/` | 9 | The page was updated after its last checked date, so its metadata and current settings claims need a new source pass. | Useful taxonomy but still an excerpt; it needs a real configuration example. | Links pass. No media. | Recheck current settings and add one inspected configuration example. |
+| `/guides/codex/recommendations/` | 6 | Product links are current enough for navigation, but the recommendations need a paired current workflow test. | Personal framing is thin relative to the overview. | Links and definition rows pass. No media. | Add firsthand defaults and a concrete parallelism failure mode. |
+| `/guides/claude-code/` | 18 | Official sources were checked August 30; paired hands-on testing remains explicitly open. | Strong personal premise, with the same shared repository and authority repetition as the Codex overview. | Links pass. Local provider derivatives are recorded in the publication manifest. | Refresh capabilities, then keep only Claude-specific behavior and firsthand experience. |
+| `/guides/claude-code/configuration/` | 8 | The page was updated after its last checked date and explicitly depends on an unfinished paired test. | Too thin to carry the current title and description confidently. | Links pass. No media. | Run the paired configuration test and expand only from receipts. |
+| `/guides/claude-code/recommendations/` | 6 | Source-based starting points are labeled honestly; current workflow evidence is still missing. | The page states defaults more than it explains Ani's actual choices. | Links and definition rows pass. No media. | Add firsthand surface-switching evidence after the paired test. |
+| `/guides/grok/` | 2 | Current capability claims were checked in August and need a fresh xAI documentation pass. Hands-on evidence remains thin and visible. | Concise source voice is appropriate until Ani has more direct use. | Links pass. Two local provider images are recorded, but the page should confirm both earn their space. | Refresh sources and choose one strongest visual before a deeper draft. |
+| `/guides/grok/configuration/` | 2 | Settings and permission claims need a current source and runtime pass. | Clear but still a source summary. | Links and table pass. No media. | Test `grok inspect` in an isolated project before expanding. |
+| `/guides/grok/recommendations/` | 2 | Recommendations are explicitly provisional because firsthand evidence is limited. | Honest boundary, but the second paragraph repeats the site's general reversible-task guidance. | No media or inline link issues. | Wait for hands-on receipts, then make the recommendation specific. |
+| `/archive/claude-code-tools/` | 3 | Frozen compatibility scope is clear. Install paths and the promised final tag need verification near November 5. | Appropriate frozen voice. | Code block and redirects pass. No new media. | Compatibility verification only; avoid ordinary editorial expansion. |
 
 ## locked media policy
+
+### Grok Bot mobile recording search: September 7
+
+- Requested placement: beside “swipe from the chat into the computer” / “take over, then hand it back.” Desired evidence is a real mobile recording showing chat, computer view, cursor/keyboard takeover, and return to the Bot.
+- Searched xAI product/docs pages, web-indexed Reddit and X results, and X video search. No recording of the exact mobile handoff was verified in this pass. No substitute media was added to the article.
+- Official broader launch trailer: https://x.com/bot/status/2087224798078517251 and the player on https://x.ai/bot. The player was found; the exact mobile sequence was not verified. Keep as a candidate, not a verified mobile walkthrough.
+- Will Oldgram (@old_pgmrs_will): https://x.com/old_pgmrs_will/status/2094265782054367651. Browser inspection confirmed a still image and text about mobile trackpad mode, not a recording. Could support a future credited screenshot reference, but does not fulfill the video request.
+- Fallback offered: record Ani's own 20–30 second mobile demonstration via a USB-connected iPhone in QuickTime (File > New Movie Recording > select iPhone as Camera), or iPhone Screen Recording followed by AirDrop. Apple reference: https://support.apple.com/en-ie/guide/quicktime-player/qtp356b55534/mac.
+- Capture sequence: Bot conversation, swipe to computer, show browser action, take control and type harmless text, hand control back. Use a demo task with nonprivate content. No recording has started; phone connection and capture remain to be done with Ani.
 
 - Ani-owned assets may be stored locally and optimized for the site.
 - Third-party media from X defaults to an official lazy embed or a link to the original post.
@@ -36,8 +235,8 @@ Source: `content/home.md`
 
 | Block | State | Wording and personal insight | Evidence or source needs | Desired media | Attribution or permission | Next action |
 | --- | --- | --- | --- | --- | --- | --- |
-| H1: a casual guide to coding agents in production software (projects, startups & big tech) | unreviewed | Check title wording and scope with Ani. | Confirm the title makes no unsupported claim. | Decide during review. | Pending if media is added. | Ani reviews title. |
-| H2: why i made this | unreviewed | Preserve the firsthand voice. Direct browser feedback exists for individual links, not approval of the whole block. | Recheck the linked X examples and product links. | No media currently requested. | Original links are present; verify labels and hover metadata. | Ani reviews the full section and its links. |
+| H1: a casual guide to coding agents in production software (projects, startups & big tech) | unreviewed | Original title and introduction restored. Ani rejected the added personal paragraph on September 7. | Preserve the original claims. | No media currently requested. | Not applicable. | Preserve Ani's wording; no review of the removed addition is pending. |
+| H2: why i made this | unreviewed | Original section restored. Ani rejected the unsolicited rewrite on September 7. This correction does not imply approval of the full block. | Product links pass the registry check. The two X links are Ani-directed cultural examples, not technical evidence. | No media currently requested. | Original links are present. | Preserve Ani's wording and browser-directed links; no review of the removed ending is pending. |
 
 ### `/handbook/operating-agents/`
 
@@ -45,9 +244,9 @@ Source: `content/handbook/operating-agents.md`
 
 | Block | State | Wording and personal insight | Evidence or source needs | Desired media | Attribution or permission | Next action |
 | --- | --- | --- | --- | --- | --- | --- |
-| H1: techniques to operate agents | unreviewed | Check title and framing with Ani. | Audit page-level claims and sources. | Decide during review. | Pending if media is added. | Ani reviews title. |
-| H2: start with a github repository | unreviewed | Check wording and add or preserve Ani's experience. | Audit claims and source coverage. | Decide during review. | Pending if media is added. | Ani reviews block. |
-| H2: separate guidance from enforcement | unreviewed | Check wording and add or preserve Ani's experience. | Audit claims and source coverage. | Decide during review. | Pending if media is added. | Ani reviews block. |
+| H1: working with coding agents | in progress | Replaces the abstract title with conventional language and frames the page around Ani's three recurring operating questions. | Page-level sources refreshed September 7. | No media currently needed for this introductory block. | Not applicable. | Ani reviews the title and three-question framing. |
+| H2: start with the repository | in progress | Removes the implication that every task must begin on GitHub. Keeps the repository as the inspectable destination for software work and makes agent files concise routing layers. | OpenAI AGENTS.md, Anthropic CLAUDE.md, and Git worktree documentation checked September 7. | A small owned repository-to-agent routing diagram may help later, but is not needed for this wording review. | Ani-owned if created later. | Ani reviews the heading, checklist, and canonical-file recommendation. |
+| H2: separate guidance from enforcement | in progress | Adds concrete CI and secret-handling examples while keeping the judgment-versus-enforcement distinction. | The examples are architectural guidance; current runtime details remain in provider pages. | No media currently needed. | Not applicable. | Ani reviews whether the examples match how he wants to teach the distinction. |
 | H2: use evidence to resolve uncertainty | unreviewed | Check wording and add or preserve Ani's experience. | Audit claims and source coverage. | Decide during review. | Pending if media is added. | Ani reviews block. |
 | H2: isolate work by ownership | unreviewed | Check wording and add or preserve Ani's experience. | Audit claims and source coverage. | Decide during review. | Pending if media is added. | Ani reviews block. |
 | H2: keep the main thread clean | unreviewed | Check wording and add or preserve Ani's experience. | Audit claims and source coverage. | Decide during review. | Pending if media is added. | Ani reviews block. |
@@ -167,6 +366,16 @@ Source: `content/guides/claude-code/recommendations.md`
 | H2: what i am still watching | unreviewed | Keep uncertainty concrete and current. | Refresh open product questions. | Decide during review. | Pending if media is added. | Ani reviews block. |
 | H3: current workflow features need a paired test | unreviewed | Check the proposed test against Ani's workflow. | Record test evidence and official sources. | Decide during review. | Pending if media is added. | Ani reviews block. |
 
+### draft: `/guides/claude-code/extensions/`
+
+Source: `content/guides/claude-code/extensions.md`
+
+| Block | State | Wording and personal insight | Evidence or source needs | Desired media | Attribution or permission | Next action |
+| --- | --- | --- | --- | --- | --- | --- |
+| H2: make events deterministic | in progress | New draft compares the five documented handler types and separates them from the Function Hooks proposal. Preserve Ani's interest in practical control and deeper agent extensibility. | Official hooks reference checked September 5. Isolated Claude Code 2.1.261 probe verifies flagged module validation, worker loading, and `session.start`; model and tool interception remain open tests. | A small owned event to handler to result diagram may clarify the mental model after Ani reviews the prose. | Ani-owned if created locally. | Ani reviews the full section, then chooses which real hook experience and experiment should become the personal example. |
+| H3: hooks run code at defined moments | in progress | Keep the five handler comparison practical, explain Function Hooks through `$`, `event`, and `next`, and preserve the correction that the proposal PDF omits today's documented MCP tool handler. | Recheck the handler list, per-event support, proposal issue, and eventual official Function Hooks documentation. Add one real Ani hook or failure after review. | A small owned event to handler to result diagram or sanitized log capture may help after Ani reviews the prose. | Ani-owned if created locally; remove paths and identifiers before any public capture. | Ani reviews the draft, chooses the useful depth, and supplies or approves the firsthand example. |
+| H3: failure should remain visible | in progress | Connect extensibility to observable load, decision, timing, and recovery state. | Exact 2.1.261 test boundary is recorded. Model and tool interception, final failure semantics, and a stable test harness remain open. | A future failure state capture could make this concrete. | Ani-owned or official source. | Ani reviews and adds a real failure mode if useful. |
+
 ## 4. Grok
 
 ### `/guides/grok/`
@@ -176,7 +385,11 @@ Source: `content/guides/grok.md`
 | Block | State | Wording and personal insight | Evidence or source needs | Desired media | Attribution or permission | Next action |
 | --- | --- | --- | --- | --- | --- | --- |
 | H1: grok | unreviewed | Check page framing and firsthand scope with Ani. | Refresh all current product claims. | Decide during review. | Pending if media is added. | Ani reviews title and premise. |
-| H2: this is grok | unreviewed | Add or preserve Ani's actual experience and uncertainty. | Require current primary sources for product facts. | Prefer official lazy embed/link if useful. | Record creator/source if third party. | Ani reviews block after source refresh. |
+| H2: this is grok | in progress | Ani’s manual writing and subsequent answers polished at his explicit request; personification candidate applied. | X API and ecosystem meaning resolved. Product capabilities are sourced; naming details remain observations. | No new media requested. | Existing media policy applies. | Quick read of the amended wording; next continuous review begins at the following H2. |
+| H2: grok bot puts the computer beside the conversation | unreviewed | Agent draft derived partly from Ani's dictation; outside his stated manual review boundary. | Keep user-reported interaction distinct from current documented behavior. | No new media requested. | Not applicable. | Resume only after the current introduction pass; no wording approval inferred. |
+| H3: swipe from the chat into the computer | unreviewed | Zoom analogy and swipe experience came from Ani; the rendered wording came from an agent. | Exact gesture is user reported. | No new media requested. | Not applicable. | Ani has not reviewed this wording. |
+| H3: take over, then hand it back | unreviewed | Takeover experience came from Ani; surrounding explanation remains an agent draft. | Preserve current source and personal-experience distinctions. | No new media requested. | Not applicable. | Ani has not reviewed this wording. |
+| H3: each bot has a screen on the shared computer | unreviewed | Agent-authored technical explanation. | Verify the distinction from current primary sources when revising. | No new media requested. | Not applicable. | Ani has not reviewed this wording. |
 
 ### `/guides/grok/configuration/`
 
@@ -249,3 +462,59 @@ Source: `content/archive/claude-code-tools.md`
 | H1: archived claude code tools | unreviewed | Review only for compatibility clarity; preserve frozen scope. | Verify security, data-loss, and installation-blocker facts only. | No new media planned. | Not applicable. | Ani reviews archive boundary. |
 | H2: install paths that still work | unreviewed | Keep instructions minimal and compatibility focused. | Test only supported compatibility paths. | No new media planned. | Not applicable. | Verify compatibility, then Ani reviews. |
 | H2: what happens next | unreviewed | Check sunset wording and dates with Ani. | Verify current compatibility-window date. | No new media planned. | Not applicable. | Ani reviews block. |
+
+
+## integration follow-up: September 7, 2026
+
+- Owner: `handbook` task `01a0732a-9d13-77b0-9c4e-95fd13d35689`.
+- Editorial recovery: native `archive-cleanup` snapshot `8f55fe8d482c8f37e95abf4d35bf464c738a43ee` preserved the six uncommitted files from former `fed7`. Restored to `/Users/anipotts/Projects/worktrees/coding-agent-tips-editorial` on unchanged branch head `6f1d025`. Every recovered file and the complete patch matched the snapshot before this follow-up was added. The original patch is retained beside the worktree as `coding-agent-tips-editorial-recovery.patch`.
+- Current review: Ani rejected the two homepage additions on September 7; `content/home.md` is restored exactly to branch HEAD. The other three foundation blocks remain unapproved local drafts. The 15-route, 101-block audit is an agent audit, not authorization to rewrite; no manual review states were promoted.
+- ASCII proposal: Ani rejected the entire animation on September 7. PR #315 is closed and its preview stopped by the coordinating task. There is no pending ASCII review, revision, integration, or release. Retain historical source only; do not revive it without a new explicit request.
+- Independent performance findings: the completed comparison reported Codex guide LCP of 6908 ms on untouched main versus 6909 ms on the candidate, and warm provider switching of 272 ms versus 256 ms against a 100 ms target. These are existing handbook performance findings to prioritize separately. Verify current measurements before any repair. Evidence and commands remain in `/Users/anipotts/.codex/worktrees/ascii-repair/PR315-receipt.md`.
+- Editing workflow: on September 7 Ani rejected a separate copy review page and asked for direct editing. Edit canonical Markdown in Codex or through the existing GitHub edit links; use normal routes for preview and the existing protected PR and Pages pipeline for publication. No copy review interface is planned.
+
+## requested continuation: September 7, 2026
+
+- Scope: Ani requested Codex and Claude Code architecture and extensibility, with greater depth on Grok Bot. Existing homepage and shared operating guide wording were left untouched in this continuation.
+- Architecture: added source backed app server explanation to the Codex overview and agent loop, extension roles, and permissions explanation to the Claude Code overview. These are local drafts; existing overview prose is retained.
+- Extensions: filled the repository context, skills, and MCP sections in both canonical chapters. The existing Claude hooks draft is retained. These chapters now use the existing excerpt mode so substantive text appears on normal guide routes; unfinished headings remain in the blueprint. No manual review state is promoted.
+- Grok Bot: Ani supplied the mobile Zoom comparison, swipe from conversation to computer, cursor and keyboard takeover, password entry, and return to the agent. The new section preserves that account and distinguishes each Bot's screen from the shared computer, using current xAI sources. Exact swipe and cursor behavior is Ani reported, not independently reproduced here.
+- Source correction: OpenAI now documents `codex mcp-server` as deprecated and directs new integrations to app server. The new Codex extensions text records this distinction.
+- Remaining chapter work: Codex event hooks, delegation, packaging, and composition; Claude delegation, packaging, and composition; firsthand examples and unresolved Function Hooks tests. These are chapter gaps, not a requirement for Ani to approve unsolicited rewrites.
+
+## write with Ani calibration: September 7, 2026
+
+- Artifact: `content/guides/grok.md`. Ani explicitly stopped at the paragraph ending **“X dominant influencer/creator/voice”**, immediately before `## grok bot puts the computer beside the conversation`. The earlier wording is not automatically approved for publication; every following section remains unreviewed, including agent-derived versions of earlier dictation.
+- Covered in Ani's input: limited Grok use; exposure through X and replies; interest in the mobile computer experience; the Zoom analogy; cursor/keyboard takeover and return to the Bot.
+- Clarified by Ani: “x/twitter and the xai ecosystem” is the intended infrastructure/social-income relationship. This establishes intended ecosystem framing, not shared technical infrastructure, a specific integration, or a revenue benefit. Replacement wording remains a candidate.
+- Clarified by Ani: `xapi` means the X API for posts/platform data. The comparison is developing around his interest in browser access, agent coordination, and changing the harness; experience with each named product remains unestablished.
+- Concrete example supplied: Ani uses one authoritative Codex task to track multiple projects, tasks, and contexts, improve instructions, and route work to the implementation tasks. This supplies the coordination example; it does not establish personal use of Cowork, ChatGPT Agent, or OpenClaw.
+- Needs research: verify those external claims after their meaning is established; date any current product recommendations and distinguish them from personal opinion.
+- Wording: raw edits preserved in the article. The partial sample in `$write-with-ani` is an unapproved demonstration, not a replacement or positive voice reference. Skill installation changes no public prose and grants no publication approval.
+- Scope and completion: finish the introduction's intended point before expanding into later Grok sections. The existing blueprint remains a candidate coverage guide, not a mandatory syllabus.
+
+### continued dictation: agent capabilities
+
+Ani's direct wording, September 7 (raw, not polished or externally verified):
+
+> creating new agents, archiving and messaging agents, reading thru other agents histories up to date to know realtime state, and also for example in codex an agent being able to edit any of the codex harness stuff and env / config etc etc since its open sourced, and for claude code its more limited as of rn but can possibly be more soon due to function hooks being proposed
+
+- Intended coordination operations: create, archive, message, inspect history and current activity. His earlier “CRUD” does not establish an intent to permanently delete agents.
+- Intended customization: instructions, environment, configuration, and potentially open harness implementation. Preserve his tentative enthusiasm about these being the best “claws.”
+- Source check: OpenAI identifies CLI, SDK, and app server as open source; its IDE extension and cloud service are not open source (https://learn.chatgpt.com/docs/open-source). Configuration editing, source modification/rebuilding, and permissions to alter a running environment are separate capabilities.
+- Source check: app server supports history reads and runtime status/events (https://learn.chatgpt.com/docs/app-server). A history snapshot alone does not prove continuously current state.
+- Source check: Anthropic Function Hooks issue #91870 remains an open proposal (https://github.com/anthropics/claude-code/issues/91870). Possible deeper customization remains prospective; do not turn this into a broad unsourced claim that Claude cannot coordinate agents or change configuration.
+- No article wording acceptance or publication follows from these answers. The Grok review boundary remains unchanged.
+
+### continued dictation: coordinator and personification
+
+Ani's direct wording, September 7 (raw; product claims require separate verification):
+
+> being able to keep track of multiple different projects tasks and contexts in parallel by communicating and orchestrating other codex threads via one singular authoritative thread that doesnt do any code edits in a specific task but rather route better improved prompts messges commands instruyctions to the actual specific codex tasks and agents. grok bots can messsage each other too and theyre much more personified in the xai world thats a big point i wanna make is that on the spectrum of personification anthropomorphism, ironically anthropic's claude is the least lifelike and codex is in the middle but grok is near the highest in terms of the company truing to humanize personify the agents so you can customize agents with icons shapes colors and they are given defualt names directly, whereas in Codex and Claude Code, different agent, different agent independent tasks are just named based off of like an AI generated summary of your initial prompt. But in Codex, sub agents are given names by default that are like based on personified like human real names or whatever whatever like Casper, you know Socrates. They could be like fucking random names. The point is Claude doesn't really have that sort of paradigm. It just uses. You know, like if it makes a subagent, it'll just call it like reviewer one, reviewer two, infra reviewer, infra engineer, something like that. Whereas, you know, so that's why I want to make a point to explain the spectrum and on each independent independent models page, sort of I denote where they are in the spectrum, where I'd say in my opinion, without making it such a huge specific deal like it's like source of fact, but more so a unique observation that I've noticed.
+
+- Personal experience: coordinator task keeps context across projects, improves prompts, and routes instructions to implementation tasks; code editing stays in those implementation tasks. Enough material for a concrete coordination paragraph without requiring another anecdote.
+- Personal observation: Claude Code feels least personified, Codex sits in the middle, and Grok Bot feels most personified among these products. Preserve the Anthropic irony and the random-name humor. Describe Ani's impression of presentation, not a measured ranking, model capability, or established corporate intent.
+- Requested placement: coordinator example in Codex coordination/extensibility; brief product-specific observations in each overview. Avoid a new taxonomy, scored graphic, or repeating the entire comparison on every page.
+- Source check, September 7: https://docs.x.ai/grok-bot/bots documents editable name, title, description, avatar and an initial name of “New Agent”; https://docs.x.ai/grok-bot/overview documents Bot messaging and independent coordination. Specific shapes/colors and automatically assigned personal names remain Ani-reported, not independently reproduced.
+- Source check, September 7: https://code.claude.com/docs/en/sub-agents supports custom names and named runtime agents. Role-style examples describe Ani's experience, not a naming restriction. https://learn.chatgpt.com/docs/agent-configuration/subagents also distinguishes configured agent roles; do not conflate these with UI display names or task titles. Casper/Socrates remain Ani's reported examples.
+- Next step: review the candidate wording for the coordinator example and short personification observation. No additional personal input is required to draft these points. Candidate wording remains unapproved; no public article changes or review-boundary advancement from this dictation.

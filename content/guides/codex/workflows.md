@@ -2,15 +2,15 @@
 title: workflows
 description: everyday, parallel, long running, and handed off codex work.
 products: [codex]
-updatedAt: "2026-08-27T12:00:00-04:00"
-checkedAt: "2026-08-28T00:00:00-04:00"
+updatedAt: "2026-09-07T15:01:58-04:00"
+checkedAt: "2026-09-07T15:01:58-04:00"
 status: pending
 completion: outline
 draft: true
-evidence: [official-source, open-question]
-sources: [openai-codex-manual, openai-codex-cloud, openai-codex-mobile]
+evidence: [official-source, analysis]
+sources: [openai-codex-worktrees, openai-codex-automations, openai-remote-connections, openai-codex-cloud, openai-codex-image-generation]
 redirects: []
-voice: personal
+voice: evidence
 navigation:
   scope: codex
   order: 40
@@ -18,76 +18,96 @@ navigation:
 
 ## the everyday loop
 
-### scope the pass before the prompt
+start with a result you can inspect. “fix the save button losing the selected
+workspace” gives the task a behavior to reproduce. include the failing route,
+what you expected, and any work already in progress. let the agent locate the
+implementation and propose the narrowest useful verification.
 
-<!-- Ani voice pass follows this approved structure. -->
+keep the evidence with the task: reproduction steps, changed files, commands,
+and results. when the work moves to another conversation, those details let
+the next agent continue without rediscovering the same failure.
 
-### keep evidence close to the work
+## parallel work needs visible ownership
 
-<!-- Ani voice pass follows this approved structure. -->
+[worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees) let
+separate tasks work on separate checkouts of one Git repository. they share
+Git history, while each checkout has its own files. dependencies, environment
+files, and running services may still need setup in the new checkout.
 
-## parallel work needs visible boundaries
+for example, split a settings feature into API validation and UI behavior:
 
-### one task owns one checkout
+```text
+create separate implementation tasks for API validation and the settings UI.
+agree on the request and response shape before either changes it.
+each task owns its assigned files and returns its branch, changed behavior,
+tests, and any contract change. integrate and check the complete save flow afterward.
+```
 
-<!-- Ani voice pass follows this approved structure. -->
+a shared checkout can also work when file ownership is clear. whichever setup
+you choose, tell each agent what the other owns and preserve existing changes.
+run the combined behavior after integration: each half can pass its own checks
+while disagreeing about the shape of the data between them.
 
-### review capacity is the real limit
+### keep a coordinator useful
 
-<!-- Ani voice pass follows this approved structure. -->
+the [coordinator example](/guides/codex/extensions/#give-work-its-own-context)
+keeps routing and project state in one conversation. send concise updates:
+what changed, whether verification passed, and what decision comes next. the
+implementation task retains the detailed debugging conversation.
+
+ask for parallel work where the questions can advance independently. an agent
+waiting for another agent's answer adds little capacity. when several results
+arrive together, review the most consequential dependency first.
 
 ## work that continues without you
 
-### goals preserve a durable objective
+[scheduled tasks](https://learn.chatgpt.com/docs/automations) can run a saved
+prompt independently or continue an existing chat with its context. local
+project work requires the host and app to remain available. cloud work uses its
+configured hosted environment.
 
-<!-- Ani voice pass follows this approved structure. -->
+a useful first automation is a report with a narrow scope:
 
-### scheduled work needs a stable environment
+```text
+each weekday morning, check the latest CI run for this repository's default branch.
+report a new failure with the job, failed step, and run link.
+stay quiet when the state is unchanged. keep this task limited to inspection.
+```
 
-<!-- Ani voice pass follows this approved structure. -->
+run it once while you are present. confirm the repository identity, the
+information it can read, and the result it produces when a run is unavailable.
+then decide whether it should ever propose or implement a fix. expanding the
+job changes both its required access and the evidence you need back.
 
-### cloud tasks return as new evidence
+## choose where execution lives
 
-<!-- Ani voice pass follows this approved structure. -->
+local execution uses your current machine. [Remote](https://learn.chatgpt.com/docs/remote-connections)
+lets another supported device steer a connected host; that host supplies the
+files, tools, credentials, and permissions. an SSH project runs commands on the
+SSH host. [Codex cloud](https://learn.chatgpt.com/docs/cloud) runs in a separate
+hosted environment with its own setup.
 
-## working across devices
+for a mobile handoff, check the connected host, task, checkout, and latest diff.
+a laptop that goes to sleep changes what local work can continue. a cloud task
+may keep running, but needs its own dependencies and access. choose the host
+first, then the screen that is convenient for steering it.
 
-### mobile is a full codex surface
+## bring visual work into the same loop
 
-<!-- Ani voice pass follows this approved structure. -->
+Codex can [generate and edit images](https://learn.chatgpt.com/docs/image-generation)
+from a prompt and reference material. describe the asset's purpose, dimensions,
+composition, and the parts that need to stay fixed. review the generated image
+before integrating it, then inspect it in the actual page at the sizes readers
+will see.
 
-### control other devices connects to a codex host
+for example, a background illustration can look good on its own while making
+overlaid text unreadable. keep the original, prepare the required derivative,
+and check loading cost, contrast, cropping, and alternative text in the page.
+visual review and code verification answer different parts of whether it works.
 
-<!-- Ani voice pass follows this approved structure. -->
+## hand off the state that matters
 
-### Remote SSH opens the remote machine directly
-
-<!-- Ani voice pass follows this approved structure. -->
-
-### choose where execution should live
-
-<!-- Ani voice pass follows this approved structure. -->
-
-## image generation belongs inside the build loop
-
-### generate from the project context
-
-<!-- Ani voice pass follows this approved structure. -->
-
-### edit and refine existing images
-
-<!-- Ani voice pass follows this approved structure. -->
-
-### turn visual output into reviewed assets
-
-<!-- Ani voice pass follows this approved structure. -->
-
-## handoffs preserve state and authority
-
-### name the repository state
-
-<!-- Ani voice pass follows this approved structure. -->
-
-### return with evidence and the remaining decision
-
-<!-- Ani voice pass follows this approved structure. -->
+finish with the repository and branch, changed behavior, verification results,
+known gaps, and next action. distinguish a local patch, a pushed branch, an
+opened pull request, and a deployed change. the next person should be able to
+see exactly where the work reached and continue from there.
