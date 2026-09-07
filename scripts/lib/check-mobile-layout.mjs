@@ -77,6 +77,13 @@ export async function verifyMobileLayout({ browser, origin }) {
         await picker.waitFor({ state: 'visible' });
         assert.ok(await picker.locator('a').evaluateAll((links) => links.every((link) => link.querySelector('svg[aria-hidden="true"]'))), 'every picker page has a decorative chapter icon');
         assert.equal(await picker.locator('[data-slot="dropdown-label"] .provider-product-icon').count(), 4, 'picker group labels use all four provider identities');
+        await page.waitForFunction(() => {
+          const viewport = document.querySelector('.mobile-page-options-scroll').getBoundingClientRect();
+          return [...document.querySelectorAll('.mobile-page-options img')].filter((image) => {
+            const rect = image.getBoundingClientRect();
+            return rect.height > 0 && rect.bottom > viewport.top && rect.top < viewport.bottom;
+          }).every((image) => image.complete && image.naturalWidth > 0);
+        });
         const report = await new AxeBuilder({ page }).include('.mobile-page-options').analyze();
         assert.deepEqual(report.violations.map(({ id }) => id), [], 'mobile picker passes axe');
         await page.keyboard.press('Escape');

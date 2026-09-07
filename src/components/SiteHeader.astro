@@ -90,7 +90,7 @@ const chapterIcons = {
                 {navigationScopes.map((scope) => (
                   <DropdownGroup>
                     <DropdownLabel>
-                      <ProviderProductIcon light={scope.providerIcon} dark={'providerIconDark' in scope ? scope.providerIconDark : undefined} size={16} />
+                      <ProviderProductIcon light={scope.providerIcon} dark={'providerIconDark' in scope ? scope.providerIconDark : undefined} size={16} loading="lazy" />
                       <span>{scope.label}</span>
                     </DropdownLabel>
                     {scope.id === 'handbook' && <DropdownLinkItem href="/" closeOnClick data-sw-drawer-close><Home aria-hidden="true" /><span>handbook home</span></DropdownLinkItem>}
