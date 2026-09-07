@@ -1,10 +1,18 @@
 import { createHash } from 'node:crypto';
+import assert from 'node:assert/strict';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { gzipSync } from 'node:zlib';
 import sharp from 'sharp';
 import { canonicalContentFiles } from '../src/content-manifest.mjs';
+import { captionText } from './lib/caption-text.mjs';
+
+assert.equal(captionText('credit <a href="https://example.com">Ani</a>.'), 'credit Ani.');
+assert.equal(captionText('Ani &amp; co'), 'Ani & co');
+assert.equal(captionText('&amp;lt;script&amp;gt;'), '&lt;script&gt;', 'caption entities decode once');
+assert.equal(captionText('visible<script>hidden</script><style>hidden</style><template>hidden</template>'), 'visible');
+assert.equal(captionText('<scr<script>ipt>credit'), 'ipt>credit', 'malformed tags must not join into new markup');
 
 const root = process.cwd();
 const mediaRoot = path.join(root, 'public/media/publications');
@@ -187,7 +195,7 @@ for (const { route, file } of canonicalContentFiles()) {
     actualPresentationsById.get(record.id).push({
       route,
       alt: attribute(imageTag, 'alt') ?? null,
-      caption: captionMatch ? captionMatch[1].replace(/<[^>]+>/g, '').trim() : null,
+      caption: captionMatch ? captionText(captionMatch[1]) : null,
       linkUrl: linkTag ? attribute(linkTag, 'href') ?? null : null,
     });
   }
