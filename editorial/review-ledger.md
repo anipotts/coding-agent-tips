@@ -184,9 +184,10 @@ they do not turn their paragraphs into accepted prose.
 
 The local publication still has 17 routes; seven completed drafts remain hidden.
 The signed [draft PR #319](https://github.com/anipotts/coding-agent-tips/pull/319)
-on `codex/handbook-editorial-review` carries the integrated
-verification receipt and performance measurements. Its provider checks apply
-to the exact PR head. This ledger tracks authorship and wording acceptance;
+on `codex/handbook-editorial-review` tracks the implementation. Its provider
+checks apply to the exact PR head; the writing task supplies the local
+verification receipt and performance measurements. This ledger tracks
+authorship and wording acceptance;
 full launch readiness still requires the review above. Production has not
 changed in this pass.
 

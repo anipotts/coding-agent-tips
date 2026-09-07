@@ -110,6 +110,7 @@ html:has(.publication-sidebar[data-state='collapsed']) { --left-rail-width: var(
 }
 .chapter-menu [data-sidebar='menu-button'] > svg { inline-size: 1rem; block-size: 1rem; }
 .chapter-row { position: relative; display: flex; align-items: center; }
+.chapter-row > [data-sw-sidebar-menu-button] { inline-size: 100%; min-inline-size: 0; }
 .chapter-row:has(.chapter-toggle) [data-sidebar='menu-button'] { padding-inline-end: 2.5rem; }
 .chapter-menu .chapter-toggle {
   inset: 50% .25rem auto auto;

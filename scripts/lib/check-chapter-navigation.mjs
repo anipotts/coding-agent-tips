@@ -57,9 +57,10 @@ export async function verifyChapterDisclosures({ browser, origin }) {
         const link = row.querySelector('a').getBoundingClientRect();
         const button = row.querySelector('.chapter-toggle').getBoundingClientRect();
         const icon = row.querySelector('.chapter-toggle svg').getBoundingClientRect();
-        return { rowHeight: rowBounds.height, buttonWidth: button.width, buttonHeight: button.height, centerDelta: Math.abs(icon.y + icon.height / 2 - link.y - link.height / 2), topInset: button.top - link.top, bottomInset: link.bottom - button.bottom, rightInset: rowBounds.right - button.right };
+        return { rowHeight: rowBounds.height, buttonWidth: button.width, buttonHeight: button.height, linkWidthGap: Math.abs(rowBounds.width - link.width), centerDelta: Math.abs(icon.y + icon.height / 2 - link.y - link.height / 2), topInset: button.top - link.top, bottomInset: link.bottom - button.bottom, rightInset: rowBounds.right - button.right };
       }));
       assert.ok(geometry.every((item) => item.rowHeight <= 28.5 && item.buttonWidth >= 24 && item.buttonHeight >= 24 && item.centerDelta <= 1 && item.topInset >= 0 && item.bottomInset >= 0 && Math.abs(item.rightInset - 4) <= 1), 'carets must remain compact, centered and inside their row with a 24px target');
+      assert.ok(geometry.every((item) => item.linkWidthGap <= 1), 'chapter links and selected backgrounds must span the full row beneath the caret');
       const report = await new AxeBuilder({ page }).include(mobile ? '.mobile-site-menu' : '.publication-sidebar').analyze();
       assert.deepEqual(report.violations.filter((item) => ['serious', 'critical'].includes(item.impact)), [], 'chapter disclosure accessibility');
       assert.equal(await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth), false);
