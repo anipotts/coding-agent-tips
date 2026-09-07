@@ -2,7 +2,7 @@
 title: claude code
 description: a practical map of claude code across terminal, desktop, editor, web, and remote workflows.
 products: [claude-code]
-updatedAt: "2026-09-07T15:02:34-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:02:34-04:00"
 status: current
 completion: complete
@@ -22,6 +22,8 @@ agent. it can inspect a repository, change files, run commands, and use the
 results to decide what to do next. you can work through a terminal, supported
 editor, desktop app, or web session.
 
+new to agents? [start with the short crash course](/handbook/operating-agents/#the-agent-crash-course).
+
 <div class="surface-bento intro-visual">
   <figure><a href="/media/guides/claude-terminal-recording.mp4"><video src="/media/guides/claude-terminal-recording.mp4" poster="/media/publications/claude-terminal-poster-1200.webp" aria-label="Claude Code terminal recording" autoplay muted loop playsinline preload="auto" width="2414" height="1392"></video></a><figcaption>a recording of Claude Code in the terminal.</figcaption></figure>
 </div>
@@ -32,7 +34,9 @@ describing their jobs: reviewer, infra engineer, things like that. Claude
 Code supports [named agents](https://code.claude.com/docs/en/sub-agents);
 the role focused presentation is what stands out in my own use.
 
-### one request can become several rounds of work
+<span id="one-request-can-become-several-rounds-of-work" class="heading-alias" aria-hidden="true"></span>
+
+### what happens after a prompt?
 
 Anthropic describes an [agent loop](https://code.claude.com/docs/en/how-claude-code-works)
 that gathers context, acts, and checks the result. the model chooses an action;
@@ -45,13 +49,17 @@ test. those steps can all follow from one prompt. the finish line still needs
 to be concrete: an empty result should render a useful message, and an ordinary
 search should keep working.
 
+### who's running twenty agents?
+
 sometimes you'll see people doing this.
 
 <div class="surface-bento">
   <figure><img src="/media/guides/claude-agent-wall.png" srcset="/media/publications/claude-agent-wall-640.webp 640w, /media/publications/claude-agent-wall-1200.webp 1200w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1151px) calc(100vw - 320px), 832px" data-full-src="/media/guides/claude-agent-wall.png" alt="a wall of Claude Code agents running in tiled terminal panes" loading="lazy" decoding="async" width="3840" height="1080" /><figcaption>i did this for a TikTok and went through my five hour usage window in 15 minutes.</figcaption></figure>
 </div>
 
-## choose where the work runs
+<span id="choose-where-the-work-runs" class="heading-alias" aria-hidden="true"></span>
+
+## where does the work run?
 
 ### terminal, editor, and desktop
 
@@ -87,7 +95,9 @@ Control can let you check on that investigation from your phone. a cloud task
 needs its own reproducible environment and access to the relevant data. choose
 the execution environment before choosing the screen you want to use.
 
-## extensions and permissions
+<span id="extensions-and-permissions" class="heading-alias" aria-hidden="true"></span>
+
+## what can i add or control?
 
 Claude Code’s [extension system](https://code.claude.com/docs/en/features-overview)
 gives different jobs to instructions, skills, tools, and events:
@@ -112,9 +122,13 @@ constrains filesystem and network access for commands inside it. the account
 behind an external tool adds another boundary: a service can only grant the
 access that identity has.
 
-## follow the artifact through the workflow
+<span id="follow-the-artifact-through-the-workflow" class="heading-alias" aria-hidden="true"></span>
 
-### repository work has an inspectable ending
+## what should i get back?
+
+<span id="repository-work-has-an-inspectable-ending" class="heading-alias" aria-hidden="true"></span>
+
+### it says it’s done. now what?
 
 a useful session returns the change, the checks it ran, and whatever is still
 uncertain. “tests pass” needs the command and result behind it. a screenshot

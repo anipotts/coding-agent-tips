@@ -2,7 +2,7 @@
 title: grok
 description: a current source based map of grok build, grok bot, and the wider grok product surface.
 products: [grok]
-updatedAt: "2026-09-07T14:37:16-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 status: pending
 evidence: [official-source, analysis, open-question]
 sources: [grok-build, grok-bot, grok-bot-mobile, grok-bot-computer, grok-bot-approvals, grok-bot-profiles, x-api, grok-assistant]
@@ -18,6 +18,8 @@ navigation:
 Grok now offers an assistant accessible through the web or X, a coding agent called Grok Build, and persistent
 cloud agents called Grok Bot. this section keeps those products separate so a
 model comparison does not get confused with a harness or a cloud computer.
+
+new to agents? [start with the short crash course](/handbook/operating-agents/#the-agent-crash-course).
 
 <div class="surface-bento">
   <figure><a href="https://docs.x.ai/build/overview"><img src="/media/publications/grok-build-1200.webp" srcset="/media/publications/grok-build-640.webp 640w, /media/publications/grok-build-1200.webp 1200w" sizes="(max-width: 48rem) calc(100vw - 2rem), (max-width: 72rem) calc((100vw - 20rem) / 2), 32rem" alt="Grok Build in its coding interface" loading="eager" fetchpriority="high" decoding="async" width="1200" height="630" /><figcaption>Grok Build and Build Mode</figcaption></a></figure>

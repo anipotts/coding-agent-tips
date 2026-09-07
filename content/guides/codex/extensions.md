@@ -1,8 +1,8 @@
 ---
-title: extensions
+title: what else can it do?
 description: choosing and combining codex extensions by the job they do.
 products: [codex]
-updatedAt: "2026-09-07T15:01:58-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:01:58-04:00"
 status: current
 completion: complete
@@ -16,9 +16,13 @@ navigation:
   order: 50
 ---
 
-## make operating knowledge reusable
+<span id="make-operating-knowledge-reusable" class="heading-alias" aria-hidden="true"></span>
 
-### instructions route the repository context
+## how do i reuse a workflow?
+
+<span id="instructions-route-the-repository-context" class="heading-alias" aria-hidden="true"></span>
+
+### project instructions
 
 project instructions give Codex the conventions it needs to work in a
 repository. keep the entry point short: where the code lives, how to verify a
@@ -28,7 +32,9 @@ beside the code it verifies; the instruction file can point to it.
 that also makes corrections easier. when a command changes, update its
 canonical definition and keep the instruction pointing there.
 
-### skills carry procedures, scripts, and references
+<span id="skills-carry-procedures-scripts-and-references" class="heading-alias" aria-hidden="true"></span>
+
+### what goes in a skill?
 
 a [skill](https://learn.chatgpt.com/docs/build-skills) is a directory with a
 `SKILL.md` entry point and optional scripts, references, or assets. Codex sees
@@ -43,7 +49,9 @@ enough that an ordinary question about the repository stays an ordinary question
 
 ## MCP connections
 
-### MCP exposes tools and resources
+<span id="mcp-exposes-tools-and-resources" class="heading-alias" aria-hidden="true"></span>
+
+### what can i connect?
 
 with [MCP](https://learn.chatgpt.com/docs/extend/mcp), Codex acts as a client of
 another system. a server can run as a local process over stdio or expose a
@@ -56,7 +64,9 @@ September 7, 2026, OpenAI marks the old
 and directs new integrations to the app server. connecting tools to Codex and
 embedding Codex inside another product are separate integration decisions.
 
-### authentication and reach stay explicit
+<span id="authentication-and-reach-stay-explicit" class="heading-alias" aria-hidden="true"></span>
+
+### why won't a connection work?
 
 MCP configuration belongs to the host making the connection. a local server
 needs its executable and dependencies on that host; an HTTP server needs to be
@@ -68,7 +78,9 @@ Codex exposes tool allow and deny lists plus approval settings for configured
 servers. start with the operations the task needs and verify a harmless read
 before relying on the connection for work.
 
-## make events deterministic
+<span id="make-events-deterministic" class="heading-alias" aria-hidden="true"></span>
+
+## when should i use hooks?
 
 [hooks](https://learn.chatgpt.com/docs/hooks) run scripts or MCP tools at defined
 points in the agent loop. use a skill for a procedure the model interprets;
@@ -98,7 +110,9 @@ and send those to the right tasks. the actual code edits happen in the
 individual project tasks. that's a concrete example of why agents being able
 to communicate with other agents matters to me.
 
-### subagents need a bounded problem
+<span id="subagents-need-a-bounded-problem" class="heading-alias" aria-hidden="true"></span>
+
+### what should a subagent do?
 
 that setup involves coordinating separate Codex tasks, each with its own
 ongoing work. a [subagent](https://learn.chatgpt.com/docs/agent-configuration/subagents)
@@ -111,7 +125,9 @@ done. integrations can use the [app server](https://learn.chatgpt.com/docs/app-s
 for thread operations, history, and runtime events. history tells you what
 has happened; status and new events help you keep up with what happens next.
 
-### the return contract matters
+<span id="the-return-contract-matters" class="heading-alias" aria-hidden="true"></span>
+
+### what should a worker report?
 
 the coordinator needs enough context to decide where the next instruction
 belongs. a useful update identifies the task, what's changed, what remains,
@@ -126,7 +142,9 @@ editing a configuration file changes the setup; changing the implementation
 means working with that source and running the changed version. that's the
 kind of extensibility i'm interested in.
 
-### try a bounded delegation
+<span id="try-a-bounded-delegation" class="heading-alias" aria-hidden="true"></span>
+
+### example: parallel code review
 
 for a change that touches both rendering and data loading, a useful request is:
 
@@ -142,7 +160,9 @@ agents investigate in parallel without writing over each other. the main task
 still needs to check whether a finding is valid and whether two reports describe
 the same bug. more reports can increase the amount of review you owe the work.
 
-## package behavior for reuse
+<span id="package-behavior-for-reuse" class="heading-alias" aria-hidden="true"></span>
+
+## when should i package a plugin?
 
 a [plugin](https://learn.chatgpt.com/docs/build-plugins) packages related skills,
 MCP connections, and supported extensions for installation. a reusable review
@@ -156,7 +176,9 @@ requests. verify that the intended workflow activates and that ordinary tasks
 remain ordinary tasks. publishing a package makes its maintenance part of the
 workflow.
 
-## compose around a recurring job
+<span id="compose-around-a-recurring-job" class="heading-alias" aria-hidden="true"></span>
+
+## how do extensions work together?
 
 consider a release check: `AGENTS.md` points to the project's check command, a
 skill explains the release procedure, an MCP connection reads CI status, and a

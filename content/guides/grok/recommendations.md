@@ -1,8 +1,8 @@
 ---
-title: recommendations
+title: choosing your setup
 description: evaluate grok on a real repository task or a browser handoff, then decide what deserves automation.
 products: [grok]
-updatedAt: "2026-09-07T15:06:44-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 status: pending
 evidence: [official-source, analysis, open-question]
 sources: [grok-build, grok-bot, grok-bot-mobile, grok-bot-computer, grok-bot-routines]
@@ -13,7 +13,9 @@ navigation:
   order: 70
 ---
 
-## begin with the product boundary
+<span id="begin-with-the-product-boundary" class="heading-alias" aria-hidden="true"></span>
+
+## Grok Build or Grok Bot?
 
 Grok Build fits work that lives in a repository: inspect files, make a change,
 run a command, and review the diff. Grok Bot adds a persistent cloud computer,
@@ -25,7 +27,9 @@ the mobile computer handoff and the ability to coordinate agents. the examples
 below are ways to evaluate those features; they are proposed exercises, with
 results still to establish.
 
-## give build one small repository job
+<span id="give-build-one-small-repository-job" class="heading-alias" aria-hidden="true"></span>
+
+## what should i try with Build?
 
 choose a change whose expected behavior you already understand. for example:
 
@@ -43,7 +47,9 @@ work, do the surrounding cases still behave correctly, and can you follow the
 explanation back to the code? an impressive transcript can still leave the
 actual behavior unresolved.
 
-## testing computer takeover
+<span id="testing-computer-takeover" class="heading-alias" aria-hidden="true"></span>
+
+## can i take over the computer?
 
 a useful browser exercise is collecting two comparable options from public
 websites into a short table. ask for source links, the criteria you supplied,
@@ -59,7 +65,9 @@ the practical question is how much supervision this saves you. can you tell
 what happened while you were away? can you correct one step and let it keep
 going? do you get a usable result after the handoff?
 
-## add another bot when the work can split
+<span id="add-another-bot-when-the-work-can-split" class="heading-alias" aria-hidden="true"></span>
+
+## when would i need another Bot?
 
 one Bot could collect the options while another checks the source links. give
 each a distinct output and make the second report discrepancies to the first.
@@ -70,7 +78,9 @@ separate screens can still touch the same files or signed in services. name the
 files each worker owns. a second Bot is useful when it adds independent work
 or review; overlapping edits add coordination you then have to untangle.
 
-## repeat a useful method before scheduling it
+<span id="repeat-a-useful-method-before-scheduling-it" class="heading-alias" aria-hidden="true"></span>
+
+## can it do this every week?
 
 xAI separates [skills and routines](https://docs.x.ai/grok-bot/skills-routines-and-automations):
 a skill describes a repeatable method, and a routine schedules work for an

@@ -58,6 +58,23 @@ this implementation request does not approve every newly written sentence.
 | [Grok: recommendations](../content/guides/grok/recommendations.md) | 🟦 written | source based exercises | pending | public |
 | [Archived Claude tools](../content/archive/claude-code-tools.md) | ✅ preserved compatibility text | 45 cc + 175 lore tests pass | preserve frozen scope | public |
 
+### reader and heading direction: September 7, 2026
+
+Ani clarified that readers know basic coding but are new to agents. He accepted
+short, question led navigation and requested a brief crash course with embedded
+references that technologically fluent readers can skip. The opening of
+`content/handbook/operating-agents.md` now provides that optional primer and a
+direct path to the first practical task. It is sourced candidate prose, not a
+record of Ani's personal testing. Existing product introductions link to it.
+
+Chapter labels and section headings now favor recognizable questions and
+concrete topics. Ani specifically adopted “who's running twenty agents?” for
+the wide Claude screenshot. The broader naming direction is accepted; the
+individual agent proposed titles and new crash course still need wording review.
+Grok's adopted headings and Zoom wording, personal anecdotes, and homepage prose
+remain preserved. Renaming a section does not change its review state. Seven
+hidden chapters remain hidden. Existing public heading fragments retain aliases.
+
 ### preserve these passages
 
 - September 7 media direction: Ani supplied a Claude Code terminal recording

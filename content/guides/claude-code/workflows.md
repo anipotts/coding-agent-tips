@@ -1,8 +1,8 @@
 ---
-title: workflows
+title: working on a project
 description: everyday, parallel, long running, and handed off claude code work.
 products: [claude-code]
-updatedAt: "2026-09-07T15:02:34-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:02:34-04:00"
 status: pending
 completion: outline
@@ -16,7 +16,7 @@ navigation:
   order: 40
 ---
 
-## keep the everyday loop small enough to inspect
+## how much should i ask for at once?
 
 start with the outcome, the checkout, and the evidence that will settle the
 task. an investigation might end with a failing input and a diagnosis. an
@@ -36,7 +36,7 @@ once that result is clear, the implementation prompt can name the specific
 behavior to change. this prevents a vague request from turning into several
 unrelated fixes that happen to touch the same feature.
 
-## choose how parallel work communicates
+## how do agents work together?
 
 Anthropic documents several [ways to run agents](https://code.claude.com/docs/en/agents).
 they give the coordinator different responsibilities:
@@ -53,7 +53,7 @@ separate filesystem edits. communication and isolation solve different parts
 of the same problem: workers need to know what changed, and they need a place
 to change their own files.
 
-### split by ownership and dependency
+### give each task its own job
 
 suppose a settings page needs new form behavior and an updated help article.
 one worker can own the form and its tests; another can own the documentation.
@@ -70,7 +70,7 @@ if both tasks need to redesign the same interface, resolve that decision before
 splitting them. a worktree gives each task its own files while the shared
 product decision still needs an owner.
 
-### check the work that is actually running
+### what's still running?
 
 `claude agents` opens agent view, currently a research preview, for background sessions.
 `/tasks` shows background work associated with the current session. the
@@ -82,7 +82,7 @@ look for work waiting on input as well as work consuming time. another active
 agent adds another stream of output to review. use parallelism where the saved
 waiting time exceeds the coordination it introduces.
 
-## choose a schedule by its execution environment
+## can it keep working while i'm away?
 
 | mechanism | where it runs | what keeps it available |
 | --- | --- | --- |
@@ -106,7 +106,7 @@ command and relevant output.” run it once while present and inspect which
 identity, environment, and tools it actually used. add an external write only
 when its authority and failure behavior are understood.
 
-## move between devices with the state attached
+## can i pick this up on another device?
 
 [Remote Control](https://code.claude.com/docs/en/remote-control) keeps execution
 on the host. a [web task](https://code.claude.com/docs/en/claude-code-on-the-web)

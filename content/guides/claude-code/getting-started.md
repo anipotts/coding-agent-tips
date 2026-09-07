@@ -1,8 +1,8 @@
 ---
-title: getting started
+title: your first task
 description: a first useful claude code loop with one repository, one task, and one way to verify it.
 products: [claude-code]
-updatedAt: "2026-09-07T15:02:34-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:02:34-04:00"
 status: pending
 completion: outline
@@ -16,7 +16,7 @@ navigation:
   order: 20
 ---
 
-## begin with one visible finish line
+## what should i try first?
 
 pick a change whose result you can recognize: a broken edge case, a confusing
 error, or a small layout problem. give Claude the starting behavior, the
@@ -28,7 +28,7 @@ current installation and login steps. start Claude Code inside the repository
 you intend to work on. check the branch and existing changes before giving it
 an editing task, especially in a checkout other people or agents use.
 
-### a small exercise with a real failure
+### fix a small bug
 
 this example uses Node’s built in test runner and needs no installed packages.
 create an empty scratch folder, then save this as `label.mjs`:
@@ -67,7 +67,7 @@ the task has a bounded input contract and an executable finish line. it also
 leaves a real decision to the agent: how to implement that behavior. this is
 an instructional fixture, separate from Ani’s project history.
 
-## make the next prompt easier
+## save the project instructions
 
 [`CLAUDE.md`](https://code.claude.com/docs/en/memory) can hold the facts that
 apply across tasks: where the code lives, how to run checks, and which project
@@ -83,7 +83,7 @@ fixed, those details become history; the test command can remain useful.
 Anthropic’s `/init` command can propose repository instructions. review its
 inferences against the actual scripts and conventions before adopting them.
 
-## review the result in the right place
+## how do i know it worked?
 
 read the changed function and rerun the test. check that the agent preserved
 the test’s meaning while fixing the implementation. for UI work, add the

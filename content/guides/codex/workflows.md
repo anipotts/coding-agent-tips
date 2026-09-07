@@ -1,8 +1,8 @@
 ---
-title: workflows
+title: working on a project
 description: everyday, parallel, long running, and handed off codex work.
 products: [codex]
-updatedAt: "2026-09-07T15:01:58-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:01:58-04:00"
 status: pending
 completion: outline
@@ -16,7 +16,7 @@ navigation:
   order: 40
 ---
 
-## the everyday loop
+## how do i scope a task?
 
 start with a result you can inspect. “fix the save button losing the selected
 workspace” gives the task a behavior to reproduce. include the failing route,
@@ -27,7 +27,7 @@ keep the evidence with the task: reproduction steps, changed files, commands,
 and results. when the work moves to another conversation, those details let
 the next agent continue without rediscovering the same failure.
 
-## parallel work needs visible ownership
+## how do i keep parallel edits separate?
 
 [worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees) let
 separate tasks work on separate checkouts of one Git repository. they share
@@ -48,7 +48,7 @@ you choose, tell each agent what the other owns and preserve existing changes.
 run the combined behavior after integration: each half can pass its own checks
 while disagreeing about the shape of the data between them.
 
-### keep a coordinator useful
+### what belongs in the coordinator?
 
 the [coordinator example](/guides/codex/extensions/#task-coordination-and-subagents)
 keeps routing and project state in one conversation. send concise updates:
@@ -59,7 +59,7 @@ ask for parallel work where the questions can advance independently. an agent
 waiting for another agent's answer adds little capacity. when several results
 arrive together, review the most consequential dependency first.
 
-## work that continues without you
+## how do i schedule repeated work?
 
 [scheduled tasks](https://learn.chatgpt.com/docs/automations) can run a saved
 prompt independently or continue an existing chat with its context. local
@@ -79,7 +79,7 @@ information it can read, and the result it produces when a run is unavailable.
 then decide whether it should ever propose or implement a fix. expanding the
 job changes both its required access and the evidence you need back.
 
-## choose where execution lives
+## where should the work run?
 
 local execution uses your current machine. [Remote](https://learn.chatgpt.com/docs/remote-connections)
 lets another supported device steer a connected host; that host supplies the
@@ -105,7 +105,7 @@ overlaid text unreadable. keep the original, prepare the required derivative,
 and check loading cost, contrast, cropping, and alternative text in the page.
 visual review and code verification answer different parts of whether it works.
 
-## hand off the state that matters
+## what belongs in a handoff?
 
 finish with the repository and branch, changed behavior, verification results,
 known gaps, and next action. distinguish a local patch, a pushed branch, an

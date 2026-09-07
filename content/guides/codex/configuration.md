@@ -1,8 +1,8 @@
 ---
-title: configuration
+title: settings and memory
 description: where codex instructions, permissions, tools, and reusable workflows belong.
 products: [codex]
-updatedAt: "2026-09-07T15:01:58-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:01:58-04:00"
 status: current
 completion: complete
@@ -15,7 +15,9 @@ navigation:
   order: 30
 ---
 
-## put each kind of context in the right place
+<span id="put-each-kind-of-context-in-the-right-place" class="heading-alias" aria-hidden="true"></span>
+
+## where do instructions and settings go?
 
 the configuration gets easier to follow when each file has a job:
 
@@ -32,7 +34,9 @@ the model instructions. config files select runtime behavior. writing “ask
 before using the network” in a paragraph and configuring network restrictions
 have different effects: one guides the agent; the other constrains commands.
 
-## configuration precedence
+<span id="configuration-precedence" class="heading-alias" aria-hidden="true"></span>
+
+## which setting wins?
 
 as of September 7, 2026, the documented
 [configuration order](https://learn.chatgpt.com/docs/config-file/config-basic)
@@ -48,7 +52,9 @@ outside the project. use the
 [reference](https://learn.chatgpt.com/docs/config-file/config-reference) when a
 repository setting appears to be ignored.
 
-### try a temporary override first
+<span id="try-a-temporary-override-first" class="heading-alias" aria-hidden="true"></span>
+
+### try a temporary setting
 
 for a local inspection session, start from the repository root:
 
@@ -74,7 +80,9 @@ trusted project config can override profile values. the explicit command line
 flags above take higher precedence. inspect the active session after switching
 profiles, especially when the app and CLI use different installed versions.
 
-## separate instructions from memory
+<span id="separate-instructions-from-memory" class="heading-alias" aria-hidden="true"></span>
+
+## instructions or memory?
 
 project instructions should explain what applies now. memory can supply useful
 context from earlier work: a failed approach, a preference, or a pointer to an
@@ -87,7 +95,9 @@ instructions. a memory saying a test uses one command can become stale when
 the project changes package managers. update the canonical project instruction
 so every new task can find the correction.
 
-## permissions describe reach and interruption
+<span id="permissions-describe-reach-and-interruption" class="heading-alias" aria-hidden="true"></span>
+
+## when will Codex ask for approval?
 
 the sandbox controls filesystem and network reach for commands. approval
 policy controls when execution needs a decision. `never` means Codex cannot
@@ -101,7 +111,9 @@ the config profiles above. follow one supported permission configuration
 format, and check the active policy before assuming a directory or destination
 is reachable.
 
-## diagnose the environment before expanding access
+<span id="diagnose-the-environment-before-expanding-access" class="heading-alias" aria-hidden="true"></span>
+
+## why is a command failing?
 
 when an operation fails, check which host ran it, the working directory, the
 loaded config layer, and the service identity. a missing executable on a remote

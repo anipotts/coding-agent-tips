@@ -19,14 +19,14 @@
       "experienceQuestions": [],
       "headings": [
         "## this is codex",
-        "## where codex lives",
-        "### terminal and editor keep the code close",
-        "### desktop coordinates parallel work",
-        "### cloud and mobile change where you steer",
-        "## the architecture behind the conversation",
-        "### instructions, tools, and permissions shape the loop",
-        "### some of the harness can be changed",
-        "## finish with an artifact you can inspect"
+        "## where can i use Codex?",
+        "### terminal and editor",
+        "### desktop and parallel tasks",
+        "### cloud work and mobile access",
+        "## how does Codex run a task?",
+        "### instructions, tools, and permissions",
+        "### can i change Codex itself?",
+        "## how do i check the result?"
       ]
     },
     {
@@ -50,13 +50,14 @@
       "experienceQuestions": [],
       "headings": [
         "## this is claude code",
-        "### one request can become several rounds of work",
-        "## choose where the work runs",
+        "### what happens after a prompt?",
+        "### who's running twenty agents?",
+        "## where does the work run?",
         "### terminal, editor, and desktop",
         "### web and Remote Control",
-        "## extensions and permissions",
-        "## follow the artifact through the workflow",
-        "### repository work has an inspectable ending",
+        "## what can i add or control?",
+        "## what should i get back?",
+        "### it says it’s done. now what?",
         "### Cowork"
       ]
     },
@@ -71,9 +72,9 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## begin with one useful pass",
-        "## try a complete example",
-        "## give the repository durable context",
+        "## what should i try first?",
+        "## example: fix a retry count",
+        "## what should go in AGENTS.md?",
         "## reviewing the change"
       ]
     },
@@ -88,10 +89,10 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## begin with one visible finish line",
-        "### a small exercise with a real failure",
-        "## make the next prompt easier",
-        "## review the result in the right place"
+        "## what should i try first?",
+        "### fix a small bug",
+        "## save the project instructions",
+        "## how do i know it worked?"
       ]
     },
     {
@@ -110,12 +111,12 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## put each kind of context in the right place",
-        "## configuration precedence",
-        "### try a temporary override first",
-        "## separate instructions from memory",
-        "## permissions describe reach and interruption",
-        "## diagnose the environment before expanding access"
+        "## where do instructions and settings go?",
+        "## which setting wins?",
+        "### try a temporary setting",
+        "## instructions or memory?",
+        "## when will Codex ask for approval?",
+        "## why is a command failing?"
       ]
     },
     {
@@ -131,13 +132,13 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## put each setting where it belongs",
-        "### settings precedence",
-        "## keep instructions and memory legible",
-        "### shared rules can have one source",
-        "### memory can become stale",
-        "## make one permission change you can explain",
-        "## inspect the environment that will execute"
+        "## where does this setting go?",
+        "### which setting wins?",
+        "## why am i repeating myself?",
+        "### one set of project rules",
+        "### is that memory still right?",
+        "## can it stop asking to run this?",
+        "## which machine is using these settings?"
       ]
     },
     {
@@ -153,12 +154,12 @@
       "experienceQuestions": [],
       "headings": [
         "## access should match the job",
-        "## inspect first, then grant the missing capability",
-        "## treat outside text as input",
-        "### network rules have a specific reach",
-        "## unattended work needs a bounded identity",
-        "## a security finding needs a reproduction",
-        "## return the action and its result"
+        "## example: diagnose a failed deployment",
+        "## can outside text change the task?",
+        "### what do network rules cover?",
+        "## what changes when work runs unattended?",
+        "## is this actually a security issue?",
+        "## what should it report?"
       ]
     },
     {
@@ -177,12 +178,12 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## decide what the task can reach",
-        "### inspect the actual sandbox boundary",
-        "## keep identity attached to the action",
-        "## define external actions before automating them",
-        "## unattended work needs a narrower contract",
-        "## enforce policy where it can hold"
+        "## what can it actually access?",
+        "### what does the sandbox cover?",
+        "## whose account is it using?",
+        "## when does it need my decision?",
+        "## what if i'm away when it needs approval?",
+        "## where do i enforce the rules?"
       ]
     },
     {
@@ -199,13 +200,13 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## the everyday loop",
-        "## parallel work needs visible ownership",
-        "### keep a coordinator useful",
-        "## work that continues without you",
-        "## choose where execution lives",
+        "## how do i scope a task?",
+        "## how do i keep parallel edits separate?",
+        "### what belongs in the coordinator?",
+        "## how do i schedule repeated work?",
+        "## where should the work run?",
         "## image generation",
-        "## hand off the state that matters"
+        "## what belongs in a handoff?"
       ]
     },
     {
@@ -224,12 +225,12 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## keep the everyday loop small enough to inspect",
-        "## choose how parallel work communicates",
-        "### split by ownership and dependency",
-        "### check the work that is actually running",
-        "## choose a schedule by its execution environment",
-        "## move between devices with the state attached"
+        "## how much should i ask for at once?",
+        "## how do agents work together?",
+        "### give each task its own job",
+        "### what's still running?",
+        "## can it keep working while i'm away?",
+        "## can i pick this up on another device?"
       ]
     },
     {
@@ -250,19 +251,19 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## make operating knowledge reusable",
-        "### instructions route the repository context",
-        "### skills carry procedures, scripts, and references",
+        "## how do i reuse a workflow?",
+        "### project instructions",
+        "### what goes in a skill?",
         "## MCP connections",
-        "### MCP exposes tools and resources",
-        "### authentication and reach stay explicit",
-        "## make events deterministic",
+        "### what can i connect?",
+        "### why won't a connection work?",
+        "## when should i use hooks?",
         "## task coordination and subagents",
-        "### subagents need a bounded problem",
-        "### the return contract matters",
-        "### try a bounded delegation",
-        "## package behavior for reuse",
-        "## compose around a recurring job"
+        "### what should a subagent do?",
+        "### what should a worker report?",
+        "### example: parallel code review",
+        "## when should i package a plugin?",
+        "## how do extensions work together?"
       ]
     },
     {
@@ -281,13 +282,13 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## choosing an extension",
-        "### a scratch project for the examples",
-        "## turn a procedure into a skill",
-        "## give a subagent a bounded question",
-        "## connect the service the task needs",
-        "## run hooks at meaningful events",
-        "### a small hook you can exercise",
+        "## what do i want to add?",
+        "### a project to try this in",
+        "## how do i teach it a repeatable task?",
+        "## when should i bring in a subagent?",
+        "## how do i connect another service?",
+        "## can it run a check after each edit?",
+        "### try a hook",
         "## plugins",
         "## function hooks are a proposal"
       ]
@@ -307,10 +308,10 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## start with the work you need to coordinate",
-        "## add parallelism around independent work",
-        "## extend the part that keeps repeating",
-        "## judge the setup with a small comparison",
+        "## which setup fits my work?",
+        "## when do more agents help?",
+        "## when should i add an extension?",
+        "## how do i compare setups?",
         "## keep the result easy to inspect"
       ]
     },
@@ -330,11 +331,11 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## choose a setup for the work in front of you",
-        "### change one part of the setup at a time",
-        "## compare setups using the same task",
-        "## add parallelism when the tasks separate cleanly",
-        "## evaluate previews with their limits visible"
+        "## where should i start?",
+        "### add one thing at a time",
+        "## how do i compare two setups?",
+        "## would more agents help?",
+        "## should i rely on a preview?"
       ]
     },
     {
@@ -350,13 +351,13 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## credential access",
-        "## choose the path that fits the work",
-        "### an interactive browser login",
-        "### an application that needs environment variables",
-        "## try the data flow with a harmless fixture",
-        "## give unattended work an explicit identity",
-        "## keep access and action review connected"
+        "## does it need my password?",
+        "## how does it sign in?",
+        "### browser logins",
+        "### environment variables",
+        "## can i test this with a dummy value?",
+        "## whose account is it using?",
+        "## what can it do after login?"
       ]
     }
   ]

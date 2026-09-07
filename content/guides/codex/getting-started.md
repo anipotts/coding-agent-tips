@@ -1,8 +1,8 @@
 ---
-title: getting started
+title: your first task
 description: a first useful codex loop with one repository, one task, and one way to verify it.
 products: [codex]
-updatedAt: "2026-09-07T15:01:58-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:01:58-04:00"
 status: pending
 completion: outline
@@ -16,7 +16,7 @@ navigation:
   order: 20
 ---
 
-## begin with one useful pass
+## what should i try first?
 
 choose a small behavior you can describe and check yourself. a failing test,
 a broken keyboard shortcut, or a confusing error message gives you something
@@ -29,7 +29,7 @@ can inspect the result comfortably. check the working directory, branch, and
 existing changes before the first edit. in a shared checkout, those changes
 may belong to someone else.
 
-## try a complete example
+## example: fix a retry count
 
 this small exercise uses Node.js and a new scratch directory. it deliberately
 starts with a bug: `0` gets replaced by the default retry count.
@@ -80,7 +80,7 @@ that demonstrates one complete loop: observed failure, a bounded request, a
 change, and a check you can repeat. it proves the listed inputs; validation of
 negative numbers or strings would be a separate requirement.
 
-## give the repository durable context
+## what should go in AGENTS.md?
 
 once you move into a real project, put recurring setup and verification
 instructions in [`AGENTS.md`](https://learn.chatgpt.com/docs/agent-configuration/agents-md).

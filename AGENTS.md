@@ -1,10 +1,11 @@
 # coding agent tips
 
-this repository is an opinionated, source backed handbook for experienced coding agent users. codex and claude code are coequal primary guides. archived claude code plugins remain available only for the compatibility window documented in `content/archive/claude-code-tools.md`.
+this repository is an opinionated, source backed handbook for people who know basic coding and are learning to work with agents. codex and claude code are coequal primary guides. archived claude code plugins remain available only for the compatibility window documented in `content/archive/claude-code-tools.md`.
 
 ## public standard
 
-- write for a staff engineer, hiring manager, or technically serious builder who may encounter one page without prior context.
+- assume basic coding knowledge and little agent experience. give a brief, optional crash course with embedded primary references. explain unfamiliar agent terms where they matter and let fluent readers move straight to practical material.
+- use short headings that help readers find a question, worry, or curiosity. preserve clear topic names and Ani's adopted headings. personal judgments require his words; a question heading does not establish his experience.
 - separate tested behavior, official product facts, analysis, and open questions.
 - prefer primary sources and record them in `editorial/sources.json`.
 - do not use generated activity, commit frequency, or vendor benchmarks as evidence of quality.

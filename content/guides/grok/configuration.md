@@ -1,8 +1,8 @@
 ---
-title: configuration
+title: settings and memory
 description: configure grok build by scope, inspect what it loads, and give grok bots a clear role.
 products: [grok]
-updatedAt: "2026-09-07T15:06:44-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 status: pending
 evidence: [tested, official-source, analysis]
 sources: [grok-build, grok-build-settings, grok-build-settings-reference, grok-build-permissions, grok-build-sandbox, grok-bot-profiles, grok-bot-approvals]
@@ -13,7 +13,9 @@ navigation:
   order: 30
 ---
 
-## put each setting where it belongs
+<span id="put-each-setting-where-it-belongs" class="heading-alias" aria-hidden="true"></span>
+
+## where do the settings go?
 
 Grok Build loads configuration from your machine and the current project.
 Grok Bot uses profiles and account settings for persistent agents. start by
@@ -32,7 +34,9 @@ belong in your user configuration. `GROK_HOME` can change the location of that
 personal directory. managed configuration and requirements can also constrain
 the effective settings on an organization managed machine.
 
-## try one inspectable configuration
+<span id="try-one-inspectable-configuration" class="heading-alias" aria-hidden="true"></span>
+
+## which settings did it load?
 
 for a session where you want to review tool approvals, the documented user
 setting is:
@@ -78,7 +82,9 @@ scanners. inspect the loaded sources before assuming a setting came from
 `.grok/`. the [settings reference](https://docs.x.ai/build/settings/reference)
 lists those scanners and their controls.
 
-## check permission and sandbox separately
+<span id="check-permission-and-sandbox-separately" class="heading-alias" aria-hidden="true"></span>
+
+## what can it actually access?
 
 ask, auto, and always approve control tool permission decisions. auto uses a
 classifier where the feature is available; deny rules and hooks still apply.
@@ -86,7 +92,9 @@ a [sandbox](https://docs.x.ai/build/features/sandbox) limits filesystem and
 network access when active. its profile and enforcement determine what an
 approved command can reach. inspect both controls before unattended work.
 
-## give a bot a role and a task a finish line
+<span id="give-a-bot-a-role-and-a-task-a-finish-line" class="heading-alias" aria-hidden="true"></span>
+
+## how should i set up a Bot?
 
 Grok Bot [profiles](https://docs.x.ai/grok-bot/bots) hold a name, description,
 avatar, and ongoing instructions. a useful role might be “collect documentation

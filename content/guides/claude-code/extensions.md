@@ -1,8 +1,8 @@
 ---
-title: extensions
+title: what else can it do?
 description: choosing and combining claude code extensions by the job they do.
 products: [claude-code]
-updatedAt: "2026-09-07T15:02:34-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:02:34-04:00"
 status: current
 completion: complete
@@ -16,7 +16,9 @@ navigation:
   order: 50
 ---
 
-## choosing an extension
+<span id="choosing-an-extension" class="heading-alias" aria-hidden="true"></span>
+
+## what do i want to add?
 
 an extension should have a specific job. instructions provide context, a skill
 carries a procedure, MCP connects a system, a subagent owns a separate problem,
@@ -28,7 +30,9 @@ start with a repeated problem from actual work. “the agent keeps missing the
 same review step” gives you something to improve and a result to evaluate.
 “add more extensions” leaves both of those unclear.
 
-### a scratch project for the examples
+<span id="a-scratch-project-for-the-examples" class="heading-alias" aria-hidden="true"></span>
+
+### a project to try this in
 
 create an empty folder with Node available. save this as `label.mjs`:
 
@@ -55,7 +59,9 @@ run `node --test label.test.mjs` once before adding an extension. these are
 small instructional fixtures, so you can see exactly which behavior each
 extension adds.
 
-## turn a procedure into a skill
+<span id="turn-a-procedure-into-a-skill" class="heading-alias" aria-hidden="true"></span>
+
+## how do i teach it a repeatable task?
 
 [skills](https://code.claude.com/docs/en/skills) use `SKILL.md` with a name,
 description, and instructions. supporting files can carry examples or scripts.
@@ -83,7 +89,9 @@ procedure under your control; it does not establish a tool permission boundary.
 review the actual result to see whether the skill gave a clearer report than
 the ordinary prompt. keep it when repeated use justifies the extra file.
 
-## give a subagent a bounded question
+<span id="give-a-subagent-a-bounded-question" class="heading-alias" aria-hidden="true"></span>
+
+## when should i bring in a subagent?
 
 [subagents](https://code.claude.com/docs/en/sub-agents) can have their own prompt
 and tool list. a project definition belongs under `.claude/agents/`. for
@@ -110,7 +118,9 @@ separate context is useful for a question whose investigation would otherwise
 crowd the main conversation. include the exact contract and files in the
 handoff. a worker can only use the context and tools it receives.
 
-## connect the service the task needs
+<span id="connect-the-service-the-task-needs" class="heading-alias" aria-hidden="true"></span>
+
+## how do i connect another service?
 
 [MCP](https://code.claude.com/docs/en/mcp) exposes tools and resources from other
 systems. a skill can explain how to use an issue tracker; its MCP server
@@ -126,7 +136,9 @@ records, or messages changes what the session can do on another system. match
 the service permissions to the intended operations, and keep returned content
 separate from instructions that authorize the task.
 
-## run hooks at meaningful events
+<span id="run-hooks-at-meaningful-events" class="heading-alias" aria-hidden="true"></span>
+
+## can it run a check after each edit?
 
 [hooks](https://code.claude.com/docs/en/hooks) attach handlers to lifecycle events.
 `PreToolUse` runs before a tool action; `PostToolUse` runs after a successful
@@ -134,7 +146,9 @@ one. current handlers include command, HTTP, MCP tool, prompt, and agent types,
 with event specific support. command handlers suit deterministic checks;
 model based handlers add judgment and another model call.
 
-### a small hook you can exercise
+<span id="a-small-hook-you-can-exercise" class="heading-alias" aria-hidden="true"></span>
+
+### try a hook
 
 in the scratch project, this `.claude/settings.json` entry runs the label test
 after an Edit or Write tool call:

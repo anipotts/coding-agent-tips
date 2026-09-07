@@ -330,7 +330,7 @@ try {
   await page.waitForURL('**/guides/codex/configuration/');
   expect(desktopDocumentToken === await page.evaluate(() => window.__navigationDocumentToken), 'chapter navigation caused a full reload');
   expect(await page.locator('html').evaluate((root) => root.classList.contains('dark') === (root.dataset.theme === 'dark')), 'Starwind and Starlight theme state diverged after chapter navigation');
-  expect((await page.locator('.publication-sidebar [aria-current="page"]').textContent())?.trim() === 'configuration', 'sidebar active chapter did not update');
+  expect((await page.locator('.publication-sidebar [aria-current="page"]').textContent())?.trim() === 'settings and memory', 'sidebar active chapter did not update');
   await page.goBack();
   await page.waitForURL('**/guides/codex/');
   await page.waitForFunction(() => document.querySelector('.publication-sidebar [aria-current="page"]')?.getAttribute('href') === '/guides/codex/');

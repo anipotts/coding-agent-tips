@@ -2,7 +2,7 @@
 title: choosing a coding agent setup
 description: compare surfaces, harnesses, models, orchestration, and hardware before choosing a setup.
 products: [market]
-updatedAt: "2026-09-07T15:05:08-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:05:08-04:00"
 status: current
 evidence: [official-source, analysis]
@@ -18,7 +18,9 @@ choose a setup around the work you need to finish and how you want to inspect
 it. a useful comparison includes the agent, its tools, the execution environment,
 and the time you spend steering and reviewing the result.
 
-## separate the choices
+<span id="separate-the-choices" class="heading-alias" aria-hidden="true"></span>
+
+## what am i choosing?
 
 | choice | question it answers |
 | --- | --- |
@@ -41,7 +43,9 @@ context and tools through different harnesses. a familiar editor may help you
 review faster. a remote host may have a dependency your laptop lacks. record
 those differences when comparing products.
 
-## choose a surface you can judge the work through
+<span id="choose-a-surface-you-can-judge-the-work-through" class="heading-alias" aria-hidden="true"></span>
+
+## which app should i use?
 
 | your main activity | a useful surface to try | tradeoff to inspect |
 | --- | --- | --- |
@@ -54,7 +58,9 @@ begin with one outcome in a surface you already understand. add coordination
 when there are independent tasks to manage. a task list becomes
 useful when it helps you make the next decision about the work.
 
-## run a small comparison
+<span id="run-a-small-comparison" class="heading-alias" aria-hidden="true"></span>
+
+## how do i compare them?
 
 choose a representative task with a known starting state. for example, use the
 same repository revision and ask each setup to fix the same search navigation
@@ -80,7 +86,9 @@ such as [Cursor's plan page](https://cursor.com/pricing). model availability, in
 and provider integrations change; inspect those terms before committing to a
 workflow that depends on them.
 
-## measure the machine before replacing it
+<span id="measure-the-machine-before-replacing-it" class="heading-alias" aria-hidden="true"></span>
+
+## do i need a better computer?
 
 with a hosted model, inference happens at the provider. local builds, browsers,
 containers, language servers, and tests still run wherever the task's execution
@@ -105,7 +113,9 @@ weights and runtime memory. estimate those needs from the model and runner you
 intend to use, then test the actual workload. a hardware specification alone
 cannot tell you whether a particular agent setup will feel responsive.
 
-## move execution for a concrete reason
+<span id="move-execution-for-a-concrete-reason" class="heading-alias" aria-hidden="true"></span>
+
+## should it run somewhere else?
 
 remote execution can help when the necessary environment already lives on
 another machine, local resources are constrained, or the task should continue

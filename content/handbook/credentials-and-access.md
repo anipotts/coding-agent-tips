@@ -2,7 +2,7 @@
 title: credentials and agent access
 description: how credentials reach browser sessions and application processes, with scoped identities and a harmless test.
 products: [codex, claude-code]
-updatedAt: "2026-09-07T15:08:30-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:08:30-04:00"
 status: pending
 completion: outline
@@ -16,7 +16,7 @@ navigation:
   order: 30
 ---
 
-## credential access
+## does it need my password?
 
 start with the operation: read a deployment result, run a development server,
 or sign in to a browser session. then identify the account and credential that
@@ -28,9 +28,9 @@ the application at runtime. the application still needs to use the value.
 inspect the path from storage to process, including what can appear in its
 output, instead of treating encryption at rest as the whole design.
 
-## choose the path that fits the work
+## how does it sign in?
 
-### an interactive browser login
+### browser logins
 
 [1Password for Claude](https://1password.com/blog/1password-for-claude) describes
 an integration on Mac that requests consent before filling a login or one time
@@ -44,7 +44,7 @@ from an arbitrary browser tool. approving a credential request also has a
 specific meaning: the session can use that login. the actions it takes after
 login still need to follow the task’s authority and the account’s permissions.
 
-### an application that needs environment variables
+### environment variables
 
 [1Password’s Codex integration](https://1password.com/blog/1password-trusted-access-layer-for-openai-codex)
 uses a local MCP server for managing Environments and arranging runtime access.
@@ -57,7 +57,7 @@ receives the value, how long it needs it, and whether the agent can cause the
 process to print it. an application with debug logging can expose information
 even when the original credential exchange was carefully scoped.
 
-## try the data flow with a harmless fixture
+## can i test this with a dummy value?
 
 [1Password CLI](https://developer.1password.com/docs/cli/secrets-scripts) supports
 secret references and `op run` for runtime environment injection. the example
@@ -94,7 +94,7 @@ this exercise checks a narrow part of the path. it leaves the service account’
 scope, the agent’s tool permissions, and the destination application’s behavior
 to review separately. use a dummy value while learning where output appears.
 
-## give unattended work an explicit identity
+## whose account is it using?
 
 [1Password Service Accounts](https://www.1password.dev/service-accounts) support
 access to selected vaults and Environments with defined actions. they give an
@@ -110,7 +110,7 @@ an expected rejection outside its scope. confirm the account, destination,
 output, and expiration or revocation path. record those facts without printing
 the credential value.
 
-## keep access and action review connected
+## what can it do after login?
 
 a useful result says which account and environment were used, what operation
 completed, and which decision remains. “signed in” establishes an authenticated

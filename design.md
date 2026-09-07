@@ -13,7 +13,7 @@ The aim is a professional publication that feels personal, current, and technica
 
 Coding agent tips is an opinionated, source backed handbook about using coding agents in real work.
 
-Its primary readers are experienced builders, staff engineers, hiring managers, and technically serious newcomers who may land on one page without prior context. A page must support two reading modes:
+Its primary readers know basic coding but are new to agents. They may feel lost among unfamiliar tools and terms, or arrive with one specific question. Keep the initial crash course brief and optional, embed primary references for deeper study, and use short headings that make questions and concerns easy to locate. Ani's observations, examples, humor, and stated limits give the handbook its personal perspective. A page must support two reading modes:
 
 1. A first pass that establishes the subject, the recommendation, and why it matters.
 2. A study pass that exposes structure, evidence, sources, technical detail, and open questions.

@@ -1,8 +1,8 @@
 ---
-title: recommendations
+title: choosing your setup
 description: source based starting points for claude code, with a practical way to compare and extend a setup.
 products: [claude-code]
-updatedAt: "2026-09-07T15:02:34-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:02:34-04:00"
 status: current
 completion: complete
@@ -15,7 +15,9 @@ navigation:
   order: 70
 ---
 
-## choose a setup for the work in front of you
+<span id="choose-a-setup-for-the-work-in-front-of-you" class="heading-alias" aria-hidden="true"></span>
+
+## where should i start?
 
 these are source based starting points for different workflows. the useful
 question is which arrangement makes your next task easy to steer and verify.
@@ -43,7 +45,9 @@ question is which arrangement makes your next task easy to steer and verify.
   </div>
 </dl>
 
-### change one part of the setup at a time
+<span id="change-one-part-of-the-setup-at-a-time" class="heading-alias" aria-hidden="true"></span>
+
+### add one thing at a time
 
 start with a repository instruction file, the project’s actual check commands,
 and permissions that fit the task. finish one useful change before adding a
@@ -55,7 +59,9 @@ its MCP connection. if independent investigations keep filling the main
 conversation, try a bounded subagent. each addition should solve a problem you
 can name and produce an outcome you can inspect.
 
-## compare setups using the same task
+<span id="compare-setups-using-the-same-task" class="heading-alias" aria-hidden="true"></span>
+
+## how do i compare two setups?
 
 a small repeatable exercise makes comparisons useful. use the same repository
 revision, the same request, and the same acceptance criteria in each setup.
@@ -70,7 +76,9 @@ one task gives evidence about that task. try a different kind of work before
 generalizing from the result: investigation, implementation, and review can
 favor different arrangements.
 
-## add parallelism when the tasks separate cleanly
+<span id="add-parallelism-when-the-tasks-separate-cleanly" class="heading-alias" aria-hidden="true"></span>
+
+## would more agents help?
 
 an interface change and a documentation update can progress together once
 the behavior is agreed. two workers redesigning the same module need more
@@ -81,7 +89,9 @@ start with a small number of tasks you can actually review. track those waiting
 on decisions as carefully as those still running. useful parallelism ends in
 work you can integrate.
 
-## evaluate previews with their limits visible
+<span id="evaluate-previews-with-their-limits-visible" class="heading-alias" aria-hidden="true"></span>
+
+## should i rely on a preview?
 
 Claude Code’s [agent guidance](https://code.claude.com/docs/en/agents) includes
 experimental agent teams. web sessions and [routines](https://code.claude.com/docs/en/routines)

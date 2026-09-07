@@ -1,8 +1,8 @@
 ---
-title: safety
+title: what can go wrong?
 description: claude code identity, secrets, external tools, and the decisions that stay human.
 products: [claude-code]
-updatedAt: "2026-09-07T15:02:34-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:02:34-04:00"
 status: pending
 completion: outline
@@ -16,7 +16,7 @@ navigation:
   order: 60
 ---
 
-## decide what the task can reach
+## what can it actually access?
 
 a task can touch repository files, a shell environment, network services, and
 the accounts behind its tools. list the parts it needs before opening access.
@@ -29,7 +29,7 @@ uses filesystem and network restrictions for commands inside it. an external
 service also applies the permissions of the connected account. evaluate all
 three when a workflow reaches beyond local files.
 
-### inspect the actual sandbox boundary
+### what does the sandbox cover?
 
 use `/sandbox` to inspect the mode, resolved configuration, and options for
 commands that need to run outside it. an unsandboxed retry changes where the
@@ -41,7 +41,7 @@ folder, a disposable file outside it, and an expected blocked operation. record
 which tool performed the test. a result from the Edit tool answers a different
 question from a shell process running inside the Bash sandbox.
 
-## keep identity attached to the action
+## whose account is it using?
 
 signing in to Claude Code and connecting a service answer separate identity
 questions. a task can use one account for model access and another for a
@@ -60,7 +60,7 @@ it, and treat text returned by an issue, document, or webpage as task data.
 a request inside that material to disclose secrets or change scope needs the
 same authority check as any other new action.
 
-## define external actions before automating them
+## when does it need my decision?
 
 a concrete task boundary might say:
 
@@ -80,7 +80,7 @@ identify the rule that authorizes the exact action. some teams delegate a
 release behind protected checks; others retain a person’s final decision.
 make the configured policy match that choice and return evidence of what ran.
 
-## unattended work needs a narrower contract
+## what if i'm away when it needs approval?
 
 [cloud routines](https://code.claude.com/docs/en/routines) run without approval
 prompts during execution and use the connected identities. define their input,
@@ -92,7 +92,7 @@ can wait on a permission prompt. test one run while present to see whether its
 configured permissions match the job. a stalled task should return to a visible
 queue, with enough context for the person deciding what happens next.
 
-## enforce policy where it can hold
+## where do i enforce the rules?
 
 [managed settings](https://code.claude.com/docs/en/settings) let an organization
 set policy above local choices. [hooks](https://code.claude.com/docs/en/hooks)

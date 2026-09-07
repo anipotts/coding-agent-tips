@@ -1,8 +1,8 @@
 ---
-title: safety
+title: what can go wrong?
 description: codex identity, secrets, external access, and the decisions that stay human.
 products: [codex]
-updatedAt: "2026-09-07T15:01:58-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:01:58-04:00"
 status: pending
 completion: outline
@@ -28,7 +28,7 @@ constrain local command execution. connected apps and MCP servers have their
 own permissions and credentials. a filesystem sandbox alone cannot describe
 what every connected service will allow.
 
-## inspect first, then grant the missing capability
+## example: diagnose a failed deployment
 
 suppose the task is to diagnose a failed deployment. a useful initial scope is:
 
@@ -49,7 +49,7 @@ that action. a standing release policy can define those conditions; an
 interactive task can leave the final action with the person reviewing it.
 state which policy applies so the agent and reviewer share the same boundary.
 
-## treat outside text as input
+## can outside text change the task?
 
 repository files, websites, issue comments, and service responses may contain
 instructions aimed at the agent. evaluate that text as evidence for the task.
@@ -61,7 +61,7 @@ controls for consequential changes: restricted credentials, protected branches,
 and the relevant approval mechanisms. several checks can reduce exposure;
 each still needs to be configured and understood.
 
-### network rules have a specific reach
+### what do network rules cover?
 
 Codex's command network proxy applies to traffic from commands and their
 subprocesses. its rules do not govern every hosted tool or connector. when using
@@ -69,7 +69,7 @@ named [permission profiles](https://learn.chatgpt.com/docs/permissions), check
 that the proxy is active before relying on destination rules. enabling command
 network access and configuring its enforcement are separate steps.
 
-## unattended work needs a bounded identity
+## what changes when work runs unattended?
 
 scheduled work needs a stable host, a narrow job, and an identity that can do
 that job. use the service's supported scoped access where available. decide in
@@ -81,7 +81,7 @@ you can inspect the result. make failure visible and keep the task from
 repeatedly taking an action whose outcome is unknown. after an interruption,
 read the service's current state before retrying a write.
 
-## a security finding needs a reproduction
+## is this actually a security issue?
 
 [Codex Security](https://learn.chatgpt.com/docs/security) is a separate scanning
 and investigation workflow. its output needs review in the context of the
@@ -93,7 +93,7 @@ the problem. verify the application still supports the intended behavior.
 report where testing stopped, including unavailable services or code paths
 outside the scan's coverage.
 
-## return the action and its result
+## what should it report?
 
 a useful handoff names the identity and environment used, what changed, the
 verification performed, and anything still awaiting a decision. “prepared the

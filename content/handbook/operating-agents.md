@@ -1,12 +1,12 @@
 ---
-title: working with coding agents
-description: durable instructions, evidence, isolation, approvals, verification, and handoffs across coding agent runtimes.
+title: start here
+description: a quick agent crash course, your first task, and how to check the result.
 products: [codex, claude-code]
-updatedAt: "2026-09-07T15:05:08-04:00"
-checkedAt: "2026-09-07T15:05:08-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
+checkedAt: "2026-09-07T16:30:42-04:00"
 status: current
 evidence: [official-source, analysis]
-sources: [openai-codex-agents-md, anthropic-memory, github-protected-branches, openai-codex-approvals, anthropic-permissions, git-worktrees]
+sources: [anthropic-how-claude-code-works, anthropic-features-overview, openai-codex-agents-md, anthropic-memory, github-protected-branches, openai-codex-approvals, anthropic-permissions, git-worktrees]
 redirects: [/guides/operating-system/]
 voice: evidence
 navigation:
@@ -14,11 +14,37 @@ navigation:
   order: 10
 ---
 
-an agent task is easier to manage when three things stay visible: what it is
-trying to finish, what it can reach, and what evidence will show that it worked.
-these questions apply across the Codex and Claude Code chapters.
+this assumes you know basic coding. the new part is working with something
+that can inspect your project, choose actions, and keep going between your
+messages. already comfortable with the terms? [try the first task](#what-should-i-ask-first).
 
-## begin with a behavior you can check
+## the agent crash course
+
+- **model and harness.** the model interprets your request and chooses a next
+  step. the harness is the software around it: tools, context, permissions,
+  and the interface you use. together they can run an
+  [agent loop](https://code.claude.com/docs/en/how-claude-code-works): inspect,
+  act, check the result, repeat.
+- **tools.** these let an agent do things: read a file, edit code, run a test,
+  or use a browser. each result becomes information for its next step.
+- **context and tokens.** context is the information available for the current
+  response. tokens are the chunks used to measure it. a
+  [context window](https://code.claude.com/docs/en/how-claude-code-works#the-context-window)
+  has a limit; a long conversation can require summarizing or dropping earlier detail.
+- **instructions and memory.** files such as `AGENTS.md`, `CLAUDE.md`, and saved
+  notes can carry information into later sessions when loaded. they
+  [supply context](https://code.claude.com/docs/en/memory); they do not retrain the model.
+- **permissions.** these determine which actions can proceed and which need
+  your approval. [check the settings](#will-it-ask-before-acting) before giving
+  it work with consequences.
+
+skills, MCP, subagents, and hooks are ways to
+[add capabilities](https://code.claude.com/docs/en/features-overview).
+you can explore those when a task gives you a reason to.
+
+<span id="begin-with-a-behavior-you-can-check" class="heading-alias" aria-hidden="true"></span>
+
+## what should i ask first?
 
 consider a search box that loses its query when you open a result and return.
 a useful request gives the agent enough context to reproduce that behavior:
@@ -40,7 +66,9 @@ if the agent finds that the requested behavior conflicts with the product's
 existing rules, resolve that decision before it builds around an assumption.
 a clear prompt leaves room to discover the cause.
 
-## make project context easy to find
+<span id="make-project-context-easy-to-find" class="heading-alias" aria-hidden="true"></span>
+
+## why am i repeating myself?
 
 start with the repository's current state: branch, existing edits, setup,
 relevant code, and checks. preserve work that belongs to other people or tasks.
@@ -58,7 +86,9 @@ its checks, and which generated files come from another source. move procedures
 used only for particular jobs into skills or focused references. update the
 canonical command when it changes so the next task can find it.
 
-## separate guidance from enforcement
+<span id="separate-guidance-from-enforcement" class="heading-alias" aria-hidden="true"></span>
+
+## will it ask before acting?
 
 instructions guide the agent's judgment. runtime settings and permissions
 constrain actions. hooks run handlers at specific events. provider controls
@@ -76,7 +106,9 @@ expose different controls; connected services also enforce their own account
 permissions. credentials being available tells you what a tool may be able to
 do. the task and applicable policy establish what it should do.
 
-## split work where it can advance independently
+<span id="split-work-where-it-can-advance-independently" class="heading-alias" aria-hidden="true"></span>
+
+## when should i use more agents?
 
 an agent can investigate the search state while another reviews keyboard and
 browser navigation behavior. both can return findings to the task implementing
@@ -97,7 +129,9 @@ need the same unresolved contract, settle the contract first. review the
 combined behavior after integration, including interactions that neither task
 could test alone.
 
-## verify the claim you are making
+<span id="verify-the-claim-you-are-making" class="heading-alias" aria-hidden="true"></span>
+
+## it says it’s done. now what?
 
 use evidence at the layer the claim describes:
 
@@ -117,7 +151,9 @@ review the implementation as well as the output. check error handling, fit with
 the existing code, security implications, and the maintenance the change adds.
 tests can pass around an unnecessary abstraction or a misunderstood requirement.
 
-## hand off a state someone can continue
+<span id="hand-off-a-state-someone-can-continue" class="heading-alias" aria-hidden="true"></span>
+
+## how do i pick this up later?
 
 finish with the changed behavior, files or revision, verification, unresolved
 gaps, and next action. an illustrative handoff for the hypothetical search fix could say:

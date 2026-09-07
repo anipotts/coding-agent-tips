@@ -1,8 +1,8 @@
 ---
-title: recommendations
+title: choosing your setup
 description: simple codex defaults for different levels of technical familiarity and workflow intensity.
 products: [codex]
-updatedAt: "2026-09-07T15:01:58-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 checkedAt: "2026-09-07T15:01:58-04:00"
 status: current
 completion: complete
@@ -15,7 +15,9 @@ navigation:
   order: 70
 ---
 
-## start with the work you need to coordinate
+<span id="start-with-the-work-you-need-to-coordinate" class="heading-alias" aria-hidden="true"></span>
+
+## which setup fits my work?
 
 my interest in Codex centers on keeping multiple projects, tasks, and contexts
 moving through one authoritative thread. that thread routes clearer prompts
@@ -40,7 +42,9 @@ on another computer. the choice of screen and the choice of execution host
 answer different questions. the [remote guide](https://learn.chatgpt.com/docs/remote-connections)
 and [cloud guide](https://learn.chatgpt.com/docs/cloud) explain those environments.
 
-## add parallelism around independent work
+<span id="add-parallelism-around-independent-work" class="heading-alias" aria-hidden="true"></span>
+
+## when do more agents help?
 
 start with a task you know how to judge. when it contains independent
 questions, give them to [subagents](https://learn.chatgpt.com/docs/agent-configuration/subagents)
@@ -56,7 +60,9 @@ check the integrated behavior before increasing the amount of parallel work.
 the benefit is the time saved reaching a correct result. extra summaries,
 duplicate investigations, and conflicting patches count against that benefit.
 
-## extend the part that keeps repeating
+<span id="extend-the-part-that-keeps-repeating" class="heading-alias" aria-hidden="true"></span>
+
+## when should i add an extension?
 
 the capabilities i'm interested in include creating and messaging tasks,
 reading their histories, checking current activity, and archiving completed
@@ -75,7 +81,9 @@ also means maintaining and running the changed implementation. choose that
 route when a concrete limitation warrants the maintenance, and keep a way to
 compare your change with the upstream behavior.
 
-## judge the setup with a small comparison
+<span id="judge-the-setup-with-a-small-comparison" class="heading-alias" aria-hidden="true"></span>
+
+## how do i compare setups?
 
 choose a task that resembles your actual work. record how long it takes to
 reach a reviewable result, what you needed to correct, which checks passed,
