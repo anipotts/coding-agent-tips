@@ -61,7 +61,7 @@ The absolute performance gate remains **99**, TBT below 100 ms, CLS below 0.05, 
 
 Font discovery and the protocol used by the preview explain the initial investigation. The retained production repair preloads the original Instrument Sans Latin font in the homepage head. CSS and typography remain unchanged. CSS/font embedding and broad runtime bundling were measured and rejected; they are absent from the final diff.
 
-CI reports and screenshots are retained in the [ASCII QA artifact](https://github.com/anipotts/coding-agent-tips/actions/runs/34143213189/artifacts/10026737446). Local initial comparison reports are in `/private/tmp/ascii-repair-audit`. The local matrix uses the system temporary `ascii-homepage-qa` directory.
+CI reports and screenshots are retained in the [ASCII QA artifact](https://github.com/anipotts/coding-agent-tips/actions/runs/34143213189). Local initial comparison reports are in `/private/tmp/ascii-repair-audit`. The local matrix uses the system temporary `ascii-homepage-qa` directory.
 
 ## production protocol comparison
 
