@@ -13,7 +13,7 @@ const parser = unified().use(remarkParse).use(remarkGfm);
 export const fingerprint = value => createHash('sha256').update(value.trim().replace(/\r\n/g, '\n') + '\n').digest('hex');
 export const bodyFingerprint = value => fingerprint(value.replace(/<span\b[^>]*\bclass=["'][^"']*\bheading-alias\b[^"']*["'][^>]*><\/span>/g, ''));
 const walk = (node, visit) => { visit(node); for (const child of node.children ?? node.childNodes ?? []) walk(child, visit); };
-const htmlText = value => { let text = ''; walk(parseFragment(value.replace(/<!--[\s\S]*?-->/g, '')), node => { if (node.nodeName === '#text') text += node.value + ' '; }); return text.trim(); };
+const htmlText = value => { let text = ''; walk(parseFragment(value), node => { if (node.nodeName === '#text') text += node.value + ' '; }); return text.trim(); };
 const sum = (items, key) => items.reduce((total, item) => total + (item[key] ?? 0), 0);
 const metrics = ['words', 'links', 'images', 'videos', 'gifs', 'embeds', 'code', 'examples', 'good', 'bad', 'tables'];
 const totals = items => Object.fromEntries(metrics.map(key => [key, sum(items, key)]));
@@ -34,7 +34,7 @@ export function inspectFeatures(body, definitions = '') {
     if (node.type === 'table') tables++;
     if (node.type === 'text' || node.type === 'inlineCode') content += node.value + ' ';
     if (node.type === 'html') {
-      const html = node.value.replace(/<!--[\s\S]*?-->/g, '');
+      const html = node.value;
       content += htmlText(html) + ' ';
       htmlChunks.push(html);
     }
