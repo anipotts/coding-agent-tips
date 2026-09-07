@@ -295,7 +295,7 @@ Credited third-party media shows:
 - a link to the original post or canonical source;
 - a natural, specific shoutout explaining why the work is useful here.
 
-Creator identity and the original-post link remain adjacent to the media in the inline publication layout. The expanded view may repeat that credit for context, but it cannot be the only place the credit appears. Credit never implies sponsorship, endorsement, partnership, affiliation, or permission beyond what is documented.
+Keep required creator attribution and the original-post link in nearby prose. Image captions appear in the expanded view, with their source links intact. Credit never implies sponsorship, endorsement, partnership, affiliation, or permission beyond what is documented.
 
 ### images, captions, and enlargement
 
@@ -303,7 +303,9 @@ Provide intrinsic dimensions, responsive sources where useful, asynchronous deco
 
 An image opens in a Starwind Dialog only when the larger view reveals useful detail. The trigger is a button with an accessible action name. Escape closes the dialog, focus is contained and restored, and the original page remains usable without the enhancement.
 
-Captions are hidden in the inline publication layout by default for dialog-enabled images. The complete caption appears with the enlarged image. If a caption contains essential information that the reader needs without opening the image, move that information into nearby prose instead of relying on the hidden caption.
+Captions are hidden in the inline publication layout from the initial render, including before enhancement scripts load. The complete caption appears beneath the enlarged image. If a caption contains essential information that the reader needs without opening the image, move that information into nearby prose instead of relying on the hidden caption.
+
+Place screenshots beside the sections they illustrate. Group images only when seeing them together helps comparison; use a compact bento grid with consistent gaps and no empty final cell. Preserve image proportions and reflow to one column when necessary for legibility. Ani's supplied Claude Code terminal recording introduces the CLI near the opening. This silent recording autoplays and loops like a GIF, with no playback controls or play overlay. Clicking opens the larger viewer and caption. Honor reduced motion by showing a still frame until the reader opens the viewer.
 
 A caption explains relevance, provenance, or credit. It does not repeat the alt text.
 

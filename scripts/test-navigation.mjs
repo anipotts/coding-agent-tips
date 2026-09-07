@@ -6,6 +6,7 @@ import { chromium } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { canonicalContentFiles } from '../src/content-manifest.mjs';
 import { verifyChapterDisclosures } from './lib/check-chapter-navigation.mjs';
+import { verifyPublicationMedia } from './lib/check-publication-media.mjs';
 
 const previewPort = 4175;
 const origin = `http://127.0.0.1:${previewPort}`;
@@ -382,6 +383,7 @@ try {
   await reducedContext.close();
 
   await verifyChapterDisclosures({ browser, origin });
+  await verifyPublicationMedia({ browser, origin });
 
   expect(consoleErrors.length === 0, `browser console errors: ${consoleErrors.join(' | ')}`);
 } finally {

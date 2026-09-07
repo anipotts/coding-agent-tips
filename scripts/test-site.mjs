@@ -22,7 +22,7 @@ if (hasRetiredGuideLabel('<p>the product guides carry the current details.</p>')
 const homeSource = await readFile(path.join(root, 'content/home.md'), 'utf8');
 const canonicalH1 = text(homeSource.match(/^#\s+(.+)$/m)?.[1] ?? '');
 const routeFile = (route) => route === '/' ? path.join(dist, 'index.html') : path.join(dist, route.replace(/^\//, ''), 'index.html');
-const publicFile = (pathname) => pathname.endsWith('.md') ? path.join(dist, pathname.replace(/^\//, '')) : routeFile(pathname.endsWith('/') ? pathname : `${pathname}/`);
+const publicFile = (pathname) => path.extname(pathname) ? path.join(dist, pathname.replace(/^\//, '')) : routeFile(pathname.endsWith('/') ? pathname : `${pathname}/`);
 const markdownFiles = async (directory) => (await Promise.all((await readdir(directory, { withFileTypes: true })).map(async (entry) => {
   const absolute = path.join(directory, entry.name);
   if (entry.isDirectory()) return markdownFiles(absolute);

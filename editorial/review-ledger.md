@@ -60,6 +60,17 @@ this implementation request does not approve every newly written sentence.
 
 ### preserve these passages
 
+- September 7 media direction: Ani supplied a Claude Code terminal recording
+  and a wide screenshot through Messages, and requested the recording in the
+  introduction. The wide screenshot accompanies “sometimes you'll see people
+  doing this.” Candidate caption, grounded in his direct account: “i did this
+  for a TikTok and went through my five hour usage window in 15 minutes.”
+  This describes that recording setup; it makes no general usage limit claim.
+  Ani then requested GIF behavior: silent autoplay and looping, with no play
+  button or playback controls. Captions remain visible only in the larger view.
+  The supplied originals are preserved. The presentation and candidate wording
+  still need Ani's visual review.
+
 - Homepage is byte identical to the starting checkout: SHA256
   `d226dae5b9f915e44e59b59a0d4b18428a4e7bf81f657513fcc9256a26d89fe0`.
 - Codex's original 3600 × 2260 screenshot and caption remain intact. Responsive

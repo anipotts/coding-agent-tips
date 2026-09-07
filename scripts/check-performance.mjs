@@ -33,6 +33,16 @@ const canonicalRoutes = new Set(canonicalContentFiles().map(({ route }) => route
 const providerRoutes = ['/guides/codex/', '/guides/claude-code/', '/guides/grok/'];
 const providerRouteSet = new Set(providerRoutes);
 const sha256 = (buffer) => createHash('sha256').update(buffer).digest('hex');
+for (const video of manifest.videos ?? []) {
+  const buffer = await readFile(path.join(root, 'public', video.path.replace(/^\//, '')));
+  if (buffer.length !== video.bytes || sha256(buffer) !== video.sha256) failures.push(`${video.id}: video file differs from its manifest`);
+  if (video.ownership !== 'owner-supplied' || !video.source || !video.poster || video.durationSeconds <= 0) failures.push(`${video.id}: recording provenance or playback metadata is incomplete`);
+  for (const route of video.canonicalPages) {
+    const page = canonicalContentFiles().find((entry) => entry.route === route);
+    const source = page ? await readFile(page.file, 'utf8') : '';
+    if (!source.includes(`src="${video.path}"`) || !source.includes(`href="${video.path}"`) || !source.includes(`poster="${video.poster}"`)) failures.push(`${video.id}: recording trigger, poster, or fallback link is missing`);
+  }
+}
 const attribute = (tag, name) => tag.match(new RegExp(`\\s${name}="([^"]*)"`))?.[1];
 const mediaRecords = [...(manifest.featuredImages ?? []), ...(manifest.assets ?? []), ...(manifest.externalMedia ?? [])];
 const ownershipClasses = new Set(['owner-supplied', 'provider-published', 'third-party', 'unknown']);
@@ -90,7 +100,8 @@ function validateEditorialMetadata(record, { rehosted }) {
     if (!canonicalRoutes.has(presentation.route)) failures.push(`${record.id}: presentation uses unknown canonical route ${presentation.route}`);
     if (typeof presentation.alt !== 'string' || presentation.alt.length === 0) failures.push(`${record.id}: presentation alt text must be exact and nonempty`);
     if (presentation.caption !== null && typeof presentation.caption !== 'string') failures.push(`${record.id}: presentation caption must be a string or null`);
-    if (presentation.linkUrl !== null && !/^https:\/\//.test(presentation.linkUrl ?? '')) failures.push(`${record.id}: presentation link must be https or null`);
+    const registeredVideo = (manifest.videos ?? []).some((video) => video.path === presentation.linkUrl);
+    if (presentation.linkUrl !== null && !/^https:\/\//.test(presentation.linkUrl ?? '') && !registeredVideo) failures.push(`${record.id}: presentation link must be https, a registered recording, or null`);
   }
 
   if (record.creditVisible && (!record.creator?.name || !record.creator?.handle || !record.originalPostUrl)) failures.push(`${record.id}: visible credit requires creator name, @handle, and original post URL`);
@@ -147,7 +158,8 @@ for (const image of manifest.featuredImages ?? []) {
   if (buffer.length !== image.bytes) failures.push(`${image.path}: byte count differs from the manifest`);
   if (buffer.length > maxFeaturedProviderBytes) failures.push(`${image.path}: ${buffer.length} bytes exceeds 1 MiB`);
   if (sha256(buffer) !== image.sha256) failures.push(`${image.path}: sha256 differs from the manifest`);
-  if (metadata.format !== 'png') failures.push(`${image.path}: expected png, received ${metadata.format}`);
+  const expectedFormat = path.extname(image.path).slice(1);
+  if (!['png', 'webp'].includes(expectedFormat) || metadata.format !== expectedFormat) failures.push(`${image.path}: unexpected image format ${metadata.format}`);
   if (metadata.width !== image.width || metadata.height !== image.height) failures.push(`${image.path}: intrinsic dimensions differ from the manifest`);
   if (image.derivativeSet && !manifest.derivativeSets[image.derivativeSet]) failures.push(`${image.id}: responsive derivative set is missing`);
   for (const route of image.canonicalPages ?? []) if (!canonicalRoutes.has(route)) failures.push(`${image.id}: unknown canonical page ${route}`);
@@ -240,7 +252,7 @@ for (const record of [...(manifest.featuredImages ?? []), ...(manifest.assets ??
   if (JSON.stringify(actual) !== JSON.stringify(expected)) failures.push(`${record.id}: manifest alt, caption, link, or route differs from canonical Markdown`);
 }
 
-const imageLcpRoutes = new Set(providerRoutes);
+const imageLcpRoutes = new Set(['/guides/codex/', '/guides/grok/']);
 for (const route of providerRoutes) {
   const tags = tagsByRoute.get(route) ?? [];
   const eager = tags.filter((tag) => attribute(tag, 'loading') === 'eager');

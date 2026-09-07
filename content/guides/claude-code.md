@@ -22,10 +22,8 @@ agent. it can inspect a repository, change files, run commands, and use the
 results to decide what to do next. you can work through a terminal, supported
 editor, desktop app, or web session.
 
-<div class="surface-bento">
-  <figure><a href="https://code.claude.com/docs/en/overview"><img src="/media/publications/claude-code-1200.webp" srcset="/media/publications/claude-code-640.webp 640w, /media/publications/claude-code-1200.webp 1200w" sizes="(max-width: 48rem) calc(100vw - 2rem), (max-width: 72rem) calc((100vw - 20rem) / 2), 32rem" alt="Claude Code working in its coding interface" loading="eager" fetchpriority="high" decoding="async" width="1200" height="728" /><figcaption>code and repository work</figcaption></a></figure>
-  <figure><a href="https://code.claude.com/docs/en/desktop"><img src="/media/publications/claude-cowork-1200.webp" srcset="/media/publications/claude-cowork-640.webp 640w, /media/publications/claude-cowork-1200.webp 1200w" sizes="(max-width: 48rem) calc(100vw - 2rem), (max-width: 72rem) calc((100vw - 20rem) / 2), 32rem" alt="the Claude Cowork task interface" loading="lazy" decoding="async" width="1200" height="842" /><figcaption>desktop tasks and visual review</figcaption></a></figure>
-  <figure><a href="https://code.claude.com/docs/en/remote-control"><img src="/media/publications/claude-chat-1200.webp" srcset="/media/publications/claude-chat-640.webp 640w, /media/publications/claude-chat-1200.webp 1200w" sizes="(max-width: 48rem) calc(100vw - 2rem), (max-width: 72rem) calc((100vw - 20rem) / 2), 32rem" alt="Claude available through a remote conversation surface" loading="lazy" decoding="async" width="1200" height="728" /><figcaption>web and remote control</figcaption></a></figure>
+<div class="surface-bento intro-visual">
+  <figure><a href="/media/guides/claude-terminal-recording.mp4"><video src="/media/guides/claude-terminal-recording.mp4" poster="/media/publications/claude-terminal-poster-1200.webp" aria-label="Claude Code terminal recording" autoplay muted loop playsinline preload="auto" width="2414" height="1392"></video></a><figcaption>a recording of Claude Code in the terminal.</figcaption></figure>
 </div>
 
 ironically, Anthropic's Claude Code feels the least personified to me out of
@@ -47,6 +45,12 @@ test. those steps can all follow from one prompt. the finish line still needs
 to be concrete: an empty result should render a useful message, and an ordinary
 search should keep working.
 
+sometimes you'll see people doing this.
+
+<div class="surface-bento">
+  <figure><img src="/media/guides/claude-agent-wall.png" srcset="/media/publications/claude-agent-wall-640.webp 640w, /media/publications/claude-agent-wall-1200.webp 1200w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1151px) calc(100vw - 320px), 832px" data-full-src="/media/guides/claude-agent-wall.png" alt="a wall of Claude Code agents running in tiled terminal panes" loading="lazy" decoding="async" width="3840" height="1080" /><figcaption>i did this for a TikTok and went through my five hour usage window in 15 minutes.</figcaption></figure>
+</div>
+
 ## choose where the work runs
 
 ### terminal, editor, and desktop
@@ -61,6 +65,10 @@ for sessions, diffs, previews, and parallel work. a worktree gives a session
 its own checkout. two sessions that own different worktrees can still produce
 conflicting changes when their branches are combined, so file ownership and a
 final integration pass matter.
+
+<div class="surface-bento">
+  <figure><a href="https://code.claude.com/docs/en/desktop"><img src="/media/publications/claude-code-1200.webp" srcset="/media/publications/claude-code-640.webp 640w, /media/publications/claude-code-1200.webp 1200w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1151px) calc(100vw - 320px), 832px" alt="the Code tab in the Claude desktop app" loading="lazy" decoding="async" width="1200" height="728" /></a><figcaption>Claude Code in the desktop app. screenshot from <a href="https://code.claude.com/docs/en/overview">Anthropic’s overview</a>.</figcaption></figure>
+</div>
 
 choose the interface that makes your next decision easy to inspect. a CSS
 change needs a rendered page; a parser change needs representative inputs and
@@ -125,6 +133,10 @@ extends Claude into broader files and deliverables. an engineering task fits
 Claude Code when its output belongs in a repository and needs the project’s
 verification. a document or a collection of organized files has its own review
 criteria. name the output first, then pick the workflow around it.
+
+<div class="surface-bento">
+  <figure><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork"><img src="/media/publications/claude-cowork-1200.webp" srcset="/media/publications/claude-cowork-640.webp 640w, /media/publications/claude-cowork-1200.webp 1200w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1151px) calc(100vw - 320px), 832px" alt="the Cowork tab in the Claude desktop app" loading="lazy" decoding="async" width="1200" height="842" /></a><figcaption>the Cowork task interface in Claude. <a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Anthropic’s Cowork guide</a>.</figcaption></figure>
+</div>
 
 continue with [configuration](/guides/claude-code/configuration/) to make the
 setup understandable, [extensions](/guides/claude-code/extensions/) to add

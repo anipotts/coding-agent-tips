@@ -63,18 +63,21 @@ html[data-theme='dark'] .sl-markdown-content pre code span { color: var(--shiki-
   .right-sidebar-container { order: 2; }
 }
 
-.surface-bento { display: grid; grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr)); gap: 1rem; margin: 1.75rem 0 2.5rem; }
-.surface-bento figure { min-width: 0; margin: 0; border: 0; background: transparent; }
+.surface-bento { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .75rem; margin: 1.75rem 0 2.5rem; align-items: start; }
+.surface-bento > figure { min-width: 0; margin: 0; border: 0; background: transparent; }
+.surface-bento > figure:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
 .surface-bento figure { position: relative; }
 .surface-bento a { display: block; text-decoration: none; }
-.surface-bento img { display: block; inline-size: 100%; block-size: auto; background: transparent; }
+.surface-bento :is(img, video) { display: block; inline-size: 100%; block-size: auto; background: transparent; }
 .surface-bento.intro-visual { grid-template-columns: minmax(0, 1fr); margin-top: 1rem; }
-.surface-bento figure[data-image-dialog-ready] figcaption { display: none; }
-.publication-image-trigger { display: block; inline-size: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+.sl-markdown-content figure:has(img, video) figcaption { display: none; }
+.publication-image-trigger { position: relative; display: block; inline-size: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
 .publication-image-dialog { inline-size: min(70rem, calc(100vw - 2rem)); max-inline-size: calc(100vw - 2rem); max-block-size: calc(100dvh - 2rem); padding: 0; overflow: auto; }
 .publication-image-dialog figure { display: grid; place-items: center; margin: 0; }
-.publication-image-dialog img { display: block; max-inline-size: 100%; max-block-size: calc(100dvh - 7rem); margin: auto; object-fit: contain; }
+.publication-image-dialog :is(img, video) { display: block; max-inline-size: 100%; max-block-size: calc(100dvh - 7rem); margin: auto; object-fit: contain; }
+.publication-image-dialog :is(img, video)[hidden] { display: none; }
 .publication-image-dialog [data-publication-dialog-caption] { inline-size: 100%; margin: 0; padding: .85rem 1rem; border-top: 1px solid var(--rule); color: var(--slate); }
+.publication-image-dialog [data-publication-dialog-caption][hidden] { display: none; }
 .publication-scroll-area { max-inline-size: 100%; margin-block: 1.5rem; border-radius: var(--radius-ui); }
 .publication-scroll-area table { margin-top: 0; }
 .publication-scrollbar { position: absolute; inset: auto 0 0; z-index: 1; block-size: .625rem; display: flex; padding: 1px; touch-action: none; }

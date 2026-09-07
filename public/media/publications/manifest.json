@@ -15,6 +15,25 @@
     }
   },
   "externalMedia": [],
+  "videos": [
+    {
+      "id": "claude-terminal-recording",
+      "path": "/media/guides/claude-terminal-recording.mp4",
+      "bytes": 2749627,
+      "sha256": "3ed0999347d744d484c9f245cf9b0bc1a7a94cd90c3a025c19cba89a06523edf",
+      "width": 2414,
+      "height": 1392,
+      "durationSeconds": 12.85,
+      "hasAudio": false,
+      "ownership": "owner-supplied",
+      "source": "Ani supplied terminal recording",
+      "retrievedAt": "2026-09-07",
+      "canonicalPages": [
+        "/guides/claude-code/"
+      ],
+      "poster": "/media/publications/claude-terminal-poster-1200.webp"
+    }
+  ],
   "featuredImages": [
     {
       "id": "codex-handbook-workspace",
@@ -40,6 +59,65 @@
           "route": "/guides/codex/",
           "alt": "Codex beside a coding agent tips task and its GitHub pull request with passing checks",
           "caption": "a screenshot of me working on some personal projects and some content for a brand deal.",
+          "linkUrl": null
+        }
+      ]
+    },
+    {
+      "id": "claude-terminal-poster",
+      "derivativeSet": "claude-terminal-poster",
+      "path": "/media/guides/claude-terminal-poster.webp",
+      "width": 2414,
+      "height": 1392,
+      "bytes": 112680,
+      "sha256": "29543199cd42dac8cb30da577ff31106c5be6b3fbef7af06e2829a845b356292",
+      "source": "Ani supplied recording frame",
+      "canonicalPages": [
+        "/guides/claude-code/"
+      ],
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Ani Potts",
+        "handle": null
+      },
+      "originalPostUrl": null,
+      "ownership": "owner-supplied",
+      "permissionStatus": "owner-supplied",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": []
+    },
+    {
+      "id": "claude-agent-wall",
+      "derivativeSet": "claude-agent-wall",
+      "path": "/media/guides/claude-agent-wall.png",
+      "width": 3840,
+      "height": 1080,
+      "bytes": 880528,
+      "sha256": "e30ebe54048744f9d98bdba03ddaafa335606ec3c36f80102db832a42455630d",
+      "source": "Ani supplied screenshot",
+      "canonicalPages": [
+        "/guides/claude-code/"
+      ],
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Ani Potts",
+        "handle": null
+      },
+      "originalPostUrl": null,
+      "ownership": "owner-supplied",
+      "permissionStatus": "owner-supplied",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [
+        {
+          "route": "/guides/claude-code/",
+          "alt": "a wall of Claude Code agents running in tiled terminal panes",
+          "caption": "i did this for a TikTok and went through my five hour usage window in 15 minutes.",
           "linkUrl": null
         }
       ]
@@ -117,9 +195,9 @@
       "presentations": [
         {
           "route": "/guides/claude-code/",
-          "alt": "Claude Code working in its coding interface",
-          "caption": "code and repository work",
-          "linkUrl": "https://code.claude.com/docs/en/overview"
+          "alt": "the Code tab in the Claude desktop app",
+          "caption": "Claude Code in the desktop app. screenshot from Anthropic’s overview.",
+          "linkUrl": "https://code.claude.com/docs/en/desktop"
         }
       ],
       "original": { "width": 2064, "height": 1252, "sha256": "40fbc77a34b0790f53acda7cc3b7ed0476ac386e6ca57f6131800573f424fb32" },
@@ -139,14 +217,7 @@
       "publicationStatus": "rehosted-file",
       "creditVisible": false,
       "embed": null,
-      "presentations": [
-        {
-          "route": "/guides/claude-code/",
-          "alt": "Claude available through a remote conversation surface",
-          "caption": "web and remote control",
-          "linkUrl": "https://code.claude.com/docs/en/remote-control"
-        }
-      ],
+      "presentations": [],
       "original": { "width": 2064, "height": 1252, "sha256": "6fcef3fffebbdcc24dfe51c43e57196dcec0402c986c32bb803a2bd6a6fcdffc" },
       "derivativeSet": "claude-chat"
     },
@@ -167,9 +238,9 @@
       "presentations": [
         {
           "route": "/guides/claude-code/",
-          "alt": "the Claude Cowork task interface",
-          "caption": "desktop tasks and visual review",
-          "linkUrl": "https://code.claude.com/docs/en/desktop"
+          "alt": "the Cowork tab in the Claude desktop app",
+          "caption": "the Cowork task interface in Claude. Anthropic’s Cowork guide.",
+          "linkUrl": "https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork"
         }
       ],
       "original": { "width": 2304, "height": 1616, "sha256": "782ff424a16217adc2bf15d89f81250e2d2c9c4f112ddad39a28942c6ae43386" },
@@ -227,6 +298,38 @@
     }
   ],
   "derivativeSets": {
+    "claude-agent-wall": [
+      {
+        "path": "/media/publications/claude-agent-wall-640.webp",
+        "width": 640,
+        "height": 180,
+        "bytes": 22640,
+        "sha256": "fcd79983a41a40674a80e344dbb9d732362208b3cd86ce216158c4973b284b23"
+      },
+      {
+        "path": "/media/publications/claude-agent-wall-1200.webp",
+        "width": 1200,
+        "height": 338,
+        "bytes": 63678,
+        "sha256": "efe7656d32c9d176e5c3add352ce3080f4daee879ab592a6dee9f7f57b47e566"
+      }
+    ],
+    "claude-terminal-poster": [
+      {
+        "path": "/media/publications/claude-terminal-poster-640.webp",
+        "width": 640,
+        "height": 369,
+        "bytes": 19824,
+        "sha256": "4ccc72297e1ef98029c525c18939985ba9614011a812050cef6f830b62fa2d83"
+      },
+      {
+        "path": "/media/publications/claude-terminal-poster-1200.webp",
+        "width": 1200,
+        "height": 692,
+        "bytes": 47238,
+        "sha256": "eac53052759d68aee13ce279996afccde38120dfac681023a6de3fba6c9b59c9"
+      }
+    ],
     "codex-handbook-workspace": [
       { "path": "/media/publications/codex-handbook-workspace-640.webp", "width": 640, "height": 402, "bytes": 27690, "sha256": "3d27593d104812a6ed66b48ff60de19c3730509b7b77950dd3bfe82cc325a8e0" },
       { "path": "/media/publications/codex-handbook-workspace-1200.webp", "width": 1200, "height": 753, "bytes": 76658, "sha256": "40f344e87f614ebf7d51d711c9cecae97d0c8d1a328f90f88fe92eb1e1f5c74a" }
