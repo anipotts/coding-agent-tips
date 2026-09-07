@@ -5,6 +5,7 @@ import process from 'node:process';
 import { chromium } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 import { canonicalContentFiles } from '../src/content-manifest.mjs';
+import { verifyChapterDisclosures } from './lib/check-chapter-navigation.mjs';
 
 const previewPort = 4175;
 const origin = `http://127.0.0.1:${previewPort}`;
@@ -130,8 +131,8 @@ try {
   await sheetTrigger.click();
   const sheet = page.locator('.mobile-site-menu[role="dialog"]');
   await sheet.waitFor({ state: 'visible' });
-  const mobileHeadings = await sheet.locator('.mobile-page-outline a').allTextContents();
-  const desktopHeadings = await page.locator('.sidebar-page-outline').first().locator('a').allTextContents();
+  const mobileHeadings = await sheet.locator('.is-current-chapter .mobile-page-outline a').allTextContents();
+  const desktopHeadings = await page.locator('.publication-sidebar .is-current-chapter .sidebar-page-outline a').allTextContents();
   expect(JSON.stringify(mobileHeadings.map((text) => text.trim())) === JSON.stringify(desktopHeadings.map((text) => text.trim())), 'mobile and desktop heading outlines differ');
   expect(await sheet.locator('.mobile-page-outline li[style*="1"]').count() > 0, 'mobile outline is missing subsection indentation');
   const sheetAccessibility = await new AxeBuilder({ page }).include('.mobile-site-menu').analyze();
@@ -318,24 +319,24 @@ try {
   expect(collapsedAlignment.triggerDelta < 1, 'collapsed sidebar trigger is not centered in the rail');
   expect(collapsedAlignment.chapterDeltas.every((delta) => delta < 1), 'collapsed chapter buttons are not centered in the rail');
   expect(Math.abs(collapsedAlignment.horizontalInset - collapsedAlignment.verticalInset) < 1, 'collapsed sidebar trigger does not have equal vertical and horizontal spacing');
-  expect(await page.locator('[aria-label="codex handbook chapters"] .sidebar-page-outline').evaluate((outline) => getComputedStyle(outline).display) === 'none', 'heading outline remains visible in icon-collapse mode');
+  expect(await page.locator('.publication-sidebar .is-current-chapter .sidebar-page-outline').evaluate((outline) => getComputedStyle(outline).display) === 'none', 'heading outline remains visible in icon-collapse mode');
   expect(await page.locator('.right-sidebar-container').evaluate((rail) => rail.getBoundingClientRect().width) === 0, 'retired right sidebar retains width');
   await sidebarTrigger.click();
   expect(await sidebar.getAttribute('data-state') === 'expanded', 'desktop sidebar did not expand');
 
   const desktopDocumentToken = await page.evaluate(() => window.__navigationDocumentToken);
-  await page.locator('[aria-label="codex handbook chapters"] a[href="/guides/codex/configuration/"]').click();
+  await page.locator('.publication-sidebar a[href="/guides/codex/configuration/"]').click();
   await page.waitForURL('**/guides/codex/configuration/');
   expect(desktopDocumentToken === await page.evaluate(() => window.__navigationDocumentToken), 'chapter navigation caused a full reload');
   expect(await page.locator('html').evaluate((root) => root.classList.contains('dark') === (root.dataset.theme === 'dark')), 'Starwind and Starlight theme state diverged after chapter navigation');
-  expect((await page.locator('[aria-label="codex handbook chapters"] [aria-current="page"]').textContent())?.trim() === 'configuration', 'sidebar active chapter did not update');
+  expect((await page.locator('.publication-sidebar [aria-current="page"]').textContent())?.trim() === 'configuration', 'sidebar active chapter did not update');
   await page.goBack();
   await page.waitForURL('**/guides/codex/');
-  await page.waitForFunction(() => document.querySelector('[aria-label="codex handbook chapters"] [aria-current="page"]')?.getAttribute('href') === '/guides/codex/');
-  const hash = await page.locator('[aria-label="codex handbook chapters"] .sidebar-page-outline a[href^="#"]').first().getAttribute('href');
+  await page.waitForFunction(() => document.querySelector('.publication-sidebar [aria-current="page"]')?.getAttribute('href') === '/guides/codex/');
+  const hash = await page.locator('.publication-sidebar .is-current-chapter .sidebar-page-outline a[href^="#"]').first().getAttribute('href');
   expect(Boolean(hash), 'page outline has no heading links');
   if (hash) {
-    await page.locator(`[aria-label="codex handbook chapters"] .sidebar-page-outline a[href="${hash}"]`).evaluate((link) => link.click());
+    await page.locator(`.publication-sidebar .is-current-chapter .sidebar-page-outline a[href="${hash}"]`).evaluate((link) => link.click());
     await page.waitForURL(`**/guides/codex/${hash}`);
     expect(await page.locator(hash).count() === 1, 'hash target is missing');
   }
@@ -379,6 +380,8 @@ try {
   await reducedPage.goto(`${origin}/guides/codex/`, { waitUntil: 'networkidle' });
   expect(await reducedPage.locator('.provider-tabs a').first().evaluate((link) => Number.parseFloat(getComputedStyle(link).transitionDuration) <= .001), 'reduced motion does not suppress interface transitions');
   await reducedContext.close();
+
+  await verifyChapterDisclosures({ browser, origin });
 
   expect(consoleErrors.length === 0, `browser console errors: ${consoleErrors.join(' | ')}`);
 } finally {

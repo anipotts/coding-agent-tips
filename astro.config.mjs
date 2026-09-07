@@ -65,5 +65,18 @@ export default defineConfig({
 
   vite: {
     plugins: [starlightDevSearch(), tailwindcss()],
+    build: {
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [{
+              // These wrappers share lifecycle code and ship together on every page.
+              name: 'interface-primitives',
+              test: (id) => id.includes('@starwind-ui/astro/') && id.includes('?astro&type=script'),
+            }],
+          },
+        },
+      },
+    },
   },
 });

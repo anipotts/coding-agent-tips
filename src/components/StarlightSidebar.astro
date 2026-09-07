@@ -1,25 +1,12 @@
 ---
-import Adjustments from '@tabler/icons/outline/adjustments.svg';
-import AppWindow from '@tabler/icons/outline/app-window.svg';
-import ArrowRight from '@tabler/icons/outline/arrow-right.svg';
-import BrandGithub from '@tabler/icons/outline/brand-github.svg';
-import Compass from '@tabler/icons/outline/compass.svg';
-import GitBranch from '@tabler/icons/outline/git-branch.svg';
-import ShieldCheck from '@tabler/icons/outline/shield-check.svg';
-import { getHandbookPages, routeForEntry } from '../content';
-import { chapterForOrder, handbookScopes, scopeForPath } from '../site';
+import { getHandbookPages } from '../content';
+import { handbookScopes, scopeForPath } from '../site';
 import ProviderProductIcon from './ProviderProductIcon.astro';
-import { pageOutline } from '../navigation';
+import ChapterMenu from './ChapterMenu.astro';
 import SidebarPrimitive from '@starwind-ui/astro/sidebar';
 import { sidebar, sidebarContainer, sidebarInner } from './starwind/sidebar/variants';
 import {
   SidebarContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
   SidebarProvider,
   SidebarTrigger,
 } from './starwind/sidebar';
@@ -34,14 +21,6 @@ const providerIconDark = activeScopeMetadata && 'providerIconDark' in activeScop
   ? activeScopeMetadata.providerIconDark
   : undefined;
 
-const navigationLabel = (page: (typeof pages)[number]) => activeScope === 'handbook'
-  ? page.data.title
-  : chapterForOrder(page.data.navigation.order)?.label ?? page.data.title;
-const chapterIcons = [Compass, ArrowRight, Adjustments, GitBranch, AppWindow, ShieldCheck, Compass];
-
-const { toc } = Astro.locals.starlightRoute;
-const isOutline = Astro.locals.starlightRoute.entry.data.completion === 'outline';
-const headings = pageOutline(toc?.items, isOutline);
 ---
 
 <SidebarProvider
@@ -76,40 +55,7 @@ const headings = pageOutline(toc?.items, isOutline);
       <SidebarTrigger />
     </div>
     <SidebarContent class="publication-sidebar-content">
-      <SidebarMenu>
-        {pages.map((page, index) => {
-          const href = routeForEntry(page);
-          const itemLabel = navigationLabel(page);
-          const NavigationIcon = chapterIcons[index] ?? BrandGithub;
-          const active = current === href;
-          return (
-            <SidebarMenuItem class:list={{ 'is-current-chapter': active }}>
-              <SidebarMenuButton
-                href={href}
-                data-astro-prefetch="hover"
-                isActive={active}
-                tooltip={itemLabel}
-                size="sm"
-                aria-current={active ? 'page' : undefined}
-              >
-                <NavigationIcon aria-hidden="true" />
-                <span>{itemLabel}</span>
-              </SidebarMenuButton>
-              {active && headings.length > 0 && (
-                <SidebarMenuSub class="sidebar-page-outline" aria-label="on this page">
-                  {headings.map((heading) => (
-                    <SidebarMenuSubItem style={`--heading-depth: ${Math.max(0, heading.depth - 2)}`}>
-                      <SidebarMenuSubButton href={`#${heading.slug}`} data-heading-id={heading.slug} size="sm">
-                        <span>{heading.text}</span>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  ))}
-                </SidebarMenuSub>
-              )}
-            </SidebarMenuItem>
-          );
-        })}
-      </SidebarMenu>
+      <ChapterMenu pages={pages} current={current} scope={activeScope} />
     </SidebarContent>
     </div>
     </div>

@@ -4,7 +4,7 @@ import BrandGithub from '@tabler/icons/outline/brand-github.svg';
 import Menu2 from '@tabler/icons/outline/menu-2.svg';
 import ChevronDown from '@tabler/icons/outline/chevron-down.svg';
 import { getHandbookPages, routeForEntry } from '../content';
-import { pageOutline } from '../navigation';
+import ChapterMenu from './ChapterMenu.astro';
 import { chapterForOrder, navigationScopes, scopeForPath, site } from '../site';
 import { Button } from './starwind/button';
 import { Dropdown, DropdownContent, DropdownGroup, DropdownLabel, DropdownLinkItem, DropdownTrigger } from './starwind/dropdown';
@@ -23,8 +23,7 @@ const mobileNavigationLabel = (page: (typeof pages)[number]) => scopeForPath(rou
   : chapterForOrder(page.data.navigation.order)?.label ?? page.data.title;
 const activePage = pages.find((page) => routeForEntry(page) === current);
 const selectedPageLabel = activePage ? `${activeScopeLabel}: ${mobileNavigationLabel(activePage)}` : 'handbook';
-const route = Astro.props.embedded ? Astro.locals.starlightRoute : undefined;
-const headings = pageOutline(route?.toc?.items, route?.entry.data.completion === 'outline');
+const scopePages = pages.filter((page) => page.data.navigation.scope === activeScope);
 ---
 
 <HeaderTag class="site-header">
@@ -87,14 +86,8 @@ const headings = pageOutline(route?.toc?.items, route?.entry.data.completion ===
               </DropdownContent>
             </Dropdown>
           </div>
-          <nav class="mobile-page-navigation" aria-label={site.interfaceCopy.onThisPage}>
-            {headings.length > 0 && <ul class="mobile-page-outline" role="list">
-              {headings.map((heading) => (
-                <li style={`--heading-depth: ${Math.max(0, heading.depth - 2)}`}>
-                  <a href={`#${heading.slug}`} data-heading-id={heading.slug} data-sw-drawer-close>{heading.text}</a>
-                </li>
-              ))}
-            </ul>}
+          <nav class="mobile-page-navigation" aria-label={`${activeScopeLabel} handbook chapters`}>
+            <ChapterMenu pages={scopePages} current={current} scope={activeScope} mode="mobile" />
           </nav>
           <div class="mobile-menu-footer">
             <Button href={site.repository} variant="ghost" size="sm" data-sw-drawer-close>
