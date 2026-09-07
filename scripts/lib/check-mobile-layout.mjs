@@ -1,0 +1,90 @@
+import assert from 'node:assert/strict';
+import AxeBuilder from '@axe-core/playwright';
+
+export async function verifyMobileLayout({ browser, origin }) {
+  for (const colorScheme of ['light', 'dark']) {
+    for (const reducedMotion of ['no-preference', 'reduce']) {
+      const context = await browser.newContext({ viewport: { width: 319, height: 856 }, colorScheme, reducedMotion });
+      await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin });
+      const page = await context.newPage();
+      const errors = [];
+      page.on('pageerror', (error) => errors.push(error.message));
+      try {
+        await page.goto(origin, { waitUntil: 'networkidle' });
+        const track = page.locator('#provider-guides');
+        const next = page.getByRole('button', { name: 'next guide', exact: true });
+        const previous = page.getByRole('button', { name: 'previous guide', exact: true });
+        const position = page.locator('[data-guide-position]');
+        assert.ok(await previous.isDisabled(), 'first carousel card disables previous');
+        assert.equal(await track.evaluate((el) => getComputedStyle(el).scrollSnapType), 'x mandatory');
+        await next.focus();
+        await page.keyboard.press('Enter');
+        await page.waitForFunction(() => document.querySelector('[data-guide-position]')?.textContent === '2 / 3');
+        await page.keyboard.press('Enter');
+        await page.waitForFunction(() => document.querySelector('[data-guide-position]')?.textContent === '3 / 3');
+        assert.ok(await next.isDisabled(), 'last carousel card disables next');
+        await previous.focus();
+        await page.keyboard.press('Space');
+        await page.waitForFunction(() => document.querySelector('[data-guide-position]')?.textContent === '2 / 3');
+        await track.locator('a').first().focus();
+        await page.waitForFunction(() => document.querySelector('[data-guide-position]')?.textContent === '1 / 3');
+        assert.equal(await position.textContent(), '1 / 3', 'focusing a card link reveals that card and updates position');
+        assert.ok(await page.locator('.footer-site-name span').isVisible(), 'footer keeps its site name at 319px');
+        assert.equal(await page.locator('.footer-meta').evaluate((el) => el.getBoundingClientRect().height), 18, 'compact footer timestamp uses one line');
+        assert.ok((await page.locator('.footer-meta time').getAttribute('title')).includes('ET'), 'full timestamp remains available');
+        await page.setViewportSize({ width: 907, height: 856 });
+        assert.ok(await next.isHidden(), 'carousel buttons hide when cards form the desktop grid');
+        assert.equal(await track.getAttribute('tabindex'), '-1', 'desktop grid has no redundant keyboard stop');
+        await page.setViewportSize({ width: 319, height: 856 });
+        await page.goto(`${origin}/handbook/operating-agents/`, { waitUntil: 'networkidle' });
+        const titleGeometry = await page.locator('.page-title-row').evaluate((el) => {
+          const title = el.querySelector('h1').getBoundingClientRect();
+          const actions = el.querySelector('.page-actions').getBoundingClientRect();
+          return { title: title.toJSON(), actions: actions.toJSON() };
+        });
+        assert.ok(titleGeometry.title.height < 40, 'short mobile page title fits one line');
+        assert.ok(titleGeometry.title.right <= titleGeometry.actions.left, 'title and page actions do not overlap');
+        await page.getByRole('button', { name: 'copy page as Markdown', exact: true }).click();
+        await page.waitForFunction(() => navigator.clipboard.readText().then((text) => text.includes('# start here')));
+        const example = page.locator('.example-block').first();
+        const code = await example.locator('pre').textContent();
+        const geometry = await example.evaluate((el) => {
+          const frame = el.getBoundingClientRect();
+          const pre = el.querySelector('pre').getBoundingClientRect();
+          const button = el.querySelector('[data-code-copy]').getBoundingClientRect();
+          return { inside: button.left >= frame.left && button.right <= frame.right && button.bottom < frame.bottom, below: button.top >= pre.bottom, height: frame.height };
+        });
+        assert.ok(geometry.inside && geometry.below, 'example copy stays below its text within the card');
+        assert.ok(geometry.height < 120, 'one-line example remains compact');
+        await example.locator('[data-code-copy]').click();
+        assert.equal((await page.evaluate(() => navigator.clipboard.readText())).trim(), code.trim(), 'example copy preserves exact prompt');
+        await page.evaluate(() => scrollTo(0, 0));
+        const searchTrigger = page.locator('.header-search [data-open-modal]');
+        for (let attempt = 0; attempt < 2; attempt++) {
+          await searchTrigger.focus();
+          await page.keyboard.press('Enter');
+          const input = page.locator('.header-search input');
+          await input.waitFor({ state: 'visible' });
+          assert.equal(await page.locator('.header-search dialog').evaluate((el) => getComputedStyle(el).animationName), 'none', 'search opens without a width animation');
+          await input.fill('configuration');
+          await page.locator('.header-search .pagefind-ui__result').first().waitFor({ state: 'visible' });
+          await page.keyboard.press('Escape');
+          assert.ok(await searchTrigger.evaluate((el) => el === document.activeElement), 'search dismissal restores trigger focus');
+        }
+        await page.locator('.mobile-site-menu-trigger').click();
+        await page.locator('.mobile-page-picker-trigger').click();
+        const picker = page.locator('.mobile-page-options');
+        await picker.waitFor({ state: 'visible' });
+        assert.ok(await picker.locator('a').evaluateAll((links) => links.every((link) => link.querySelector('svg[aria-hidden="true"]'))), 'every picker page has a decorative chapter icon');
+        assert.equal(await picker.locator('[data-slot="dropdown-label"] .provider-product-icon').count(), 4, 'picker group labels use all four provider identities');
+        const report = await new AxeBuilder({ page }).include('.mobile-page-options').analyze();
+        assert.deepEqual(report.violations.map(({ id }) => id), [], 'mobile picker passes axe');
+        await page.keyboard.press('Escape');
+        await page.keyboard.press('Escape');
+        assert.equal(await page.evaluate(() => document.documentElement.scrollWidth - innerWidth), 0, 'mobile page has no horizontal overflow');
+        assert.deepEqual(errors, [], 'mobile interactions have no page errors');
+      } finally { await context.close(); }
+    }
+  }
+  console.log('319px carousel, keyboard, metadata, page/prompt copy, search focus, and picker icons passed in both themes and motion preferences');
+}

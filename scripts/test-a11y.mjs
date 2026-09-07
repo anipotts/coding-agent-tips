@@ -11,6 +11,7 @@ const origin = `http://127.0.0.1:${previewPort}`;
 const vite = path.join(process.cwd(), 'node_modules/vite/bin/vite.js');
 const routes = canonicalContentFiles().map((entry) => entry.route);
 const viewports = [
+  { name: 'annotated mobile', width: 319, height: 856 },
   { name: 'reflow narrow', width: 320, height: 800 },
   { name: 'mobile small', width: 375, height: 812 },
   { name: '200% browser zoom equivalent', width: 720, height: 500 },
@@ -71,7 +72,9 @@ try {
           if (computed.fontFamily.includes('Instrument Sans') && !['400', '600'].includes(computed.fontWeight)) findings.push(`unsupported sans weight ${computed.fontWeight}: ${element.textContent.trim().slice(0, 60)}`);
         }
 
-        const displaySize = Math.min(64, Math.max(44, viewportWidth * .05));
+        const displaySize = viewportWidth < 768
+          ? Math.min(44, Math.max(32, viewportWidth * .085))
+          : Math.min(64, Math.max(44, viewportWidth * .05));
         const titleSize = Math.min(48, Math.max(36, viewportWidth * .04));
         const headingSize = Math.min(32, Math.max(28, viewportWidth * .02));
         if (route === '/') checkRole(elements('.home-content h1'), { size: displaySize, line: displaySize, weight: 600, family: 'Instrument Sans', color: ink }, 'display h1');
@@ -82,8 +85,10 @@ try {
         checkRole(elements('.source-publisher h3'), { size: 16, line: 24, weight: 600, family: 'Instrument Sans', color: ink }, 'source publisher heading');
 
         const reading = elements('.home-content p, .home-guides p, .sl-markdown-content p, .run-page p, .source-groups > p')
-          .filter((element) => !element.matches('.section-label, .history-year, .run-header > p:first-child, .source-kinds, .page-meta, [data-slot="item-description"]'));
+          .filter((element) => !element.matches('.section-label, .example-label, .history-year, .run-header > p:first-child, .source-kinds, .page-meta, [data-slot="item-description"]'));
         checkRole(reading, { size: 18, line: 30, weight: 400, family: 'Instrument Sans', color: ink }, 'reading prose');
+        checkRole(elements('.example-good .example-label'), { size: 14, line: 21, weight: 600, family: 'Instrument Sans', color: dark ? 'rgb(140, 219, 172)' : 'rgb(23, 97, 57)' }, 'good example label');
+        checkRole(elements('.example-bad .example-label'), { size: 14, line: 21, weight: 600, family: 'Instrument Sans', color: dark ? 'rgb(255, 167, 167)' : 'rgb(163, 43, 43)' }, 'bad example label');
         for (const element of reading.filter(visible)) if (element.getBoundingClientRect().width > 816) findings.push(`reading measure exceeds 68ch: ${element.textContent.trim().slice(0, 60)}`);
 
         checkRole(elements('td, .run-inventory li, .artifact-list li, .run-page dd'), { size: 16, line: 24, weight: 400, family: 'Instrument Sans', color: ink }, 'dense content');

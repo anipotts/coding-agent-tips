@@ -52,7 +52,9 @@ and `claude doctor` for configuration diagnostics.
 
 <span id="keep-instructions-and-memory-legible" class="heading-alias" aria-hidden="true"></span>
 
-## why am i repeating myself?
+<span id="why-am-i-repeating-myself" class="heading-alias" aria-hidden="true"></span>
+
+## why does my agent forget?
 
 <span id="shared-rules-can-have-one-source" class="heading-alias" aria-hidden="true"></span>
 

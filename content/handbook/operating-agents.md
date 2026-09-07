@@ -87,7 +87,9 @@ a clear prompt leaves room to discover the cause.
 
 <span id="make-project-context-easy-to-find" class="heading-alias" aria-hidden="true"></span>
 
-## why am i repeating myself?
+<span id="why-am-i-repeating-myself" class="heading-alias" aria-hidden="true"></span>
+
+## why does my agent forget?
 
 start with the repository's current state: branch, existing edits, setup,
 relevant code, and checks. preserve work that belongs to other people or tasks.

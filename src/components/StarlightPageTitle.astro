@@ -5,7 +5,7 @@ import Copy from '@tabler/icons/outline/copy.svg';
 import Edit from '@tabler/icons/outline/edit.svg';
 import FileText from '@tabler/icons/outline/file-text.svg';
 import Link from '@tabler/icons/outline/link.svg';
-import { formatUpdatedAt } from '../date';
+import UpdatedAt from './UpdatedAt.astro';
 import { scopeForPath, site } from '../site';
 import { Button } from './starwind/button';
 import { ButtonGroup } from './starwind/button-group';
@@ -63,7 +63,7 @@ const isProviderGuide = scopeForPath(Astro.url.pathname) !== 'handbook';
 </div>
 {updatedAt && (
   <p class="page-meta" aria-label="page metadata">
-    <span>{site.interfaceCopy.lastUpdated} <time datetime={updatedAt}>{formatUpdatedAt(updatedAt)}</time></span>
+    <span>{site.interfaceCopy.lastUpdated} <UpdatedAt value={updatedAt} /></span>
   </p>
 )}
 

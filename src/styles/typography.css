@@ -58,6 +58,10 @@ body {
   line-height: 1;
 }
 
+@media (max-width: 47.99rem) {
+  :root { --type-display-size: clamp(2rem, 8.5vw, 2.75rem); }
+}
+
 :where(main, .run-inventory, .page-sources) h2 {
   color: var(--ink);
   font-family: var(--font-sans);
@@ -241,6 +245,7 @@ body {
 }
 
 .header-search kbd,
+.guide-carousel-controls,
 .code-copy {
   font-family: var(--font-sans);
   font-size: .75rem;

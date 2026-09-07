@@ -40,6 +40,9 @@ for (const icon of ['codex-light.png', 'codex-dark.png', 'claude-code.png', 'gro
 
 const registry = JSON.parse(await readFile(path.join(root, 'editorial/sources.json'), 'utf8'));
 const metadata = [];
+for (const privatePath of ['__progress', 'editorial/progress', 'editorial/review-ledger.md']) {
+  try { await access(path.join(dist, privatePath)); failures.push(`local writing map leaked into production: ${privatePath}`); } catch { /* Development-only files must be absent. */ }
+}
 for (const [route, source] of contentFiles) {
   const markdown = await readFile(source, 'utf8');
   const title = scalar(markdown, 'title');

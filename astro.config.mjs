@@ -6,6 +6,7 @@ import { defineConfig } from 'astro/config';
 import { contentRedirects } from './src/content-manifest.mjs';
 import { site } from './src/site';
 import starlightDevSearch from './src/integrations/starlight-dev-search.mjs';
+import editorialProgress from './src/integrations/editorial-progress.mjs';
 import linkMetadata from './src/rehype/link-metadata.mjs';
 import publicationElements from './src/rehype/publication-elements.mjs';
 
@@ -64,7 +65,7 @@ export default defineConfig({
   ],
 
   vite: {
-    plugins: [starlightDevSearch(), tailwindcss()],
+    plugins: [starlightDevSearch(), editorialProgress(), tailwindcss()],
     build: {
       rolldownOptions: {
         output: {

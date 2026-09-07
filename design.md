@@ -97,9 +97,22 @@ The homepage introduces one clear thesis and routes the reader into the handbook
 
 Keep the first screen legible without decorative hero art. Use open rows and restrained cards only where a group needs a boundary. Provider groups may share a grid because they have the same conceptual structure. Shared guides remain a simple publication list.
 
+Below `48rem`, provider cards use native horizontal scrolling with snap points
+and manual previous/next controls. They never rotate automatically. Preserve
+keyboard access to every card link, including without JavaScript. The mobile
+homepage display size is `clamp(32px, 8.5vw, 44px)`; the words and reading type
+remain unchanged. The footer stacks brand, links, and update date on mobile.
+
 ### provider guide pages
 
 A provider page opens with its title, update state, page actions, and first useful claim. The guide rail provides chapter navigation; the active page may reveal a compact indented heading outline.
+
+At narrow widths, give the title its reading space: below `30rem`, the copy
+action uses its icon and full accessible name. Below `40rem`, dates use a
+compact date with the full ET timestamp available on the time element. Example
+labels, text, and the copy action share one compact colored card; the copy
+action stays below the text. Search transitions preserve stable control width
+and respect reduced motion.
 
 Do not add a permanent right table of contents or a second intermediate navigation bar. The article remains the visual center. Media can become wider than prose when comparison or interface detail needs it.
 
@@ -110,6 +123,16 @@ Shared pages use the same publication shell without pretending to belong to a pr
 ### editorial review
 
 Review happens in canonical Markdown and the normal Astro preview. The retired copy-review application is not part of the system.
+
+Ani requested a live local writing map on September 7, 2026. `/__progress/`
+is a read-only development view of the canonical files, including hidden
+chapters. It derives headings, content presence, media, code examples, and
+links on file saves. It reads exact review and provenance records from the
+machine-readable block in `editorial/review-ledger.md`; counts are generated.
+The map never infers approval from layout feedback, file changes, or voice
+frontmatter. Unique body fingerprints survive a heading rename; changed or
+ambiguous accepted wording is flagged. The map does not edit or publish prose,
+and its route, ledger, and assets are excluded from production builds.
 
 The current schema has three separate axes:
 

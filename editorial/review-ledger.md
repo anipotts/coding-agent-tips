@@ -627,3 +627,323 @@ Ani's direct wording, September 7 (raw; product claims require separate verifica
 - Source check, September 7: https://docs.x.ai/grok-bot/bots documents editable name, title, description, avatar and an initial name of “New Agent”; https://docs.x.ai/grok-bot/overview documents Bot messaging and independent coordination. Specific shapes/colors and automatically assigned personal names remain Ani-reported, not independently reproduced.
 - Source check, September 7: https://code.claude.com/docs/en/sub-agents supports custom names and named runtime agents. Role-style examples describe Ani's experience, not a naming restriction. https://learn.chatgpt.com/docs/agent-configuration/subagents also distinguishes configured agent roles; do not conflate these with UI display names or task titles. Casper/Socrates remain Ani's reported examples.
 - Next step: review the candidate wording for the coordinator example and short personification observation. No additional personal input is required to draft these points. Candidate wording remains unapproved; no public article changes or review-boundary advancement from this dictation.
+
+## live writing map
+
+Requested September 7: a read-only local map of current writing, review, provenance, media, examples, and links. The view at `/__progress/` reads the current Markdown and the exact records below on file changes. No public route or production assets are generated. Earlier ledger tables remain historical. This is the only structured acceptance record; generated counts are never maintained by hand.
+
+The unclear “why am i repeating myself?” heading is now “why does my agent forget?” on the operating guide and Claude configuration page. Earlier fragments remain aliases. This is a candidate heading in response to Ani’s September 7 browser annotation; it does not approve the body.
+
+<!-- live-map:start -->
+```json
+{
+  "version": 1,
+  "definitions": {
+    "acceptance": "Exact body, heading, and whole-page acceptance are separate. Layout feedback is not wording acceptance.",
+    "matching": "Unique exact content fingerprints survive renamed headings. Changed or ambiguous matches remain flagged. Heading aliases are ignored when fingerprinting body text."
+  },
+  "records": [
+    {
+      "id": "homepage-preserved-original",
+      "file": "content/home.md",
+      "status": "preserve",
+      "match": "file",
+      "hash": "d226dae5b9f915e44e59b59a0d4b18428a4e7bf81f657513fcc9256a26d89fe0",
+      "origin": "ani-original-and-manual-edits",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:106 Homepage is byte identical to the starting checkout",
+      "note": "Leave the original wording alone as directed. Exact preservation is established; full-page wording approval, factual certification, and publication are not inferred."
+    },
+    {
+      "id": "codex-original-caption",
+      "file": "content/guides/codex.md",
+      "anchor": "this-is-codex",
+      "status": "preserve",
+      "match": "quote",
+      "hash": "60ed4b882d4a5448268f20c80c57e4cf28f672690b3667615321efafc2d723d8",
+      "quote": "a screenshot of me working on some personal projects and some content for a brand deal.",
+      "origin": "ani-supplied-caption",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:108 Codex's original 3600 × 2260 screenshot and caption remain intact; editorial/review-ledger.md:270 Ani supplied the image and directed placement/caption",
+      "note": "Applies to caption text only. Image ownership/preservation is recorded separately in public/media/publications/manifest.json; neighboring introduction prose is agent drafted."
+    },
+    {
+      "id": "archive-preserve-scope",
+      "file": "content/archive/claude-code-tools.md",
+      "status": "preserve",
+      "match": "file",
+      "hash": "ee7bb88ea0571522e77a52f8496f34a7f9f36ce5d9d5387983a91a43de3104f5",
+      "origin": "frozen-compatibility-unknown-authorship",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:34 Archived Claude tools: preserved compatibility text; preserve frozen scope",
+      "note": "Preservation requirement and compatibility scope; no claim Ani authored or explicitly approved every sentence. Exclude from ordinary voice rewrite demand."
+    },
+    {
+      "id": "grok-computer-view-accepted-body",
+      "file": "content/guides/grok.md",
+      "anchor": "computer-view",
+      "status": "accepted-body",
+      "match": "body",
+      "hash": "2179eff97bd4c2a13e43d4503e34f3ebc58a3e12a4e70d1beece994f3b7ae4fa",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:196 Ani then answered “Keep this wording” to the complete two paragraph candidate",
+      "note": "Exactly two paragraphs. Acceptance excludes the section heading, taking-control prose, shared-computer prose, and complete page."
+    },
+    {
+      "id": "grok-cooperative-heading-adopted",
+      "file": "content/guides/grok.md",
+      "anchor": "cooperative-computer-use",
+      "status": "adopted-heading",
+      "match": "heading",
+      "hash": "387d1bd5fb5f33167c504ad7886aef1706cf0d5c36d5d2246cceeecf44de2178",
+      "origin": "ani-selected-heading",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:205 i prefer something very direct and opinionated like \"cooperative computer use\"",
+      "note": "Exact H2 chosen by Ani. Does not approve any child heading or body."
+    },
+    {
+      "id": "claude-twenty-agents-heading-adopted",
+      "file": "content/guides/claude-code.md",
+      "anchor": "whos-running-twenty-agents",
+      "status": "adopted-heading",
+      "match": "heading",
+      "hash": "ca48d8b040653683f44783343c078b8dc5a2cdb4535e8626a77b280a87cab788",
+      "origin": "ani-selected-heading",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:70 Ani specifically adopted “who's running twenty agents?”",
+      "note": "Exact H3 chosen by Ani. Screenshot ownership and candidate caption are separate."
+    },
+    {
+      "id": "grok-limited-use-and-replies",
+      "file": "content/guides/grok.md",
+      "anchor": "this-is-grok",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "dbf99465a94f247f42325e9c415609001f5ec9a401259e35a253661d6d8fcea0",
+      "quote": "i use Grok drastically less than Codex and Claude Code, so these pages won't\ngive you the perspective of an extreme power user. for most of Grok's life,\ni've used it through the X app or watched people bring it into comment replies\nto argue with people who definitely don't go outside of their house ever.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help",
+      "note": "Meaning comes from Ani’s manual draft and direct answers; current wording is an agent polish. Applied is not exact wording acceptance. Product behavior requires separate factual support."
+    },
+    {
+      "id": "grok-bot-comparison-and-claws",
+      "file": "content/guides/grok.md",
+      "anchor": "this-is-grok",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "3be785f815cc5171d74d265bde6ac8a8a3fd1bf694dbf14aca06aa83ffd4e2bd",
+      "quote": "what interests me about Grok Bot is the polished mobile experience: chat with\nan agent, see the computer it's using, step in yourself, then hand it back.\nit brings to mind the promise of Claude Cowork, ChatGPT Agent, and\nespecially OpenClaw. i think of OpenClaw as an agent you give “claws” to.\nright now, a browser and the ability to coordinate other agents might be the\nmost useful claws: create them, message them, read their histories, check what\nthey're doing, and archive them when the work is done.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help",
+      "note": "Meaning comes from Ani’s manual draft and direct answers; current wording is an agent polish. Applied is not exact wording acceptance. Product behavior requires separate factual support. This is one mixed paragraph: Ani supplies interest/analogy and tentative usefulness; capability details are proposed/factually checked separately, not personal proof of testing all products."
+    },
+    {
+      "id": "grok-x-ecosystem",
+      "file": "content/guides/grok.md",
+      "anchor": "this-is-grok",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "b08884b745da4c9716449868de6445c93bd89547ec12df407a33ef8cb7a75363",
+      "quote": "if you're a creator, influencer, or voice making your living primarily on X,\nthere's also the appeal of working within the broader X and xAI ecosystem.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help",
+      "note": "Meaning comes from Ani’s manual draft and direct answers; current wording is an agent polish. Applied is not exact wording acceptance. Product behavior requires separate factual support."
+    },
+    {
+      "id": "grok-social-context-personal-sentence",
+      "file": "content/guides/grok.md",
+      "anchor": "this-is-grok",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "3ee2d03475d42533140008af9035bb1e15057ef64840cfa016efcac0c5d27237",
+      "quote": "i haven't had much personal need for real time social context.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help",
+      "note": "Personal sentence only; the adjacent Grok/SuperGrok recommendation and X API description are separately sourced agent prose."
+    },
+    {
+      "id": "grok-personification-opinion",
+      "file": "content/guides/grok.md",
+      "anchor": "this-is-grok",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "aff471089f9fe1f87f50abfdbfae2f819b427f54c519046f85ca5d1d039f8724",
+      "quote": "Grok Bot also feels the most personified to me out of these three products,\nwith Codex somewhere in the middle and Claude Code at the other end. the\nnames and customizable appearances make individual Bots feel more like\ncharacters. the icons, shapes, and colors i've seen are part of that\nimpression.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help; editorial/review-ledger.md:620 Personal observation: Claude Code feels least personified, Codex sits in the middle, and Grok Bot feels most personified",
+      "note": "Personal impression is grounded. Excludes adjacent sentences attributing capabilities to xAI docs. No corporate-intent or model-quality ranking established."
+    },
+    {
+      "id": "codex-personification-opinion",
+      "file": "content/guides/codex.md",
+      "anchor": "this-is-codex",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "e97c6f625cc36ac932ea5fb67c46d5028b4a5e2570ca178c259ea201f82d93b9",
+      "quote": "on the spectrum of how personified these products feel to me, Codex sits\nsomewhere between Claude Code and Grok Bot. the main tasks get descriptive\ntitles, but then i've seen a subagent show up named Casper or Socrates.\nsome fucking random names. that small detail gives the agents a bit of\npersonality alongside the work they're doing.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help; editorial/review-ledger.md:620 Casper/Socrates remain Ani reported examples",
+      "note": "Casper/Socrates and profanity are user-grounded. Exact polish and adjacent overview explanations do not acquire approval."
+    },
+    {
+      "id": "claude-personification-opinion",
+      "file": "content/guides/claude-code.md",
+      "anchor": "this-is-claude-code",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "99db9701a4bf9fc31016cef9f59f4b7667f7cb4fe104ce2fd49065cd1048c3be",
+      "quote": "ironically, Anthropic's Claude Code feels the least personified to me out of\nClaude Code, Codex, and Grok Bot. the agents i've seen tend to have names\ndescribing their jobs: reviewer, infra engineer, things like that.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help; editorial/review-ledger.md:620 Role-style examples describe Ani experience, not a naming restriction",
+      "note": "Excludes the adjacent externally sourced named-agents capability sentence."
+    },
+    {
+      "id": "claude-personification-closing-opinion",
+      "file": "content/guides/claude-code.md",
+      "anchor": "this-is-claude-code",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "f0bca67e9e49562acfebc201880f95fc66079cb9c29f066c2b614fcaa03dae7c",
+      "quote": "the role focused presentation is what stands out in my own use.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help",
+      "note": "Personal interpretation derived from Ani. The intervening named-agents sentence is factual agent prose with its own source."
+    },
+    {
+      "id": "codex-coordinator-introduction",
+      "file": "content/guides/codex.md",
+      "anchor": "desktop-and-parallel-tasks",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "5a19b9065bd587df5f2e208d6987057c920c90531e693b3867666c6be0741cbd",
+      "quote": "i use one authoritative Codex thread to keep track of multiple projects,\ntasks, and contexts running in parallel. it turns what i want into clearer\ninstructions and routes them to the right tasks. i explain that setup in\n[the delegation section](/guides/codex/extensions/#task-coordination-and-subagents).",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help; editorial/review-ledger.md:609 Intended coordination operations and harness customization; editorial/review-ledger.md:622 coordinator task keeps context across projects",
+      "note": "User supplied perspective and authorized application. Preserve intended meaning; exact candidate wording remains reviewable. Surrounding technical explanation is a separate agent draft."
+    },
+    {
+      "id": "codex-coordinator-core",
+      "file": "content/guides/codex/extensions.md",
+      "anchor": "task-coordination-and-subagents",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "73245e530543fecd61b1bb9bbec27a9740046196ce8c37e19c8a097f5d44e716",
+      "quote": "i use one authoritative Codex thread to keep track of multiple projects,\ntasks, and contexts running in parallel. its job is to understand what's\nhappening across them, turn what i want into clearer prompts and instructions,\nand send those to the right tasks. the actual code edits happen in the\nindividual project tasks. that's a concrete example of why agents being able\nto communicate with other agents matters to me.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help; editorial/review-ledger.md:609 Intended coordination operations and harness customization; editorial/review-ledger.md:622 coordinator task keeps context across projects",
+      "note": "User supplied perspective and authorized application. Preserve intended meaning; exact candidate wording remains reviewable. Surrounding technical explanation is a separate agent draft."
+    },
+    {
+      "id": "claude-function-hooks-interest",
+      "file": "content/guides/claude-code/extensions.md",
+      "anchor": "function-hooks-are-a-proposal",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "d205ceb7464fc1565b9a1078974ddd35cc151db8f39266ba1dd0178d733bf0c1",
+      "quote": "i'm interested in how much an agent can change about its own setup, including\nthe harness around it. that's why the Function Hooks proposal caught my\nattention: it could expose more of Claude Code's internals to extensions.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:110 remain grounded in Ani supplied words; editorial/review-ledger.md:270 supplied by Ani and applied with editorial help; editorial/review-ledger.md:609 Intended coordination operations and harness customization; editorial/review-ledger.md:622 coordinator task keeps context across projects",
+      "note": "User supplied perspective and authorized application. Preserve intended meaning; exact candidate wording remains reviewable. Surrounding technical explanation is a separate agent draft."
+    },
+    {
+      "id": "codex-coordination-operations",
+      "file": "content/guides/codex/extensions.md",
+      "anchor": "what-should-a-subagent-do",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "59fb2f2de314dfbc4cb845be6f846934a5e420ece8ab2c967108049bbe9b82df",
+      "quote": "the operations i'm interested in are concrete: create a task, message it,\nread its history, check its current activity, and archive it when the work is\ndone.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:607 creating new agents, archiving and messaging agents, reading thru other agents histories",
+      "note": "Only the personal list of desired operations. Excludes adjacent app-server/history/status factual explanation."
+    },
+    {
+      "id": "claude-tiktok-caption-candidate",
+      "file": "content/guides/claude-code.md",
+      "anchor": "whos-running-twenty-agents",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "801169b4b2ca25aa277be1808fb6381241e7914c971b4b20169a847324f77cde",
+      "quote": "i did this for a TikTok and went through my five hour usage window in 15 minutes.",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:95 Candidate caption, grounded in his direct account",
+      "note": "Anecdote supplied by Ani; caption wording and media presentation still require his review. Does not establish a general Claude usage limit."
+    },
+    {
+      "id": "grok-taking-control-next-review",
+      "file": "content/guides/grok.md",
+      "anchor": "taking-control",
+      "status": "review-started",
+      "match": "body",
+      "hash": "4c6c5e8d8ac36e71872574ef431de07438fcd3147b029b74a2b35bea4a15f262",
+      "origin": "agent-polish-of-ani",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:123 Continue the Grok computer section at taking control",
+      "note": "Current next review point, with prior dictation and editorial direction. Zero approval of this body is inferred; this is a cursor, not proof Ani has read every sentence."
+    },
+    {
+      "id": "operating-prompt-review",
+      "file": "content/handbook/operating-agents.md",
+      "anchor": "what-should-i-ask-first",
+      "status": "review-started",
+      "match": "body",
+      "hash": "8062438e48084ca4c15e10b317b948455bbf584aa7cbfd667f27ec9e38576f4b",
+      "origin": "agent-draft-under-ani-direction",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:78 This is task direction, not acceptance of the earlier example wording",
+      "note": "Ani requested conversational prompts and visible good/bad examples. Implemented candidate remains unreviewed. Hypothetical examples establish no personal experience."
+    },
+    {
+      "id": "operating-handoff-review",
+      "file": "content/handbook/operating-agents.md",
+      "anchor": "how-do-i-pick-this-up-later",
+      "status": "review-started",
+      "match": "body",
+      "hash": "b9f1fc5c6b3acfefbb6db926d192fcb5872b6e50e93c8bcec007425567f52183",
+      "origin": "agent-draft-under-ani-direction",
+      "date": "2026-09-07",
+      "source": "editorial/review-ledger.md:78 This is task direction, not acceptance of the earlier example wording",
+      "note": "Ani requested conversational prompts and visible good/bad examples. Implemented candidate remains unreviewed. Hypothetical examples establish no personal experience."
+    }
+  ],
+  "next": [
+    {
+      "title": "Grok: taking control",
+      "detail": "Next wording review after the accepted Zoom paragraphs.",
+      "file": "content/guides/grok.md",
+      "anchor": "taking-control"
+    },
+    {
+      "title": "Your actual setup",
+      "detail": "Vet Codex and Claude defaults against how you use them.",
+      "file": "content/guides/codex/recommendations.md",
+      "anchor": "_top"
+    },
+    {
+      "title": "Credentials and access",
+      "detail": "Review assumptions before this hidden chapter can ship.",
+      "file": "content/handbook/credentials-and-access.md",
+      "anchor": "_top"
+    }
+  ],
+  "notes": [
+    "The old ledger heading tables are historical. Current inventory is derived from Markdown.",
+    "No whole-page acceptance is recorded. Preserved material and partial approvals remain separate."
+  ]
+}
+```
+<!-- live-map:end -->

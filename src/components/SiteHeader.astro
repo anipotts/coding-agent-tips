@@ -3,8 +3,17 @@ import Search from '@astrojs/starlight/components/Search.astro';
 import BrandGithub from '@tabler/icons/outline/brand-github.svg';
 import Menu2 from '@tabler/icons/outline/menu-2.svg';
 import ChevronDown from '@tabler/icons/outline/chevron-down.svg';
+import Adjustments from '@tabler/icons/outline/adjustments.svg';
+import AppWindow from '@tabler/icons/outline/app-window.svg';
+import ArrowRight from '@tabler/icons/outline/arrow-right.svg';
+import Book from '@tabler/icons/outline/book.svg';
+import Compass from '@tabler/icons/outline/compass.svg';
+import GitBranch from '@tabler/icons/outline/git-branch.svg';
+import Home from '@tabler/icons/outline/home.svg';
+import ShieldCheck from '@tabler/icons/outline/shield-check.svg';
 import { getHandbookPages, routeForEntry } from '../content';
 import ChapterMenu from './ChapterMenu.astro';
+import ProviderProductIcon from './ProviderProductIcon.astro';
 import { chapterForOrder, navigationScopes, scopeForPath, site } from '../site';
 import { Button } from './starwind/button';
 import { Dropdown, DropdownContent, DropdownGroup, DropdownLabel, DropdownLinkItem, DropdownTrigger } from './starwind/dropdown';
@@ -24,6 +33,11 @@ const mobileNavigationLabel = (page: (typeof pages)[number]) => scopeForPath(rou
 const activePage = pages.find((page) => routeForEntry(page) === current);
 const selectedPageLabel = activePage ? `${activeScopeLabel}: ${mobileNavigationLabel(activePage)}` : 'handbook';
 const scopePages = pages.filter((page) => page.data.navigation.scope === activeScope);
+const chapterIcons = {
+  'ph:book-open-text': Book, 'ph:arrow-right': ArrowRight,
+  'ph:sliders-horizontal': Adjustments, 'ph:git-branch': GitBranch,
+  'ph:app-window': AppWindow, 'ph:shield-check': ShieldCheck, 'ph:compass': Compass,
+} as const;
 ---
 
 <HeaderTag class="site-header">
@@ -35,7 +49,7 @@ const scopePages = pages.filter((page) => page.data.navigation.scope === activeS
     <div class="header-actions">
       <div class="header-search" transition:persist><Search /></div>
       <ThemeToggle class="site-header-control" variant="default" size="sm" ariaLabel="toggle color theme" />
-      <Tooltip>
+      <Tooltip class="header-github">
         <TooltipTrigger>
           <Button
             class="github-link site-header-control"
@@ -72,17 +86,26 @@ const scopePages = pages.filter((page) => page.data.navigation.scope === activeS
                 </Button>
               </DropdownTrigger>
               <DropdownContent class="mobile-page-options" align="start">
+                <div class="mobile-page-options-scroll" tabindex="0" role="group" aria-label="all handbook pages">
                 {navigationScopes.map((scope) => (
                   <DropdownGroup>
-                    <DropdownLabel>{scope.label}</DropdownLabel>
-                    {scope.id === 'handbook' && <DropdownLinkItem href="/" closeOnClick data-sw-drawer-close>handbook home</DropdownLinkItem>}
-                    {pages.filter((page) => scopeForPath(routeForEntry(page)) === scope.id).map((page) => (
-                      <DropdownLinkItem href={routeForEntry(page)} closeOnClick data-sw-drawer-close data-astro-prefetch="tap" aria-current={current === routeForEntry(page) ? 'page' : undefined}>
-                        {mobileNavigationLabel(page)}
-                      </DropdownLinkItem>
-                    ))}
+                    <DropdownLabel>
+                      <ProviderProductIcon light={scope.providerIcon} dark={'providerIconDark' in scope ? scope.providerIconDark : undefined} size={16} />
+                      <span>{scope.label}</span>
+                    </DropdownLabel>
+                    {scope.id === 'handbook' && <DropdownLinkItem href="/" closeOnClick data-sw-drawer-close><Home aria-hidden="true" /><span>handbook home</span></DropdownLinkItem>}
+                    {pages.filter((page) => scopeForPath(routeForEntry(page)) === scope.id).map((page) => {
+                      const chapter = chapterForOrder(page.data.navigation.order);
+                      const PageIcon = chapter ? chapterIcons[chapter.icon] : Book;
+                      return (
+                        <DropdownLinkItem href={routeForEntry(page)} closeOnClick data-sw-drawer-close data-astro-prefetch="tap" aria-current={current === routeForEntry(page) ? 'page' : undefined}>
+                          <PageIcon aria-hidden="true" /><span>{mobileNavigationLabel(page)}</span>
+                        </DropdownLinkItem>
+                      );
+                    })}
                   </DropdownGroup>
                 ))}
+                </div>
               </DropdownContent>
             </Dropdown>
           </div>

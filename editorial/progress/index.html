@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><title>writing map | coding agent tips</title>
+  <link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/__progress/map.css">
+  <script type="module" src="/__progress/map.js"></script>
+</head>
+<body>
+  <header class="map-header"><a class="brand" href="/" target="_blank" rel="noopener"><img src="/favicon.svg" alt="" width="26" height="26">coding agent tips</a><div class="header-right"><span id="connection" role="status">connecting</span><button id="theme" aria-label="switch color theme">◐</button></div></header>
+  <main id="main">
+    <div class="intro"><div><p class="eyebrow">local working files</p><h1>writing map</h1><p class="lede">what exists, what you've reviewed, and what's next.</p></div><p id="freshness" class="muted">reading your files…</p></div>
+    <section aria-label="handbook totals" id="summary" class="summary"></section>
+    <details class="definitions"><summary>how this is counted</summary><div><p>Pages and headings come from the current canonical Markdown, including hidden chapters. “Written” means every leaf has content and no detected placeholder; it does not mean a chapter meets its reader’s needs or is launch ready.</p><p>Review and voice come from exact, fingerprinted evidence in the existing editorial ledger. Reading a page, changing its layout, or editing one sentence never approves its neighbors. “Unclassified” means a voice pass is not recorded; it does not claim the text sounds unlike you.</p><p>Media counts are placements, so responsive versions and video posters do not count as extra images. “Labeled examples” counts explicit example blocks; other code and example sections appear separately. Links count authored destinations, excluding the generated source footer. Local route visibility is separate from production.</p><p>File saves update this map automatically. New personal approvals still need a recorded observation; the map never invents them. A changed accepted passage is flagged for another review.</p></div></details>
+    <section id="next" class="next" aria-label="next writing steps"></section>
+    <form class="filters" role="search" onsubmit="return false">
+      <label class="query">find a page or section<input id="query" type="search" placeholder="memory, permissions, computer use…" autocomplete="off"></label>
+      <label>guide<select id="scope"><option value="all">all guides</option><option value="handbook">handbook</option><option value="codex">codex</option><option value="claude-code">claude code</option><option value="grok">grok</option></select></label>
+      <label>show<select id="filter"><option value="all">everything</option><option value="review">needs wording review</option><option value="accepted">accepted / preserved</option><option value="voice">voice not recorded</option><option value="empty">writing gaps</option><option value="media">has media</option><option value="examples">examples / code</option><option value="links">has links</option><option value="hidden">hidden chapters</option></select></label>
+    </form>
+    <p id="results" class="muted" aria-live="polite"></p>
+    <div class="workspace"><nav id="pages" aria-label="pages in the handbook"></nav><section id="detail" aria-label="selected page"></section></div>
+    <p id="failure" role="alert" hidden></p>
+  </main>
+</body>
+</html>

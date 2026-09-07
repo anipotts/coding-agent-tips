@@ -7,6 +7,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { canonicalContentFiles } from '../src/content-manifest.mjs';
 import { verifyChapterDisclosures } from './lib/check-chapter-navigation.mjs';
 import { verifyPublicationMedia } from './lib/check-publication-media.mjs';
+import { verifyMobileLayout } from './lib/check-mobile-layout.mjs';
 
 const previewPort = 4175;
 const origin = `http://127.0.0.1:${previewPort}`;
@@ -52,6 +53,7 @@ try {
   expect(await page.locator('.sidebar-page-outline a[data-astro-prefetch]').count() === 0, 'hash links must not be prefetched');
 
   for (const viewport of [
+    { width: 319, height: 856 },
     { width: 375, height: 812 },
     { width: 768, height: 1024 },
     { width: 1024, height: 900 },
@@ -384,6 +386,7 @@ try {
 
   await verifyChapterDisclosures({ browser, origin });
   await verifyPublicationMedia({ browser, origin });
+  await verifyMobileLayout({ browser, origin });
 
   expect(consoleErrors.length === 0, `browser console errors: ${consoleErrors.join(' | ')}`);
 } finally {
