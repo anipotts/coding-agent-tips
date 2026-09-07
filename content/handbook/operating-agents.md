@@ -2,11 +2,11 @@
 title: start here
 description: a quick agent crash course, your first task, and how to check the result.
 products: [codex, claude-code]
-updatedAt: "2026-09-07T16:33:00-04:00"
-checkedAt: "2026-09-07T16:30:42-04:00"
+updatedAt: "2026-09-07T16:55:21-04:00"
+checkedAt: "2026-09-07T16:55:21-04:00"
 status: current
 evidence: [official-source, analysis]
-sources: [anthropic-how-claude-code-works, anthropic-features-overview, openai-codex-agents-md, anthropic-memory, github-protected-branches, openai-codex-approvals, anthropic-permissions, git-worktrees]
+sources: [openai-codex-prompting, anthropic-best-practices, anthropic-how-claude-code-works, anthropic-features-overview, openai-codex-agents-md, anthropic-memory, github-protected-branches, openai-codex-approvals, anthropic-permissions, git-worktrees]
 redirects: [/guides/operating-system/]
 voice: evidence
 navigation:
@@ -47,20 +47,39 @@ you can explore those when a task gives you a reason to.
 ## what should i ask first?
 
 consider a search box that loses its query when you open a result and return.
-a useful request gives the agent enough context to reproduce that behavior:
+here are two example prompts for that same bug.
+
+<div class="example-block example-bad">
+<p class="example-label">example prompt: too vague</p>
 
 ```text
-on /search, enter "permissions", open a result, then go back.
-the query disappears. preserve the query and selected filters when returning.
-inspect the existing routing behavior and make the smallest coherent fix.
-add a regression check and verify the flow in the browser.
-keep the patch local for review.
+fix search
 ```
 
-the task has an observable failure and a finish line. the agent can choose
-where to inspect and how to implement the change. you can judge whether it
+</div>
+
+<div class="example-block example-good">
+<p class="example-label">example prompt: enough context</p>
+
+```text
+when i search for permissions on /search then open a result and go back, my search disappears
+can you fix it so the query and filters stay? look into why it happens, add a test and check it in the browser
+keep the change small and leave it local for me to review
+```
+
+</div>
+
+with no other context, the first prompt <mark class="example-bad">leaves the bug and expected behavior unspecified</mark>.
+the useful details in the second are <mark class="example-good">how to reproduce it, what should change, and how to check the fix</mark>.
+the agent can choose where to inspect and how to implement the change. you can judge whether it
 preserves the state and still handles a fresh visit, an empty query, and a
 shared search URL correctly.
+
+use your own words. [OpenAI’s prompting guide](https://learn.chatgpt.com/docs/prompting)
+emphasizes ordinary language and useful context. for a small change with clear
+scope, [Anthropic recommends asking for the fix directly](https://code.claude.com/docs/en/best-practices).
+when the approach is uncertain, a short investigation or plan can resolve that
+before editing.
 
 if the agent finds that the requested behavior conflicts with the product's
 existing rules, resolve that decision before it builds around an assumption.
@@ -156,14 +175,31 @@ tests can pass around an unnecessary abstraction or a misunderstood requirement.
 ## how do i pick this up later?
 
 finish with the changed behavior, files or revision, verification, unresolved
-gaps, and next action. an illustrative handoff for the hypothetical search fix could say:
+gaps, and next action. for the hypothetical search fix, compare these example
+handoffs:
+
+<div class="example-block example-bad">
+<p class="example-label">example handoff: missing detail</p>
 
 ```text
-query and filters now survive opening a result and returning.
-the routing regression check and browser navigation check passed.
-the patch is local; review the URL behavior before opening the pull request.
+all done, everything works
 ```
 
+</div>
+
+<div class="example-block example-good">
+<p class="example-label">example handoff: enough to continue</p>
+
+```text
+the query and filters stay put now when you open a result and go back.
+the routing test and browser check passed. the changes are still local.
+next up is reviewing the URL behavior before opening a PR.
+```
+
+</div>
+
+the first handoff leaves <mark class="example-bad">the checks and current state unclear</mark>.
+the useful version says <mark class="example-good">what passed and where the work stopped</mark>.
 use the actual results in a real handoff. keep private transcripts,
 credentials, and unrelated context out of public project notes.
 

@@ -22,6 +22,10 @@
   --accent-strong: #0a2c91;
   --accent-on-solid: #ffffff;
   --status-warning: #e52b1a;
+  --example-good-ink: #176139;
+  --example-good-fill: #eaf6ee;
+  --example-bad-ink: #a32b2b;
+  --example-bad-fill: #fceeee;
   --white: var(--surface-canvas);
   --ink: var(--text-primary);
   --slate: var(--text-muted);
@@ -84,6 +88,10 @@ html[data-theme='dark'] {
   --accent-strong: #c1ccff;
   --accent-on-solid: #0b0c0f;
   --status-warning: #ff776b;
+  --example-good-ink: #8cdbac;
+  --example-good-fill: #12271e;
+  --example-bad-ink: #ffa7a7;
+  --example-bad-fill: #321c21;
   --sl-color-accent-low: var(--accent-soft);
   --sl-color-accent: var(--cobalt);
   --sl-color-accent-high: var(--accent-strong);

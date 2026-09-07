@@ -1453,6 +1453,28 @@
       "url": "https://github.com/anipotts/coding-agent-tips/blob/main/.github/workflows/freshness-draft.yml",
       "last_checked": "2026-09-07",
       "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-prompting",
+      "title": "Prompting",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/prompting",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "anthropic-best-practices",
+      "title": "Best practices for Claude Code",
+      "publisher": "anthropic",
+      "product": "claude-code",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://code.claude.com/docs/en/best-practices",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
     }
   ],
   "publishers": [

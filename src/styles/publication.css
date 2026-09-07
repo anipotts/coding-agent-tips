@@ -105,10 +105,20 @@ html[data-theme='dark'] .sl-markdown-content pre code span { color: var(--shiki-
 .registered-link-card-kind { display: block; }
 .registered-link-card-heading small,
 .registered-link-card-kind { color: var(--slate); }
-.code-frame { position: relative; margin-block: 1.5rem; }
-.code-frame pre { margin-block: 0; padding-block-start: 2.6rem; }
-.code-copy { position: absolute; z-index: 2; inset: .45rem .45rem auto auto; cursor: pointer; }
+.code-frame { position: relative; display: flex; flex-direction: column; gap: .375rem; margin-block: 1.5rem; }
+.code-frame pre { margin-block: 0; padding-block: 1rem; }
+.code-frame > [data-sw-tooltip-portal] { position: absolute; }
+.code-copy { position: static; align-self: flex-end; cursor: pointer; }
 .code-copy-tooltip { inline-size: max-content; white-space: nowrap; }
+
+.example-good { --example-ink: var(--example-good-ink); --example-fill: var(--example-good-fill); }
+.example-bad { --example-ink: var(--example-bad-ink); --example-fill: var(--example-bad-fill); }
+.example-block { margin-block: 1.5rem; }
+.sl-markdown-content .example-label { margin-block: 0 .5rem; color: var(--example-ink); }
+.example-block .code-frame { margin-block: 0; }
+.sl-markdown-content .example-block pre { background: var(--example-fill) !important; border-color: color-mix(in srgb, var(--example-ink) 30%, var(--rule)); border-inline-start: .2rem solid var(--example-ink); }
+.example-block pre, .example-block pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
+.sl-markdown-content mark:is(.example-good, .example-bad) { padding: .04em .16em; border-radius: .15em; background: var(--example-fill); color: var(--example-ink); box-decoration-break: clone; -webkit-box-decoration-break: clone; }
 
 .starlight-aside { border-radius: var(--radius-md) !important; background: var(--surface-subtle) !important; }
 

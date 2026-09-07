@@ -75,6 +75,21 @@ Grok's adopted headings and Zoom wording, personal anecdotes, and homepage prose
 remain preserved. Renaming a section does not change its review state. Seven
 hidden chapters remain hidden. Existing public heading fragments retain aliases.
 
+### example presentation and prompt voice: September 7, 2026
+
+Ani requested red and green highlighting to distinguish weak and useful examples,
+explicit example labels, copy controls below code blocks, and prompts that sound
+naturally dictated. His stated preference is to spend enough thought to make the
+task clear, then act; rigid punctuation and prolonged prompt preparation get in
+his way. This is task direction, not acceptance of the earlier example wording.
+
+The first prompt and handoff on the operating agents page now have labeled
+contrasts and highlighted explanations. The rewritten search prompt is a
+hypothetical example, not a claim about Ani's project. OpenAI's prompting guide
+supports ordinary language and useful context; Anthropic's best practices support
+acting directly on small, clear fixes and planning when the approach is uncertain.
+Candidate wording remains unreviewed. The 180-word primer is unchanged.
+
 ### preserve these passages
 
 - September 7 media direction: Ani supplied a Claude Code terminal recording

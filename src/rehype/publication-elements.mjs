@@ -62,6 +62,7 @@ function transformChildren(parent) {
         'data-open-delay': '180',
         'data-state': 'closed',
       }, [
+        child,
         element('button', {
           type: 'button',
           className: [
@@ -76,7 +77,6 @@ function transformChildren(parent) {
           'data-state': 'closed',
           'aria-label': 'copy code',
         }, [{ type: 'text', value: 'copy' }]),
-        child,
         element('span', {
           'data-sw-tooltip-portal': '',
           'data-sw-portal-placement': 'runtime',

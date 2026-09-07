@@ -37,8 +37,6 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from './starwin
       .map((root) => createPreviewCard(root));
     const scrollAreas = [...document.querySelectorAll<HTMLElement>('.publication-scroll-area[data-sw-scroll-area]')]
       .map((root) => createScrollArea(root));
-    const codeTooltips = [...document.querySelectorAll<HTMLElement>('.code-frame[data-sw-tooltip]')]
-      .map((root) => createTooltip(root));
 
     document.querySelectorAll<HTMLElement>('.sl-markdown-content figure').forEach((figure) => {
       const image = figure.querySelector<HTMLImageElement | HTMLVideoElement>('img, video');
@@ -89,17 +87,24 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from './starwin
     document.querySelectorAll<HTMLButtonElement>('[data-code-copy]').forEach((button) => {
       const pre = button.parentElement?.querySelector('pre');
       if (!pre) return;
+      const copyKind = button.closest('.example-block') ? 'example' : 'code';
+      button.setAttribute('aria-label', `copy ${copyKind}`);
+      const tooltip = button.parentElement?.querySelector('.code-copy-tooltip');
+      if (tooltip) tooltip.textContent = `copy ${copyKind}`;
       button.addEventListener('click', async () => {
         try {
           await navigator.clipboard.writeText(pre.textContent ?? '');
           button.textContent = 'copied';
-          toast.success('code copied');
+          toast.success(`${copyKind} copied`);
         } catch {
           toast.error('copy failed', { description: 'The code block could not be copied.' });
         }
         window.setTimeout(() => { button.textContent = 'copy'; }, 1500);
       }, { signal: controller.signal });
     });
+
+    const codeTooltips = [...document.querySelectorAll<HTMLElement>('.code-frame[data-sw-tooltip]')]
+      .map((root) => createTooltip(root));
 
     cleanupPublicationEnhancements = () => {
       controller.abort();

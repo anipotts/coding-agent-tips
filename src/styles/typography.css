@@ -122,6 +122,7 @@ body {
   line-height: var(--type-dense-line);
 }
 .page-sources > p:last-child { max-width: 68ch; }
+.sl-markdown-content .example-label { font-size: .875rem; font-weight: 600; line-height: 1.5; }
 .home-content :where(p, ul, ol) + :where(p, ul, ol),
 .sl-markdown-content :where(p, ul, ol) + :where(p, ul, ol),
 .run-page :where(p, ul, ol) + :where(p, ul, ol) { margin-top: 1rem; }
