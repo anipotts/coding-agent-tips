@@ -11,7 +11,7 @@ This file tracks Ani's manual review of every currently public canonical page an
 
 ## review order
 
-1. Grok computer and takeover section
+1. Grok cooperative computer use section
 2. Codex and Claude defaults, workflow examples, and product chapters
 3. credentials and access
 4. shared operating and setup guidance
@@ -70,8 +70,8 @@ this implementation request does not approve every newly written sentence.
 - Grok's limited use, X replies joke, tentative “claws” idea, and X/xAI ecosystem
   meaning remain. The historical boundary ended “X dominant influencer/creator/voice.”
   The applied replacement ends “the broader X and xAI ecosystem.”
-- The Zoom paragraphs under “swipe from the chat into the computer” are now
-  Ani reviewed; the next block is “take over, then hand it back.” The
+- The Zoom paragraphs under “computer view” are now Ani reviewed; the next
+  block is “taking control.” The
   unsupported sentence attributing the exact swipe and
   cursor sequence to “my own use of the app” was removed. The analogy and
   documented takeover remain; describing an interface alone does not establish
@@ -79,7 +79,7 @@ this implementation request does not approve every newly written sentence.
 
 ### what still needs Ani
 
-1. Continue the Grok computer section at “take over, then hand it back.” Ani
+1. Continue the Grok computer section at “taking control.” Ani
    accepted the two revised Zoom paragraphs. Cursor/keyboard takeover and the
    shared computer explanation still need wording review.
 2. Then review the product chapters one section at a time. Actual Codex/Claude
@@ -152,15 +152,39 @@ continues.
 
 Ani then answered **“Keep this wording”** to the complete two paragraph candidate.
 Those paragraphs are now **Ani reviewed** and should be preserved. SHA256 of
-the canonical Markdown body between the swipe heading and the takeover heading:
+the canonical Markdown body between “computer view” and “taking control”:
 `2179eff97bd4c2a13e43d4503e34f3ebc58a3e12a4e70d1beece994f3b7ae4fa`.
 This acceptance does not cover the neighboring takeover or shared computer
 paragraphs, and it is separate from publication of the complete page.
 
+### heading direction: September 7, 2026
+
+Ani's direct correction:
+
+> i dont like these super marketty titles, i prefer something very direct and opinionated like "cooperative computer use"
+
+The active Grok H2 is now **cooperative computer use**, using Ani's suggested
+title. The subheadings are **computer view**, **taking control**, and
+**shared computer**. Only headings changed; the accepted Zoom paragraphs
+retain the fingerprint above. This answer supplies heading direction and
+does not approve the takeover prose. The earlier quoted titles below remain
+historical review records, not current section names.
+
+The same direction was applied to twelve clearly vague headings in the new
+agent drafts, including “configuration precedence,” “settings precedence,”
+“MCP connections,” “task coordination and subagents,” “image generation,”
+“reviewing the change,” “extensions and permissions,” “Cowork,” “choosing an
+extension,” “plugins,” “testing computer takeover,” and “credential access.”
+Blueprint headings and three coordinator fragment links were updated together.
+Paragraph wording, the homepage, archive, and dated timeline event titles were
+preserved. These agent selected heading refinements remain reviewable choices;
+they do not turn their paragraphs into accepted prose.
+
 ### release state
 
 The local publication still has 17 routes; seven completed drafts remain hidden.
-The signed draft PR on `codex/handbook-editorial-review` carries the integrated
+The signed [draft PR #319](https://github.com/anipotts/coding-agent-tips/pull/319)
+on `codex/handbook-editorial-review` carries the integrated
 verification receipt and performance measurements. Its provider checks apply
 to the exact PR head. This ledger tracks authorship and wording acceptance;
 full launch readiness still requires the review above. Production has not
@@ -174,6 +198,12 @@ checks. History's contrast regression now reports the affected theme and node.
 Performance receipts identify local HTTP/2 transport, three cold mobile runs
 per measured page, median results, and synthetic navigation timing. They make
 no claim to production field INP.
+
+Ani also requested independent right aligned chapter carets to inspect H2/H3
+sections before navigating, then corrected their vertical padding and alignment.
+The technical pass adds those disclosures to the existing navigation. Chapter
+names remain links; caret buttons toggle outlines. These UI requests do not
+change the review state of the chapter prose.
 
 After review: promote only accepted hidden chapters, regenerate and verify all
 24 routes, sign the exact release changes, and check the provider's required

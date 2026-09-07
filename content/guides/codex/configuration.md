@@ -32,7 +32,7 @@ the model instructions. config files select runtime behavior. writing “ask
 before using the network” in a paragraph and configuring network restrictions
 have different effects: one guides the agent; the other constrains commands.
 
-## understand what wins
+## configuration precedence
 
 as of September 7, 2026, the documented
 [configuration order](https://learn.chatgpt.com/docs/config-file/config-basic)

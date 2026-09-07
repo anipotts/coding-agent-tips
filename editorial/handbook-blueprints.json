@@ -54,10 +54,10 @@
         "## choose where the work runs",
         "### terminal, editor, and desktop",
         "### web and Remote Control",
-        "## understand what shapes the loop",
+        "## extensions and permissions",
         "## follow the artifact through the workflow",
         "### repository work has an inspectable ending",
-        "### broader deliverables have a different starting point"
+        "### Cowork"
       ]
     },
     {
@@ -74,7 +74,7 @@
         "## begin with one useful pass",
         "## try a complete example",
         "## give the repository durable context",
-        "## close the loop"
+        "## reviewing the change"
       ]
     },
     {
@@ -111,7 +111,7 @@
       "experienceQuestions": [],
       "headings": [
         "## put each kind of context in the right place",
-        "## understand what wins",
+        "## configuration precedence",
         "### try a temporary override first",
         "## separate instructions from memory",
         "## permissions describe reach and interruption",
@@ -132,7 +132,7 @@
       "experienceQuestions": [],
       "headings": [
         "## put each setting where it belongs",
-        "### know which value wins",
+        "### settings precedence",
         "## keep instructions and memory legible",
         "### shared rules can have one source",
         "### memory can become stale",
@@ -204,7 +204,7 @@
         "### keep a coordinator useful",
         "## work that continues without you",
         "## choose where execution lives",
-        "## bring visual work into the same loop",
+        "## image generation",
         "## hand off the state that matters"
       ]
     },
@@ -253,11 +253,11 @@
         "## make operating knowledge reusable",
         "### instructions route the repository context",
         "### skills carry procedures, scripts, and references",
-        "## connect a real system",
+        "## MCP connections",
         "### MCP exposes tools and resources",
         "### authentication and reach stay explicit",
         "## make events deterministic",
-        "## give work its own context",
+        "## task coordination and subagents",
         "### subagents need a bounded problem",
         "### the return contract matters",
         "### try a bounded delegation",
@@ -281,14 +281,14 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## choose the part of the loop that needs help",
+        "## choosing an extension",
         "### a scratch project for the examples",
         "## turn a procedure into a skill",
         "## give a subagent a bounded question",
         "## connect the service the task needs",
         "## run hooks at meaningful events",
         "### a small hook you can exercise",
-        "## package pieces that belong together",
+        "## plugins",
         "## function hooks are a proposal"
       ]
     },
@@ -350,7 +350,7 @@
       ],
       "experienceQuestions": [],
       "headings": [
-        "## give the task access it can explain",
+        "## credential access",
         "## choose the path that fits the work",
         "### an interactive browser login",
         "### an application that needs environment variables",

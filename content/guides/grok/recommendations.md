@@ -43,7 +43,7 @@ work, do the surrounding cases still behave correctly, and can you follow the
 explanation back to the code? an impressive transcript can still leave the
 actual behavior unresolved.
 
-## test the part that makes bot interesting
+## testing computer takeover
 
 a useful browser exercise is collecting two comparable options from public
 websites into a short table. ask for source links, the criteria you supplied,

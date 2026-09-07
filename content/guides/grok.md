@@ -58,9 +58,9 @@ impression. xAI documents [editable names and avatars](https://docs.x.ai/grok-bo
 and Bots can [message each other and pass work between them](https://docs.x.ai/grok-bot/overview).
 those details give the whole experience a different personality.
 
-## grok bot puts the computer beside the conversation
+## cooperative computer use
 
-### swipe from the chat into the computer
+### computer view
 
 you can literally see the browser the agent is working in. it's like being
 on a Zoom call where the speaker is sharing their screen: you can focus on
@@ -73,7 +73,7 @@ other agents while the virtual computer keeps working in the
 [background](https://docs.x.ai/grok-bot/computer-and-apps). you choose when
 to watch, when to step in, and when to let it keep going.
 
-### take over, then hand it back
+### taking control
 
 you can tap into cursor mode, intercept the agent's actions, and use the
 keyboard on the virtual browser. type a password, do an action yourself, then
@@ -88,7 +88,7 @@ control. xAI also documents [secure handoffs](https://docs.x.ai/grok-bot/approva
 and supported masked secret requests for sensitive inputs. completing a login
 and approving the Bot's next action are separate decisions.
 
-### each bot has a screen on the shared computer
+### shared computer
 
 the interface makes it feel like each agent has its own computer. underneath,
 xAI says the Bots on your account share one persistent

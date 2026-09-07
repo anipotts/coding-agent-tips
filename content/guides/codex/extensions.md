@@ -41,7 +41,7 @@ change and what evidence to return. its scripts handle repeatable checks; its
 instructions explain how to interpret the results. write the trigger narrowly
 enough that an ordinary question about the repository stays an ordinary question.
 
-## connect a real system
+## MCP connections
 
 ### MCP exposes tools and resources
 
@@ -89,7 +89,7 @@ nonmanaged hooks require trust for their current definition. inspect them with
 the rejected case, and a handler error. a hook that silently skips its check
 leaves the session with a different policy than you intended.
 
-## give work its own context
+## task coordination and subagents
 
 i use one authoritative Codex thread to keep track of multiple projects,
 tasks, and contexts running in parallel. its job is to understand what's

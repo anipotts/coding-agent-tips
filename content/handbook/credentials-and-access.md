@@ -16,7 +16,7 @@ navigation:
   order: 30
 ---
 
-## give the task access it can explain
+## credential access
 
 start with the operation: read a deployment result, run a development server,
 or sign in to a browser session. then identify the account and credential that

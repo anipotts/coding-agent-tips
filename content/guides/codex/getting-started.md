@@ -97,7 +97,7 @@ the bug description belongs in the current prompt. the test command belongs
 in repository guidance because the next task will need it too. a short file
 with correct commands saves more time than a long file full of stale advice.
 
-## close the loop
+## reviewing the change
 
 read the changed files, inspect the result, and check any behavior the test
 cannot show. a visual change needs a look at the running page. a database

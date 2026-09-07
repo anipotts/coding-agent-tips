@@ -50,7 +50,7 @@ while disagreeing about the shape of the data between them.
 
 ### keep a coordinator useful
 
-the [coordinator example](/guides/codex/extensions/#give-work-its-own-context)
+the [coordinator example](/guides/codex/extensions/#task-coordination-and-subagents)
 keeps routing and project state in one conversation. send concise updates:
 what changed, whether verification passed, and what decision comes next. the
 implementation task retains the detailed debugging conversation.
@@ -92,7 +92,7 @@ a laptop that goes to sleep changes what local work can continue. a cloud task
 may keep running, but needs its own dependencies and access. choose the host
 first, then the screen that is convenient for steering it.
 
-## bring visual work into the same loop
+## image generation
 
 Codex can [generate and edit images](https://learn.chatgpt.com/docs/image-generation)
 from a prompt and reference material. describe the asset's purpose, dimensions,

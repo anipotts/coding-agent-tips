@@ -79,7 +79,7 @@ Control can let you check on that investigation from your phone. a cloud task
 needs its own reproducible environment and access to the relevant data. choose
 the execution environment before choosing the screen you want to use.
 
-## understand what shapes the loop
+## extensions and permissions
 
 Claude Code’s [extension system](https://code.claude.com/docs/en/features-overview)
 gives different jobs to instructions, skills, tools, and events:
@@ -118,7 +118,7 @@ machines, add the environment and any state that stayed behind. these details
 make it possible to resume a task without guessing what the previous session
 meant by “done.”
 
-### broader deliverables have a different starting point
+### Cowork
 
 [Cowork](https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork)
 extends Claude into broader files and deliverables. an engineering task fits

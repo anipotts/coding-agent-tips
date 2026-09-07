@@ -20,7 +20,7 @@ navigation:
 my interest in Codex centers on keeping multiple projects, tasks, and contexts
 moving through one authoritative thread. that thread routes clearer prompts
 and instructions to the tasks doing the work. the
-[coordination example](/guides/codex/extensions/#give-work-its-own-context)
+[coordination example](/guides/codex/extensions/#task-coordination-and-subagents)
 explains the division.
 
 that gives this page a practical lens: choose the setup that makes the work

@@ -16,7 +16,7 @@ navigation:
   order: 50
 ---
 
-## choose the part of the loop that needs help
+## choosing an extension
 
 an extension should have a specific job. instructions provide context, a skill
 carries a procedure, MCP connects a system, a subagent owns a separate problem,
@@ -168,7 +168,7 @@ measure the delay it adds. a slow hook makes each matching action slower.
 record success, failure, and timeout behavior so a quiet handler has an
 explanation.
 
-## package pieces that belong together
+## plugins
 
 [plugins](https://code.claude.com/docs/en/plugins) distribute related skills,
 agents, hooks, and MCP configuration. begin with standalone files while the

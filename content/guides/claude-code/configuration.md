@@ -33,7 +33,7 @@ the change should affect.
 keep local paths and account details out of shared examples. a teammate should
 be able to understand a project setting without also inheriting your machine.
 
-### know which value wins
+### settings precedence
 
 Anthropic documents this order for conflicting settings, highest first:
 managed settings, command line options, project local settings, shared project

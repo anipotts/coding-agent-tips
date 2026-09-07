@@ -51,7 +51,7 @@ check explains what the change actually achieved.
 i use one authoritative Codex thread to keep track of multiple projects,
 tasks, and contexts running in parallel. it turns what i want into clearer
 instructions and routes them to the right tasks. i explain that setup in
-[the delegation section](/guides/codex/extensions/#give-work-its-own-context).
+[the delegation section](/guides/codex/extensions/#task-coordination-and-subagents).
 
 the desktop app brings conversations, terminals, previews, and review together.
 [worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees) give
