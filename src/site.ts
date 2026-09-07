@@ -9,6 +9,8 @@ export const site = {
     pauseAnimation: 'pause animation',
     resumeAnimation: 'resume animation',
     menu: 'menu',
+    choosePage: 'choose page',
+    onThisPage: 'on this page',
     search: 'search',
     sources: 'sources',
     sharedFoundations: 'shared foundations',
