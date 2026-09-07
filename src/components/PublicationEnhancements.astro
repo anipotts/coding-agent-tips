@@ -57,7 +57,7 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from './starwin
 
       trigger.addEventListener('click', (event) => {
         if (!dialog || !dialogImage || !dialogCaption) return;
-        dialogImage.src = image.currentSrc || image.src;
+        dialogImage.src = image.dataset.fullSrc || image.currentSrc || image.src;
         dialogImage.alt = image.alt;
         dialogCaption.textContent = caption?.textContent?.trim() ?? '';
         dialog.setOpen(true, { reason: 'imperative-action', event, trigger });

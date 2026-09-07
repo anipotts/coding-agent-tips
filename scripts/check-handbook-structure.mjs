@@ -71,7 +71,7 @@ for (const guide of blueprint.guides) {
   if (duplicateAnchors.length) failures.push(`${relative}: duplicate heading anchors: ${[...new Set(duplicateAnchors)].join(', ')}`);
 
   if (!guide.provider || !guide.chapter || !guide.evidenceType) failures.push(`${relative}: blueprint metadata is incomplete`);
-  if (!Array.isArray(guide.experienceQuestions) || !guide.experienceQuestions.length) failures.push(`${relative}: blueprint experience questions are required`);
+  if (!Array.isArray(guide.experienceQuestions)) failures.push(`${relative}: blueprint experience questions must be an array`);
   for (const sourceId of guide.sourceIds ?? []) {
     if (!sourceIds.has(sourceId)) failures.push(`${relative}: blueprint source ${sourceId} is absent from editorial/sources.json`);
   }

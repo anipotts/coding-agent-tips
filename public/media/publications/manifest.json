@@ -18,6 +18,7 @@
   "featuredImages": [
     {
       "id": "codex-handbook-workspace",
+      "derivativeSet": "codex-handbook-workspace",
       "path": "/media/guides/codex-handbook-workspace.png",
       "width": 3600,
       "height": 2260,
@@ -226,6 +227,10 @@
     }
   ],
   "derivativeSets": {
+    "codex-handbook-workspace": [
+      { "path": "/media/publications/codex-handbook-workspace-640.webp", "width": 640, "height": 402, "bytes": 27690, "sha256": "3d27593d104812a6ed66b48ff60de19c3730509b7b77950dd3bfe82cc325a8e0" },
+      { "path": "/media/publications/codex-handbook-workspace-1200.webp", "width": 1200, "height": 753, "bytes": 76658, "sha256": "40f344e87f614ebf7d51d711c9cecae97d0c8d1a328f90f88fe92eb1e1f5c74a" }
+    ],
     "claude-chat": [
       { "path": "/media/publications/claude-chat-640.webp", "width": 640, "height": 389, "bytes": 9456, "sha256": "3f71cb9fd4b5a3e8d6bde417b95c930c8048cd0ad754fbb6e06ccb0b460e9108" },
       { "path": "/media/publications/claude-chat-1200.webp", "width": 1200, "height": 728, "bytes": 41278, "sha256": "3304233750961a282ecb9da7ff59cea05f4b9a52574861ca71728bd65788e5da" }

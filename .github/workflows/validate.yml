@@ -31,6 +31,12 @@ jobs:
       - name: validate generated handbook index
         run: bun run check:readme
 
+      - name: validate handbook structure and public completeness
+        run: |
+          bun run check:handbook
+          bun run check:completeness
+          bun run check:links
+
       - name: type check and build
         run: |
           bun run check:ui
@@ -48,6 +54,11 @@ jobs:
 
       - name: verify client navigation
         run: bun run test:navigation
+
+      - name: verify progressive agent surface and development search
+        run: |
+          bun run test:agent
+          bun run test:dev-search
 
       - name: check documentation links
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2

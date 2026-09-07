@@ -30,9 +30,29 @@ export function splitCanonicalMarkdown(markdown) {
   return { data: YAML.parse(match[1]), body: markdown.slice(match[0].length) };
 }
 
-function sectionIndex(body) {
+export function sectionIndex(body) {
   const tree = unified().use(remarkParse).parse(body);
-  const children = tree.children ?? [];
+  // Raw HTML timelines contribute real headings; fenced HTML examples remain code nodes.
+  const children = (tree.children ?? []).flatMap((node) => {
+    if (node.type !== 'html') return [node];
+    const html = node.value.replace(/<!--[\s\S]*?(?:-->|$)/g, '');
+    const matches = [...html.matchAll(/<h([1-6])\b([^>]*)>([\s\S]*?)<\/h\1>/gi)];
+    if (!matches.length) return [{ ...node, value: html }];
+    const parts = [];
+    let cursor = 0;
+    for (const match of matches) {
+      if (match.index > cursor) parts.push({ type: 'html', value: html.slice(cursor, match.index) });
+      const anchor = match[2].match(/\bid\s*=\s*(?:"([^"]+)"|'([^']+)')/i);
+      parts.push({
+        type: 'heading', depth: Number(match[1]),
+        children: [{ type: 'text', value: normalizePublicText(match[3]) }],
+        data: { anchor: anchor?.[1] ?? anchor?.[2] },
+      });
+      cursor = match.index + match[0].length;
+    }
+    if (cursor < html.length) parts.push({ type: 'html', value: html.slice(cursor) });
+    return parts;
+  });
   const slugger = new GithubSlugger();
   const sections = [];
 
@@ -47,7 +67,7 @@ function sectionIndex(body) {
       content.push(node);
     }
     sections.push({
-      anchor: slugger.slug(title),
+      anchor: heading.data?.anchor ?? slugger.slug(title),
       title,
       depth: heading.depth,
       text: normalizePublicText(content.map((node) => toString(node)).join(' ')),

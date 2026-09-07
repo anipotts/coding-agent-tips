@@ -1,3 +1,7 @@
+[data-sw-toast-viewport] [hidden] {
+  display: none;
+}
+
 [data-sw-toast-viewport] [data-slot="toast"] {
   --scale: max(0.9, 1 - (var(--toast-index, 0) * 0.05));
   z-index: calc(1000 - var(--toast-index, 0));

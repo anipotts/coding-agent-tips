@@ -53,7 +53,7 @@ this implementation request does not approve every newly written sentence.
 | [Claude Code: extensions](../content/guides/claude-code/extensions.md) | 🟦 written | sources + local fixture | pending; adopted passages preserved | public |
 | [Claude Code: safety](../content/guides/claude-code/safety.md) | 🟦 written | source review | pending | hidden |
 | [Claude Code: recommendations](../content/guides/claude-code/recommendations.md) | 🟦 written | source review | pending | public |
-| [Grok: overview](../content/guides/grok.md) | 🟦 written | sources + Ani dictation | computer section next; opening applied | public |
+| [Grok: overview](../content/guides/grok.md) | 🟦 written | sources + Ani dictation | Zoom paragraphs Ani reviewed; takeover next | public |
 | [Grok: configuration](../content/guides/grok/configuration.md) | 🟦 written | sources + CLI discovery | pending | public |
 | [Grok: recommendations](../content/guides/grok/recommendations.md) | 🟦 written | source based exercises | pending | public |
 | [Archived Claude tools](../content/archive/claude-code-tools.md) | ✅ preserved compatibility text | 45 cc + 175 lore tests pass | preserve frozen scope | public |
@@ -70,16 +70,18 @@ this implementation request does not approve every newly written sentence.
 - Grok's limited use, X replies joke, tentative “claws” idea, and X/xAI ecosystem
   meaning remain. The historical boundary ended “X dominant influencer/creator/voice.”
   The applied replacement ends “the broader X and xAI ecosystem.”
-- The next continuous review block remains “grok bot puts the computer beside
-  the conversation.” The unsupported sentence attributing the exact swipe and
+- The Zoom paragraphs under “swipe from the chat into the computer” are now
+  Ani reviewed; the next block is “take over, then hand it back.” The
+  unsupported sentence attributing the exact swipe and
   cursor sequence to “my own use of the app” was removed. The analogy and
   documented takeover remain; describing an interface alone does not establish
   that Ani personally performed each action.
 
 ### what still needs Ani
 
-1. Review the Grok computer section: Zoom analogy, cursor/keyboard takeover,
-   and the shared computer explanation. The focused question is pending.
+1. Continue the Grok computer section at “take over, then hand it back.” Ani
+   accepted the two revised Zoom paragraphs. Cursor/keyboard takeover and the
+   shared computer explanation still need wording review.
 2. Then review the product chapters one section at a time. Actual Codex/Claude
    defaults and a concrete reason to switch setups could add personal detail;
    the current factual guidance makes no invented claim about those defaults.
@@ -133,12 +135,45 @@ optional: the exact requested footage has not been verified or captured.
 - Registry versions were checked against npm and the official Claude changelog:
   Codex `0.153.4`, Claude Code `2.1.263`. Historical test versions stay historical.
 
+### Grok Zoom correction: September 7, 2026
+
+Ani's direct answer, retained as raw wording:
+
+> i dont like saying imagining it, but rather more so like it literally is like being on a zoom call where the speaker is presenting and you can choose to focus and see what theyre presenting showing on their screen but if its not important at that specific moment in time for you to visualy oversee agent work in a browser computer interface then u can go back to chatting with otehr agents while this virtual computer stays on in the bg working
+
+The superseded candidate described imagining a mobile Zoom call and sliding
+through participants because they do not fit on one screen. That version is
+rejected as the current analogy and remains recoverable in `f68158f`.
+The revised candidate focuses on choosing when to watch a shared screen and
+when to talk to other agents. It removes “i imagine” and keeps the literal
+interface comparison. xAI's mobile and computer documentation were rechecked
+on September 7 and explicitly support leaving the view while cloud work
+continues.
+
+Ani then answered **“Keep this wording”** to the complete two paragraph candidate.
+Those paragraphs are now **Ani reviewed** and should be preserved. SHA256 of
+the canonical Markdown body between the swipe heading and the takeover heading:
+`2179eff97bd4c2a13e43d4503e34f3ebc58a3e12a4e70d1beece994f3b7ae4fa`.
+This acceptance does not cover the neighboring takeover or shared computer
+paragraphs, and it is separate from publication of the complete page.
+
 ### release state
 
 The local publication still has 17 routes; seven completed drafts remain hidden.
-Final integrated validation, performance receipts, and the draft PR are recorded
-here when available. Full launch readiness still requires the wording review
-above. Production has not changed in this pass.
+The signed draft PR on `codex/handbook-editorial-review` carries the integrated
+verification receipt and performance measurements. Its provider checks apply
+to the exact PR head. This ledger tracks authorship and wording acceptance;
+full launch readiness still requires the review above. Production has not
+changed in this pass.
+
+The technical changes preserve the original image and version 1 agent API,
+add responsive image loading and a progressive content catalog, and validate
+development search and hidden page exclusion. Code copy tooltips, unused toast
+actions, and dark history caption contrast were corrected through browser
+checks. History's contrast regression now reports the affected theme and node.
+Performance receipts identify local HTTP/2 transport, three cold mobile runs
+per measured page, median results, and synthetic navigation timing. They make
+no claim to production field INP.
 
 After review: promote only accepted hidden chapters, regenerate and verify all
 24 routes, sign the exact release changes, and check the provider's required

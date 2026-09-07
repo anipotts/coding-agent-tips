@@ -1,5 +1,5 @@
 import { navigate as astroNavigate } from 'astro:transitions/client';
-import { AGENT_INDEX_VERSION } from '../agent-index-version.mjs';
+import { AGENT_CATALOG_VERSION } from '../agent-index-version.mjs';
 import { createHandbookTools } from '../agent-contract.mjs';
 
 type ToolDefinition = ReturnType<typeof createHandbookTools>[number];
@@ -19,15 +19,28 @@ declare global {
 }
 
 let cachedIndex: unknown;
+const cachedPages = new Map<string, unknown>();
 async function loadIndex(signal?: AbortSignal) {
   if (cachedIndex) return cachedIndex;
-  const target = new URL('/agent-index.json', window.location.origin);
+  const target = new URL('/agent-catalog.json', window.location.origin);
   const response = await fetch(target, { headers: { accept: 'application/json' }, signal });
   if (!response.ok) throw new Error(`agent index returned ${response.status}`);
   const index = await response.json();
-  if (index?.schemaVersion !== AGENT_INDEX_VERSION) throw new Error('agent index version mismatch');
+  if (index?.schemaVersion !== AGENT_CATALOG_VERSION) throw new Error('agent catalog version mismatch');
   cachedIndex = index;
   return index;
+}
+
+async function loadPage(page: { route: string; contentUrl: string }, signal?: AbortSignal) {
+  if (cachedPages.has(page.route)) return cachedPages.get(page.route);
+  const target = new URL(page.contentUrl, window.location.origin);
+  if (target.origin !== window.location.origin || !target.pathname.startsWith('/agent-pages/')) throw new Error('invalid page content URL');
+  const response = await fetch(target, { headers: { accept: 'application/json' }, signal });
+  if (!response.ok) throw new Error(`page content returned ${response.status}`);
+  const content = await response.json();
+  if (content?.schemaVersion !== AGENT_CATALOG_VERSION || content.page?.route !== page.route) throw new Error('page content version or route mismatch');
+  cachedPages.set(page.route, content.page);
+  return content.page;
 }
 
 async function navigate(target: string) {
@@ -54,7 +67,7 @@ async function registerCurrentDocument() {
   const controller = new AbortController();
   state.controller = controller;
   state.context = context;
-  const tools = createHandbookTools({ loadIndex, navigate });
+  const tools = createHandbookTools({ loadIndex, loadPage, navigate });
   try {
     for (const tool of tools) await context.registerTool(tool, { signal: controller.signal });
   } catch (error) {

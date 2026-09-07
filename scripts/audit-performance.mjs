@@ -1,12 +1,14 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { once } from 'node:events';
-import { mkdir, mkdtemp, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import os from 'node:os';
 import path from 'node:path';
 import process from 'node:process';
 import { chromium } from '@playwright/test';
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
+import { startHttp2Preview, requireHttp2 } from './lib/http2-preview.mjs';
 
 const root = process.cwd();
 const previewPort = 4176;
@@ -32,6 +34,8 @@ const failures = [];
 let server;
 let serverExit;
 let browser;
+let auditPreview;
+let buildPages;
 
 const median = (values) => [...values].sort((left, right) => left - right)[Math.floor(values.length / 2)];
 const metricsFor = (lhr) => ({
@@ -45,8 +49,13 @@ const metricsFor = (lhr) => ({
 });
 
 try {
-  const build = spawnSync(process.execPath, [astro, 'build'], { stdio: 'inherit' });
+  // Imported Markdown transforms can otherwise leave cached rendered content.
+  const build = spawnSync(process.execPath, [astro, 'build', '--force'], { stdio: 'inherit' });
   if (build.status !== 0) process.exit(build.status ?? 1);
+  buildPages = await Promise.all(pages.map(async ({ id, route }) => ({
+    id, route,
+    sha256: createHash('sha256').update(await readFile(path.join(root, 'dist', route.replace(/^\//, ''), 'index.html'))).digest('hex'),
+  })));
   server = spawn(process.execPath, [vite, 'preview', '--host', '127.0.0.1', '--port', String(previewPort), '--strictPort'], { stdio: 'inherit' });
   serverExit = once(server, 'exit');
   for (let attempt = 0; attempt < 40; attempt += 1) {
@@ -55,17 +64,20 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 250));
   }
 
+  // Match the deployed site's HTTP/2 transport while preserving Vite's bytes.
+  auditPreview = await startHttp2Preview(previewPort);
   for (const page of pages) {
     for (let run = 1; run <= 3; run += 1) {
       console.log(`auditing ${page.id} cold mobile run ${run}/3`);
-      const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless=new', '--no-sandbox'] });
+      const chrome = await chromeLauncher.launch({ chromePath: chromium.executablePath(), chromeFlags: ['--headless=new', '--no-sandbox', '--allow-insecure-localhost'] });
       try {
-        const result = await lighthouse(`${origin}${page.route}`, {
+        const result = await lighthouse(`${auditPreview.origin}${page.route}`, {
           port: chrome.port,
           onlyCategories: ['performance'],
           output: 'json',
           logLevel: 'silent',
         });
+        requireHttp2(result.lhr);
         const reportPath = path.join(outputDirectory, `${page.id}-${run}.json`);
         await writeFile(reportPath, result.report);
         audits.push({ page: page.id, run, ...metricsFor(result.lhr), reportPath });
@@ -76,25 +88,34 @@ try {
   }
 
   browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({ viewport: { width: 375, height: 812 } });
+  const context = await browser.newContext({ viewport: { width: 375, height: 812 }, ignoreHTTPSErrors: true });
   const page = await context.newPage();
-  await page.goto(`${origin}/guides/codex/`, { waitUntil: 'networkidle' });
+  await page.goto(`${auditPreview.origin}/guides/codex/`, { waitUntil: 'networkidle' });
   await page.locator('.provider-tabs a[href="/guides/claude-code/"]').click();
   await page.waitForURL('**/guides/claude-code/');
   await page.locator('.provider-tabs a[href="/guides/codex/"]').click();
   await page.waitForURL('**/guides/codex/');
 
   await page.evaluate(() => {
+    window.__performanceSwitchStart = null;
     window.__performanceSwitchEvents = [];
     window.__performanceSwitchObserver = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
-        if (entry.interactionId > 0) window.__performanceSwitchEvents.push({ name: entry.name, duration: entry.duration, interactionId: entry.interactionId });
+        if (window.__performanceSwitchStart !== null && entry.startTime >= window.__performanceSwitchStart && entry.interactionId > 0) {
+          window.__performanceSwitchEvents.push({ name: entry.name, startTime: entry.startTime, duration: entry.duration, interactionId: entry.interactionId });
+        }
       }
     });
-    window.__performanceSwitchObserver.observe({ type: 'event', buffered: true, durationThreshold: 0 });
-    const start = performance.now();
-    window.__performanceSwitchComplete = new Promise((resolve) => {
-      document.addEventListener('astro:page-load', () => requestAnimationFrame(() => requestAnimationFrame(() => resolve(performance.now() - start))), { once: true });
+    window.__performanceSwitchObserver.observe({ type: 'event', durationThreshold: 16 });
+    // Start at the user's click, excluding tracing setup and automation waits.
+    document.querySelector('.provider-tabs a[href="/guides/claude-code/"]').addEventListener('click', (event) => {
+      window.__performanceSwitchStart = event.timeStamp;
+    }, { capture: true, once: true });
+    window.__performanceSwitchComplete = new Promise((resolve, reject) => {
+      document.addEventListener('astro:page-load', () => requestAnimationFrame(() => requestAnimationFrame(() => {
+        if (window.__performanceSwitchStart === null) { reject(new Error('provider switch has no observed click')); return; }
+        resolve(performance.now() - window.__performanceSwitchStart);
+      })), { once: true });
     });
   });
 
@@ -106,7 +127,8 @@ try {
   });
   await page.locator('.provider-tabs a[href="/guides/claude-code/"]').click();
   await page.waitForURL('**/guides/claude-code/');
-  const interactionToNextPaint = await page.evaluate(() => window.__performanceSwitchComplete);
+  const clickToRoutePaint = await page.evaluate(() => window.__performanceSwitchComplete);
+  if (!Number.isFinite(clickToRoutePaint) || clickToRoutePaint <= 0) throw new Error('provider switch timing is invalid');
   await page.waitForTimeout(200);
   const eventEntries = await page.evaluate(() => window.__performanceSwitchEvents);
   await cdp.send('Tracing.end');
@@ -123,8 +145,9 @@ try {
   const interactionDurations = eventEntries.map(({ duration }) => duration);
   const warmSwitch = {
     route: '/guides/codex/ -> /guides/claude-code/',
-    inp: interactionDurations.length > 0 ? Math.max(...interactionDurations) : interactionToNextPaint,
-    interactionToNextPaint,
+    clickToRoutePaint,
+    eventTimingMax: interactionDurations.length > 0 ? Math.max(...interactionDurations) : null,
+    measurement: 'observed click to two animation frames after astro:page-load; a synthetic route measurement, not field INP',
     eventEntries,
     tracePath,
   };
@@ -153,15 +176,16 @@ try {
     if (metric.cls >= 0.05) failures.push(`${id}: median CLS ${metric.cls} is not below 0.05`);
   }
   if (medians.home.score < 99) failures.push(`home: median Lighthouse score ${medians.home.score} did not preserve the 100-class baseline`);
-  if (warmSwitch.inp >= 100) failures.push(`warm provider switch: ${warmSwitch.inp}ms is not below 100ms`);
+  if (warmSwitch.clickToRoutePaint >= 100) failures.push(`warm provider switch click to route paint: ${warmSwitch.clickToRoutePaint}ms is not below 100ms`);
 
-  const summary = { generatedAt: new Date().toISOString(), outputDirectory, medians, warmSwitch, audits, failures };
+  const summary = { generatedAt: new Date().toISOString(), outputDirectory, buildPages, transport: 'h2 (verified); local Vite response bytes, without CDN caching or compression', medians, warmSwitch, audits, failures };
   await writeFile(path.join(outputDirectory, 'summary.json'), `${JSON.stringify(summary, null, 2)}\n`);
   console.table(medians);
-  console.log(`warm provider switch INP: ${warmSwitch.inp}ms`);
+  console.log(`warm provider switch click to route paint: ${warmSwitch.clickToRoutePaint}ms (not field INP)`);
   console.log(`audit artifacts: ${outputDirectory}`);
 } finally {
   await browser?.close();
+  await auditPreview?.close();
   if (server && server.exitCode === null && server.signalCode === null) server.kill('SIGTERM');
   if (serverExit) await serverExit;
   for (let attempt = 0; attempt < 40; attempt += 1) {

@@ -62,14 +62,16 @@ those details give the whole experience a different personality.
 
 ### swipe from the chat into the computer
 
-you can literally see the browser the agent is working in. i imagine it like
-being on a mobile Zoom call and sliding through the participants because they
-do not all fit on one screen. here, you chat with an agent, then swipe to the
-right and see its computer view, with a terminal and a browser.
+you can literally see the browser the agent is working in. it's like being
+on a Zoom call where the speaker is sharing their screen: you can focus on
+the presentation when you want to see what they're doing. with Grok Bot,
+you swipe from the conversation into the computer view, with its terminal
+and browser.
 
-that is the part i want to go into with Grok Bot. the conversation and the
-computer are right beside each other. you can look at the actual page, see
-where the agent is, and step in when you need to.
+when you don't need to watch the screen, you can go back to chatting with
+other agents while the virtual computer keeps working in the
+[background](https://docs.x.ai/grok-bot/computer-and-apps). you choose when
+to watch, when to step in, and when to let it keep going.
 
 ### take over, then hand it back
 

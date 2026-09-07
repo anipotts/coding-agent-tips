@@ -4,6 +4,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { chromium } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
+import { canonicalContentFiles } from '../src/content-manifest.mjs';
 
 const previewPort = 4175;
 const origin = `http://127.0.0.1:${previewPort}`;
@@ -29,6 +30,10 @@ try {
   await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin });
   const page = await context.newPage();
   const consoleErrors = [];
+  const originalScreenshotRequests = [];
+  page.on('request', (request) => {
+    if (new URL(request.url()).pathname === '/media/guides/codex-handbook-workspace.png') originalScreenshotRequests.push(request.url());
+  });
   page.on('console', (message) => { if (message.type() === 'error') consoleErrors.push(message.text()); });
   page.on('pageerror', (error) => consoleErrors.push(error.message));
   await page.addInitScript(() => { window.__navigationDocumentToken = crypto.randomUUID(); });
@@ -38,7 +43,9 @@ try {
   expect(await page.title() === 'codex | coding agent tips', 'guide title is incorrect');
   expect(await page.locator('meta[name="astro-view-transitions-enabled"]').count() === 1, 'ClientRouter marker is missing');
   expect(await page.locator('.provider-tabs a[data-astro-prefetch="hover"]').count() === 4, 'provider tabs are missing selective hover prefetching');
-  expect(await page.locator('.publication-sidebar [data-sidebar="menu-button"][data-astro-prefetch="hover"]').count() === 3, 'desktop chapters are missing selective hover prefetching');
+  const expectedCodexRoutes = canonicalContentFiles().filter(({ route }) => route.startsWith('/guides/codex/')).map(({ route }) => route).sort();
+  const prefetchedCodexRoutes = await page.locator('.publication-sidebar [data-sidebar="menu-button"][data-astro-prefetch="hover"]').evaluateAll((links) => links.map((link) => link.getAttribute('href')).sort());
+  expect(JSON.stringify(prefetchedCodexRoutes) === JSON.stringify(expectedCodexRoutes), 'public desktop chapters are missing selective hover prefetching');
   expect(await page.locator('.mobile-page-options a[data-astro-prefetch="tap"]').count() >= 13, 'mobile page picker is missing selective tap prefetching');
   expect(await page.locator('.sidebar-page-outline a[data-astro-prefetch]').count() === 0, 'hash links must not be prefetched');
 
@@ -213,9 +220,14 @@ try {
   const figure = page.locator('.surface-bento figure').first();
   expect(await figure.locator('figcaption').evaluate((caption) => getComputedStyle(caption).display) === 'none', 'dialog-enabled image caption is visible in the reading flow');
   const imageTrigger = figure.locator('[data-publication-image-trigger]');
+  expect(await figure.locator('img').evaluate((image) => image.currentSrc.includes('codex-handbook-workspace-') && image.currentSrc.endsWith('.webp')), 'inline Codex screenshot does not use a responsive derivative');
+  expect(originalScreenshotRequests.length === 0, 'full-resolution Codex screenshot downloaded before user enlargement');
   await imageTrigger.click();
   const imageDialog = page.locator('#publication-image-dialog[role="dialog"]');
   await imageDialog.waitFor({ state: 'visible' });
+  expect(await imageDialog.locator('[data-publication-dialog-image]').getAttribute('src') === '/media/guides/codex-handbook-workspace.png', 'image dialog must load the full-resolution original on demand');
+  await imageDialog.locator('[data-publication-dialog-image]').evaluate((image) => image.decode());
+  expect(await imageDialog.locator('[data-publication-dialog-image]').evaluate((image) => image.naturalWidth) === 3600, 'enlarged Codex screenshot must retain the supplied resolution');
   expect((await imageDialog.locator('[data-publication-dialog-caption]').textContent())?.trim() === 'a screenshot of me working on some personal projects and some content for a brand deal.', 'enlarged image is missing its caption');
   await page.keyboard.press('Escape');
   await imageDialog.waitFor({ state: 'hidden' });
@@ -335,10 +347,32 @@ try {
   const tableArea = page.locator('.publication-scroll-area').first();
   expect(await tableArea.locator('table[tabindex="0"][aria-label="scrollable comparison table"]').count() === 1, 'wide table is not wrapped in a build-time Starwind ScrollArea');
 
-  await page.goto(`${origin}/archive/claude-code-tools/`, { waitUntil: 'networkidle' });
   const codeCopy = page.locator('[data-code-copy]').first();
-  await codeCopy.click();
-  expect((await page.evaluate(() => navigator.clipboard.readText())).includes('claude-code'), 'code copy did not write code to the clipboard');
+  for (const width of [375, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto(`${origin}/archive/claude-code-tools/`, { waitUntil: 'networkidle' });
+    await page.mouse.move(0, 0);
+    await codeCopy.hover();
+    const tooltip = page.locator('.code-copy-tooltip:not([hidden])');
+    await tooltip.waitFor({ state: 'visible' });
+    await page.waitForFunction(() => document.querySelector('.code-copy-tooltip:not([hidden])')?.getAttribute('data-side') === 'left');
+    const tooltipGeometry = await tooltip.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const styles = getComputedStyle(element);
+      const trigger = document.querySelector(`[aria-describedby="${element.id}"]`);
+      const frame = trigger?.closest('.code-frame')?.getBoundingClientRect();
+      return { height: bounds.height, lineHeight: Number.parseFloat(styles.lineHeight), padding: Number.parseFloat(styles.paddingTop) + Number.parseFloat(styles.paddingBottom), top: bounds.top, frameTop: frame?.top, left: bounds.left, right: bounds.right };
+    });
+    expect(tooltipGeometry.height <= tooltipGeometry.lineHeight + tooltipGeometry.padding + 1, 'copy tooltip must remain one line');
+    expect(tooltipGeometry.top >= tooltipGeometry.frameTop && tooltipGeometry.left >= 0 && tooltipGeometry.right <= width, 'copy tooltip must stay beside the button inside the code frame');
+    await codeCopy.click();
+    await page.waitForFunction(() => navigator.clipboard.readText().then((text) => text.includes('claude-code')));
+    const copiedToast = page.locator('[data-slot="toast"]').filter({ hasText: 'code copied' });
+    await copiedToast.waitFor({ state: 'visible' });
+    expect(await copiedToast.locator('[data-slot="toast-action"]').isHidden(), 'copy confirmation must not show an unused Action button');
+    await copiedToast.locator('[data-slot="toast-close"]').click();
+    await copiedToast.waitFor({ state: 'hidden' });
+  }
 
   const reducedContext = await browser.newContext({ viewport: { width: 1024, height: 900 }, reducedMotion: 'reduce' });
   const reducedPage = await reducedContext.newPage();

@@ -1,8 +1,11 @@
 @layer theme, starlight, components, utilities, site;
 
 @import "tailwindcss/theme.css" layer(theme);
-@import "tailwindcss/utilities.css" layer(utilities);
+@import "tailwindcss/utilities.css" layer(utilities) source(none);
 @import "tw-animate-css";
+/* Only application and publication files can introduce rendered utilities. */
+@source "../";
+@source "../../content/";
 @plugin "@tailwindcss/forms" { strategy: 'class'; }
 @custom-variant dark (&:where(.dark, .dark *));
 

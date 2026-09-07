@@ -15,9 +15,10 @@ export async function GET() {
   const body = [
     '# coding agent tips',
     '',
-    '> approved public handbook pages in Markdown for readers, agents, and language models.',
+    '> public handbook pages in Markdown for readers, agents, and language models.',
     '',
     `Structured index: ${new URL('/agent-index.json', site.url).href}`,
+    `Progressive catalog: ${new URL('/agent-catalog.json', site.url).href}`,
     '',
     ...pages,
     '',

@@ -20,10 +20,16 @@ try {
   } catch {}
 
   if (origin === isolatedOrigin) {
-    server = spawn(process.execPath, [astro, 'dev', '--host', '127.0.0.1', '--port', '4177'], { stdio: 'inherit' });
+    // Astro 7 auto-backgrounds agent runs. Keep this owned test process in the
+    // foreground and leave any editor's dev server and lock file untouched.
+    server = spawn(process.execPath, [astro, 'dev', '--ignore-lock', '--host', '127.0.0.1', '--port', '4177'], {
+      stdio: 'inherit',
+      env: { ...process.env, ASTRO_DEV_BACKGROUND: '1' },
+    });
     serverExit = once(server, 'exit');
     for (let attempt = 0; attempt < 40; attempt += 1) {
       try { if ((await fetch(origin)).ok) break; } catch {}
+      if (server.exitCode !== null || server.signalCode !== null) throw new Error('isolated astro development server exited before becoming ready');
       if (attempt === 39) throw new Error('astro development server did not become ready');
       await new Promise((resolve) => setTimeout(resolve, 250));
     }

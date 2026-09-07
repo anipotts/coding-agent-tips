@@ -28,9 +28,10 @@ header.header { z-index: var(--z-navigation); height: var(--site-header-height);
 .sl-markdown-content th, .sl-markdown-content td { padding: .75rem 1rem; }
 .sl-markdown-content th, .sl-markdown-content td { border-color: var(--rule); }
 .sl-markdown-content code { border-radius: var(--radius-ui); background: var(--soft); color: var(--ink); }
-.sl-markdown-content pre { border-radius: var(--radius-ui); background: var(--ink) !important; }
-.sl-markdown-content pre code { background: transparent; color: #f5f7fb; }
-.sl-markdown-content pre code span { color: var(--shiki-light, #f5f7fb) !important; }
+.sl-markdown-content pre { border-radius: var(--radius-ui); background: var(--surface-subtle) !important; }
+.sl-markdown-content pre code { background: transparent; color: var(--ink); }
+.sl-markdown-content pre code span { color: var(--shiki-light, inherit); }
+html[data-theme='dark'] .sl-markdown-content pre code span { color: var(--shiki-dark, inherit); }
 .editorial-rows { margin: 1.5rem 0 2rem; padding: 0; border-top: 1px solid var(--ink); }
 .editorial-rows > div { display: grid; grid-template-columns: 7rem minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem; padding: 1.1rem 0; border-bottom: 1px solid var(--rule); }
 .editorial-rows :where(dt, dd) { min-width: 0; margin: 0; }
@@ -103,6 +104,7 @@ header.header { z-index: var(--z-navigation); height: var(--site-header-height);
 .code-frame { position: relative; margin-block: 1.5rem; }
 .code-frame pre { margin-block: 0; padding-block-start: 2.6rem; }
 .code-copy { position: absolute; z-index: 2; inset: .45rem .45rem auto auto; cursor: pointer; }
+.code-copy-tooltip { inline-size: max-content; white-space: nowrap; }
 
 .starlight-aside { border-radius: var(--radius-md) !important; background: var(--surface-subtle) !important; }
 
@@ -115,6 +117,7 @@ header.header { z-index: var(--z-navigation); height: var(--site-header-height);
 .history-timeline figure { grid-column: 2; max-width: 42rem; margin: 1rem 0 0; border-radius: var(--radius-ui); overflow: hidden; background: var(--soft); }
 .history-timeline figure img { display: block; inline-size: 100%; max-block-size: 20rem; object-fit: cover; }
 .history-timeline figcaption { padding: .6rem .75rem; }
+html[data-theme='dark'] .history-timeline figcaption a { color: var(--accent-strong); }
 
 @media (max-width: 47.99rem) {
   .sl-markdown-content table { display: block; overflow-x: auto; }

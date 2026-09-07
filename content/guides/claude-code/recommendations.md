@@ -72,7 +72,7 @@ favor different arrangements.
 
 ## add parallelism when the tasks separate cleanly
 
-a reader-facing change and a documentation update can progress together once
+an interface change and a documentation update can progress together once
 the behavior is agreed. two workers redesigning the same module need more
 coordination. use [separate worktrees](https://code.claude.com/docs/en/desktop)
 for independent edits and assign one owner to combine and verify the result.

@@ -21,7 +21,13 @@ export default defineConfig({
   site: site.url,
   output: 'static',
   prefetch: { prefetchAll: false, defaultStrategy: 'hover' },
-  markdown: { processor: unified({ rehypePlugins: [linkMetadata, publicationElements] }) },
+  markdown: {
+    processor: unified({ rehypePlugins: [linkMetadata, publicationElements] }),
+    shikiConfig: {
+      themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' },
+      defaultColor: false,
+    },
+  },
   redirects,
   integrations: [
     sitemap({ filter: (page) => {
@@ -30,6 +36,8 @@ export default defineConfig({
     } }),
     starlight({
       title: site.name,
+      // Publication code frames already provide syntax highlighting and copy controls.
+      expressiveCode: false,
       customCss: ['./src/styles/starwind.css', './src/styles/global.css'],
       head: [
         { tag: 'meta', attrs: { property: 'og:image', content: socialImage } },

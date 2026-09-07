@@ -19,7 +19,8 @@ const maxGuideCssGzipBytes = 32 * 1024;
 const maxGuideJavaScriptGzipBytes = 72 * 1024;
 const maxFontBytes = 80 * 1024;
 const maxFontFiles = 4;
-const maxAgentIndexGzipBytes = 32 * 1024;
+const maxAgentCatalogGzipBytes = 32 * 1024;
+const maxAgentPageGzipBytes = 32 * 1024;
 const canonicalRoutes = new Set(canonicalContentFiles().map(({ route }) => route));
 const providerRoutes = ['/guides/codex/', '/guides/claude-code/', '/guides/grok/'];
 const providerRouteSet = new Set(providerRoutes);
@@ -140,6 +141,7 @@ for (const image of manifest.featuredImages ?? []) {
   if (sha256(buffer) !== image.sha256) failures.push(`${image.path}: sha256 differs from the manifest`);
   if (metadata.format !== 'png') failures.push(`${image.path}: expected png, received ${metadata.format}`);
   if (metadata.width !== image.width || metadata.height !== image.height) failures.push(`${image.path}: intrinsic dimensions differ from the manifest`);
+  if (image.derivativeSet && !manifest.derivativeSets[image.derivativeSet]) failures.push(`${image.id}: responsive derivative set is missing`);
   for (const route of image.canonicalPages ?? []) if (!canonicalRoutes.has(route)) failures.push(`${image.id}: unknown canonical page ${route}`);
 }
 
@@ -197,6 +199,15 @@ for (const { route, file } of canonicalContentFiles()) {
       if (attribute(tag, 'decoding') !== 'async') failures.push(`${route}: ${src} must decode asynchronously`);
       if (!['eager', 'lazy'].includes(attribute(tag, 'loading'))) failures.push(`${route}: ${src} has no loading policy`);
       if (Number(attribute(tag, 'width')) !== image.width || Number(attribute(tag, 'height')) !== image.height) failures.push(`${route}: ${src} markup dimensions differ from the featured image manifest`);
+      if (image.derivativeSet) {
+        const expected = manifest.derivativeSets[image.derivativeSet] ?? [];
+        const srcset = attribute(tag, 'srcset') ?? '';
+        for (const derivative of expected) {
+          if (!srcset.split(',').some((candidate) => candidate.trim() === `${derivative.path} ${derivative.width}w`)) failures.push(`${route}: featured image lacks its ${derivative.width}w derivative`);
+        }
+        if (!attribute(tag, 'sizes')) failures.push(`${route}: featured responsive image must declare sizes`);
+        if (attribute(tag, 'data-full-src') !== image.path) failures.push(`${route}: featured image must retain its original for enlargement`);
+      }
       continue;
     }
     if (!src?.startsWith('/media/publications/')) continue;
@@ -235,9 +246,12 @@ for (const route of providerRoutes) {
   for (const file of mobileFiles) bytes += (await stat(path.join(root, 'public', file.replace(/^\//, '')))).size;
   for (const tag of tags) {
     const src = attribute(tag, 'src');
-    if (featuredImageByPath.has(src)) bytes += (await stat(path.join(root, 'public', src.replace(/^\//, '')))).size;
+    if (featuredImageByPath.has(src) && !featuredImageByPath.get(src).derivativeSet) bytes += (await stat(path.join(root, 'public', src.replace(/^\//, '')))).size;
   }
-  const providerBudget = tags.some((tag) => featuredImageByPath.has(attribute(tag, 'src'))) ? maxFeaturedProviderBytes : maxProviderBytes;
+  const providerBudget = tags.some((tag) => {
+    const image = featuredImageByPath.get(attribute(tag, 'src'));
+    return image && !image.derivativeSet;
+  }) ? maxFeaturedProviderBytes : maxProviderBytes;
   if (bytes > providerBudget) failures.push(`${route}: ${bytes} mobile image bytes exceeds ${providerBudget / 1024} KiB`);
 }
 
@@ -248,7 +262,16 @@ for (const tag of tagsByRoute.get('/handbook/history/') ?? []) {
 
 const distRoot = path.join(root, 'dist');
 const agentIndexGzipBytes = gzipSync(await readFile(path.join(distRoot, 'agent-index.json'))).length;
-if (agentIndexGzipBytes > maxAgentIndexGzipBytes) failures.push(`${agentIndexGzipBytes} compressed agent index bytes exceeds 32 KiB`);
+const catalogBuffer = await readFile(path.join(distRoot, 'agent-catalog.json'));
+const agentCatalogGzipBytes = gzipSync(catalogBuffer).length;
+if (agentCatalogGzipBytes > maxAgentCatalogGzipBytes) failures.push(`${agentCatalogGzipBytes} compressed agent catalog bytes exceeds 32 KiB`);
+const catalog = JSON.parse(catalogBuffer);
+let maxAgentPageBytes = 0;
+for (const page of catalog.pages) {
+  const bytes = gzipSync(await readFile(path.join(distRoot, page.contentUrl.replace(/^\//, '')))).length;
+  maxAgentPageBytes = Math.max(maxAgentPageBytes, bytes);
+  if (bytes > maxAgentPageGzipBytes) failures.push(`${page.route}: ${bytes} compressed agent page bytes exceeds 32 KiB`);
+}
 const assetRoot = path.join(distRoot, '_astro');
 const guideStylesheets = new Set();
 const guideScripts = new Set();
@@ -303,4 +326,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`validated media, guide HTML, ${agentIndexGzipBytes} compressed agent-index bytes, ${guideStylesheets.size} shared stylesheets, ${reachableScripts.size} reachable scripts, and ${fontFiles.length} font files against performance budgets`);
+console.log(`validated media, guide HTML, ${agentCatalogGzipBytes} compressed catalog bytes, ${maxAgentPageBytes} largest page chunk bytes, ${guideStylesheets.size} shared stylesheets (${guideCssGzipBytes} compressed bytes), ${reachableScripts.size} reachable scripts (${guideJavaScriptGzipBytes} compressed bytes), and ${fontFiles.length} font files (${fontBytes} bytes) against performance budgets; compatibility full index: ${agentIndexGzipBytes} compressed bytes`);

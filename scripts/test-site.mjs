@@ -16,6 +16,9 @@ const text = (html) => html
   .replace(/&(?:amp|#x26|#38);/g, (entity) => ampersandEntities.has(entity) ? '&' : entity)
   .replace(/\s+/g, ' ')
   .trim();
+const hasRetiredGuideLabel = (html) => />\s*product guides\s*</i.test(html);
+if (!hasRetiredGuideLabel('<span class="sidebar-label">product guides</span>')) failures.push('retired label check must reject the old navigation label');
+if (hasRetiredGuideLabel('<p>the product guides carry the current details.</p>')) failures.push('retired label check must allow ordinary prose about the guides');
 const homeSource = await readFile(path.join(root, 'content/home.md'), 'utf8');
 const canonicalH1 = text(homeSource.match(/^#\s+(.+)$/m)?.[1] ?? '');
 const routeFile = (route) => route === '/' ? path.join(dist, 'index.html') : path.join(dist, route.replace(/^\//, ''), 'index.html');
@@ -68,7 +71,7 @@ for (const [route, source] of contentFiles) {
   if (!publicText.includes('last updated')) failures.push(`${route}: exact update metadata is missing`);
   if ((route.startsWith('/guides/codex') || route.startsWith('/guides/claude-code')) && publicText.includes('last checked')) failures.push(`${route}: internal source check metadata is exposed in the public page header`);
   for (const label of ['handbook', 'codex', 'claude code', 'grok']) if (!publicText.includes(label)) failures.push(`${route}: provider scope tab is missing: ${label}`);
-  if (/\bproduct guides\b/i.test(publicText)) failures.push(`${route}: retired product guides label appears in public output`);
+  if (hasRetiredGuideLabel(html)) failures.push(`${route}: retired product guides label appears in public output`);
   if (html.includes('·')) failures.push(`${route}: mid dot appears in public output`);
   if (!html.includes('coding agent tips on GitHub')) failures.push(`${route}: GitHub link is missing from the site header`);
   if (/GitHub stars|github-stars|\d+ stars, checked/i.test(html)) failures.push(`${route}: stale GitHub star metadata appears in the site header`);
@@ -115,7 +118,27 @@ try {
   if (homepageMarkdown !== `${canonicalBody}\n`) failures.push('/index.md: generated homepage Markdown differs from canonical content');
 } catch { failures.push('/index.md: generated homepage Markdown is missing'); }
 
-const activeGuideText = (await Promise.all(contentFiles.map(([, source]) => readFile(source, 'utf8')))).join('\n');
+// Dated test environments must retain the version actually exercised. Only
+// exempt the version in that explicit test claim; later current-version prose
+// in the same paragraph still goes through the duplication check.
+const withoutDatedTestVersions = (markdown) => markdown.replace(
+  /\bon (?:January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4},?\s+(?:i|an agent run for this guide) (?:tested|verified|reproduced) [^.!?`]*?`\d+\.\d+\.\d+(?:-[\w.-]+)?`/gi,
+  (claim) => claim.replace(/`[^`]+`$/, '`recorded test version`'),
+);
+const versionFixture = '2.1.261';
+for (const [fixture, remains] of [
+  ['on September 5, 2026, i tested Claude Code `2.1.261` in isolation.', false],
+  ['on September 5, 2026, an agent run for this guide tested Claude Code `2.1.261` in isolation.', false],
+  ['an agent run for this guide tested Claude Code `2.1.261` in isolation.', true],
+  ['i tested Claude Code `2.1.261` in isolation.', true],
+  ['on September 5, 2026, the current Claude Code version is `2.1.261`.', true],
+  ['on September 5, 2026, i tested Claude Code `2.1.261`. use 2.1.261 today.', true],
+]) {
+  if (withoutDatedTestVersions(fixture).includes(versionFixture) !== remains) {
+    failures.push('dated test version classification failed');
+  }
+}
+const activeGuideText = (await Promise.all(contentFiles.map(([, source]) => readFile(source, 'utf8')))).map(withoutDatedTestVersions).join('\n');
 for (const version of Object.values(registry.product_versions)) {
   const occurrences = activeGuideText.split(String(version)).length - 1;
   if (occurrences > 0) failures.push(`current product version ${version} is duplicated outside editorial/sources.json`);

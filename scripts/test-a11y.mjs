@@ -39,8 +39,8 @@ try {
     for (const route of routes) {
       await page.goto(`${origin}${route}`, { waitUntil: 'domcontentloaded' });
       await page.evaluate(() => document.fonts.ready);
-      // Expressive Code adds keyboard focus after its resize/idle observation.
-      await page.waitForFunction(() => [...document.querySelectorAll('.expressive-code pre')].every((pre) => pre.scrollWidth <= pre.clientWidth || pre.tabIndex === 0));
+      // Publication code frames make overflowing examples keyboard scrollable.
+      await page.waitForFunction(() => [...document.querySelectorAll('.code-frame pre')].every((pre) => pre.scrollWidth <= pre.clientWidth || pre.tabIndex === 0));
       if (await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)) failures.push(`${viewport.name} ${route}: horizontal overflow`);
       const typographyFailures = await page.evaluate(({ route, viewportWidth }) => {
         const findings = [];
@@ -110,7 +110,9 @@ try {
       }
 
       const report = await new AxeBuilder({ page }).analyze();
-      for (const violation of report.violations.filter((item) => item.impact === 'serious' || item.impact === 'critical')) failures.push(`${viewport.name} ${route}: ${violation.impact} ${violation.id}`);
+      for (const violation of report.violations.filter((item) => item.impact === 'serious' || item.impact === 'critical')) {
+        for (const node of violation.nodes) failures.push(`${colorScheme} ${viewport.name} ${route}: ${violation.impact} ${violation.id} at ${node.target.join(' -> ')}\n${node.failureSummary}`);
+      }
 
       const checkClipping = async (label) => {
         if (await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)) failures.push(`${viewport.name} ${route}: ${label} causes horizontal overflow`);
