@@ -103,6 +103,9 @@ try {
   assert.equal(await page.evaluate(() => window.__webmcpTest.maximumActive()), 5, 'registrations must abort before replacement');
   assert.deepEqual(await page.evaluate(() => window.__webmcpTest.activeNames()), AGENT_TOOL_NAMES);
   assert.deepEqual(errors, []);
+  // Astro announces client navigation after a delay. Compare public page text
+  // independently of that transient screen reader announcement.
+  await page.addStyleTag({ content: '.astro-route-announcer { display: none !important; }' });
   const supportedText = (await page.locator('body').innerText()).replace(/\s+/g, ' ').trim();
   await supported.close();
 
@@ -114,6 +117,7 @@ try {
   await fallbackPage.goto(`${origin}/guides/codex/configuration/`, { waitUntil: 'networkidle' });
   assert.equal(await fallbackPage.evaluate(() => document.modelContext), undefined);
   assert.equal(await fallbackPage.locator('[data-webmcp], webmcp').count(), 0, 'agent surface must render no visible UI');
+  await fallbackPage.addStyleTag({ content: '.astro-route-announcer { display: none !important; }' });
   assert.equal((await fallbackPage.locator('body').innerText()).replace(/\s+/g, ' ').trim(), supportedText, 'WebMCP support must not alter public text');
   assert.deepEqual(fallbackErrors, []);
   await unsupported.close();

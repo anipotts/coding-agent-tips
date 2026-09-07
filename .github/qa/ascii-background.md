@@ -2,30 +2,37 @@
 
 ## scope and source
 
-The implementation lives on `codex/ascii-provider-field`, in the isolated worktree `/private/tmp/coding-agent-tips-ascii`. It starts at `origin/main` commit `259e1d769c1c3005f2cb05c7ea869cc4c4497182`. The retained head of PR #312, `d967e4e988c57c7fffe6d1f0ef6c5dde74726cc6`, is already an ancestor. Its remote branch was deleted after merge. No rejected animation or exception stub exists in this base.
+Draft [PR #315](https://github.com/anipotts/coding-agent-tips/pull/315) uses `codex/ascii-provider-field`. The September 7 repair worktree is `/Users/anipotts/.codex/worktrees/ascii-repair/coding-agent-tips`. Its signed merge `82b9e77` integrates current main `7557555`, including PR #316's navigation and controls. The design authority from PR #312 is already in main. Editorial work remains separate.
 
-The first implementation commit is `da46325`. Followup refinements start on a resolved frame, handle font loading failure, preserve the immediate no-script reading path, and refine the contrast test's scope. The verified provider assets and original homepage wording remain the source of identity and prose.
+The field uses the verified provider assets to generate compact masks at build time. One canvas follows a continuous search, gather, resolve, and disperse sequence. OffscreenCanvas renders in a worker at a capped 30 fps on desktop and 24 fps on mobile. Particle count, resolution, and device pixel ratio are bounded. Hidden tabs and pause stop scheduling; reduced motion draws one resolved Codex frame. The fallback also draws one static frame. No animation library or runtime image download is required.
 
-## local verification
+The single approved exception in `design.md` describes the implementation, its reading surfaces, motion controls, and verification requirements.
 
-Passed:
+## verification on September 7
+
+The initial September 5 environment blocked browser testing. Those historical restrictions no longer apply. The previous CI run `33990903386` stopped because its runner shut down during the matrix. The new run [34143213189](https://github.com/anipotts/coding-agent-tips/actions/runs/34143213189) completed the matrix and exposed the separate Lighthouse gate described below.
+
+The following checks passed locally on the integrated animation tree:
 
 - `bun run check`, with zero errors, warnings, or hints;
 - `bun run build`;
-- `bun run test:site`, including typography ownership and 15 canonical routes;
-- `bun run check:performance`, including media, shared CSS, scripts, and fonts;
-- `bun run check:content`;
-- `bun run check:ui`.
+- `bun run test:site`, including 15 canonical routes;
+- `bun run check:performance`, covering delivery size and asset budgets;
+- `bun run check:content` and `bun run check:ui`;
+- `bun run test:ascii`, covering all 36 width, theme, and motion combinations;
+- `bun run test:a11y`, including typography, reflow, text spacing, text resize, and axe across 15 routes at eight widths in both themes;
+- WebMCP, navigation, and normal development search checks;
+- `bun run test:audit-preview`, including compressed response parity.
 
-The normal Astro development server was attempted, but the sandbox denied its loopback bind. A Vite static preview of this worktree's production build was available at `http://127.0.0.1:4341/`. Ordinary Chrome UI review covered the homepage at 1440 by 900 and 375 by 812 in both themes, at the top of the page, plus pause and resume. The field visibly moved and formed the source silhouettes. The first review prompted larger, denser glyphs. A startup event race and a deferred-frame cancellation were fixed during review.
+The matrix checks protected text backgrounds and contrast, full-page axe results at mobile and desktop sizes, pixel stability under reduced motion and pause, live preference changes, route cleanup, no-script content, and worker transfer fallback. Widths are 320, 375, 768, 942, 959, 960, 1024, 1191, and 1440 pixels in both themes and motion preferences. Progress and partial results are saved after each combination so an interrupted runner retains useful evidence.
 
-`bun run test:a11y` and `bun run test:ascii` were attempted. Their preview ports were denied by the sandbox. Chromium launch was independently blocked by macOS Mach port restrictions. Lighthouse startup also failed. There are no valid Lighthouse, FCP, LCP, CLS, sustained CPU, or complete motion-matrix results from this session. Raw browser DevTools access was declined and was not retried through another route.
+Manual review used the normal Astro development server at `http://127.0.0.1:4351/`, at 1440 by 900 and 375 by 812 in light and dark themes. The review included the moving field and recognizable provider forms. Full-page reduced-motion captures at 1440 and 375 pixels were also inspected in both themes. The heading, prose, guide cards, links, and footer retain readable surfaces.
 
-## contrast and byte measurements
+A full verification run exposed a timing race in the existing WebMCP test: Astro adds the page title to its screen reader route announcer after navigation. The test now excludes that transient announcement through a test-only style in both compared pages; its strict public-text equality and registration assertions remain intact. No production announcement behavior changes.
 
-Reading elements sit on fully opaque canvas or existing component surfaces above the animation. The ten pixel canvas colored extension around prose protects glyph edges. The underlying animated pixels therefore contribute zero to the protected text's background color.
+## contrast
 
-The following are calculations from the paired semantic tokens, independent of animation phase. They are not a substitute for the pending rendered viewport matrix.
+Reading elements sit on fully opaque canvas or component surfaces above the animation. A ten pixel canvas colored extension protects prose glyph edges. Animated pixels contribute zero to the protected text background, independent of phase. The rendered matrix verifies the computed surfaces and contrast.
 
 | foreground against canvas | light contrast | dark contrast |
 | --- | --- | --- |
@@ -33,14 +40,50 @@ The following are calculations from the paired semantic tokens, independent of a
 | muted text | 7.31:1 | 8.67:1 |
 | accent text | 6.84:1 | 5.01:1 |
 
-The initial audited production builds measured 9,697 bytes of gzipped homepage HTML before and 11,191 bytes after. The new controller and worker were approximately 2,301 and 1,264 bytes gzipped. Subsequent error handling and no-script refinements change these totals slightly. These are delivery size measurements only; browser performance remains unmeasured.
+## paired performance measurements
 
-## remaining release work
+Both sets use three cold homepage runs per revision with Lighthouse's default mobile simulation. The unchanged baseline is main `7557555`; the candidate is the integrated animation tree at `82b9e77`. Subsequent diagnostic changes affect test scripts and this review document.
 
-The new `test:ascii` script covers 36 width, theme, and motion combinations, protected text backgrounds and contrast, full-page axe checks at mobile and desktop sizes, pixel stability under reduced motion and pause, live preference changes, route cleanup, no-script content, and worker transfer fallback.
+| median metric | local baseline | local animation | Linux CI baseline | Linux CI animation |
+| --- | ---: | ---: | ---: | ---: |
+| Lighthouse performance | 96 | 96 | 97 | 97 |
+| FCP, ms | 2036.35 | 2108.03 | 1675.31 | 1674.32 |
+| LCP, ms | 2486.35 | 2487.72 | 2347.86 | 2342.56 |
+| TBT, ms | 0 | 0 | 0 | 0 |
+| CLS | 0.000971 | 0.000971 | 0.000971 | 0.000971 |
+| transferred bytes | 252264 | 256974 | 252622 | 257357 |
 
-The `ascii-homepage` CI job runs that matrix and a paired cold mobile Lighthouse comparison with three runs per revision. `audit:ascii` also samples ten seconds of worker frame cost and main thread task duration. Reports and screenshots go to the runner's temporary directory and the `ascii-homepage-qa` artifact. These checks have been authored and syntax checked; they still need execution in a permitted environment.
+The animation adds approximately 4.7 KB to the measured transfer. These samples show timing variation; they establish neither a speed improvement nor a general absence of regressions.
 
-Before approval, run the new matrix and all existing browser checks, inspect reduced motion in both themes on desktop and mobile, inspect the complete provider sequence, and put actual before and after Lighthouse medians in the PR description. Keep the PR unmerged for Ani's visual review.
+Ten seconds of desktop worker sampling measured 271 frames locally with frame p50 1.5 ms, p95 1.9 ms, and 5.55 ms of main thread tasks. Linux CI measured 300 frames with p50 3.2 ms, p95 3.4 ms, and 9.18 ms of main thread tasks. These are instrumented Chromium samples, not whole-device power measurements.
 
-The session could push the first signed commit. PR creation was blocked because the connector required native approval while the session's approval policy was `never`. No PR, merge, deployment, or live publication was completed.
+The absolute performance gate remains **99**, TBT below 100 ms, CLS below 0.05, and worker frame p95 at most 16 ms. Both baseline and candidate miss the score gate through the original HTTP/1.1 preview. A failing baseline grants no waiver. It now records revisions, runtime provenance, medians, deltas, and separate baseline and candidate failures, and rejects missing worker samples.
+
+Font discovery and the protocol used by the preview explain the initial investigation. The retained production repair preloads the original Instrument Sans Latin font in the homepage head. CSS and typography remain unchanged. CSS/font embedding and broad runtime bundling were measured and rejected; they are absent from the final diff.
+
+CI reports and screenshots are retained in the [ASCII QA artifact](https://github.com/anipotts/coding-agent-tips/actions/runs/34143213189/artifacts/10026737446). Local initial comparison reports are in `/private/tmp/ascii-repair-audit`. The local matrix uses the system temporary `ascii-homepage-qa` directory.
+
+## production protocol comparison
+
+On September 7, `curl` independently confirmed that `https://agents.anipotts.com` serves HTTP/2. Vite preview serves HTTP/1.1. Default Lighthouse network simulation produced a materially different result for the same built files under those two protocols.
+
+A paired HTTP/2 comparison of main `7557555` and the integrated animation with the original-font preload produced these medians, with all three runs in each group scoring 100:
+
+| metric | baseline | animation and font preload |
+| --- | ---: | ---: |
+| Lighthouse performance | 100 | 100 |
+| FCP, ms | 1430.84 | 1280.81 |
+| LCP, ms | 1506.11 | 1505.81 |
+| TBT, ms | 0 | 0 |
+| CLS | 0.026217 | 0.000971 |
+| transferred bytes | 241019 | 245219 |
+
+The initial protocol comparison artifacts are in `/private/tmp/ascii-http2-audit`. Ten seconds of runtime sampling measured 273 frames, worker p50 1.4 ms and p95 3.0 ms, with 6.15 ms of main thread tasks. CLS varied between baseline runs; the paired results are observations, not a general claim about every device or load.
+
+Both `audit:ascii` and `audit:performance` now use `scripts/lib/http2-preview.mjs` for Lighthouse. It forwards Vite responses through loopback HTTP/2 without changing their body, status, compression, or cache policy. A regression test verifies byte and header parity, including a compressed 404 response. Each Lighthouse run must report protocol `h2`. The certificate is generated temporarily for loopback use and removed on shutdown; the browser exception is restricted to insecure localhost.
+
+The Lighthouse version, mobile simulation, three-run medians, score 99, TBT, CLS, and worker thresholds remain unchanged. Reports retain the measured revisions and homepage HTML hashes. The original HTTP/1.1 comparison is retained above so the protocol correction is explicit.
+
+## review state
+
+The animation is prepared for visual review. The production protocol comparison meets the unchanged Lighthouse gate. Final signed-head CI status is reported with the PR receipt. Keep PR #315 unmerged, as requested by Ani. A local preview, passing size budgets, and passing motion checks do not establish a production release.

@@ -18,6 +18,7 @@ try {
   for (let i = 0; i < 50; i++) { try { if ((await fetch(origin)).ok) break; } catch {} if (i === 49) throw Error('preview unavailable'); await new Promise(r => setTimeout(r, 200)); }
   browser = await chromium.launch();
   for (const width of [320, 375, 768, 942, 959, 960, 1024, 1191, 1440]) for (const theme of ['light', 'dark']) for (const reduced of [false, true]) {
+    console.log(`checking ${width}px ${theme} ${reduced ? "reduced" : "moving"}`);
     const context = await browser.newContext({ viewport: { width, height: 900 }, colorScheme: theme, reducedMotion: reduced ? 'reduce' : 'no-preference' });
     const page = await context.newPage();
     page.on('pageerror', e => errors.push(e.message));
@@ -79,6 +80,7 @@ try {
       }
     }
     results.push({ width, theme, reduced, ...contrast });
+    await writeFile(path.join(output, 'matrix.json'), JSON.stringify(results, null, 2));
     await context.close();
   }
   const nojs = await browser.newContext({ javaScriptEnabled: false });

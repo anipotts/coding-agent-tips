@@ -20,7 +20,11 @@ try {
   } catch {}
 
   if (origin === isolatedOrigin) {
-    server = spawn(process.execPath, [astro, 'dev', '--host', '127.0.0.1', '--port', '4177'], { stdio: 'inherit' });
+    // Own a foreground child even when Astro detects an agent environment.
+    // An independent review preview may use this checkout at a different port.
+    server = spawn(process.execPath, [astro, 'dev', '--host', '127.0.0.1', '--port', '4177', '--ignore-lock'], {
+      stdio: 'inherit', env: { ...process.env, ASTRO_DEV_BACKGROUND: '1' },
+    });
     serverExit = once(server, 'exit');
     for (let attempt = 0; attempt < 40; attempt += 1) {
       try { if ((await fetch(origin)).ok) break; } catch {}

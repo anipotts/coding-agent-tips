@@ -7,6 +7,7 @@ import process from 'node:process';
 import { chromium } from '@playwright/test';
 import * as chromeLauncher from 'chrome-launcher';
 import lighthouse from 'lighthouse';
+import { startHttp2Preview, requireHttp2 } from './lib/http2-preview.mjs';
 
 const root = process.cwd();
 const previewPort = 4176;
@@ -32,6 +33,7 @@ const failures = [];
 let server;
 let serverExit;
 let browser;
+let auditPreview;
 
 const median = (values) => [...values].sort((left, right) => left - right)[Math.floor(values.length / 2)];
 const metricsFor = (lhr) => ({
@@ -55,17 +57,19 @@ try {
     await new Promise((resolve) => setTimeout(resolve, 250));
   }
 
+  auditPreview = await startHttp2Preview(previewPort);
   for (const page of pages) {
     for (let run = 1; run <= 3; run += 1) {
       console.log(`auditing ${page.id} cold mobile run ${run}/3`);
-      const chrome = await chromeLauncher.launch({ chromeFlags: ['--headless=new', '--no-sandbox'] });
+      const chrome = await chromeLauncher.launch({ chromePath: chromium.executablePath(), chromeFlags: ['--headless=new', '--no-sandbox', '--allow-insecure-localhost'] });
       try {
-        const result = await lighthouse(`${origin}${page.route}`, {
+        const result = await lighthouse(`${auditPreview.origin}${page.route}`, {
           port: chrome.port,
           onlyCategories: ['performance'],
           output: 'json',
           logLevel: 'silent',
         });
+        requireHttp2(result.lhr);
         const reportPath = path.join(outputDirectory, `${page.id}-${run}.json`);
         await writeFile(reportPath, result.report);
         audits.push({ page: page.id, run, ...metricsFor(result.lhr), reportPath });
@@ -155,13 +159,14 @@ try {
   if (medians.home.score < 99) failures.push(`home: median Lighthouse score ${medians.home.score} did not preserve the 100-class baseline`);
   if (warmSwitch.inp >= 100) failures.push(`warm provider switch: ${warmSwitch.inp}ms is not below 100ms`);
 
-  const summary = { generatedAt: new Date().toISOString(), outputDirectory, medians, warmSwitch, audits, failures };
+  const summary = { protocol: 'h2', profile: 'Lighthouse default cold mobile simulation', generatedAt: new Date().toISOString(), outputDirectory, medians, warmSwitch, audits, failures };
   await writeFile(path.join(outputDirectory, 'summary.json'), `${JSON.stringify(summary, null, 2)}\n`);
   console.table(medians);
   console.log(`warm provider switch INP: ${warmSwitch.inp}ms`);
   console.log(`audit artifacts: ${outputDirectory}`);
 } finally {
   await browser?.close();
+  await auditPreview?.close();
   if (server && server.exitCode === null && server.signalCode === null) server.kill('SIGTERM');
   if (serverExit) await serverExit;
   for (let attempt = 0; attempt < 40; attempt += 1) {

@@ -82,6 +82,8 @@ jobs:
       - run: bun install --frozen-lockfile
       - run: bunx playwright install --with-deps chromium
       - run: bun run build
+      - name: verify audit transport preserves publication responses
+        run: bun run test:audit-preview
       - name: verify ASCII lifecycle, contrast, and motion matrix
         run: bun run test:ascii
         env:

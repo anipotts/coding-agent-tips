@@ -1,6 +1,7 @@
 ---
 import "@/styles/starwind.css";
 import '../styles/global.css';
+import instrumentSansLatin from '@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url';
 import { ThemeInitScript } from '@starwind-ui/astro/theme';
 import { ClientRouter } from 'astro:transitions';
 import SiteHeader from '../components/SiteHeader.astro';
@@ -24,6 +25,7 @@ const socialImage = new URL(site.socialImage, Astro.site);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <link rel="preload" as="font" type="font/woff2" href={instrumentSansLatin} crossorigin="anonymous" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

@@ -445,6 +445,8 @@ Do not hide page overflow to conceal a broken component. Repair it or give a gen
 
 Keep static HTML, ordinary URLs, external shared CSS, and the existing Astro `ClientRouter`. Do not add React, global hydration, a service worker, analytics, another icon kit, or a third-party runtime for visual refinement.
 
+The homepage preloads its existing Latin Instrument Sans font so the heading font is discovered with the document. Cold Lighthouse audits use a loopback HTTP/2 preview, matching the production CDN, and pinned Chromium with the default mobile simulation. The proxy preserves the built response bytes and cache headers and must prove that HTTP/2 was negotiated. Keep the homepage score gate at 99, with the existing layout shift and blocking time limits. Protocol changes must be recorded alongside paired baseline and candidate measurements.
+
 Prefer CSS and semantic HTML for presentation. Prefetch likely provider and chapter destinations on intent; do not prefetch every page, citation, hash, image, or embed.
 
 Use the established budgets for guide HTML, shared CSS, Starwind runtime JavaScript, fonts, and duplicate component code. Keep the console free of errors and actionable warnings. A visual flourish does not justify route latency, layout shift, input delay, privacy cost, or another failure mode.
