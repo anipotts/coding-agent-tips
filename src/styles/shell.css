@@ -317,6 +317,19 @@ html[data-theme='dark'] .provider-product-icon.has-theme-pair .provider-product-
   .header-search site-search button[data-close-modal] { display: none; }
 }
 
+@media (max-width: 47.99rem) {
+  /* Keep the input in the header while results use the available reading width. */
+  .header-search site-search dialog { translate: none; }
+  .header-search #starlight__search .pagefind-ui__drawer {
+    position: fixed;
+    inset: calc(.625rem + var(--control-size) + .5rem) var(--site-gutter) auto;
+    inline-size: auto;
+    margin: 0;
+    max-height: calc(100dvh - .625rem - var(--control-size) - .5rem - var(--site-gutter));
+    padding: .75rem;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
   ::view-transition-group(provider-tab-active),

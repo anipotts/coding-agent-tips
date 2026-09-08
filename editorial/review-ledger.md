@@ -630,6 +630,45 @@ Ani's direct wording, September 7 (raw; product claims require separate verifica
 
 ## live writing map
 
+### next writing milestone: six core pages
+
+Plan requested September 7, 2026. This is proposed work order, not wording
+acceptance or permission to promote hidden chapters. Work in canonical Markdown
+and inspect each section through its normal route and the live map.
+
+1. **Grok overview.** Resume at `taking-control`, then review `shared-computer`
+   and the earlier introduction/personification candidates. Preserve the two
+   accepted Zoom paragraphs. Finish with a clear distinction between the visible
+   computer experience and the documented shared computer, plus Ani's limited
+   use and ecosystem interest. A mobile recording remains optional.
+2. **Start here.** Review the short crash course and six practical questions.
+   Keep enough context to act: a conversational first prompt, what the agent
+   remembers, permission scope, coordination, checking a result, and resuming.
+   Validate existing examples; consolidate repetition before adding more prose.
+3. **Codex and Claude overviews.** Review one product at a time. Explain where
+   work runs, what a task does, what to inspect, and the differences Ani actually
+   notices. Preserve his media, joke, and adopted headings. Ask about a recent
+   real workflow only where the current explanation needs personal context.
+4. **Codex and Claude extensions.** Cover skills, connections, hooks, and agent
+   coordination through one useful, reproducible example per chapter. Keep the
+   supported feature, proposed feature, and Ani's judgment separate. Use his
+   supplied coordinator description; ask only for missing details that change it.
+
+These six pages are the next completion target, not six automatic approvals.
+For each section: resolve its reader question, check changing facts from primary
+sources, make the example and its limits clear, review candidate wording with
+Ani, and record acceptance only for the exact span he accepts. A technical
+explanation can be complete without a personal anecdote. The agent prepares
+research, checks examples, and flags unsupported first person independently;
+Ani receives one focused question or candidate section at a time.
+
+After this milestone, review settings and recommendations against Ani's actual
+defaults; finish the two first-task, workflow, and safety pairs plus credentials;
+then reconcile shared setup, history, and method guidance. Hidden chapters stay
+hidden until their individual content and wording review is complete. Preserve
+the homepage and frozen archive. Run final publication and provider checks after
+integration. The map derives current counts; this plan adds no manual totals.
+
 Requested September 7: a read-only local map of current writing, review, provenance, media, examples, and links. The view at `/__progress/` reads the current Markdown and the exact records below on file changes. No public route or production assets are generated. Earlier ledger tables remain historical. This is the only structured acceptance record; generated counts are never maintained by hand.
 
 The unclear “why am i repeating myself?” heading is now “why does my agent forget?” on the operating guide and Claude configuration page. Earlier fragments remain aliases. This is a candidate heading in response to Ani’s September 7 browser annotation; it does not approve the body.
@@ -923,21 +962,39 @@ The unclear “why am i repeating myself?” heading is now “why does my agent
   "next": [
     {
       "title": "Grok: taking control",
-      "detail": "Next wording review after the accepted Zoom paragraphs.",
+      "detail": "Finish takeover and shared computer, then vet earlier introduction candidates. Keep the accepted Zoom wording.",
       "file": "content/guides/grok.md",
       "anchor": "taking-control"
     },
     {
-      "title": "Your actual setup",
-      "detail": "Vet Codex and Claude defaults against how you use them.",
-      "file": "content/guides/codex/recommendations.md",
-      "anchor": "_top"
+      "title": "Start here",
+      "detail": "Review the crash course, first prompt, memory, permissions, coordination, checks, and handoff.",
+      "file": "content/handbook/operating-agents.md",
+      "anchor": "the-agent-crash-course"
     },
     {
-      "title": "Credentials and access",
-      "detail": "Review assumptions before this hidden chapter can ship.",
-      "file": "content/handbook/credentials-and-access.md",
-      "anchor": "_top"
+      "title": "Codex overview",
+      "detail": "Ground the explanation of tasks, surfaces, and customization in clear examples and your supplied observations.",
+      "file": "content/guides/codex.md",
+      "anchor": "this-is-codex"
+    },
+    {
+      "title": "Claude overview",
+      "detail": "Review the terminal introduction, parallel agents, surfaces, and result checking around your existing media.",
+      "file": "content/guides/claude-code.md",
+      "anchor": "this-is-claude-code"
+    },
+    {
+      "title": "Codex extensions",
+      "detail": "Finish skills, connections, hooks, and your coordinator workflow with a reproducible example.",
+      "file": "content/guides/codex/extensions.md",
+      "anchor": "how-do-i-reuse-a-workflow"
+    },
+    {
+      "title": "Claude extensions",
+      "detail": "Review one practical extension example and distinguish supported hooks from function-hook proposals.",
+      "file": "content/guides/claude-code/extensions.md",
+      "anchor": "what-do-i-want-to-add"
     }
   ],
   "notes": [

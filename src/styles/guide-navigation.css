@@ -222,7 +222,8 @@ html:has(.publication-sidebar[data-state='collapsed']) { --left-rail-width: var(
 .mobile-page-options { overflow: hidden; inline-size: min(20.5rem, calc(100dvw - 2.5rem)); }
 .mobile-page-options-scroll { max-block-size: min(30rem, calc(100dvh - 8rem)); overflow-y: auto; }
 .mobile-page-options-scroll:focus-visible { outline: 2px solid var(--cobalt); outline-offset: -2px; }
-.mobile-page-options [data-slot='dropdown-link-item'] { padding-inline-start: .5rem; text-decoration: none; }
+.mobile-page-options [data-slot='dropdown-link-item'] { padding-inline-start: 1.5rem; text-decoration: none; }
+.mobile-page-options [data-slot='dropdown-group'] + [data-slot='dropdown-group'] { margin-block-start: .75rem; }
 .mobile-page-options [data-slot='dropdown-label'] { display: flex; align-items: center; gap: .5rem; color: var(--slate); }
 .mobile-page-options [aria-current='page'] { background: var(--accent-soft); color: var(--accent-strong); }
 .mobile-page-navigation { flex: 1; min-block-size: 0; overflow-y: auto; overscroll-behavior: contain; }

@@ -17,16 +17,16 @@ navigation:
 
 ## this is claude code
 
+<div class="surface-bento intro-visual">
+  <figure><a href="/media/guides/claude-terminal-recording.mp4"><video src="/media/guides/claude-terminal-recording.mp4" poster="/media/publications/claude-terminal-poster-1200.webp" aria-label="Claude Code terminal recording" autoplay muted loop playsinline preload="auto" width="2414" height="1392"></video></a><figcaption>a recording of Claude Code in the terminal.</figcaption></figure>
+</div>
+
 [Claude Code](https://code.claude.com/docs/en/overview) is Anthropic’s coding
 agent. it can inspect a repository, change files, run commands, and use the
 results to decide what to do next. you can work through a terminal, supported
 editor, desktop app, or web session.
 
 new to agents? [start with the short crash course](/handbook/operating-agents/#the-agent-crash-course).
-
-<div class="surface-bento intro-visual">
-  <figure><a href="/media/guides/claude-terminal-recording.mp4"><video src="/media/guides/claude-terminal-recording.mp4" poster="/media/publications/claude-terminal-poster-1200.webp" aria-label="Claude Code terminal recording" autoplay muted loop playsinline preload="auto" width="2414" height="1392"></video></a><figcaption>a recording of Claude Code in the terminal.</figcaption></figure>
-</div>
 
 ironically, Anthropic's Claude Code feels the least personified to me out of
 Claude Code, Codex, and Grok Bot. the agents i've seen tend to have names

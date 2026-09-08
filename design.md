@@ -114,6 +114,14 @@ labels, text, and the copy action share one compact colored card; the copy
 action stays below the text. Search transitions preserve stable control width
 and respect reduced motion.
 
+Below `48rem`, search results use the viewport width minus the shared page
+gutters, centered below the inline header input. The results scroll within
+the available viewport height. In the mobile page picker, chapter icons and
+labels sit one indentation level beneath their provider label.
+
+The Claude overview places Ani's terminal recording immediately below
+“this is claude code,” before the explanatory paragraphs.
+
 Do not add a permanent right table of contents or a second intermediate navigation bar. The article remains the visual center. Media can become wider than prose when comparison or interface detail needs it.
 
 ### shared handbook pages
