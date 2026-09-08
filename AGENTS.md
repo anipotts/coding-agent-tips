@@ -31,6 +31,15 @@ this repository is an opinionated, source backed handbook for people who know ba
 - edit public prose in its canonical Markdown file and review the affected route in the normal Astro development server.
 - normal public prose does not use hyphens. preserve them only for syntax, routes, filenames, commands, URLs, version identifiers, and official product names.
 
+## working checkout
+
+For the remaining handbook completion work, use the saved project checkout on
+local `main`. Keep the development preview and ongoing edits in that checkout.
+GitHub's protected `main` still requires a pull request and passing checks;
+create a temporary submission branch from the current work when needed, then
+fast forward local `main` to the verified merge. Preserve other worktrees as
+recovery copies until their remaining work is accounted for.
+
 ## verification
 
 run the source, Astro, generated route, Markdown, and shell checks before publishing a broad change. run `bun test plugins/cc/tests` and `pytest plugins/lore/tests` when archive files or shared runtime dependencies change, and during the scheduled full verification.
