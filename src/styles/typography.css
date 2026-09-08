@@ -182,6 +182,7 @@ body {
 }
 
 .source-domain { font-weight: 400; line-height: var(--type-metadata-line); }
+.publication-embed .publication-embed-credit { font-size: var(--type-metadata-size); line-height: var(--type-metadata-line); }
 
 .site-name, .site-footer .footer-site-name, .provider-tabs a[aria-current='page'], .publication-sidebar a[aria-current='page'],
 .right-sidebar a[aria-current='true'] { font-weight: 600; }

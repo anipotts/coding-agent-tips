@@ -233,5 +233,6 @@ html:has(.publication-sidebar[data-state='collapsed']) { --left-rail-width: var(
 .mobile-page-outline a:hover { background: var(--soft); color: var(--ink); }
 .mobile-page-outline a[data-active='true'] { background: color-mix(in srgb, var(--accent-soft) 62%, transparent); color: var(--accent-strong); }
 .mobile-page-outline a:focus-visible { outline: 2px solid var(--accent-strong); outline-offset: -2px; }
-.mobile-menu-footer { padding-block-start: .5rem; border-block-start: 1px solid var(--rule); }
+.guide-help { border-block-start: 1px solid var(--rule); }
+.mobile-menu-footer { display: grid; gap: .25rem; padding-block-start: .5rem; border-block-start: 1px solid var(--rule); }
 .mobile-menu-footer a { text-decoration: none; }

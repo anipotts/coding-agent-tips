@@ -14,7 +14,37 @@
       "originalPostFallback": true
     }
   },
-  "externalMedia": [],
+  "externalMedia": [
+    {
+      "id": "grok-bot-mobile-trackpad",
+      "retrievedAt": "2026-09-07",
+      "creator": { "name": "Will Oldgram", "handle": "@old_pgmrs_will" },
+      "originalPostUrl": "https://x.com/old_pgmrs_will/status/2094265782054367651",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": ["/guides/grok/"],
+      "mediaType": "image",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2094265782054367651&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 824,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/old_pgmrs_will/status/2094265782054367651"
+      },
+      "presentations": [
+        {
+          "route": "/guides/grok/",
+          "alt": "Grok Bot mobile screenshot showing the virtual desktop and trackpad menu, in Japanese",
+          "caption": null,
+          "linkUrl": "https://x.com/old_pgmrs_will/status/2094265782054367651"
+        }
+      ]
+    }
+  ],
   "videos": [
     {
       "id": "claude-terminal-recording",
@@ -260,14 +290,7 @@
       "publicationStatus": "rehosted-file",
       "creditVisible": false,
       "embed": null,
-      "presentations": [
-        {
-          "route": "/guides/grok/",
-          "alt": "Grok Build in its coding interface",
-          "caption": "Grok Build and Build Mode",
-          "linkUrl": "https://docs.x.ai/build/overview"
-        }
-      ],
+      "presentations": [],
       "original": { "width": 1200, "height": 630, "sha256": "df1fc4b220ca48749f61d9959446a39f1a118423d8acea47bb1d5f9417202894" },
       "derivativeSet": "grok-build"
     },
@@ -285,14 +308,7 @@
       "publicationStatus": "rehosted-file",
       "creditVisible": false,
       "embed": null,
-      "presentations": [
-        {
-          "route": "/guides/grok/",
-          "alt": "an xAI product graphic for Grok tools",
-          "caption": "Grok Bot and persistent cloud work",
-          "linkUrl": "https://docs.x.ai/grok-bot/overview"
-        }
-      ],
+      "presentations": [],
       "original": { "width": 1200, "height": 630, "sha256": "a0589b382026d4ee6120dd91f582c17ba79c914a5a51040550ead128711232a8" },
       "derivativeSet": "grok-bot"
     }

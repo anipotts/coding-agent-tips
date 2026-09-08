@@ -321,6 +321,16 @@ state or stand in for Ani's wording approval.
 
 ## locked media policy
 
+### Grok interface screenshot and optional crash course: September 7
+
+- Ani requested the crash-course invitation outside article prose. Removed it from all three product overviews; on those overviews the shared link now lives in the desktop guide rail and mobile guide menu footer. Other chapters retain access through handbook navigation. This layout change conveys no wording acceptance.
+- Ani requested real Grok UI instead of the two company promotional images. Removed those presentations, retaining their registered files and provenance for reference.
+- Used Will Oldgram's (@old_pgmrs_will) August 31 mobile Grok Bot screenshot through the official X embed: https://x.com/old_pgmrs_will/status/2094265782054367651. Fresh inspection of the official embed and syndication data confirmed a still image, Japanese trackpad menu, cursor, and virtual desktop/file manager. This is third-party media, not Ani's capture or a recording of the complete handoff.
+- Placement: under “cooperative computer use,” before the accepted “computer view” body. The embed retains X's post presentation, visible source credit and a direct fallback link; no image file is rehosted. The embed loads lazily, reserves responsive space, disables autoplay, and only accepts height updates from its own official X frame. Ani's own capture could later replace the post wrapper with the site's usual image-only viewer.
+- The accepted Zoom body and the two explicit fingertip/phone-keyboard revisions remain unchanged. Media placement does not approve neighboring prose.
+- Local checks: content/source registry, UI ownership, eight editorial inventory tests, build, 17 canonical route checks, agent surfaces, navigation, and unchanged performance budgets passed. Chromium checks covered 319/375/768/1440 pixels in both themes; WebKit covered 319/768. Verified the actual X screenshot, navigation/hash behavior, collapsed-rail keyboard access, bounded iframe resizing, and credited fallback with X blocked or JavaScript disabled. The full sweep initially reached X's image link during loading and reported an unnamed link. The accessibility check now waits for the external screenshot and fonts to load, while continuing to audit the complete iframe. Grok then passed all nine required widths in both themes. Receipt: `/tmp/handbook-grok-closure.json`; screenshots: `/tmp/grok-nav-media/` and `/tmp/grok-nav-media-webkit/`.
+- Final accessibility verification also passed across all 17 routes, nine widths, and both themes (306 route/viewport/theme cases): `/tmp/handbook-grok-a11y-verified.log`. The separate full Lighthouse audit remains part of launch preparation; this change passed the existing asset and compressed-output budgets without raising them. Whole-page editorial acceptance and publication remain pending.
+
 ### Grok Bot mobile recording search: September 7
 
 - Requested placement: beside “swipe from the chat into the computer” / “take over, then hand it back.” Desired evidence is a real mobile recording showing chat, computer view, cursor/keyboard takeover, and return to the Bot.
@@ -581,6 +591,7 @@ Source: `content/archive/claude-code-tools.md`
 - ASCII proposal: Ani rejected the entire animation on September 7. PR #315 is closed and its preview stopped by the coordinating task. There is no pending ASCII review, revision, integration, or release. Retain historical source only; do not revive it without a new explicit request.
 - Independent performance findings: the completed comparison reported Codex guide LCP of 6908 ms on untouched main versus 6909 ms on the candidate, and warm provider switching of 272 ms versus 256 ms against a 100 ms target. These are existing handbook performance findings to prioritize separately. Verify current measurements before any repair. Evidence and commands remain in `/Users/anipotts/.codex/worktrees/ascii-repair/PR315-receipt.md`.
 - Editing workflow: on September 7 Ani rejected a separate copy review page and asked for direct editing. Edit canonical Markdown in Codex or through the existing GitHub edit links; use normal routes for preview and the existing protected PR and Pages pipeline for publication. No copy review interface is planned.
+- Custody recheck, September 7: the completed mobile copy-review result from task `019fde30-e39a-7380-8519-03dc7d2c3e99` (titled `imessage-mcp`) is preserved in ancestor commit `dc34f5c`, including the mobile pane navigation, client behavior, responsive CSS, and regression test. Ancestor `f0b73b8` later removed the separate application. The former `fed7` directory is no longer a Git worktree. This is committed historical work, not an outstanding uncommitted implementation to restore. The six later dirty editorial files are separately preserved by the recovery snapshot and patch above. No files in the former worktree were changed during this recheck.
 
 ## requested continuation: September 7, 2026
 
@@ -928,11 +939,11 @@ The unclear “why am i repeating myself?” heading is now “why does my agent
       "anchor": "taking-control",
       "status": "review-started",
       "match": "body",
-      "hash": "4c6c5e8d8ac36e71872574ef431de07438fcd3147b029b74a2b35bea4a15f262",
+      "hash": "ee3f7ee8d79cd65ec21e5887d48dcd8523f07a53558f7ad523a0a0c89c52d8fb",
       "origin": "agent-polish-of-ani",
       "date": "2026-09-07",
       "source": "editorial/review-ledger.md:123 Continue the Grok computer section at taking control",
-      "note": "Current next review point, with prior dictation and editorial direction. Zero approval of this body is inferred; this is a cursor, not proof Ani has read every sentence."
+      "note": "Active wording review. Ani replaced cursor mode with controlling the virtual mouse/cursor with a fingertip and specified the phone keyboard. Those exact revisions are recorded separately. The earlier duplicate phone phrase was removed. Mobile and approvals documentation were read September 7, 2026; precise gesture wording is Ani-reported. Neighboring password and approval prose remains candidate wording. Prior candidate is preserved in git ab5e384 and the conversation."
     },
     {
       "id": "operating-prompt-review",
@@ -957,6 +968,32 @@ The unclear “why am i repeating myself?” heading is now “why does my agent
       "date": "2026-09-07",
       "source": "editorial/review-ledger.md:78 This is task direction, not acceptance of the earlier example wording",
       "note": "Ani requested conversational prompts and visible good/bad examples. Implemented candidate remains unreviewed. Hypothetical examples establish no personal experience."
+    },
+    {
+      "id": "grok-fingertip-cursor-edit",
+      "file": "content/guides/grok.md",
+      "anchor": "taking-control",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "c05f23108f6aeaad1e11791e18956a3fe2a9def99246f698b700feb76d99e66d",
+      "quote": "control the virtual mouse/cursor with your fingertip",
+      "origin": "ani-direct-revision",
+      "date": "2026-09-07",
+      "source": "Response annotations to taking-control candidate: fingertip cursor control and phone keyboard.",
+      "note": "Ani directly supplied this replacement for tap into cursor mode. This local revision does not establish acceptance of the surrounding body."
+    },
+    {
+      "id": "grok-phone-keyboard-edit",
+      "file": "content/guides/grok.md",
+      "anchor": "taking-control",
+      "status": "grounded-candidate",
+      "match": "quote",
+      "hash": "531155fd6114c61b4cad6b95b62140f5ad572f555e4d5858776382e73bd5e73a",
+      "quote": "your\nphone's keyboard",
+      "origin": "ani-direct-revision",
+      "date": "2026-09-07",
+      "source": "Response annotations to taking-control candidate: fingertip cursor control and phone keyboard.",
+      "note": "Ani directly specified your phone’s in place of the before keyboard. Line wrapping is retained for exact matching. This local revision does not establish acceptance of the surrounding body."
     }
   ],
   "next": [

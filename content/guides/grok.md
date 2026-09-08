@@ -5,7 +5,7 @@ products: [grok]
 updatedAt: "2026-09-07T16:33:00-04:00"
 status: pending
 evidence: [official-source, analysis, open-question]
-sources: [grok-build, grok-bot, grok-bot-mobile, grok-bot-computer, grok-bot-approvals, grok-bot-profiles, x-api, grok-assistant]
+sources: [grok-build, grok-bot, grok-bot-mobile, grok-bot-computer, grok-bot-approvals, grok-bot-profiles, grok-bot-mobile-trackpad-capture, x-api, grok-assistant]
 redirects: []
 voice: evidence
 navigation:
@@ -18,13 +18,6 @@ navigation:
 Grok now offers an assistant accessible through the web or X, a coding agent called Grok Build, and persistent
 cloud agents called Grok Bot. this section keeps those products separate so a
 model comparison does not get confused with a harness or a cloud computer.
-
-new to agents? [start with the short crash course](/handbook/operating-agents/#the-agent-crash-course).
-
-<div class="surface-bento">
-  <figure><a href="https://docs.x.ai/build/overview"><img src="/media/publications/grok-build-1200.webp" srcset="/media/publications/grok-build-640.webp 640w, /media/publications/grok-build-1200.webp 1200w" sizes="(max-width: 48rem) calc(100vw - 2rem), (max-width: 72rem) calc((100vw - 20rem) / 2), 32rem" alt="Grok Build in its coding interface" loading="eager" fetchpriority="high" decoding="async" width="1200" height="630" /><figcaption>Grok Build and Build Mode</figcaption></a></figure>
-  <figure><a href="https://docs.x.ai/grok-bot/overview"><img src="/media/publications/grok-bot-1200.webp" srcset="/media/publications/grok-bot-640.webp 640w, /media/publications/grok-bot-1200.webp 1200w" sizes="(max-width: 48rem) calc(100vw - 2rem), (max-width: 72rem) calc((100vw - 20rem) / 2), 32rem" alt="an xAI product graphic for Grok tools" loading="lazy" decoding="async" width="1200" height="630" /><figcaption>Grok Bot and persistent cloud work</figcaption></a></figure>
-</div>
 
 as of september 7, 2026, [Grok Build provides](https://docs.x.ai/build/overview) an interactive terminal CLI,
 headless scripting, ACP integration, custom models, skills, plugins, hooks, MCP,
@@ -62,6 +55,11 @@ those details give the whole experience a different personality.
 
 ## cooperative computer use
 
+<div class="publication-embed" data-media-id="grok-bot-mobile-trackpad">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2094265782054367651&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Grok Bot mobile screenshot showing the virtual desktop and trackpad menu, in Japanese" width="550" height="824" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit">mobile desktop and trackpad menu, shared by <a href="https://x.com/old_pgmrs_will/status/2094265782054367651" target="_blank" rel="noopener noreferrer">Will Oldgram (@old_pgmrs_will) on X</a>.</p>
+</div>
+
 ### computer view
 
 you can literally see the browser the agent is working in. it's like being
@@ -77,18 +75,14 @@ to watch, when to step in, and when to let it keep going.
 
 ### taking control
 
-you can tap into cursor mode, intercept the agent's actions, and use the
-keyboard on the virtual browser. type a password, do an action yourself, then
-hand it back to the agent. it feels built natively for that back and forth.
+you can control the virtual mouse/cursor with your fingertip and use your
+phone's keyboard on the agent's computer. if it reaches a login screen, you can
+[type your password](https://docs.x.ai/grok-bot/mobile) into the site yourself,
+then hand control back and tell the agent to keep going. it feels built
+natively for that back and forth.
 
-xAI's [mobile documentation](https://docs.x.ai/grok-bot/mobile) describes the
-same handoff: open the computer from a conversation, take over for a password
-or verification step, and return control.
-
-entering a password happens in the service's login screen while you have
-control. xAI also documents [secure handoffs](https://docs.x.ai/grok-bot/approvals-security-and-privacy)
-and supported masked secret requests for sensitive inputs. completing a login
-and approving the Bot's next action are separate decisions.
+some connections also offer [masked secret requests](https://docs.x.ai/grok-bot/approvals-security-and-privacy).
+signing in and approving the agent's next action are separate decisions.
 
 ### shared computer
 

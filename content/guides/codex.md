@@ -27,8 +27,6 @@ you can use it through the [terminal](https://learn.chatgpt.com/docs/codex/cli),
 an editor, the desktop app, or a [cloud environment](https://learn.chatgpt.com/docs/cloud).
 the surface changes how you steer and inspect the work.
 
-new to agents? [start with the short crash course](/handbook/operating-agents/#the-agent-crash-course).
-
 on the spectrum of how personified these products feel to me, Codex sits
 somewhere between Claude Code and Grok Bot. the main tasks get descriptive
 titles, but then i've seen a subagent show up named Casper or Socrates.

@@ -113,6 +113,9 @@ const chapterIcons = {
             <ChapterMenu pages={scopePages} current={current} scope={activeScope} mode="mobile" />
           </nav>
           <div class="mobile-menu-footer">
+            {current === `/guides/${activeScope}/` && <Button href={site.crashCourse.href} variant="ghost" size="sm" data-sw-drawer-close>
+              <Book aria-hidden="true" /><span>{site.crashCourse.label}</span>
+            </Button>}
             <Button href={site.repository} variant="ghost" size="sm" data-sw-drawer-close>
               <BrandGithub aria-hidden="true" />
               <span>GitHub</span>

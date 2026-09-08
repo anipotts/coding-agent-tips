@@ -85,8 +85,9 @@ try {
         checkRole(elements('.source-publisher h3'), { size: 16, line: 24, weight: 600, family: 'Instrument Sans', color: ink }, 'source publisher heading');
 
         const reading = elements('.home-content p, .home-guides p, .sl-markdown-content p, .run-page p, .source-groups > p')
-          .filter((element) => !element.matches('.section-label, .example-label, .history-year, .run-header > p:first-child, .source-kinds, .page-meta, [data-slot="item-description"]'));
+          .filter((element) => !element.matches('.section-label, .example-label, .publication-embed-credit, .history-year, .run-header > p:first-child, .source-kinds, .page-meta, [data-slot="item-description"]'));
         checkRole(reading, { size: 18, line: 30, weight: 400, family: 'Instrument Sans', color: ink }, 'reading prose');
+        checkRole(elements('.publication-embed-credit'), { size: 12, line: 18, weight: 400, family: 'Instrument Sans', color: slate }, 'external media credit');
         checkRole(elements('.example-good .example-label'), { size: 14, line: 21, weight: 600, family: 'Instrument Sans', color: dark ? 'rgb(140, 219, 172)' : 'rgb(23, 97, 57)' }, 'good example label');
         checkRole(elements('.example-bad .example-label'), { size: 14, line: 21, weight: 600, family: 'Instrument Sans', color: dark ? 'rgb(255, 167, 167)' : 'rgb(163, 43, 43)' }, 'bad example label');
         for (const element of reading.filter(visible)) if (element.getBoundingClientRect().width > 816) findings.push(`reading measure exceeds 68ch: ${element.textContent.trim().slice(0, 60)}`);
@@ -114,6 +115,19 @@ try {
         if (!(await menu.evaluate((trigger) => document.activeElement === trigger))) failures.push(`${viewport.name} ${route}: mobile Sheet does not restore focus after Escape`);
       }
 
+      // A lazy external post can still be hydrating after the host's fonts
+      // are ready. Audit the loaded screenshot, including its iframe links.
+      for (const iframe of await page.locator('.publication-embed iframe').elementHandles()) {
+        await iframe.scrollIntoViewIfNeeded();
+        const frame = await iframe.contentFrame();
+        if (!frame) throw new Error(`${route}: external media frame is unavailable`);
+        await frame.waitForFunction(() => {
+          const images = [...document.querySelectorAll('img[src*="/media/"]')];
+          return images.length > 0 && images.every((image) => image.complete && image.naturalWidth > 0);
+        });
+        await frame.evaluate(() => document.fonts.ready);
+      }
+      await page.evaluate(() => scrollTo(0, 0));
       const report = await new AxeBuilder({ page }).analyze();
       for (const violation of report.violations.filter((item) => item.impact === 'serious' || item.impact === 'critical')) {
         for (const node of violation.nodes) failures.push(`${colorScheme} ${viewport.name} ${route}: ${violation.impact} ${violation.id} at ${node.target.join(' -> ')}\n${node.failureSummary}`);

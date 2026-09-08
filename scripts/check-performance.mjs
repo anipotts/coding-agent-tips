@@ -183,7 +183,7 @@ for (const asset of manifest.assets) {
 }
 for (const external of manifest.externalMedia ?? []) {
   validateEditorialMetadata(external, { rehosted: false });
-  if ((external.presentations ?? []).length > 0) failures.push(`${external.id}: external media cannot be rendered before a reviewed renderer exists`);
+  if ((external.presentations ?? []).length && (external.publicationStatus !== 'official-embed' || external.mediaType !== 'image' || !/^https:\/\/platform\.twitter\.com\/embed\/Tweet\.html\?id=\d+&dnt=true&hideThread=true&theme=light$/.test(external.embed?.url ?? ''))) failures.push(`${external.id}: renderer supports only official X still-image embeds`);
 }
 
 const recordByRenderedPath = new Map();
@@ -197,6 +197,16 @@ for (const { route, file } of canonicalContentFiles()) {
   const source = await readFile(file, 'utf8');
   const tags = [...source.matchAll(/<img\b[^>]*>/g)].map(([tag]) => tag);
   tagsByRoute.set(route, tags);
+  for (const [, id, body] of source.matchAll(/<div class="publication-embed" data-media-id="([^"]+)">([\s\S]*?)<\/div>/g)) {
+    const record = (manifest.externalMedia ?? []).find((entry) => entry.id === id);
+    if (!record) { failures.push(`${route}: unregistered external media ${id}`); continue; }
+    const frame = body.match(/<iframe\b[^>]*>/)?.[0] ?? '';
+    const fallback = body.match(/<a\b[^>]*>/)?.[0] ?? '';
+    if (captionText(attribute(frame, 'src') ?? '') !== record.embed?.url || attribute(frame, 'loading') !== 'lazy' || attribute(frame, 'allow') !== "autoplay 'none'") failures.push(`${id}: embed source, lazy loading, or autoplay policy differs`);
+    if (Number(attribute(frame, 'width')) !== record.embed?.width || Number(attribute(frame, 'height')) !== record.embed?.height) failures.push(`${id}: embed must reserve its recorded dimensions`);
+    if (attribute(fallback, 'href') !== record.originalPostUrl || !captionText(body).includes(record.creator.name) || !captionText(body).includes(record.creator.handle)) failures.push(`${id}: visible creator credit or original-post fallback is missing`);
+    actualPresentationsById.get(id).push({ route, alt: attribute(frame, 'title') ?? null, caption: null, linkUrl: attribute(fallback, 'href') ?? null });
+  }
   for (const [, figure] of source.matchAll(/<figure>([\s\S]*?)<\/figure>/g)) {
     const imageTag = figure.match(/<img\b[^>]*>/)?.[0];
     const src = imageTag ? attribute(imageTag, 'src') : undefined;
@@ -246,13 +256,14 @@ for (const { route, file } of canonicalContentFiles()) {
 }
 
 const presentationSort = (left, right) => JSON.stringify(left).localeCompare(JSON.stringify(right));
-for (const record of [...(manifest.featuredImages ?? []), ...(manifest.assets ?? [])]) {
+for (const record of mediaRecords) {
   const expected = [...(record.presentations ?? [])].sort(presentationSort);
   const actual = [...(actualPresentationsById.get(record.id) ?? [])].sort(presentationSort);
   if (JSON.stringify(actual) !== JSON.stringify(expected)) failures.push(`${record.id}: manifest alt, caption, link, or route differs from canonical Markdown`);
 }
 
-const imageLcpRoutes = new Set(['/guides/codex/', '/guides/grok/']);
+// Grok opens with prose; its external still-image post is below the introduction.
+const imageLcpRoutes = new Set(['/guides/codex/']);
 for (const route of providerRoutes) {
   const tags = tagsByRoute.get(route) ?? [];
   const eager = tags.filter((tag) => attribute(tag, 'loading') === 'eager');

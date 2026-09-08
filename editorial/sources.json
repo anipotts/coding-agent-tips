@@ -25,6 +25,18 @@
   },
   "sources": [
     {
+      "id": "grok-bot-mobile-trackpad-capture",
+      "title": "Grok Bot mobile trackpad screenshot",
+      "publisher": "will-oldgram",
+      "product": "grok",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/old_pgmrs_will/status/2094265782054367651",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Third-party still image visually inspected through the official X embed. Shows the Japanese mobile trackpad menu and virtual desktop. This is interface evidence, not an agent-run product test or Ani's own screenshot."
+    },
+    {
       "id": "openai-codex-manual",
       "title": "Codex documentation",
       "publisher": "openai",
@@ -1478,6 +1490,12 @@
     }
   ],
   "publishers": [
+    {
+      "id": "will-oldgram",
+      "label": "Will Oldgram",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
     {
       "id": "openai",
       "label": "OpenAI",

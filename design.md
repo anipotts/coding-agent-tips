@@ -359,6 +359,8 @@ Third-party embeds load lazily and never block the first useful article content.
 
 Every embed includes an ordinary link to the original post or source. If the runtime is blocked, the post is deleted, the network is unavailable, or JavaScript is disabled, the reader still sees the creator identity, a useful description, and the source link. The surrounding argument cannot depend on the embed remaining available.
 
+The Grok mobile capture uses X's official still-image post embed, with its original post presentation and nearby credit. Reserve responsive height before loading, accept height changes only from that iframe's official origin, and keep the source link independent of the embedded runtime. On product overviews, keep optional crash-course navigation in the guide rail and mobile menu footer, outside article prose. Other chapters retain the shared handbook navigation.
+
 ## interaction contracts
 
 Use plain, stable verbs: `search`, `copy page`, `copy link`, `view Markdown`, `edit on GitHub`, `open menu`, and `switch to dark mode`.

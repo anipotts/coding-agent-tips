@@ -1,12 +1,15 @@
 ---
 import { getHandbookPages } from '../content';
-import { handbookScopes, scopeForPath } from '../site';
+import { handbookScopes, scopeForPath, site } from '../site';
+import Book from '@tabler/icons/outline/book.svg';
 import ProviderProductIcon from './ProviderProductIcon.astro';
 import ChapterMenu from './ChapterMenu.astro';
 import SidebarPrimitive from '@starwind-ui/astro/sidebar';
 import { sidebar, sidebarContainer, sidebarInner } from './starwind/sidebar/variants';
 import {
   SidebarContent,
+  SidebarFooter,
+  SidebarMenuButton,
   SidebarProvider,
   SidebarTrigger,
 } from './starwind/sidebar';
@@ -57,6 +60,11 @@ const providerIconDark = activeScopeMetadata && 'providerIconDark' in activeScop
     <SidebarContent class="publication-sidebar-content">
       <ChapterMenu pages={pages} current={current} scope={activeScope} />
     </SidebarContent>
+    {current === `/guides/${activeScope}/` && <SidebarFooter class="guide-help">
+      <SidebarMenuButton href={site.crashCourse.href} aria-label={site.crashCourse.label} tooltip={site.crashCourse.label} size="sm">
+        <Book aria-hidden="true" /><span>{site.crashCourse.label}</span>
+      </SidebarMenuButton>
+    </SidebarFooter>}
     </div>
     </div>
   </SidebarPrimitive.Sidebar>

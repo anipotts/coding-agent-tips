@@ -5,6 +5,10 @@ export const site = {
   socialImage: '/social-card.png',
   socialImageAlt: 'coding agent tips: a guide to coding agents in production software',
   releaseHistory: 'https://github.com/anipotts/coding-agent-tips/releases',
+  crashCourse: {
+    label: 'agent crash course',
+    href: '/handbook/operating-agents/#the-agent-crash-course',
+  },
   interfaceCopy: {
     menu: 'menu',
     choosePage: 'choose page',

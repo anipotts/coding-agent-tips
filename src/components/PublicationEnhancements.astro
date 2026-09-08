@@ -38,6 +38,18 @@ import { Dialog, DialogContent, DialogDescription, DialogTitle } from './starwin
     const scrollAreas = [...document.querySelectorAll<HTMLElement>('.publication-scroll-area[data-sw-scroll-area]')]
       .map((root) => createScrollArea(root));
 
+    // X reports the rendered post height. Accept resize messages only from
+    // the official frame that sent them, never from an unrelated window.
+    const postFrames = [...document.querySelectorAll<HTMLIFrameElement>('.publication-embed iframe')];
+    if (postFrames.length) window.addEventListener('message', (event) => {
+      if (event.origin !== 'https://platform.twitter.com') return;
+      const frame = postFrames.find((candidate) => candidate.contentWindow === event.source);
+      const message = event.data?.['twttr.embed'];
+      const height = message?.params?.[0]?.height;
+      if (!frame || message?.method !== 'twttr.private.resize' || !Number.isFinite(height) || height < 200 || height > 2000) return;
+      frame.style.blockSize = `${Math.ceil(height)}px`;
+    }, { signal: controller.signal });
+
     document.querySelectorAll<HTMLElement>('.sl-markdown-content figure').forEach((figure) => {
       const image = figure.querySelector<HTMLImageElement | HTMLVideoElement>('img, video');
       const caption = figure.querySelector<HTMLElement>('figcaption');

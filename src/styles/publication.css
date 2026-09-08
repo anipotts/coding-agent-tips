@@ -72,6 +72,10 @@ html[data-theme='dark'] .sl-markdown-content pre code span { color: var(--shiki-
 .surface-bento a { display: block; text-decoration: none; }
 .surface-bento :is(img, video) { display: block; inline-size: 100%; block-size: auto; background: transparent; }
 .surface-bento.intro-visual { grid-template-columns: minmax(0, 1fr); margin-top: 1rem; }
+.publication-embed { max-inline-size: 550px; margin: 1.5rem auto 2rem; }
+.publication-embed iframe { display: block; inline-size: 100%; block-size: 824px; border: 0; color-scheme: light; }
+.publication-embed .publication-embed-credit { margin: .625rem 0 0; color: var(--slate); }
+@media (max-width: 30rem) { .publication-embed iframe { block-size: 620px; } }
 .sl-markdown-content figure:has(img, video) figcaption { display: none; }
 .publication-image-trigger { position: relative; display: block; inline-size: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
 .publication-image-dialog { inline-size: min(70rem, calc(100vw - 2rem)); max-inline-size: calc(100vw - 2rem); max-block-size: calc(100dvh - 2rem); padding: 0; overflow: auto; }
