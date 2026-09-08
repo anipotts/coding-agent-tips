@@ -160,6 +160,13 @@ body {
   text-transform: none;
 }
 
+.author-attribution, .author-attribution a {
+  font-family: var(--font-sans);
+  font-size: var(--type-metadata-size);
+  font-weight: 400;
+  line-height: var(--type-metadata-line);
+}
+
 .source-summary-title {
   font-family: var(--font-sans);
   font-size: 1.125rem;

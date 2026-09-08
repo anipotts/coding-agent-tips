@@ -185,6 +185,11 @@ html[data-theme='dark'] .provider-product-icon.has-theme-pair .provider-product-
 .home-guide-list a:hover h3 { color: var(--cobalt); }
 .site-footer { min-height: var(--site-header-height); padding: 1rem var(--site-gutter); display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 1rem 2rem; align-items: center; }
 .site-footer p { margin: 0; }
+.footer-identity { display: grid; gap: .25rem; }
+.author-attribution { margin: 0; color: var(--slate); }
+.author-attribution a { color: inherit; text-underline-offset: .2em; }
+.author-attribution a:hover { color: var(--cobalt); }
+.publication-author { margin-top: 1.5rem; }
 .footer-meta { justify-self: center; }
 .site-footer nav { display: flex; align-items: center; justify-self: end; gap: 1.5rem; }
 .footer-github svg { inline-size: var(--control-icon-size); block-size: var(--control-icon-size); }
@@ -292,7 +297,7 @@ html[data-theme='dark'] .provider-product-icon.has-theme-pair .provider-product-
   .home-content table { display: block; overflow-x: auto; }
   .home-content th, .home-content td { min-width: 9.5rem; }
   .site-footer { grid-template-columns: 1fr; grid-template-areas: 'brand' 'nav' 'meta'; gap: .75rem; padding-block: 1.5rem; border-top: 1px solid var(--rule); }
-  .footer-site-name { grid-area: brand; }
+  .footer-identity { grid-area: brand; }
   .footer-meta { grid-area: meta; justify-self: start; }
   .site-footer nav { grid-area: nav; justify-self: start; gap: 1.25rem; }
   .site-footer nav a { display: inline-flex; align-items: center; min-block-size: 2rem; }

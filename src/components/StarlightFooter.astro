@@ -1,5 +1,6 @@
 ---
 import DefaultFooter from '@astrojs/starlight/components/Footer.astro';
+import AuthorAttribution from './AuthorAttribution.astro';
 import ArrowUpRight from '@tabler/icons/outline/arrow-up-right.svg';
 import registry from '../../editorial/sources.json';
 import PublicationEnhancements from './PublicationEnhancements.astro';
@@ -53,6 +54,7 @@ const sourceCountLabel = `${pageSources.length} ${pageSources.length === 1 ? 'so
   </AccordionItem>
 </Accordion>}
 <PublicationEnhancements />
+<div class="publication-author"><AuthorAttribution /></div>
 <DefaultFooter />
 
 <style>

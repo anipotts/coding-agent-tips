@@ -11,6 +11,7 @@ import { getEntry, render } from 'astro:content';
 import { getHomepagePages, routeForEntry } from '../content';
 import ProviderProductIcon from '../components/ProviderProductIcon.astro';
 import UpdatedAt from '../components/UpdatedAt.astro';
+import AuthorAttribution from '../components/AuthorAttribution.astro';
 import { Button } from '../components/starwind/button';
 import { Card } from '../components/starwind/card';
 import { Item, ItemContent, ItemDescription, ItemTitle } from '../components/starwind/item';
@@ -110,10 +111,13 @@ const highlightIcons = {
 
   </main>
   <footer class="site-footer" id="site-footer">
+    <div class="footer-identity">
     <a class="site-name footer-site-name" href="/" aria-label={site.interfaceCopy.home}>
       <img src="/favicon.svg" alt="" width="24" height="24" />
       <span>{site.name}</span>
     </a>
+    <AuthorAttribution />
+    </div>
     <p class="footer-meta">{site.interfaceCopy.lastUpdated} <UpdatedAt value={home.data.updatedAt} /></p>
     <nav aria-label="footer">
       <a href="/archive/">{site.interfaceCopy.archive}</a>

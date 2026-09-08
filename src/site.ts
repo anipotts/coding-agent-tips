@@ -5,6 +5,12 @@ export const site = {
   socialImage: '/social-card.png',
   socialImageAlt: 'coding agent tips: a guide to coding agents in production software',
   releaseHistory: 'https://github.com/anipotts/coding-agent-tips/releases',
+  author: {
+    name: 'Ani Potts',
+    label: 'ani potts',
+    url: 'https://anipotts.com/',
+    id: 'https://anipotts.com/#person',
+  },
   crashCourse: {
     label: 'agent foundations',
     href: '/handbook/operating-agents/#the-foundations',
@@ -24,8 +30,32 @@ export const site = {
     archive: 'archive',
     lastUpdated: 'last updated',
     releases: 'releases',
+    by: 'by',
   },
 } as const;
+
+// Both page shells publish the same author and website identity.
+export const authorshipHead = [
+  { tag: 'meta', attrs: { name: 'author', content: site.author.name } },
+  { tag: 'link', attrs: { rel: 'author', href: site.author.url } },
+  {
+    tag: 'script',
+    attrs: { type: 'application/ld+json' },
+    content: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      '@id': `${site.url}/#website`,
+      name: site.name,
+      url: `${site.url}/`,
+      author: {
+        '@type': 'Person',
+        '@id': site.author.id,
+        name: site.author.name,
+        url: site.author.url,
+      },
+    }).replaceAll('<', '\\u003c'),
+  },
+] as const;
 
 export const handbookChapters = [
   { id: 'overview', label: 'what is it?', slug: '', order: 10, icon: 'ph:book-open-text' },

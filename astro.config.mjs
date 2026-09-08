@@ -4,7 +4,7 @@ import starlight from '@astrojs/starlight';
 import { unified } from '@astrojs/markdown-remark';
 import { defineConfig } from 'astro/config';
 import { contentRedirects } from './src/content-manifest.mjs';
-import { site } from './src/site';
+import { authorshipHead, site } from './src/site';
 import starlightDevSearch from './src/integrations/starlight-dev-search.mjs';
 import editorialProgress from './src/integrations/editorial-progress.mjs';
 import linkMetadata from './src/rehype/link-metadata.mjs';
@@ -41,6 +41,7 @@ export default defineConfig({
       expressiveCode: false,
       customCss: ['./src/styles/starwind.css', './src/styles/global.css'],
       head: [
+        ...authorshipHead,
         { tag: 'meta', attrs: { property: 'og:image', content: socialImage } },
         { tag: 'meta', attrs: { property: 'og:image:width', content: '1280' } },
         { tag: 'meta', attrs: { property: 'og:image:height', content: '640' } },

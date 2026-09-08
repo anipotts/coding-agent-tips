@@ -56,6 +56,15 @@ for (const [route, source] of contentFiles) {
   const publicText = text(html);
   const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/)?.[1];
   if (canonical !== `${origin}${route}`) failures.push(`${route}: canonical url is missing or incorrect`);
+  if ((html.match(/<meta name="author" content="Ani Potts"/g) ?? []).length !== 1) failures.push(`${route}: expected one consistent author meta tag`);
+  if (!html.includes('<link rel="author" href="https://anipotts.com/"')) failures.push(`${route}: personal author link is missing from metadata`);
+  const bylines = [...html.matchAll(/<p\b[^>]*class="author-attribution"[^>]*>(.*?)<\/p>/gs)];
+  if (bylines.length !== 1 || text(bylines[0][1]) !== 'by ani potts' || !bylines[0][1].includes('href="https://anipotts.com/"')) failures.push(`${route}: visible author attribution is missing or inconsistent`);
+  try {
+    const identities = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)].map((match) => JSON.parse(match[1]));
+    const websites = identities.filter((entry) => entry['@type'] === 'WebSite');
+    if (websites.length !== 1 || websites[0]['@id'] !== `${origin}/#website` || websites[0].url !== `${origin}/` || websites[0].name !== 'coding agent tips' || websites[0].author?.['@id'] !== 'https://anipotts.com/#person' || websites[0].author?.name !== 'Ani Potts' || websites[0].author?.url !== 'https://anipotts.com/') failures.push(`${route}: structured website authorship is missing or inconsistent`);
+  } catch { failures.push(`${route}: structured identity is not valid JSON`); }
   if (!html.includes('<meta property="og:title"')) failures.push(`${route}: open graph title is missing`);
   if (!html.includes(`<meta property="og:image" content="${origin}/social-card.png"`)) failures.push(`${route}: social preview image is missing`);
   if (!html.includes(`<meta name="twitter:image" content="${origin}/social-card.png"`)) failures.push(`${route}: twitter preview image is missing`);
