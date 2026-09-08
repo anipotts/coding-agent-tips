@@ -34,7 +34,7 @@
       ],
       "mediaType": "image",
       "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=2094265782054367651&dnt=true&hideThread=true&theme=light",
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2094265782054367651&dnt=true&hideThread=true&theme=dark",
         "width": 360,
         "height": 716,
         "autoplay": false,
@@ -70,7 +70,7 @@
       ],
       "mediaType": "text",
       "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=1617979122625712128&dnt=true&hideThread=true&theme=light",
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1617979122625712128&dnt=true&hideThread=true&theme=dark",
         "width": 360,
         "height": 249,
         "mobileHeight": 228,
@@ -142,7 +142,7 @@
       ],
       "mediaType": "text",
       "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=2024987174077432126&dnt=true&hideThread=true&theme=light",
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2024987174077432126&dnt=true&hideThread=true&theme=dark",
         "width": 360,
         "height": 441,
         "mobileHeight": 380,
@@ -178,7 +178,7 @@
       ],
       "mediaType": "video",
       "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=1767548763134964000&dnt=true&hideThread=true&theme=light",
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1767548763134964000&dnt=true&hideThread=true&theme=dark",
         "width": 360,
         "height": 662,
         "mobileHeight": 555,
@@ -214,7 +214,7 @@
       ],
       "mediaType": "video",
       "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=1848742752403476488&dnt=true&hideThread=true&theme=light",
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1848742752403476488&dnt=true&hideThread=true&theme=dark",
         "width": 360,
         "height": 662,
         "mobileHeight": 540,
@@ -250,7 +250,7 @@
       ],
       "mediaType": "video",
       "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=1894095276740055364&dnt=true&hideThread=true&theme=light",
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1894095276740055364&dnt=true&hideThread=true&theme=dark",
         "width": 360,
         "height": 710,
         "mobileHeight": 597,
@@ -279,29 +279,22 @@
       "ownership": "provider-published",
       "permissionStatus": "not-recorded",
       "licenseStatus": "not-recorded",
-      "publicationStatus": "official-embed",
+      "publicationStatus": "credited-link",
       "creditVisible": true,
       "canonicalPages": [
         "/guides/codex/"
       ],
       "mediaType": "video",
-      "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=2018385663457116379&dnt=true&hideThread=true&theme=light",
-        "width": 360,
-        "height": 638,
-        "mobileHeight": 536,
-        "autoplay": false,
-        "reducedMotion": true,
-        "fallbackUrl": "https://x.com/OpenAIDevs/status/2018385663457116379"
-      },
+      "embed": null,
       "presentations": [
         {
           "route": "/guides/codex/",
-          "alt": "Codex app walkthrough (February 2026)",
+          "alt": "watch the Codex walkthrough ↗",
           "caption": null,
           "linkUrl": "https://x.com/OpenAIDevs/status/2018385663457116379"
         }
-      ]
+      ],
+      "publicationNote": "September 8, 2026: use the original post link while the native X affiliation link has no accessible name in either supported theme."
     },
     {
       "id": "karpathy-autoresearch-post",
@@ -322,7 +315,7 @@
       ],
       "mediaType": "image",
       "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=2030371219518931079&dnt=true&hideThread=true&theme=light",
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2030371219518931079&dnt=true&hideThread=true&theme=dark",
         "width": 360,
         "height": 701,
         "mobileHeight": 566,
@@ -394,7 +387,7 @@
       ],
       "mediaType": "video",
       "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=1861079874385203522&dnt=true&hideThread=true&theme=light",
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1861079874385203522&dnt=true&hideThread=true&theme=dark",
         "width": 360,
         "height": 730,
         "mobileHeight": 593,
@@ -430,7 +423,7 @@
       ],
       "mediaType": "text",
       "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=1886192184808149383&dnt=true&hideThread=true&theme=light",
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1886192184808149383&dnt=true&hideThread=true&theme=dark",
         "width": 360,
         "height": 417,
         "mobileHeight": 361,
@@ -466,7 +459,7 @@
       ],
       "mediaType": "video",
       "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=1893350391158292550&dnt=true&hideThread=true&theme=light",
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1893350391158292550&dnt=true&hideThread=true&theme=dark",
         "width": 360,
         "height": 1348,
         "mobileHeight": 1177,

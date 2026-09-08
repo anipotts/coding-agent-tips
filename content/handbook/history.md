@@ -63,7 +63,7 @@ and many other contributors.
     <h2 id="devin-demonstrates-a-software-task">Devin demonstrates a software task</h2>
     <p>Cognition introduced Devin with a demonstration of an agent using a shell, editor, and browser. the launch brought the idea of delegating a whole software task into a single visible workflow. the video records Cognition’s demonstration at the time.</p>
 <div class="publication-embed" data-media-id="cognition-devin-launch-post">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1767548763134964000&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Devin launch demonstration (March 2024)" width="360" height="662" style="--embed-height: 662px; --embed-height-mobile: 555px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1767548763134964000&amp;dnt=true&amp;hideThread=true&amp;theme=dark" title="Devin launch demonstration (March 2024)" width="360" height="662" style="--embed-height: 662px; --embed-height-mobile: 555px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit"><a href="https://x.com/cognition/status/1767548763134964000" target="_blank" rel="noopener noreferrer">Cognition (@cognition)</a>, march 2024.</p>
 </div>
   </li>
@@ -85,7 +85,7 @@ and many other contributors.
     <h2 id="claude-uses-the-screen">Claude uses the screen</h2>
     <p>Anthropic introduced computer use in beta: Claude could interpret screenshots and act through mouse and keyboard commands. this October 2024 demo shows the screen itself becoming an interface for agent actions.</p>
 <div class="publication-embed" data-media-id="anthropic-computer-use-demo-post">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1848742752403476488&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Claude computer use demonstration (October 2024)" width="360" height="662" style="--embed-height: 662px; --embed-height-mobile: 540px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1848742752403476488&amp;dnt=true&amp;hideThread=true&amp;theme=dark" title="Claude computer use demonstration (October 2024)" width="360" height="662" style="--embed-height: 662px; --embed-height-mobile: 540px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit"><a href="https://x.com/AnthropicAI/status/1848742752403476488" target="_blank" rel="noopener noreferrer">Anthropic (@AnthropicAI)</a>, october 2024.</p>
 </div>
   </li>
@@ -103,7 +103,7 @@ and many other contributors.
     <p>the product decision now included execution location, permissions, context, and review surface.</p>
     <p>Anthropic’s February 2025 launch recording shows that workflow in the terminal.</p>
 <div class="publication-embed" data-media-id="anthropic-claude-code-launch-post">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1894095276740055364&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Claude Code terminal launch demonstration (February 2025)" width="360" height="710" style="--embed-height: 710px; --embed-height-mobile: 597px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1894095276740055364&amp;dnt=true&amp;hideThread=true&amp;theme=dark" title="Claude Code terminal launch demonstration (February 2025)" width="360" height="710" style="--embed-height: 710px; --embed-height-mobile: 597px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit"><a href="https://x.com/AnthropicAI/status/1894095276740055364" target="_blank" rel="noopener noreferrer">Anthropic (@AnthropicAI)</a>, february 2025.</p>
 </div>
   </li>

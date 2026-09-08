@@ -351,3 +351,5 @@ body {
   line-height: 1.125rem;
 }
 .sidebar-page-outline [data-active='true'] { font-weight: 600; }
+
+.publication-post-action { font-size: 16px; line-height: 1.5; font-weight: 600; }

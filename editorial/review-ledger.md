@@ -2,6 +2,56 @@
 
 This file tracks Ani's manual review of every currently public canonical page and each H1, H2, and H3 block. It is editorial working state, not public content. A section stays `unreviewed` until Ani has directly reviewed it. Git history, validation, publication status, and a lack of recent changes do not count as approval.
 
+
+## current implementation receipt: September 8, 2026
+
+This receipt supersedes the earlier unresolved map and embed findings below.
+The live map remains the current inventory; these are dated verification results.
+
+- The inventory keeps the original Markdown parse context when assigning HTML
+  to sections. Timeline paragraphs, dates, and links remain with their headings;
+  literal code and split inline video tags keep their original meaning.
+- Authored map links resolve against the chapter route. Unsafe schemes produce
+  plain text. Hash navigation was clicked through to the actual target page.
+- The `next` array in the live-map block is the only authored question queue.
+  The map derives remaining page reviews, including new and hidden chapters.
+  Review milestones close from matching acceptance records. Answered input
+  requires a resolution and source and never approves neighboring prose.
+- The pending first-prompt review now matches its heading to track the ongoing
+  review location through candidate edits. This is a review-started record,
+  not title or body acceptance. Its prior body record is retained in `47997d6`.
+- Twelve native X posts remain embedded with tested per-post themes. X's dark
+  theme resolves the show-more contrast failures, while the Ricky and Boris
+  posts retain light mode for distinguishable inline links. The Codex app
+  walkthrough uses the original credited link because its native affiliation
+  control lacks an accessible name in both themes. Source dropdowns retain all
+  original posts. The media checker validates both presentation types.
+  Supported options: https://docs.x.com/x-for-websites/embedded-posts/guides/embedded-tweet-parameter-reference
+
+Local verification passed: `bun run verify`, including all 306 accessibility
+cases across 17 routes, nine widths, and both themes. No accessibility rules or
+frames were excluded. Fourteen inventory, provenance, queue, and URL regression
+tests pass and now run in the existing CI site job. The development test creates,
+edits, and removes its own hidden fixture to check real save-to-map events.
+
+Browser checks passed at 319 and 1440 pixels in light and dark: readable history
+text, no overflow or application errors, question filtering, and map links that
+open the correct chapter hash. A temporary canonical edit appeared through SSE
+in 567 ms and in the normal route in 1073 ms, then was restored. The measured
+inventory scan was 169 ms. Evidence: `/tmp/handbook-fixes-qa/results.json`.
+
+Fresh performance audit passed with three cold mobile runs per route, verified
+local HTTP/2, and no CDN caching or response compression. Median scores for home,
+Codex, Claude, and Grok were 100, 97, 97, and 99; median LCP was 1516, 2412,
+2408, and 1810 ms. The warm provider switch measured 48.4 ms to route paint,
+a synthetic interaction measurement. Evidence: `/tmp/handbook-fixes-performance/summary.json`.
+
+The next editorial milestone is Grok takeover and shared-computer wording,
+Start here, and the two provider introductions, followed by their extensions.
+The homepage, accepted Zoom body, and frozen archive remain preserved. Seven
+chapters remain hidden; no full-page wording approval or production deployment
+is implied by these technical checks. PR #319 remains a draft.
+
 ## embedded demonstrations: September 7, 2026
 
 Ani approved the proposed distribution of 12 X posts across eight pages and
@@ -211,21 +261,15 @@ Candidate wording remains unreviewed. The 180-word primer is unchanged.
 
 ### what still needs Ani
 
-1. Continue the Grok computer section at “taking control.” Ani
-   accepted the two revised Zoom paragraphs. Cursor/keyboard takeover and the
-   shared computer explanation still need wording review.
-2. Then review the product chapters one section at a time. Actual Codex/Claude
-   defaults and a concrete reason to switch setups could add personal detail;
-   the current factual guidance makes no invented claim about those defaults.
-3. Review the credentials chapter as source based guidance. Any “why i pay” or
-   “what changed my mind” account needs Ani's own answer before it can be added.
-4. Complete wording review for the shared chapters and the seven hidden chapters.
-   Set each accepted page's review state from an explicit response, then promote
-   the hidden files through the existing content machinery and rerun release checks.
+The `next` entries in the live-map block below are the active question and
+review queue. The local writing map derives the remaining page reviews from
+current files and exact review records, including all seven hidden chapters.
+Older checklists above are historical context.
 
 No additional opinion or anecdote is required merely to fill an old heading.
-No mandatory outline remains to start writing. The Grok mobile recording is
-optional: the exact requested footage has not been verified or captured.
+The credentials chapter can remain source based guidance; a personal account
+of subscriptions or purchases requires Ani's own words if he chooses to add it.
+The Grok mobile recording remains optional for launch.
 
 ### material corrections and reproducible examples
 
@@ -1039,12 +1083,12 @@ The unclear “why am i repeating myself?” heading is now “why does my agent
       "file": "content/handbook/operating-agents.md",
       "anchor": "what-should-i-ask-first",
       "status": "review-started",
-      "match": "body",
-      "hash": "8062438e48084ca4c15e10b317b948455bbf584aa7cbfd667f27ec9e38576f4b",
+      "match": "heading",
+      "hash": "738a8b71ce28d18deb3456f1111d7e47c78b1b94941191c7644de55f5ae36c2e",
       "origin": "agent-draft-under-ani-direction",
       "date": "2026-09-07",
       "source": "editorial/review-ledger.md:78 This is task direction, not acceptance of the earlier example wording",
-      "note": "Ani requested conversational prompts and visible good/bad examples. Implemented candidate remains unreviewed. Hypothetical examples establish no personal experience."
+      "note": "Ani requested conversational prompts and visible good/bad examples. Implemented candidate remains unreviewed. Hypothetical examples establish no personal experience. Review remains open after Ani requested a shorter imperative example. This heading match tracks the review location; it accepts neither the title nor the body. The earlier body fingerprint remains in git 47997d6."
     },
     {
       "id": "operating-handoff-review",
@@ -1088,44 +1132,109 @@ The unclear “why am i repeating myself?” heading is now “why does my agent
   "next": [
     {
       "title": "Grok: taking control",
-      "detail": "Finish takeover and shared computer, then vet earlier introduction candidates. Keep the accepted Zoom wording.",
+      "detail": "Review the fingertip cursor and phone keyboard wording. The accepted Zoom passage stays accepted.",
       "file": "content/guides/grok.md",
-      "anchor": "taking-control"
+      "anchor": "taking-control",
+      "id": "grok-takeover-review",
+      "kind": "review",
+      "scope": "body",
+      "status": "open"
     },
     {
       "title": "Start here",
       "detail": "Review the crash course, first prompt, memory, permissions, coordination, checks, and handoff.",
       "file": "content/handbook/operating-agents.md",
-      "anchor": "the-agent-crash-course"
+      "anchor": "the-agent-crash-course",
+      "id": "start-here-review",
+      "kind": "review",
+      "scope": "page",
+      "status": "open"
     },
     {
       "title": "Codex overview",
       "detail": "Ground the explanation of tasks, surfaces, and customization in clear examples and your supplied observations.",
       "file": "content/guides/codex.md",
-      "anchor": "this-is-codex"
+      "anchor": "this-is-codex",
+      "id": "codex-overview-review",
+      "kind": "review",
+      "scope": "page",
+      "status": "open"
     },
     {
       "title": "Claude overview",
       "detail": "Review the terminal introduction, parallel agents, surfaces, and result checking around your existing media.",
       "file": "content/guides/claude-code.md",
-      "anchor": "this-is-claude-code"
+      "anchor": "this-is-claude-code",
+      "id": "claude-overview-review",
+      "kind": "review",
+      "scope": "page",
+      "status": "open"
     },
     {
       "title": "Codex extensions",
       "detail": "Finish skills, connections, hooks, and your coordinator workflow with a reproducible example.",
       "file": "content/guides/codex/extensions.md",
-      "anchor": "how-do-i-reuse-a-workflow"
+      "anchor": "how-do-i-reuse-a-workflow",
+      "id": "codex-extensions-review",
+      "kind": "review",
+      "scope": "page",
+      "status": "open"
     },
     {
       "title": "Claude extensions",
       "detail": "Review one practical extension example and distinguish supported hooks from function-hook proposals.",
       "file": "content/guides/claude-code/extensions.md",
-      "anchor": "what-do-i-want-to-add"
+      "anchor": "what-do-i-want-to-add",
+      "id": "claude-extensions-review",
+      "kind": "review",
+      "scope": "page",
+      "status": "open"
+    },
+    {
+      "id": "grok-shared-computer",
+      "title": "Grok: shared computer",
+      "file": "content/guides/grok.md",
+      "question": "When your Grok bots message each other, what have you seen them share or use on the same computer?",
+      "detail": "Clarify the scope of your observation before treating shared state as a universal feature.",
+      "kind": "input",
+      "scope": "page",
+      "status": "open"
+    },
+    {
+      "id": "codex-defaults",
+      "title": "Your Codex setup",
+      "file": "content/guides/codex/recommendations.md",
+      "question": "Which Codex surface, model, and permission settings do you actually start with, and what makes you change them?",
+      "detail": "Optional personal context for the existing factual setup guidance.",
+      "kind": "input",
+      "scope": "page",
+      "status": "open"
+    },
+    {
+      "id": "claude-defaults",
+      "title": "Your Claude setup",
+      "file": "content/guides/claude-code/recommendations.md",
+      "question": "What do you actually use Claude Code for now, and what makes you pick it for a task?",
+      "detail": "Keep your use and preferences separate from supported product features.",
+      "kind": "input",
+      "scope": "page",
+      "status": "open"
+    },
+    {
+      "id": "coordinator-example",
+      "title": "One coordinator example",
+      "file": "content/guides/codex/extensions.md",
+      "question": "Walk through one task your coordinating Codex thread routed to another task, including what it read, sent, and checked afterward.",
+      "detail": "One concrete example would complete the workflow you described; no invented project or outcome.",
+      "kind": "input",
+      "scope": "page",
+      "status": "open"
     }
   ],
   "notes": [
     "The old ledger heading tables are historical. Current inventory is derived from Markdown.",
-    "No whole-page acceptance is recorded. Preserved material and partial approvals remain separate."
+    "No whole-page acceptance is recorded. Preserved material and partial approvals remain separate.",
+    "The live-map next queue owns active questions. Review steps follow exact acceptance evidence; answering a question does not approve the resulting prose. Remaining page reviews are derived automatically."
   ]
 }
 ```

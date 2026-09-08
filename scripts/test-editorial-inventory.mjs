@@ -1,7 +1,9 @@
 import test from 'node:test';
+import { readFile } from 'node:fs/promises';
+import { safeUrl } from '../editorial/progress/links.js';
 import assert from 'node:assert/strict';
 import { canonicalContentFiles } from '../src/content-manifest.mjs';
-import { indexWriting, inspectFeatures, applyReviewRecords, fingerprint, bodyFingerprint, buildEditorialInventory } from './lib/editorial-inventory.mjs';
+import { resolveWritingSteps, indexWriting, inspectFeatures, applyReviewRecords, fingerprint, bodyFingerprint, buildEditorialInventory } from './lib/editorial-inventory.mjs';
 const doc = body => `---\ntitle: fixture\nnavigation: { scope: handbook, order: 1 }\n---\n\n${body}`;
 
 test('media checks can inspect drafts without adding them to public routes', () => {
@@ -57,4 +59,81 @@ test('live inventory includes hidden drafts and keeps its axes independent',asyn
  assert.ok(data.pages.every(p=>Array.isArray(p.sections)&&Array.isArray(p.sources)));
  assert.ok(data.pages.flatMap(p=>p.sections).every(s=>typeof s.bodyHash==='string'&&typeof s.review==='string'&&typeof s.voice==='string'));
  assert.match(data.revision,/^[a-f0-9]{64}$/);
+});
+
+
+test('HTML timeline sections keep their paragraphs, links, and dates in the original parse context', async () => {
+ const raw = await readFile('content/handbook/history.md', 'utf8');
+ const page = indexWriting(raw, 'content/handbook/history.md');
+ const whole = inspectFeatures(raw.replace(/^---[\s\S]*?---/, ''));
+ for (const key of ['links', 'code', 'embeds', 'images', 'videos']) assert.equal(page.counts[key], whole.counts[key], key);
+ assert.equal(page.counts.code, 0);
+ const first = page.sections.find(s => s.anchor === 'the-transformer-creates-the-foundation');
+ assert.match(first.text, /^2017 Attention Is All You Need/);
+ assert.doesNotMatch(first.text, /2020/);
+ assert.ok(first.links.includes('https://arxiv.org/abs/1706.03762'));
+ assert.match(page.sections.find(s => s.anchor === 'prompts-become-a-general-interface').text, /^2020 GPT-3/);
+});
+
+test('HTML body clipping preserves real indented and fenced code without promoting literal headings', () => {
+ const page = indexWriting(doc(`## code
+
+    <h2>indented example</h2>
+
+<ol>
+  <li>
+    <p>2017</p>
+    <h2 id="event">event</h2>
+    <p>A <a href="/reference/">reference</a> and TODO.</p>
+  </li>
+</ol>
+
+\`\`\`html
+<h2>fenced example</h2>
+\`\`\`
+
+<section><h2 id="empty">empty</h2></section>`), 'content/handbook/fixture.md');
+ assert.deepEqual(page.sections.map(s => s.anchor), ['_top', 'code', 'event', 'empty']);
+ assert.equal(page.counts.code, 2);
+ assert.equal(page.sections[1].counts.code, 1);
+ assert.equal(page.sections[2].counts.code, 1);
+ assert.equal(page.sections[2].placeholder, true);
+ assert.equal(page.sections[3].written, 'empty');
+});
+
+test('map links use the canonical page as their base and reject unsafe protocols', () => {
+ const base = 'http://127.0.0.1:4330/handbook/operating-agents/';
+ assert.equal(safeUrl('#what-should-i-ask-first', base), base + '#what-should-i-ask-first');
+ assert.equal(safeUrl('../history/#event', base), 'http://127.0.0.1:4330/handbook/history/#event');
+ assert.equal(safeUrl('/guides/grok/', base), 'http://127.0.0.1:4330/guides/grok/');
+ assert.equal(safeUrl('https://example.com/docs', base), 'https://example.com/docs');
+ for (const value of ['javascript:alert(1)', 'data:text/html,test', 'file:///tmp/a']) assert.equal(safeUrl(value, base), null);
+});
+
+test('one ledger queue drives questions and review steps without inventing acceptance', () => {
+ const page = indexWriting(doc('## opinion\n\nmy wording'), 'content/handbook/fixture.md');
+ const question = { id:'question', kind:'input', scope:'page', status:'open', file:page.file, title:'actual use', detail:'One concrete example.', question:'What happened?' };
+ const review = { id:'review', kind:'review', scope:'body', status:'open', file:page.file, anchor:'opinion', title:'review wording', detail:'Read this body.' };
+ let steps = resolveWritingSteps([page], [question, review]);
+ assert.equal(steps.filter(s => s.kind === 'input' && !s.resolved).length, 1);
+ assert.ok(steps.some(s => s.scope === 'page' && s.kind === 'review')); // derived page milestone
+ steps = resolveWritingSteps([page], [{ ...question, status:'answered', resolution:'User supplied example', source:'Direct response' }, review]);
+ assert.equal(steps[0].resolved, true);
+ assert.equal(steps[1].resolved, false);
+ assert.equal(page.review, 'unreviewed');
+ applyReviewRecords(page, [{file:page.file, anchor:'opinion', status:'accepted-body', match:'body', hash:page.sections[1].bodyHash}]);
+ steps = resolveWritingSteps([page], [review]);
+ assert.equal(steps[0].resolved, true);
+ assert.equal(steps[1].resolved, false); // accepted body never closes the page milestone
+ assert.throws(() => resolveWritingSteps([page], [question, question]), /Invalid writing step/);
+ assert.throws(() => resolveWritingSteps([page], [{ ...question, status:'answered' }]), /Invalid writing step/);
+ assert.equal(resolveWritingSteps([page], [{ ...review, anchor:'renamed' }])[0].stale, true);
+});
+
+
+test('inline HTML sources keep their video context across separate Markdown nodes', () => {
+ const page = indexWriting(doc('## clip\n\nWatch <video><source src="/movie.mp4"></video> here.'), 'content/handbook/fixture.md');
+ assert.equal(page.counts.videos, 1);
+ assert.equal(page.sections[1].media[0].url, '/movie.mp4');
+ assert.match(page.sections[1].text, /Watch here/);
 });

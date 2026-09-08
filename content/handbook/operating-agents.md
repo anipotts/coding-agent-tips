@@ -45,7 +45,7 @@ you can explore those when a task gives you a reason to.
 Karpathy captured the language shift in one sentence back in 2023.
 
 <div class="publication-embed" data-media-id="karpathy-programming-english">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1617979122625712128&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Karpathy on programming in English (January 2023)" width="360" height="249" style="--embed-height: 249px; --embed-height-mobile: 228px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1617979122625712128&amp;dnt=true&amp;hideThread=true&amp;theme=dark" title="Karpathy on programming in English (January 2023)" width="360" height="249" style="--embed-height: 249px; --embed-height-mobile: 228px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit"><a href="https://x.com/karpathy/status/1617979122625712128" target="_blank" rel="noopener noreferrer">Andrej Karpathy (@karpathy)</a>, january 2023.</p>
 </div>
 

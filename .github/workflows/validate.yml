@@ -39,6 +39,9 @@ jobs:
           bun run check:completeness
           bun run check:links
 
+      - name: verify writing inventory and review boundaries
+        run: bun run test:editorial
+
       - name: type check and build
         run: |
           bun run check:ui

@@ -189,11 +189,11 @@ for (const asset of manifest.assets) {
 }
 for (const external of manifest.externalMedia ?? []) {
   validateEditorialMetadata(external, { rehosted: false });
-  if ((external.presentations ?? []).length && (external.publicationStatus !== 'official-embed' || !['text', 'image', 'video'].includes(external.mediaType) || !/^https:\/\/platform\.twitter\.com\/embed\/Tweet\.html\?id=\d+&dnt=true&hideThread=true&theme=light$/.test(external.embed?.url ?? ''))) failures.push(`${external.id}: renderer requires an official X text, image, or video embed`);
-  if (external.publicationStatus === 'official-embed') {
+  if ((external.presentations ?? []).length && external.publicationStatus === 'official-embed' && (!['text', 'image', 'video'].includes(external.mediaType) || !/^https:\/\/platform\.twitter\.com\/embed\/Tweet\.html\?id=\d+&dnt=true&hideThread=true&theme=(?:light|dark)$/.test(external.embed?.url ?? ''))) failures.push(`${external.id}: renderer requires an official X text, image, or video embed`);
+  if (['official-embed', 'credited-link'].includes(external.publicationStatus)) {
     const source = sourceRegistry.sources.find(({ id }) => id === external.sourceId);
     if (!source || source.url !== external.originalPostUrl) failures.push(`${external.id}: original post is missing from the source registry`);
-    if (new URL(external.embed.url).searchParams.get('id') !== external.originalPostUrl.match(/\/status\/(\d+)/)?.[1]) failures.push(`${external.id}: embedded post differs from the credited original`);
+    if (external.publicationStatus === 'official-embed' && new URL(external.embed.url).searchParams.get('id') !== external.originalPostUrl.match(/\/status\/(\d+)/)?.[1]) failures.push(`${external.id}: embedded post differs from the credited original`);
   }
 }
 
@@ -209,11 +209,20 @@ for (const { route, file } of editorialPages) {
   const metadata = parseYaml(source.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '') ?? {};
   const tags = [...source.matchAll(/<img\b[^>]*>/g)].map(([tag]) => tag);
   tagsByRoute.set(route, tags);
-  for (const [, id, body] of source.matchAll(/<div class="publication-embed" data-media-id="([^"]+)">([\s\S]*?)<\/div>/g)) {
+  for (const [, id, body] of source.matchAll(/<div class="publication-embed(?: publication-post-link)?" data-media-id="([^"]+)">([\s\S]*?)<\/div>/g)) {
     const record = (manifest.externalMedia ?? []).find((entry) => entry.id === id);
     if (!record) { failures.push(`${route}: unregistered external media ${id}`); continue; }
     const frame = body.match(/<iframe\b[^>]*>/)?.[0] ?? '';
     const fallback = body.match(/<a\b[^>]*>/)?.[0] ?? '';
+    if (record.publicationStatus === 'credited-link') {
+      if (frame || record.embed !== null) failures.push(`${id}: a credited link must not load a player`);
+      const label = body.match(/<a class="publication-post-action"[^>]*>([\s\S]*?)<\/a>/)?.[1];
+      if (!label?.trim() || attribute(fallback, 'href') !== record.originalPostUrl
+        || !captionText(body).includes(record.creator.name) || !captionText(body).includes(record.creator.handle)) failures.push(`${id}: credited post link needs a named action and creator attribution`);
+      if (!(metadata.sources ?? []).includes(record.sourceId)) failures.push(`${id}: original post is missing from the page source dropdown`);
+      actualPresentationsById.get(id).push({ route, alt: label ? captionText(label) : null, caption: null, linkUrl: attribute(fallback, 'href') ?? null });
+      continue;
+    }
     const permissions = record.mediaType === 'video' ? "fullscreen; autoplay 'none'" : "autoplay 'none'";
     if (captionText(attribute(frame, 'src') ?? '') !== record.embed?.url || attribute(frame, 'loading') !== 'lazy' || attribute(frame, 'allow') !== permissions) failures.push(`${id}: embed source, lazy loading, or autoplay policy differs`);
     if (attribute(frame, 'sandbox') !== 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox' || attribute(frame, 'referrerpolicy') !== 'no-referrer') failures.push(`${id}: external frame isolation differs`);

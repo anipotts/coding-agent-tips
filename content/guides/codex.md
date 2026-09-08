@@ -67,9 +67,9 @@ outcome, and any local setup needed to run its checks.
 this February 2026 walkthrough shows the Codex app’s approach to supervising
 several tasks.
 
-<div class="publication-embed" data-media-id="openai-codex-app-walkthrough-post">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2018385663457116379&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Codex app walkthrough (February 2026)" width="360" height="638" style="--embed-height: 638px; --embed-height-mobile: 536px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
-  <p class="publication-embed-credit"><a href="https://x.com/OpenAIDevs/status/2018385663457116379" target="_blank" rel="noopener noreferrer">OpenAI Developers (@OpenAIDevs)</a>, february 2026.</p>
+<div class="publication-embed publication-post-link" data-media-id="openai-codex-app-walkthrough-post">
+  <a class="publication-post-action" href="https://x.com/OpenAIDevs/status/2018385663457116379" target="_blank" rel="noopener noreferrer">watch the Codex walkthrough ↗</a>
+  <p class="publication-embed-credit">OpenAI Developers (@OpenAIDevs), february 2026.</p>
 </div>
 
 <span id="cloud-and-mobile-change-where-you-steer" class="heading-alias" aria-hidden="true"></span>

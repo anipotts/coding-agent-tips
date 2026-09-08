@@ -86,7 +86,7 @@ coding” through a description of his own workflow. keeping his words attached
 to the term helps a reader see what he meant.
 
 <div class="publication-embed" data-media-id="karpathy-vibe-coding-post">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1886192184808149383&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Karpathy introduces vibe coding (February 2025)" width="360" height="417" style="--embed-height: 417px; --embed-height-mobile: 361px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1886192184808149383&amp;dnt=true&amp;hideThread=true&amp;theme=dark" title="Karpathy introduces vibe coding (February 2025)" width="360" height="417" style="--embed-height: 417px; --embed-height-mobile: 361px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit"><a href="https://x.com/karpathy/status/1886192184808149383" target="_blank" rel="noopener noreferrer">Andrej Karpathy (@karpathy)</a>, february 2025.</p>
 </div>
 
@@ -107,6 +107,6 @@ recording can show that result; evaluating reliability or maintainability
 would require examining the project and testing it.
 
 <div class="publication-embed" data-media-id="levels-cursor-flight-simulator-post">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1893350391158292550&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Pieter Levels shows his early Cursor flight simulator (February 2025)" width="360" height="1348" style="--embed-height: 1348px; --embed-height-mobile: 1177px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1893350391158292550&amp;dnt=true&amp;hideThread=true&amp;theme=dark" title="Pieter Levels shows his early Cursor flight simulator (February 2025)" width="360" height="1348" style="--embed-height: 1348px; --embed-height-mobile: 1177px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit"><a href="https://x.com/levelsio/status/1893350391158292550" target="_blank" rel="noopener noreferrer">Pieter Levels (@levelsio)</a>, february 2025.</p>
 </div>

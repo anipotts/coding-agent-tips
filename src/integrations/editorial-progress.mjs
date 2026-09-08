@@ -49,7 +49,7 @@ export default function editorialProgress() {
           if (url.pathname === '/__progress/data.json') {
             const data = await current(); response.setHeader('Content-Type', 'application/json; charset=utf-8'); response.end(JSON.stringify(data)); return;
           }
-          const assets = { '/__progress': 'index.html', '/__progress/': 'index.html', '/__progress/map.css': 'map.css', '/__progress/map.js': 'map.js' };
+          const assets = { '/__progress': 'index.html', '/__progress/': 'index.html', '/__progress/map.css': 'map.css', '/__progress/map.js': 'map.js', '/__progress/links.js': 'links.js' };
           const file = assets[url.pathname];
           if (!file) { response.writeHead(404); response.end('Unknown local map path'); return; }
           response.setHeader('Content-Type', file.endsWith('.html') ? 'text/html; charset=utf-8' : file.endsWith('.css') ? 'text/css; charset=utf-8' : 'text/javascript; charset=utf-8');

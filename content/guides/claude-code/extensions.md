@@ -140,7 +140,7 @@ Alex Albert’s 2024 demo shows Claude desktop using MCP to create a GitHub
 repository and pull request.
 
 <div class="publication-embed" data-media-id="alex-albert-mcp-github-demo-post">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1861079874385203522&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Alex Albert demonstrates MCP with GitHub (November 2024)" width="360" height="730" style="--embed-height: 730px; --embed-height-mobile: 593px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1861079874385203522&amp;dnt=true&amp;hideThread=true&amp;theme=dark" title="Alex Albert demonstrates MCP with GitHub (November 2024)" width="360" height="730" style="--embed-height: 730px; --embed-height-mobile: 593px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit"><a href="https://x.com/alexalbert__/status/1861079874385203522" target="_blank" rel="noopener noreferrer">Alex Albert (@alexalbert__)</a>, november 2024.</p>
 </div>
 
