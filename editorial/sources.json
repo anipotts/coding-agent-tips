@@ -1158,8 +1158,9 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://docs.x.ai/grok-bot/mobile",
-      "last_checked": "2026-09-07",
-      "evidence": "official-source"
+      "last_checked": "2026-09-08",
+      "evidence": "official-source",
+      "notes": "Rechecked 2026-09-08 for the mobile computer view, human takeover, and return of control. Exact fingertip/cursor and phone keyboard wording remains grounded in Ani's account; the documentation corroborates the general takeover flow."
     },
     {
       "id": "grok-bot-computer",
@@ -1169,8 +1170,9 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://docs.x.ai/grok-bot/computer-and-apps",
-      "last_checked": "2026-09-07",
-      "evidence": "official-source"
+      "last_checked": "2026-09-08",
+      "evidence": "official-source",
+      "notes": "Rechecked 2026-09-08: one persistent computer per account, separate Bot screens, shared files/browser sessions/CLI credentials, background work, and the instruction to return control and tell the Bot to continue. This is documented behavior, not an independent product test."
     },
     {
       "id": "grok-bot-approvals",
@@ -1180,8 +1182,9 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://docs.x.ai/grok-bot/approvals-security-and-privacy",
-      "last_checked": "2026-09-07",
-      "evidence": "official-source"
+      "last_checked": "2026-09-08",
+      "evidence": "official-source",
+      "notes": "Rechecked 2026-09-08 for action approvals, human entry of sensitive values, supported masked secret requests, and the shared-computer boundary. This is source review, not Ani's wording acceptance or a hands-on security evaluation."
     },
     {
       "id": "grok-bot-profiles",

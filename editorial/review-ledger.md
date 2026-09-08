@@ -44,6 +44,30 @@ caching or compression. Median scores were 100, 97, 97, and 99; median LCP was
 (synthetic interaction, not field INP). Artifacts are in
 `/tmp/handbook-posts-performance/summary.json`.
 
+## September 8 continuation
+
+Rechecked the official Grok mobile, computer, and approvals pages for the
+computer-use section. These support human takeover, returning control, work
+continuing in the cloud, and one shared computer with separate Bot screens.
+The source registry has the new checking date and explicit scope. Ani's exact
+cursor and phone-keyboard wording remains the personal basis for those details.
+The takeover paragraph was presented for wording review; no new acceptance is
+recorded without his response. No additional anecdote is needed for the short
+overview. After takeover wording, review the shared-computer explanation, then
+the earlier introduction candidates before moving on to product defaults.
+
+The previous CI site job exhausted its ten-minute limit in the accessibility
+sweep. Browser waits now have explicit limits, every case reports its route,
+width, duration, and findings as it completes, and a stopped run names its
+current case. The site job has twenty minutes for setup and the full matrix.
+A controlled blocked-X request failed after the expected fifteen seconds with
+the Grok route identified. All existing accessibility rules remain enabled.
+Browser plugin is absent in this session; validation uses the repository's
+Playwright workflow. The X-controlled widget defects remain launch issues.
+The full local rerun completed all 306 cases and reported the same 90
+X-controlled findings, with no new site-owned violations. Source validation
+passed for 123 entries and the editorial inventory tests passed all nine cases.
+
 ## states
 
 - `unreviewed`: Ani has not reviewed the current wording.

@@ -25,6 +25,8 @@ const server = spawn(process.execPath, [vite, 'preview', '--host', '127.0.0.1', 
 const serverExit = once(server, 'exit');
 const failures = [];
 let browser;
+let activeCase = 'starting preview';
+let completedCases = 0;
 
 try {
   for (let attempt = 0; attempt < 40; attempt += 1) {
@@ -36,8 +38,14 @@ try {
   for (const colorScheme of ['light', 'dark']) {
   for (const viewport of viewports) {
     const context = await browser.newContext({ viewport, colorScheme });
+    context.setDefaultTimeout(15_000);
+    context.setDefaultNavigationTimeout(30_000);
     const page = await context.newPage();
     for (const route of routes) {
+      activeCase = `${colorScheme} ${viewport.width}px ${route}`;
+      const started = performance.now();
+      const previousFailures = failures.length;
+      console.log(`[a11y] checking ${activeCase}`);
       await page.goto(`${origin}${route}`, { waitUntil: 'domcontentloaded' });
       await page.evaluate(() => document.fonts.ready);
       // Publication code frames make overflowing examples keyboard scrollable.
@@ -170,15 +178,20 @@ try {
       }
 
       if (viewport.width === 720) await checkClipping('200% browser zoom equivalent');
+      for (const failure of failures.slice(previousFailures)) console.error(failure);
+      completedCases += 1;
+      console.log(`[a11y] ${completedCases}/${routes.length * viewports.length * 2} checked (${Math.round(performance.now() - started)}ms, ${failures.length - previousFailures} findings)`);
     }
     await context.close();
   }
   }
+} catch (error) {
+  throw new Error(`[a11y] stopped during ${activeCase} after ${completedCases} completed cases: ${error.message}`, { cause: error });
 } finally {
   await browser?.close();
   if (server.exitCode === null && server.signalCode === null) server.kill('SIGTERM');
   await serverExit;
 }
 
-if (failures.length > 0) { console.error(failures.join('\n')); process.exit(1); }
+if (failures.length > 0) { console.error(`[a11y] ${failures.length} findings across ${completedCases} completed cases; see the per-case diagnostics above.`); process.exit(1); }
 console.log(`typography, reflow, text spacing, text resize, and axe checks passed across ${routes.length} routes at ${viewports.length} required widths in both themes`);
