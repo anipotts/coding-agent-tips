@@ -3,6 +3,48 @@
 This file tracks Ani's manual review of every currently public canonical page and each H1, H2, and H3 block. It is editorial working state, not public content. A section stays `unreviewed` until Ani has directly reviewed it. Git history, validation, publication status, and a lack of recent changes do not count as approval.
 
 
+## Grok and foundations voice pass: September 8, 2026
+
+Ani requested a stronger mobile comparison, the ability to watch real browser
+actions, direct workspace wording, and saved-login convenience. His wording
+includes “much easier to visually follow compared to just reading action
+summary lines” and “without needing to setup a developer friendly password
+manager like 1pw.” The comparison is scoped to his stated mobile experience.
+Current provider docs corroborate remote conversations and task control; they
+do not establish universal absence of browser viewing across every rollout.
+xAI explicitly documents separate Bot screens on one shared account computer.
+The candidate states that directly rather than implying separate virtual machines.
+
+For Start here, Ani described “a friend” and “a genius that you have accessible
+in your pocket on your laptop” with files, documents, apps, and browser access.
+He asked to separate model and harness and replace vague calls to action with
+links that explain their destination. “the foundations” is the candidate frame.
+The previous crash-course hash remains an alias. Only the introduction and
+foundations body changed; the detailed prompt examples remain available below.
+
+The original X screenshot is now an image-only Grok hero using its source URL.
+The larger view retains creator credit and the original-post link. This is a
+still image, not a recording, and no third-party file was rehosted. The source
+registry and media inventory describe the exact presentation. Existing generic
+endings in the three provider overviews and Codex first-task draft now name
+concrete examples from their destination pages.
+
+All new wording remains candidate material. The accepted Zoom body and
+homepage remain unchanged. This review advances neither full-page acceptance
+nor publication.
+
+Validation passed: source/content checks, Astro diagnostics and build, 14
+inventory regression tests, generated routes and agent surfaces, UI ownership,
+and media/performance budgets. Chromium checks at 319, 759, and 1440 pixels in
+light and dark passed for both changed pages: no app errors or overflow, no
+accessibility violations, image enlargement and source credit, Escape/focus
+return, descriptive destination links, and the old crash-course hash. Blocked
+image checks kept the original source reachable with and without JavaScript.
+The source-hosted screenshot transferred 41,593 bytes and was the observed LCP
+element in these unthrottled local runs. This is targeted rendering evidence,
+not a new full performance audit or deployment receipt. Artifacts:
+`/tmp/handbook-voice-qa/results.json`.
+
 ## current implementation receipt: September 8, 2026
 
 This receipt supersedes the earlier unresolved map and embed findings below.
@@ -1072,11 +1114,11 @@ The unclear “why am i repeating myself?” heading is now “why does my agent
       "anchor": "taking-control",
       "status": "review-started",
       "match": "body",
-      "hash": "ee3f7ee8d79cd65ec21e5887d48dcd8523f07a53558f7ad523a0a0c89c52d8fb",
+      "hash": "cfbc721319f97c69b912382d5edb58cc4080e21460cdc95502d90aeed6c70c6e",
       "origin": "agent-polish-of-ani",
-      "date": "2026-09-07",
-      "source": "editorial/review-ledger.md:123 Continue the Grok computer section at taking control",
-      "note": "Active wording review. Ani replaced cursor mode with controlling the virtual mouse/cursor with a fingertip and specified the phone keyboard. Those exact revisions are recorded separately. The earlier duplicate phone phrase was removed. Mobile and approvals documentation were read September 7, 2026; precise gesture wording is Ani-reported. Neighboring password and approval prose remains candidate wording. Prior candidate is preserved in git ab5e384 and the conversation."
+      "date": "2026-09-08",
+      "source": "Ani browser comments September 8, 2026, comments 1 and 2: compare the current mobile interfaces and explain why watching the actual browser is easier to follow.",
+      "note": "Candidate revised in response to direct feedback. Fingerprint tracks the new body awaiting review; it is not acceptance. Earlier candidate remains in ee3edeb. Exact fingertip and phone-keyboard revisions remain recorded separately."
     },
     {
       "id": "operating-prompt-review",
@@ -1127,12 +1169,72 @@ The unclear “why am i repeating myself?” heading is now “why does my agent
       "date": "2026-09-07",
       "source": "Response annotations to taking-control candidate: fingertip cursor control and phone keyboard.",
       "note": "Ani directly specified your phone’s in place of the before keyboard. Line wrapping is retained for exact matching. This local revision does not establish acceptance of the surrounding body."
+    },
+    {
+      "id": "grok-takeover-observations-sept8",
+      "file": "content/guides/grok.md",
+      "anchor": "taking-control",
+      "status": "grounded-candidate",
+      "match": "body",
+      "hash": "cfbc721319f97c69b912382d5edb58cc4080e21460cdc95502d90aeed6c70c6e",
+      "origin": "agent-polish-under-ani-direction",
+      "date": "2026-09-08",
+      "source": "Ani browser annotations on Grok and Start here, September 8, 2026, comments 1–10.",
+      "note": "Personal comparison and visual-following preference came from Ani comments 1 and 2. General remote capabilities have source support; absence of live mobile viewing across every rollout was not established from documentation."
+    },
+    {
+      "id": "grok-shared-sessions-sept8",
+      "file": "content/guides/grok.md",
+      "anchor": "shared-computer",
+      "status": "grounded-candidate",
+      "match": "body",
+      "hash": "f30f62ac48dc3ee932d6c5b70e1dbd388dec7db184db209914079837b7867559",
+      "origin": "agent-polish-under-ani-direction",
+      "date": "2026-09-08",
+      "source": "Ani browser annotations on Grok and Start here, September 8, 2026, comments 1–10.",
+      "note": "Ani comments 3 and 4 requested direct workspace wording and saved-login convenience. Primary docs specify per-Bot screens on one shared account computer, not a separate VM per Bot. Saved sessions are distinguished from a password manager and may expire."
+    },
+    {
+      "id": "foundations-opening-sept8",
+      "file": "content/handbook/operating-agents.md",
+      "anchor": "_top",
+      "status": "grounded-candidate",
+      "match": "body",
+      "hash": "001d995535ab485ff27fbd7ca7c13d6221b83f8dadcbe9c71dcf7279b612e5ec",
+      "origin": "agent-polish-under-ani-direction",
+      "date": "2026-09-08",
+      "source": "Ani browser annotations on Grok and Start here, September 8, 2026, comments 1–10.",
+      "note": "Ani comments 8 and 9 supplied the friend/genius comparison and requested descriptive links to prompt examples. This is candidate polish, not final wording acceptance."
+    },
+    {
+      "id": "foundations-model-sept8",
+      "file": "content/handbook/operating-agents.md",
+      "anchor": "the-model",
+      "status": "grounded-candidate",
+      "match": "body",
+      "hash": "0a41b1236013f624c42bf148c1ee7444be75d2607d86b06ebafedbad8fff5710",
+      "origin": "agent-polish-under-ani-direction",
+      "date": "2026-09-08",
+      "source": "Ani browser annotations on Grok and Start here, September 8, 2026, comments 1–10.",
+      "note": "Ani comment 10 requested separate model and harness explanations, starting with familiar product names. The ChatGPT app/model distinction was corrected from primary documentation."
+    },
+    {
+      "id": "foundations-harness-sept8",
+      "file": "content/handbook/operating-agents.md",
+      "anchor": "the-harness",
+      "status": "grounded-candidate",
+      "match": "body",
+      "hash": "3e0bcdba63ddb04dc0837057c082004ff4ba61d44e189cf4db24ac69d3a40928",
+      "origin": "agent-polish-under-ani-direction",
+      "date": "2026-09-08",
+      "source": "Ani browser annotations on Grok and Start here, September 8, 2026, comments 1–10.",
+      "note": "Ani comments 9 and 10 requested a brief conversational foundation with deeper links. Technical explanation comes from primary documentation, not an invented personal experience."
     }
   ],
   "next": [
     {
       "title": "Grok: taking control",
-      "detail": "Review the fingertip cursor and phone keyboard wording. The accepted Zoom passage stays accepted.",
+      "detail": "Review the added visual-following observation and the scoped Codex/Claude mobile comparison alongside the preserved fingertip and phone-keyboard wording.",
       "file": "content/guides/grok.md",
       "anchor": "taking-control",
       "id": "grok-takeover-review",
@@ -1141,10 +1243,20 @@ The unclear “why am i repeating myself?” heading is now “why does my agent
       "status": "open"
     },
     {
+      "id": "grok-shared-computer-review",
+      "title": "Grok: shared computer",
+      "file": "content/guides/grok.md",
+      "anchor": "shared-computer",
+      "kind": "review",
+      "scope": "body",
+      "status": "open",
+      "detail": "Review the explanation of separate screens and shared files and logins. Source support is established; the wording remains proposed. No extra personal example is required for this overview."
+    },
+    {
       "title": "Start here",
-      "detail": "Review the crash course, first prompt, memory, permissions, coordination, checks, and handoff.",
+      "detail": "Review the friend-like introduction, separate model and harness explanations, descriptive prompt links, then memory, permissions, coordination, checks, and handoff.",
       "file": "content/handbook/operating-agents.md",
-      "anchor": "the-agent-crash-course",
+      "anchor": "the-foundations",
       "id": "start-here-review",
       "kind": "review",
       "scope": "page",
@@ -1194,11 +1306,13 @@ The unclear “why am i repeating myself?” heading is now “why does my agent
       "id": "grok-shared-computer",
       "title": "Grok: shared computer",
       "file": "content/guides/grok.md",
-      "question": "When your Grok bots message each other, what have you seen them share or use on the same computer?",
-      "detail": "Clarify the scope of your observation before treating shared state as a universal feature.",
-      "kind": "input",
-      "scope": "page",
-      "status": "open"
+      "detail": "The shared state is documented product behavior. Ani does not need to supply an anecdote to establish it.",
+      "kind": "research",
+      "scope": "body",
+      "status": "answered",
+      "anchor": "shared-computer",
+      "resolution": "Primary documentation rechecked September 8, 2026: Bots use one persistent cloud computer per account with separate screens and shared files, browser sessions, and command-line credentials. This supports the factual explanation; it does not establish Ani's own use or accept the wording.",
+      "source": "https://docs.x.ai/grok-bot/computer-and-apps and https://docs.x.ai/grok-bot/mobile, read September 8, 2026."
     },
     {
       "id": "codex-defaults",

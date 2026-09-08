@@ -4,8 +4,8 @@
   "derivativeFormat": "webp",
   "derivativeWidths": [640, 1200],
   "mediaPolicy": {
-    "thirdPartyUseRequirements": ["official-embed", "credited-link", "permission-granted", "reusable-license"],
-    "rehostedDisallowedStatuses": ["official-embed", "credited-link"],
+    "thirdPartyUseRequirements": ["official-embed", "credited-link", "permission-granted", "reusable-license", "remote-image"],
+    "rehostedDisallowedStatuses": ["official-embed", "credited-link", "remote-image"],
     "visibleCreditRequires": ["creator.name", "creator.handle", "originalPostUrl"],
     "embedRequirements": {
       "reservedDimensions": true,
@@ -18,7 +18,7 @@
     {
       "id": "grok-bot-mobile-trackpad",
       "sourceId": "grok-bot-mobile-trackpad-capture",
-      "retrievedAt": "2026-09-07",
+      "retrievedAt": "2026-09-08",
       "creator": {
         "name": "Will Oldgram",
         "handle": "@old_pgmrs_will"
@@ -27,29 +27,28 @@
       "ownership": "third-party",
       "permissionStatus": "not-recorded",
       "licenseStatus": "not-recorded",
-      "publicationStatus": "official-embed",
+      "publicationStatus": "remote-image",
       "creditVisible": true,
       "canonicalPages": [
         "/guides/grok/"
       ],
       "mediaType": "image",
-      "embed": {
-        "url": "https://platform.twitter.com/embed/Tweet.html?id=2094265782054367651&dnt=true&hideThread=true&theme=dark",
-        "width": 360,
-        "height": 716,
-        "autoplay": false,
-        "reducedMotion": true,
-        "fallbackUrl": "https://x.com/old_pgmrs_will/status/2094265782054367651",
-        "mobileHeight": 596
-      },
+      "embed": null,
       "presentations": [
         {
           "route": "/guides/grok/",
-          "alt": "Grok Bot mobile screenshot showing the virtual desktop and trackpad menu, in Japanese",
-          "caption": null,
+          "alt": "Grok Bot mobile computer view with a file browser, Chrome icon, and trackpad controls in Japanese",
+          "caption": "Grok Bot's mobile computer and trackpad menu. screenshot shared by Will Oldgram (@old_pgmrs_will) on X.",
           "linkUrl": "https://x.com/old_pgmrs_will/status/2094265782054367651"
         }
-      ]
+      ],
+      "creditPlacement": "expanded-caption",
+      "mediaUrl": "https://pbs.twimg.com/media/HRBSyy5bcAAh2mc?format=jpg&name=small",
+      "observedBytes": 41593,
+      "width": 680,
+      "height": 646,
+      "selectionSource": "Ani browser comments September 8, 2026: show only the image from this post and place real Grok UI beneath the opening heading. Credit belongs in the expanded caption.",
+      "notes": "Image URL and intrinsic dimensions inspected in the existing official X embed. Loaded directly from X media hosting; no file is rehosted and no creator license or permission is inferred."
     },
     {
       "id": "karpathy-programming-english",

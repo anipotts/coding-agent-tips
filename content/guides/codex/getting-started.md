@@ -2,7 +2,7 @@
 title: your first task
 description: a first useful codex loop with one repository, one task, and one way to verify it.
 products: [codex]
-updatedAt: "2026-09-07T16:33:00-04:00"
+updatedAt: "2026-09-08T14:44:41-04:00"
 checkedAt: "2026-09-07T15:01:58-04:00"
 status: pending
 completion: outline
@@ -108,5 +108,6 @@ if a check cannot run because a service is missing, retain that limitation in
 the handoff. decide whether another check is enough for the current task or
 whether the environment needs fixing first.
 
-continue with [configuration](/guides/codex/configuration/) to make the next
-session start with the right defaults.
+the [configuration guide](/guides/codex/configuration/#try-a-temporary-setting)
+shows how to try a sandbox and approval setting for one session, then save
+a reusable profile when you want those defaults again.

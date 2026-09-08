@@ -2,10 +2,10 @@
 title: grok
 description: a current source based map of grok build, grok bot, and the wider grok product surface.
 products: [grok]
-updatedAt: "2026-09-07T16:33:00-04:00"
+updatedAt: "2026-09-08T14:44:41-04:00"
 status: pending
 evidence: [official-source, analysis, open-question]
-sources: [grok-build, grok-bot, grok-bot-mobile, grok-bot-computer, grok-bot-approvals, grok-bot-profiles, grok-bot-mobile-trackpad-capture, x-api, grok-assistant]
+sources: [grok-build, grok-bot, grok-bot-mobile, grok-bot-computer, grok-bot-approvals, grok-bot-profiles, grok-bot-mobile-trackpad-capture, openai-remote-connections, anthropic-remote-control, x-api, grok-assistant]
 redirects: []
 voice: evidence
 navigation:
@@ -14,6 +14,10 @@ navigation:
 ---
 
 ## this is grok
+
+<div class="surface-bento intro-visual source-image" data-media-id="grok-bot-mobile-trackpad">
+  <figure><a href="https://x.com/old_pgmrs_will/status/2094265782054367651"><img src="https://pbs.twimg.com/media/HRBSyy5bcAAh2mc?format=jpg&amp;name=small" alt="Grok Bot mobile computer view with a file browser, Chrome icon, and trackpad controls in Japanese" width="680" height="646" loading="eager" fetchpriority="high" decoding="async" referrerpolicy="no-referrer" /></a><figcaption>Grok Bot's mobile computer and trackpad menu. screenshot shared by <a href="https://x.com/old_pgmrs_will/status/2094265782054367651" target="_blank" rel="noopener noreferrer">Will Oldgram (@old_pgmrs_will) on X</a>.</figcaption></figure>
+</div>
 
 Grok now offers an assistant accessible through the web or X, a coding agent called Grok Build, and persistent
 cloud agents called Grok Bot. this section keeps those products separate so a
@@ -55,11 +59,6 @@ those details give the whole experience a different personality.
 
 ## cooperative computer use
 
-<div class="publication-embed" data-media-id="grok-bot-mobile-trackpad">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2094265782054367651&amp;dnt=true&amp;hideThread=true&amp;theme=dark" title="Grok Bot mobile screenshot showing the virtual desktop and trackpad menu, in Japanese" width="360" height="716" style="--embed-height: 716px; --embed-height-mobile: 596px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
-  <p class="publication-embed-credit">mobile desktop and trackpad menu, shared by <a href="https://x.com/old_pgmrs_will/status/2094265782054367651" target="_blank" rel="noopener noreferrer">Will Oldgram (@old_pgmrs_will) on X</a>.</p>
-</div>
-
 ### computer view
 
 you can literally see the browser the agent is working in. it's like being
@@ -78,23 +77,38 @@ to watch, when to step in, and when to let it keep going.
 you can control the virtual mouse/cursor with your fingertip and use your
 phone's keyboard on the agent's computer. if it reaches a login screen, you can
 [type your password](https://docs.x.ai/grok-bot/mobile) into the site yourself,
-then hand control back and tell the agent to keep going. it feels built
-natively for that back and forth.
+then hand control back and tell the agent to keep going. the controls are built
+into the same interface you use to work with the agent.
+
+when you're letting the agent drive, you can just watch. for me, seeing the
+browser move through the actual page is much easier to follow than reading
+action summaries as they arrive in the conversation.
+
+that's the difference i'm pointing to with Codex and Claude Code on mobile
+as of september 8, 2026: their mobile interfaces don't give me the same live
+browser view with fingertip control. [Codex Remote](https://learn.chatgpt.com/docs/remote-connections)
+and [Claude Code Remote Control](https://code.claude.com/docs/en/remote-control)
+let you follow and steer work through conversations, outputs, and approvals.
+Grok Bot also puts the computer itself on your phone.
 
 some connections also offer [masked secret requests](https://docs.x.ai/grok-bot/approvals-security-and-privacy).
 signing in and approving the agent's next action are separate decisions.
 
 ### shared computer
 
-the interface makes it feel like each agent has its own computer. underneath,
-xAI says the Bots on your account share one persistent
-[cloud computer](https://docs.x.ai/grok-bot/computer-and-apps). each Bot has its
-own screen, while files, browser sessions, and logins are shared.
+each Bot has its own screen for computer work, with access to the terminal
+and browser. xAI documents those screens on [one shared cloud computer](https://docs.x.ai/grok-bot/computer-and-apps)
+for your account. files, browser sessions, and command line credentials are
+available across your Bots.
 
-that explains how another Bot can pick up saved work without repeating the
-setup. it also means a login you add for one Bot becomes available to the
-others on your account. the separate screens give them room to work in
-parallel; the account is the boundary around the computer.
+if you choose to stay signed in to a site in that browser, another Bot can
+use the saved session and pick up the work. for that workflow, you can skip
+setting up something like 1Password just to hand the same login to every
+agent. the browser keeps the session, and your other Bots can use it too.
+a site can still expire that session or ask you to sign in again.
 
-continue with [configuration](/guides/grok/configuration/) or
-[recommendations](/guides/grok/recommendations/).
+the [Bot configuration example](/guides/grok/configuration/#how-should-i-set-up-a-bot)
+shows how to give an agent an ongoing job, such as watching a few changelogs.
+the [browser handoff exercise](/guides/grok/recommendations/#can-i-take-over-the-computer)
+walks through comparing two options, changing a filter yourself, and letting
+the Bot finish from there.

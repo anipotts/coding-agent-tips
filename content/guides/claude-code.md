@@ -2,7 +2,7 @@
 title: claude code
 description: a practical map of claude code across terminal, desktop, editor, web, and remote workflows.
 products: [claude-code]
-updatedAt: "2026-09-07T16:33:00-04:00"
+updatedAt: "2026-09-08T14:44:41-04:00"
 checkedAt: "2026-09-07T15:02:34-04:00"
 status: current
 completion: complete
@@ -150,8 +150,7 @@ criteria. name the output first, then pick the workflow around it.
   <figure><a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork"><img src="/media/publications/claude-cowork-1200.webp" srcset="/media/publications/claude-cowork-640.webp 640w, /media/publications/claude-cowork-1200.webp 1200w" sizes="(max-width: 767px) calc(100vw - 32px), (max-width: 1151px) calc(100vw - 320px), 832px" alt="the Cowork tab in the Claude desktop app" loading="lazy" decoding="async" width="1200" height="842" /></a><figcaption>the Cowork task interface in Claude. <a href="https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork">Anthropic’s Cowork guide</a>.</figcaption></figure>
 </div>
 
-continue with [configuration](/guides/claude-code/configuration/) to make the
-setup understandable, [extensions](/guides/claude-code/extensions/) to add
-capabilities, or [recommendations](/guides/claude-code/recommendations/) to
-choose a starting arrangement. the product explanations here are source based;
-the personification observation above is personal.
+the [configuration guide](/guides/claude-code/configuration/#where-does-this-setting-go)
+shows where to put personal settings and shared project instructions.
+for a workflow you repeat, the [extensions example](/guides/claude-code/extensions/#a-project-to-try-this-in)
+builds a project skill and checks it against a real command.

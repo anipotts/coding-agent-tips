@@ -319,6 +319,7 @@ Classify media before adding it:
 
 - **Ani owned**: Ani created or supplied it. It may be stored locally, optimized, and served through responsive derivatives. Preserve provenance in the media manifest.
 - **licensed or explicitly permitted third party**: local storage is allowed only within the documented license or permission. Record the original URL, source page, permission basis, and derivative inventory.
+- **source-hosted image selected by Ani**: a directly requested image may load from its original public media URL. Record the exact URL, dimensions, selection, and source. Keep the creator and original-post link in the expanded caption and a normal image link before JavaScript enhancement. This does not establish a reusable license or permission to store a copy locally.
 - **unlicensed third party**: do not rehost it. For X content, default to the official lazy embed or a credited link to the original post. For other sources, prefer the original page or an official embed.
 
 Never turn technical ability to download an asset into permission to republish it.
@@ -332,7 +333,12 @@ Credited third-party media shows:
 - a link to the original post or canonical source;
 - a natural, specific shoutout explaining why the work is useful here.
 
-Keep required creator attribution and the original-post link in nearby prose. Image captions appear in the expanded view, with their source links intact. Credit never implies sponsorship, endorsement, partnership, affiliation, or permission beyond what is documented.
+Keep creator attribution and the original-post link in nearby prose for post embeds. For an image-only presentation selected by Ani, keep both in the expanded caption. Image captions appear in the expanded view, with their source links intact. Credit never implies sponsorship, endorsement, partnership, affiliation, or permission beyond what is documented.
+
+Onward links describe the question or example at their destination. Prefer
+“give a Bot a changelog-watching job” or “compare options and take over a filter”
+to generic chapter names or “continue here.” Keep these transitions brief and
+specific to content the linked page actually covers.
 
 ### images, captions, and enlargement
 

@@ -6,8 +6,8 @@ export const site = {
   socialImageAlt: 'coding agent tips: a guide to coding agents in production software',
   releaseHistory: 'https://github.com/anipotts/coding-agent-tips/releases',
   crashCourse: {
-    label: 'agent crash course',
-    href: '/handbook/operating-agents/#the-agent-crash-course',
+    label: 'agent foundations',
+    href: '/handbook/operating-agents/#the-foundations',
   },
   interfaceCopy: {
     menu: 'menu',

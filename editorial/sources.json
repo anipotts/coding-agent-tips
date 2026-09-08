@@ -32,9 +32,9 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://x.com/old_pgmrs_will/status/2094265782054367651",
-      "last_checked": "2026-09-07",
+      "last_checked": "2026-09-08",
       "evidence": "analysis",
-      "notes": "Third-party still image visually inspected through the official X embed. Shows the Japanese mobile trackpad menu and virtual desktop. This is interface evidence, not an agent-run product test or Ani's own screenshot."
+      "notes": "Third-party screenshot inspected through the original X embed September 8, 2026. The requested image-only presentation uses its original pbs.twimg.com image URL, with dimensions 680 by 646; credit is in the expanded caption. Shows the Japanese trackpad menu, file browser, and Chrome icon. No personal test, recording, reusable license, or independent VM per Bot is established."
     },
     {
       "id": "openai-codex-manual",
@@ -202,7 +202,7 @@
       "aliases": [
         "https://learn.chatgpt.com/docs/remote-connections.md"
       ],
-      "last_checked": "2026-09-07",
+      "last_checked": "2026-09-08",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -211,7 +211,8 @@
           "SSH host",
           "Remote"
         ]
-      }
+      },
+      "notes": "Rechecked September 8, 2026 for mobile task steering, approval, terminal output, screenshots, and host execution. Supports the described remote workflow; silence about a live viewer is not proof it is unavailable in every release."
     },
     {
       "id": "anthropic-claude-overview",
@@ -243,8 +244,9 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/how-claude-code-works",
-      "last_checked": "2026-09-07",
-      "evidence": "official-source"
+      "last_checked": "2026-09-08",
+      "evidence": "official-source",
+      "notes": "Rechecked September 8, 2026 for models, tools, the agent loop, context, permissions, and Claude Code as the harness around Claude."
     },
     {
       "id": "anthropic-platforms",
@@ -456,7 +458,7 @@
       "layer": "surface",
       "status": "core",
       "url": "https://code.claude.com/docs/en/remote-control",
-      "last_checked": "2026-09-07",
+      "last_checked": "2026-09-08",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -465,7 +467,8 @@
           "available on all plans",
           "running locally"
         ]
-      }
+      },
+      "notes": "Rechecked September 8, 2026: connected phone/browser conversations, subagent progress, attachments, approvals, and execution on the local machine. Mobile live-view comparison in Grok is Ani-reported, not inferred from undocumented absence."
     },
     {
       "id": "anthropic-commands",
@@ -999,8 +1002,9 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
-      "last_checked": "2026-08-22",
-      "evidence": "official-source"
+      "last_checked": "2026-09-08",
+      "evidence": "official-source",
+      "notes": "Rechecked September 8, 2026 for ChatGPT as a product using models and Codex as its software development experience. The foundations explanation uses this distinction without enumerating rollout-dependent model versions."
     },
     {
       "id": "openai-cursor-contract",

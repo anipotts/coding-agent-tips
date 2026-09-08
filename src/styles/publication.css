@@ -72,6 +72,7 @@ html[data-theme='dark'] .sl-markdown-content pre code span { color: var(--shiki-
 .surface-bento a { display: block; text-decoration: none; }
 .surface-bento :is(img, video) { display: block; inline-size: 100%; block-size: auto; background: transparent; }
 .surface-bento.intro-visual { grid-template-columns: minmax(0, 1fr); margin-top: 1rem; }
+.surface-bento.source-image { inline-size: min(100%, 360px); margin-inline: auto; }
 .publication-embed { inline-size: min(100%, 360px); margin: 1.25rem auto 1.5rem; }
 .publication-embed iframe { display: block; inline-size: 100%; block-size: var(--embed-height, 824px); border: 0; }
 .publication-embed .publication-embed-credit { margin: .625rem 0 0; color: var(--slate); }

@@ -1,12 +1,12 @@
 ---
 title: start here
-description: a quick agent crash course, your first task, and how to check the result.
+description: "the foundations of working with agents: models, harnesses, better prompts, and checking the result."
 products: [codex, claude-code]
-updatedAt: "2026-09-07T22:03:00-04:00"
+updatedAt: "2026-09-08T14:44:41-04:00"
 checkedAt: "2026-09-07T16:55:21-04:00"
 status: current
 evidence: [official-source, analysis]
-sources: [openai-codex-prompting, anthropic-best-practices, anthropic-how-claude-code-works, anthropic-features-overview, openai-codex-agents-md, anthropic-memory, github-protected-branches, openai-codex-approvals, anthropic-permissions, git-worktrees, karpathy-programming-english, ricky-cursor-coding-session]
+sources: [openai-codex-prompting, anthropic-best-practices, anthropic-how-claude-code-works, openai-work-and-codex, anthropic-features-overview, openai-codex-agents-md, anthropic-memory, github-protected-branches, openai-codex-approvals, anthropic-permissions, git-worktrees, karpathy-programming-english, ricky-cursor-coding-session]
 redirects: [/guides/operating-system/]
 voice: evidence
 navigation:
@@ -14,33 +14,46 @@ navigation:
   order: 10
 ---
 
-this assumes you know basic coding. the new part is working with something
-that can inspect your project, choose actions, and keep going between your
-messages. already comfortable with the terms? [try the first task](#what-should-i-ask-first).
+think of an agent as a ridiculously smart friend you can work with from your
+laptop or phone. depending on the tools you give it, it can read your code
+and documents, connect to your apps, and use a browser. you explain what
+you want, watch it work, and step in when you need to.
 
-## the agent crash course
+if getting it to understand what you want is the frustrating part, the
+[good and bad prompt examples](#what-should-i-ask-first) show which details
+help it get the job done.
 
-- **model and harness.** the model interprets your request and chooses a next
-  step. the harness is the software around it: tools, context, permissions,
-  and the interface you use. together they can run an
-  [agent loop](https://code.claude.com/docs/en/how-claude-code-works): inspect,
-  act, check the result, repeat.
-- **tools.** these let an agent do things: read a file, edit code, run a test,
-  or use a browser. each result becomes information for its next step.
-- **context and tokens.** context is the information available for the current
-  response. tokens are the chunks used to measure it. a
-  [context window](https://code.claude.com/docs/en/how-claude-code-works#the-context-window)
-  has a limit; a long conversation can require summarizing or dropping earlier detail.
-- **instructions and memory.** files such as `AGENTS.md`, `CLAUDE.md`, and saved
-  notes can carry information into later sessions when loaded. they
-  [supply context](https://code.claude.com/docs/en/memory); they do not retrain the model.
-- **permissions.** these determine which actions can proceed and which need
-  your approval. [check the settings](#will-it-ask-before-acting) before giving
-  it work with consequences.
+<span id="the-agent-crash-course" class="heading-alias" aria-hidden="true"></span>
 
-skills, MCP, subagents, and hooks are ways to
-[add capabilities](https://code.claude.com/docs/en/features-overview).
-you can explore those when a task gives you a reason to.
+## the foundations
+
+### the model
+
+you already know the names: ChatGPT, Claude, Grok, Gemini. those names mix
+apps and models together. ChatGPT is the app; OpenAI's models run inside it.
+Claude, Grok, and Gemini also name families of models.
+
+the [model](https://code.claude.com/docs/en/how-claude-code-works#models) is
+what interprets your request, reasons through the problem, and generates
+a response or chooses a tool to call.
+
+### the harness
+
+the harness is the software wrapped around that model. Claude Code wraps
+Claude; Codex wraps OpenAI's models. it supplies tools, manages context,
+and handles permissions. the model chooses an action, the harness runs
+the tool, and the result goes back to the model.
+
+that's how “fix the search bug” can turn into reading files, editing code,
+running a test, seeing an error, and trying again. this is the
+[agent loop](https://code.claude.com/docs/en/how-claude-code-works#the-agentic-loop).
+you can interrupt it with more context or a correction along the way.
+
+what you give it matters: [context](https://code.claude.com/docs/en/how-claude-code-works#the-context-window)
+is the information available for the current response. [instructions and memory](#why-does-my-agent-forget)
+help carry useful details forward. [permissions](#will-it-ask-before-acting)
+control which actions it can take. those are the foundations for working
+with it, and each link goes deeper when you need it.
 
 Karpathy captured the language shift in one sentence back in 2023.
 

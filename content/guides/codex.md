@@ -2,7 +2,7 @@
 title: codex
 description: a practical map of the codex terminal, app, editor, cloud, and mobile surfaces.
 products: [codex]
-updatedAt: "2026-09-07T22:03:00-04:00"
+updatedAt: "2026-09-08T14:44:41-04:00"
 checkedAt: "2026-09-07T15:01:58-04:00"
 status: current
 completion: complete
@@ -144,7 +144,7 @@ support the behavior they exercise. a visual change needs a browser check.
 a pushed branch still needs review and integration before it becomes the
 version users see.
 
-read [configuration](/guides/codex/configuration/) to decide where rules live,
-[extensions](/guides/codex/extensions/) to add a recurring capability, or
-[recommendations](/guides/codex/recommendations/) for a practical way to choose
-and evaluate a setup.
+the [configuration guide](/guides/codex/configuration/#instructions-or-memory)
+explains what belongs in project instructions and what memory carries forward.
+the [coordination example](/guides/codex/extensions/#task-coordination-and-subagents)
+shows how one task can route work to others and check what comes back.
