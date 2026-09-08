@@ -1487,6 +1487,162 @@
       "url": "https://code.claude.com/docs/en/best-practices",
       "last_checked": "2026-09-07",
       "evidence": "official-source"
+    },
+    {
+      "id": "karpathy-programming-english",
+      "title": "Karpathy on programming in English (January 2023)",
+      "publisher": "karpathy",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/karpathy/status/1617979122625712128",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2023-01-24. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "ricky-cursor-coding-session",
+      "title": "Ricky Robinett shares a Cursor coding session (August 2024)",
+      "publisher": "rickyrobinett",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/rickyrobinett/status/1825581674870055189",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2024-08-19. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "karpathy-mac-mini-claws",
+      "title": "Karpathy on a Mac mini and claws (February 2026)",
+      "publisher": "karpathy",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/karpathy/status/2024987174077432126",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2026-02-20. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "cognition-devin-launch-post",
+      "title": "Devin launch demonstration (March 2024)",
+      "publisher": "cognition",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/cognition/status/1767548763134964000",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2024-03-12. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical provider demonstration; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "anthropic-computer-use-demo-post",
+      "title": "Claude computer use demonstration (October 2024)",
+      "publisher": "anthropic",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/AnthropicAI/status/1848742752403476488",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2024-10-22. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical provider demonstration; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "anthropic-claude-code-launch-post",
+      "title": "Claude Code terminal launch demonstration (February 2025)",
+      "publisher": "anthropic",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/AnthropicAI/status/1894095276740055364",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2025-02-24. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical provider demonstration; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "openai-codex-app-walkthrough-post",
+      "title": "Codex app walkthrough (February 2026)",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/OpenAIDevs/status/2018385663457116379",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2026-02-02. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical provider demonstration; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "karpathy-autoresearch-post",
+      "title": "Karpathy introduces autoresearch (March 2026)",
+      "publisher": "karpathy",
+      "product": "codex",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://x.com/karpathy/status/2030371219518931079",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2026-03-07. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "boris-parallel-claude-post",
+      "title": "Boris Cherny shows five parallel Claude sessions (January 2026)",
+      "publisher": "bcherny",
+      "product": "claude-code",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://x.com/bcherny/status/2007179833990885678",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2026-01-02. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "alex-albert-mcp-github-demo-post",
+      "title": "Alex Albert demonstrates MCP with GitHub (November 2024)",
+      "publisher": "alexalbert__",
+      "product": "claude-code",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/alexalbert__/status/1861079874385203522",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2024-11-25. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "karpathy-vibe-coding-post",
+      "title": "Karpathy introduces vibe coding (February 2025)",
+      "publisher": "karpathy",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/karpathy/status/1886192184808149383",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2025-02-02. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "levels-cursor-flight-simulator-post",
+      "title": "Pieter Levels shows his early Cursor flight simulator (February 2025)",
+      "publisher": "levelsio",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/levelsio/status/1893350391158292550",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2025-02-22. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "karpathy-autoresearch-repository",
+      "title": "autoresearch experiment loop and setup",
+      "publisher": "karpathy",
+      "product": "cross runtime",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://github.com/karpathy/autoresearch",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source",
+      "notes": "Read README setup, fixed experiment time budget, agent-edited train.py, human-edited program.md, metric, and platform limits. No local research experiment was run for this handbook."
     }
   ],
   "publishers": [
@@ -1573,6 +1729,42 @@
       "label": "Git",
       "domain": "git-scm.com",
       "icon": "/icons/publishers/git.png"
+    },
+    {
+      "id": "karpathy",
+      "label": "Andrej Karpathy",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
+    {
+      "id": "rickyrobinett",
+      "label": "Ricky Robinett",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
+    {
+      "id": "cognition",
+      "label": "Cognition",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
+    {
+      "id": "bcherny",
+      "label": "Boris Cherny",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
+    {
+      "id": "alexalbert__",
+      "label": "Alex Albert",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
+    {
+      "id": "levelsio",
+      "label": "Pieter Levels",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
     }
   ]
 }

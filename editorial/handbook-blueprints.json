@@ -14,7 +14,8 @@
         "openai-remote-connections",
         "openai-codex-app-server",
         "openai-codex-agents-md",
-        "openai-codex-open-source"
+        "openai-codex-open-source",
+        "openai-codex-app-walkthrough-post"
       ],
       "experienceQuestions": [],
       "headings": [
@@ -196,11 +197,14 @@
         "openai-codex-automations",
         "openai-remote-connections",
         "openai-codex-cloud",
-        "openai-codex-image-generation"
+        "openai-codex-image-generation",
+        "karpathy-autoresearch-post",
+        "karpathy-autoresearch-repository"
       ],
       "experienceQuestions": [],
       "headings": [
         "## how do i scope a task?",
+        "### can it keep improving the result?",
         "## how do i keep parallel edits separate?",
         "### what belongs in the coordinator?",
         "## how do i schedule repeated work?",
@@ -278,7 +282,8 @@
         "anthropic-mcp",
         "anthropic-hooks",
         "anthropic-plugins",
-        "anthropic-function-hooks-proposal"
+        "anthropic-function-hooks-proposal",
+        "alex-albert-mcp-github-demo-post"
       ],
       "experienceQuestions": [],
       "headings": [
@@ -327,7 +332,8 @@
         "anthropic-remote-control",
         "anthropic-web",
         "anthropic-agents",
-        "anthropic-routines"
+        "anthropic-routines",
+        "boris-parallel-claude-post"
       ],
       "experienceQuestions": [],
       "headings": [

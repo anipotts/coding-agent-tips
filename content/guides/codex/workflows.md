@@ -2,13 +2,13 @@
 title: working on a project
 description: everyday, parallel, long running, and handed off codex work.
 products: [codex]
-updatedAt: "2026-09-07T16:33:00-04:00"
+updatedAt: "2026-09-07T22:03:00-04:00"
 checkedAt: "2026-09-07T15:01:58-04:00"
 status: pending
 completion: outline
 draft: true
 evidence: [official-source, analysis]
-sources: [openai-codex-worktrees, openai-codex-automations, openai-remote-connections, openai-codex-cloud, openai-codex-image-generation]
+sources: [openai-codex-worktrees, openai-codex-automations, openai-remote-connections, openai-codex-cloud, openai-codex-image-generation, karpathy-autoresearch-post, karpathy-autoresearch-repository]
 redirects: []
 voice: evidence
 navigation:
@@ -26,6 +26,24 @@ implementation and propose the narrowest useful verification.
 keep the evidence with the task: reproduction steps, changed files, commands,
 and results. when the work moves to another conversation, those details let
 the next agent continue without rediscovering the same failure.
+
+### can it keep improving the result?
+
+Karpathy’s [autoresearch](https://github.com/karpathy/autoresearch) gives an
+agent a training experiment it can edit, run, and score repeatedly. the human
+sets the research instructions; the agent keeps or discards changes based on
+the measured result. it is an external project that can use Codex or another
+coding agent.
+
+the transferable idea is to define what better means before starting the
+loop. for a performance task, keep the input and measurement method fixed,
+set a time budget, and preserve the baseline for comparison. autoresearch’s
+GPU training setup has its own requirements; the repository explains those.
+
+<div class="publication-embed" data-media-id="karpathy-autoresearch-post">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2030371219518931079&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Karpathy introduces autoresearch (March 2026)" width="550" height="772" style="--embed-height: 772px; --embed-height-mobile: 566px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/karpathy/status/2030371219518931079" target="_blank" rel="noopener noreferrer">Andrej Karpathy (@karpathy)</a>, march 2026.</p>
+</div>
 
 ## how do i keep parallel edits separate?
 

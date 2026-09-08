@@ -2,12 +2,12 @@
 title: choosing your setup
 description: source based starting points for claude code, with a practical way to compare and extend a setup.
 products: [claude-code]
-updatedAt: "2026-09-07T16:33:00-04:00"
+updatedAt: "2026-09-07T22:03:00-04:00"
 checkedAt: "2026-09-07T15:02:34-04:00"
 status: current
 completion: complete
 evidence: [official-source, analysis, open-question]
-sources: [anthropic-claude-overview, anthropic-platforms, anthropic-desktop, anthropic-remote-control, anthropic-web, anthropic-agents, anthropic-routines]
+sources: [anthropic-claude-overview, anthropic-platforms, anthropic-desktop, anthropic-remote-control, anthropic-web, anthropic-agents, anthropic-routines, boris-parallel-claude-post]
 redirects: []
 voice: evidence
 navigation:
@@ -88,6 +88,15 @@ for independent edits and assign one owner to combine and verify the result.
 start with a small number of tasks you can actually review. track those waiting
 on decisions as carefully as those still running. useful parallelism ends in
 work you can integrate.
+
+Boris Cherny shared his own setup in January 2026: five Claude sessions in
+numbered terminal tabs, with notifications when one needs input. the useful
+detail is how he keeps track of work that needs his attention.
+
+<div class="publication-embed" data-media-id="boris-parallel-claude-post">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2007179833990885678&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Boris Cherny shows five parallel Claude sessions (January 2026)" width="550" height="648" style="--embed-height: 648px; --embed-height-mobile: 487px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/bcherny/status/2007179833990885678" target="_blank" rel="noopener noreferrer">Boris Cherny (@bcherny)</a>, january 2026.</p>
+</div>
 
 <span id="evaluate-previews-with-their-limits-visible" class="heading-alias" aria-hidden="true"></span>
 

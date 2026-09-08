@@ -1,7 +1,14 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { canonicalContentFiles } from '../src/content-manifest.mjs';
 import { indexWriting, inspectFeatures, applyReviewRecords, fingerprint, bodyFingerprint, buildEditorialInventory } from './lib/editorial-inventory.mjs';
 const doc = body => `---\ntitle: fixture\nnavigation: { scope: handbook, order: 1 }\n---\n\n${body}`;
+
+test('media checks can inspect drafts without adding them to public routes', () => {
+ const route='/guides/codex/workflows/';
+ assert.ok(!canonicalContentFiles().some(page=>page.route===route));
+ assert.ok(canonicalContentFiles(process.cwd(),{includeDrafts:true}).some(page=>page.route===route));
+});
 
 test('counts authored structure and media, excluding fenced HTML and responsive alternatives',()=>{
  const p=indexWriting(doc('## section\n\n[docs][ref]\n\n<div><h3 id="history">event</h3><img src="/a.webp" srcset="/b.webp 600w" alt="image"><video poster="/poster.webp"><source src="/movie.mp4"></video></div>\n\n```html\n<h2>fake heading</h2><img src="/fake.webp">\n```\n\n[ref]: https://example.com\n'),'content/handbook/fixture.md');

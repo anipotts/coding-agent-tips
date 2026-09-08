@@ -17,15 +17,21 @@
   "externalMedia": [
     {
       "id": "grok-bot-mobile-trackpad",
+      "sourceId": "grok-bot-mobile-trackpad-capture",
       "retrievedAt": "2026-09-07",
-      "creator": { "name": "Will Oldgram", "handle": "@old_pgmrs_will" },
+      "creator": {
+        "name": "Will Oldgram",
+        "handle": "@old_pgmrs_will"
+      },
       "originalPostUrl": "https://x.com/old_pgmrs_will/status/2094265782054367651",
       "ownership": "third-party",
       "permissionStatus": "not-recorded",
       "licenseStatus": "not-recorded",
       "publicationStatus": "official-embed",
       "creditVisible": true,
-      "canonicalPages": ["/guides/grok/"],
+      "canonicalPages": [
+        "/guides/grok/"
+      ],
       "mediaType": "image",
       "embed": {
         "url": "https://platform.twitter.com/embed/Tweet.html?id=2094265782054367651&dnt=true&hideThread=true&theme=light",
@@ -41,6 +47,438 @@
           "alt": "Grok Bot mobile screenshot showing the virtual desktop and trackpad menu, in Japanese",
           "caption": null,
           "linkUrl": "https://x.com/old_pgmrs_will/status/2094265782054367651"
+        }
+      ]
+    },
+    {
+      "id": "karpathy-programming-english",
+      "sourceId": "karpathy-programming-english",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Andrej Karpathy",
+        "handle": "@karpathy"
+      },
+      "originalPostUrl": "https://x.com/karpathy/status/1617979122625712128",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/operating-agents/"
+      ],
+      "mediaType": "text",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1617979122625712128&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 225,
+        "mobileHeight": 228,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/karpathy/status/1617979122625712128"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/operating-agents/",
+          "alt": "Karpathy on programming in English (January 2023)",
+          "caption": null,
+          "linkUrl": "https://x.com/karpathy/status/1617979122625712128"
+        }
+      ]
+    },
+    {
+      "id": "ricky-cursor-coding-session",
+      "sourceId": "ricky-cursor-coding-session",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Ricky Robinett",
+        "handle": "@rickyrobinett"
+      },
+      "originalPostUrl": "https://x.com/rickyrobinett/status/1825581674870055189",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/operating-agents/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1825581674870055189&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 775,
+        "mobileHeight": 581,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/rickyrobinett/status/1825581674870055189"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/operating-agents/",
+          "alt": "Ricky Robinett shares a Cursor coding session (August 2024)",
+          "caption": null,
+          "linkUrl": "https://x.com/rickyrobinett/status/1825581674870055189"
+        }
+      ]
+    },
+    {
+      "id": "karpathy-mac-mini-claws",
+      "sourceId": "karpathy-mac-mini-claws",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Andrej Karpathy",
+        "handle": "@karpathy"
+      },
+      "originalPostUrl": "https://x.com/karpathy/status/2024987174077432126",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/choosing-a-setup/"
+      ],
+      "mediaType": "text",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2024987174077432126&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 369,
+        "mobileHeight": 380,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/karpathy/status/2024987174077432126"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/choosing-a-setup/",
+          "alt": "Karpathy on a Mac mini and claws (February 2026)",
+          "caption": null,
+          "linkUrl": "https://x.com/karpathy/status/2024987174077432126"
+        }
+      ]
+    },
+    {
+      "id": "cognition-devin-launch-post",
+      "sourceId": "cognition-devin-launch-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Cognition",
+        "handle": "@cognition"
+      },
+      "originalPostUrl": "https://x.com/cognition/status/1767548763134964000",
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/history/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1767548763134964000&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 721,
+        "mobileHeight": 555,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/cognition/status/1767548763134964000"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/history/",
+          "alt": "Devin launch demonstration (March 2024)",
+          "caption": null,
+          "linkUrl": "https://x.com/cognition/status/1767548763134964000"
+        }
+      ]
+    },
+    {
+      "id": "anthropic-computer-use-demo-post",
+      "sourceId": "anthropic-computer-use-demo-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Anthropic",
+        "handle": "@AnthropicAI"
+      },
+      "originalPostUrl": "https://x.com/AnthropicAI/status/1848742752403476488",
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/history/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1848742752403476488&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 697,
+        "mobileHeight": 540,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/AnthropicAI/status/1848742752403476488"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/history/",
+          "alt": "Claude computer use demonstration (October 2024)",
+          "caption": null,
+          "linkUrl": "https://x.com/AnthropicAI/status/1848742752403476488"
+        }
+      ]
+    },
+    {
+      "id": "anthropic-claude-code-launch-post",
+      "sourceId": "anthropic-claude-code-launch-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Anthropic",
+        "handle": "@AnthropicAI"
+      },
+      "originalPostUrl": "https://x.com/AnthropicAI/status/1894095276740055364",
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/history/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1894095276740055364&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 721,
+        "mobileHeight": 597,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/AnthropicAI/status/1894095276740055364"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/history/",
+          "alt": "Claude Code terminal launch demonstration (February 2025)",
+          "caption": null,
+          "linkUrl": "https://x.com/AnthropicAI/status/1894095276740055364"
+        }
+      ]
+    },
+    {
+      "id": "openai-codex-app-walkthrough-post",
+      "sourceId": "openai-codex-app-walkthrough-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "OpenAI Developers",
+        "handle": "@OpenAIDevs"
+      },
+      "originalPostUrl": "https://x.com/OpenAIDevs/status/2018385663457116379",
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/guides/codex/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2018385663457116379&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 697,
+        "mobileHeight": 537,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/OpenAIDevs/status/2018385663457116379"
+      },
+      "presentations": [
+        {
+          "route": "/guides/codex/",
+          "alt": "Codex app walkthrough (February 2026)",
+          "caption": null,
+          "linkUrl": "https://x.com/OpenAIDevs/status/2018385663457116379"
+        }
+      ]
+    },
+    {
+      "id": "karpathy-autoresearch-post",
+      "sourceId": "karpathy-autoresearch-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Andrej Karpathy",
+        "handle": "@karpathy"
+      },
+      "originalPostUrl": "https://x.com/karpathy/status/2030371219518931079",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/guides/codex/workflows/"
+      ],
+      "mediaType": "image",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2030371219518931079&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 772,
+        "mobileHeight": 566,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/karpathy/status/2030371219518931079"
+      },
+      "presentations": [
+        {
+          "route": "/guides/codex/workflows/",
+          "alt": "Karpathy introduces autoresearch (March 2026)",
+          "caption": null,
+          "linkUrl": "https://x.com/karpathy/status/2030371219518931079"
+        }
+      ]
+    },
+    {
+      "id": "boris-parallel-claude-post",
+      "sourceId": "boris-parallel-claude-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Boris Cherny",
+        "handle": "@bcherny"
+      },
+      "originalPostUrl": "https://x.com/bcherny/status/2007179833990885678",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/guides/claude-code/recommendations/"
+      ],
+      "mediaType": "image",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2007179833990885678&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 648,
+        "mobileHeight": 487,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/bcherny/status/2007179833990885678"
+      },
+      "presentations": [
+        {
+          "route": "/guides/claude-code/recommendations/",
+          "alt": "Boris Cherny shows five parallel Claude sessions (January 2026)",
+          "caption": null,
+          "linkUrl": "https://x.com/bcherny/status/2007179833990885678"
+        }
+      ]
+    },
+    {
+      "id": "alex-albert-mcp-github-demo-post",
+      "sourceId": "alex-albert-mcp-github-demo-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Alex Albert",
+        "handle": "@alexalbert__"
+      },
+      "originalPostUrl": "https://x.com/alexalbert__/status/1861079874385203522",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/guides/claude-code/extensions/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1861079874385203522&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 752,
+        "mobileHeight": 593,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/alexalbert__/status/1861079874385203522"
+      },
+      "presentations": [
+        {
+          "route": "/guides/claude-code/extensions/",
+          "alt": "Alex Albert demonstrates MCP with GitHub (November 2024)",
+          "caption": null,
+          "linkUrl": "https://x.com/alexalbert__/status/1861079874385203522"
+        }
+      ]
+    },
+    {
+      "id": "karpathy-vibe-coding-post",
+      "sourceId": "karpathy-vibe-coding-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Andrej Karpathy",
+        "handle": "@karpathy"
+      },
+      "originalPostUrl": "https://x.com/karpathy/status/1886192184808149383",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/method-and-sources/"
+      ],
+      "mediaType": "text",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1886192184808149383&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 345,
+        "mobileHeight": 361,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/karpathy/status/1886192184808149383"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/method-and-sources/",
+          "alt": "Karpathy introduces vibe coding (February 2025)",
+          "caption": null,
+          "linkUrl": "https://x.com/karpathy/status/1886192184808149383"
+        }
+      ]
+    },
+    {
+      "id": "levels-cursor-flight-simulator-post",
+      "sourceId": "levels-cursor-flight-simulator-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Pieter Levels",
+        "handle": "@levelsio"
+      },
+      "originalPostUrl": "https://x.com/levelsio/status/1893350391158292550",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/method-and-sources/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1893350391158292550&dnt=true&hideThread=true&theme=light",
+        "width": 550,
+        "height": 1606,
+        "mobileHeight": 1177,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/levelsio/status/1893350391158292550"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/method-and-sources/",
+          "alt": "Pieter Levels shows his early Cursor flight simulator (February 2025)",
+          "caption": null,
+          "linkUrl": "https://x.com/levelsio/status/1893350391158292550"
         }
       ]
     }

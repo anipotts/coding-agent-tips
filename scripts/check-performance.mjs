@@ -5,6 +5,7 @@ import path from 'node:path';
 import process from 'node:process';
 import { gzipSync } from 'node:zlib';
 import sharp from 'sharp';
+import { parse as parseYaml } from 'yaml';
 import { canonicalContentFiles } from '../src/content-manifest.mjs';
 import { captionText } from './lib/caption-text.mjs';
 
@@ -22,14 +23,19 @@ const failures = [];
 const maxDerivativeBytes = 150 * 1024;
 const maxProviderBytes = 400 * 1024;
 const maxFeaturedProviderBytes = 1024 * 1024;
-const maxGuideHtmlGzipBytes = 24 * 1024;
+// Complete chapters now include attributed external demonstrations and their
+// source groups. Keep a 25 KiB cap; CSS, JavaScript, and media budgets are unchanged.
+const maxGuideHtmlGzipBytes = 25 * 1024;
 const maxGuideCssGzipBytes = 32 * 1024;
 const maxGuideJavaScriptGzipBytes = 72 * 1024;
 const maxFontBytes = 80 * 1024;
 const maxFontFiles = 4;
 const maxAgentCatalogGzipBytes = 32 * 1024;
 const maxAgentPageGzipBytes = 32 * 1024;
-const canonicalRoutes = new Set(canonicalContentFiles().map(({ route }) => route));
+// Draft assets need the same provenance checks without publishing their routes.
+const editorialPages = canonicalContentFiles(root, { includeDrafts: true });
+const canonicalRoutes = new Set(editorialPages.map(({ route }) => route));
+const sourceRegistry = JSON.parse(await readFile(path.join(root, 'editorial/sources.json'), 'utf8'));
 const providerRoutes = ['/guides/codex/', '/guides/claude-code/', '/guides/grok/'];
 const providerRouteSet = new Set(providerRoutes);
 const sha256 = (buffer) => createHash('sha256').update(buffer).digest('hex');
@@ -183,7 +189,12 @@ for (const asset of manifest.assets) {
 }
 for (const external of manifest.externalMedia ?? []) {
   validateEditorialMetadata(external, { rehosted: false });
-  if ((external.presentations ?? []).length && (external.publicationStatus !== 'official-embed' || external.mediaType !== 'image' || !/^https:\/\/platform\.twitter\.com\/embed\/Tweet\.html\?id=\d+&dnt=true&hideThread=true&theme=light$/.test(external.embed?.url ?? ''))) failures.push(`${external.id}: renderer supports only official X still-image embeds`);
+  if ((external.presentations ?? []).length && (external.publicationStatus !== 'official-embed' || !['text', 'image', 'video'].includes(external.mediaType) || !/^https:\/\/platform\.twitter\.com\/embed\/Tweet\.html\?id=\d+&dnt=true&hideThread=true&theme=light$/.test(external.embed?.url ?? ''))) failures.push(`${external.id}: renderer requires an official X text, image, or video embed`);
+  if (external.publicationStatus === 'official-embed') {
+    const source = sourceRegistry.sources.find(({ id }) => id === external.sourceId);
+    if (!source || source.url !== external.originalPostUrl) failures.push(`${external.id}: original post is missing from the source registry`);
+    if (new URL(external.embed.url).searchParams.get('id') !== external.originalPostUrl.match(/\/status\/(\d+)/)?.[1]) failures.push(`${external.id}: embedded post differs from the credited original`);
+  }
 }
 
 const recordByRenderedPath = new Map();
@@ -193,8 +204,9 @@ for (const asset of manifest.assets ?? []) {
   for (const derivative of manifest.derivativeSets[asset.derivativeSet] ?? []) recordByRenderedPath.set(derivative.path, asset);
 }
 const tagsByRoute = new Map();
-for (const { route, file } of canonicalContentFiles()) {
+for (const { route, file } of editorialPages) {
   const source = await readFile(file, 'utf8');
+  const metadata = parseYaml(source.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '') ?? {};
   const tags = [...source.matchAll(/<img\b[^>]*>/g)].map(([tag]) => tag);
   tagsByRoute.set(route, tags);
   for (const [, id, body] of source.matchAll(/<div class="publication-embed" data-media-id="([^"]+)">([\s\S]*?)<\/div>/g)) {
@@ -202,7 +214,11 @@ for (const { route, file } of canonicalContentFiles()) {
     if (!record) { failures.push(`${route}: unregistered external media ${id}`); continue; }
     const frame = body.match(/<iframe\b[^>]*>/)?.[0] ?? '';
     const fallback = body.match(/<a\b[^>]*>/)?.[0] ?? '';
-    if (captionText(attribute(frame, 'src') ?? '') !== record.embed?.url || attribute(frame, 'loading') !== 'lazy' || attribute(frame, 'allow') !== "autoplay 'none'") failures.push(`${id}: embed source, lazy loading, or autoplay policy differs`);
+    const permissions = record.mediaType === 'video' ? "fullscreen; autoplay 'none'" : "autoplay 'none'";
+    if (captionText(attribute(frame, 'src') ?? '') !== record.embed?.url || attribute(frame, 'loading') !== 'lazy' || attribute(frame, 'allow') !== permissions) failures.push(`${id}: embed source, lazy loading, or autoplay policy differs`);
+    if (attribute(frame, 'sandbox') !== 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox' || attribute(frame, 'referrerpolicy') !== 'no-referrer') failures.push(`${id}: external frame isolation differs`);
+    if (!(metadata.sources ?? []).includes(record.sourceId)) failures.push(`${id}: original post is missing from the page source dropdown`);
+    if (record.embed?.mobileHeight && (!Number.isInteger(record.embed.mobileHeight) || record.embed.mobileHeight <= 0 || attribute(frame, 'style') !== `--embed-height: ${record.embed.height}px; --embed-height-mobile: ${record.embed.mobileHeight}px`)) failures.push(`${id}: responsive reserved dimensions differ`);
     if (Number(attribute(frame, 'width')) !== record.embed?.width || Number(attribute(frame, 'height')) !== record.embed?.height) failures.push(`${id}: embed must reserve its recorded dimensions`);
     if (attribute(fallback, 'href') !== record.originalPostUrl || !captionText(body).includes(record.creator.name) || !captionText(body).includes(record.creator.handle)) failures.push(`${id}: visible creator credit or original-post fallback is missing`);
     actualPresentationsById.get(id).push({ route, alt: attribute(frame, 'title') ?? null, caption: null, linkUrl: attribute(fallback, 'href') ?? null });
@@ -310,7 +326,7 @@ for (const { route } of canonicalContentFiles().filter(({ route }) => route.star
   const htmlPath = path.join(distRoot, route.replace(/^\//, ''), 'index.html');
   const html = await readFile(htmlPath);
   const htmlGzipBytes = gzipSync(html).length;
-  if (htmlGzipBytes > maxGuideHtmlGzipBytes) failures.push(`${route}: ${htmlGzipBytes} compressed HTML bytes exceeds 24 KiB`);
+  if (htmlGzipBytes > maxGuideHtmlGzipBytes) failures.push(`${route}: ${htmlGzipBytes} compressed HTML bytes exceeds 25 KiB`);
   const source = html.toString();
   if (new RegExp(`origin${'-'}trial|navigator\\.modelContext`).test(source)) failures.push(`${route}: unsupported WebMCP compatibility code is present`);
   if (source.includes('--surface-canvas:') || source.includes('--rail-expanded-width:')) failures.push(`${route}: shared site CSS is inlined into generated HTML`);

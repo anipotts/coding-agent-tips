@@ -2,12 +2,12 @@
 title: codex
 description: a practical map of the codex terminal, app, editor, cloud, and mobile surfaces.
 products: [codex]
-updatedAt: "2026-09-07T16:33:00-04:00"
+updatedAt: "2026-09-07T22:03:00-04:00"
 checkedAt: "2026-09-07T15:01:58-04:00"
 status: current
 completion: complete
 evidence: [official-source, analysis]
-sources: [openai-codex-cli, openai-codex-cloud, openai-codex-worktrees, openai-remote-connections, openai-codex-app-server, openai-codex-agents-md, openai-codex-open-source]
+sources: [openai-codex-cli, openai-codex-cloud, openai-codex-worktrees, openai-remote-connections, openai-codex-app-server, openai-codex-agents-md, openai-codex-open-source, openai-codex-app-walkthrough-post]
 redirects: []
 voice: personal
 navigation:
@@ -63,6 +63,14 @@ the desktop app brings conversations, terminals, previews, and review together.
 [worktrees](https://learn.chatgpt.com/docs/environments/git-worktrees) give
 independent changes separate checkouts. each still needs an owner, a clear
 outcome, and any local setup needed to run its checks.
+
+this February 2026 walkthrough shows the Codex app’s approach to supervising
+several tasks.
+
+<div class="publication-embed" data-media-id="openai-codex-app-walkthrough-post">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2018385663457116379&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Codex app walkthrough (February 2026)" width="550" height="697" style="--embed-height: 697px; --embed-height-mobile: 537px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/OpenAIDevs/status/2018385663457116379" target="_blank" rel="noopener noreferrer">OpenAI Developers (@OpenAIDevs)</a>, february 2026.</p>
+</div>
 
 <span id="cloud-and-mobile-change-where-you-steer" class="heading-alias" aria-hidden="true"></span>
 

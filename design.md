@@ -359,7 +359,9 @@ Third-party embeds load lazily and never block the first useful article content.
 
 Every embed includes an ordinary link to the original post or source. If the runtime is blocked, the post is deleted, the network is unavailable, or JavaScript is disabled, the reader still sees the creator identity, a useful description, and the source link. The surrounding argument cannot depend on the embed remaining available.
 
-The Grok mobile capture uses X's official still-image post embed, with its original post presentation and nearby credit. Reserve responsive height before loading, accept height changes only from that iframe's official origin, and keep the source link independent of the embedded runtime. On product overviews, keep optional crash-course navigation in the guide rail and mobile menu footer, outside article prose. Other chapters retain the shared handbook navigation.
+Use X's official post embed for text, screenshots, and video demonstrations, with the original presentation and nearby creator credit. Keep posts centered at up to 550 pixels, one per section, with at most two per page except the longer history timeline. Reserve measured desktop and mobile heights before loading, accept height changes only from that iframe's official origin, and keep the source link independent of the embedded runtime. Videos play after a reader's action and may open fullscreen. Register every embedded post as a page source so it appears in the bottom source dropdown. Draft placements receive the same source and media checks while staying out of public routes.
+
+On product overviews, keep optional crash-course navigation in the guide rail and mobile menu footer, outside article prose. Other chapters retain the shared handbook navigation.
 
 ## interaction contracts
 

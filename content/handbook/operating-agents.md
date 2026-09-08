@@ -2,11 +2,11 @@
 title: start here
 description: a quick agent crash course, your first task, and how to check the result.
 products: [codex, claude-code]
-updatedAt: "2026-09-07T16:55:21-04:00"
+updatedAt: "2026-09-07T22:03:00-04:00"
 checkedAt: "2026-09-07T16:55:21-04:00"
 status: current
 evidence: [official-source, analysis]
-sources: [openai-codex-prompting, anthropic-best-practices, anthropic-how-claude-code-works, anthropic-features-overview, openai-codex-agents-md, anthropic-memory, github-protected-branches, openai-codex-approvals, anthropic-permissions, git-worktrees]
+sources: [openai-codex-prompting, anthropic-best-practices, anthropic-how-claude-code-works, anthropic-features-overview, openai-codex-agents-md, anthropic-memory, github-protected-branches, openai-codex-approvals, anthropic-permissions, git-worktrees, karpathy-programming-english, ricky-cursor-coding-session]
 redirects: [/guides/operating-system/]
 voice: evidence
 navigation:
@@ -41,6 +41,13 @@ messages. already comfortable with the terms? [try the first task](#what-should-
 skills, MCP, subagents, and hooks are ways to
 [add capabilities](https://code.claude.com/docs/en/features-overview).
 you can explore those when a task gives you a reason to.
+
+Karpathy captured the language shift in one sentence back in 2023.
+
+<div class="publication-embed" data-media-id="karpathy-programming-english">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1617979122625712128&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Karpathy on programming in English (January 2023)" width="550" height="225" style="--embed-height: 225px; --embed-height-mobile: 228px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/karpathy/status/1617979122625712128" target="_blank" rel="noopener noreferrer">Andrej Karpathy (@karpathy)</a>, january 2023.</p>
+</div>
 
 <span id="begin-with-a-behavior-you-can-check" class="heading-alias" aria-hidden="true"></span>
 
@@ -84,6 +91,15 @@ before editing.
 if the agent finds that the requested behavior conflicts with the product's
 existing rules, resolve that decision before it builds around an assumption.
 a clear prompt leaves room to discover the cause.
+
+for a longer example to watch, Ricky Robinett shared highlights of his daughter
+building a chatbot with Cursor. you can follow the conversation and the code
+together.
+
+<div class="publication-embed" data-media-id="ricky-cursor-coding-session">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1825581674870055189&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Ricky Robinett shares a Cursor coding session (August 2024)" width="550" height="775" style="--embed-height: 775px; --embed-height-mobile: 581px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/rickyrobinett/status/1825581674870055189" target="_blank" rel="noopener noreferrer">Ricky Robinett (@rickyrobinett)</a>, august 2024.</p>
+</div>
 
 <span id="make-project-context-easy-to-find" class="heading-alias" aria-hidden="true"></span>
 

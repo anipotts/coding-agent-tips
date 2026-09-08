@@ -2,11 +2,11 @@
 title: where this comes from
 description: how sources, tests, personal writing, automated checks, and publication are distinguished.
 products: [cross runtime]
-updatedAt: "2026-09-07T15:08:30-04:00"
+updatedAt: "2026-09-07T22:03:00-04:00"
 checkedAt: "2026-09-07T15:08:30-04:00"
 status: current
 evidence: [official-source, analysis, open-question]
-sources: [handbook-source-registry, handbook-source-checker, handbook-freshness-workflow]
+sources: [handbook-source-registry, handbook-source-checker, handbook-freshness-workflow, karpathy-vibe-coding-post, levels-cursor-flight-simulator-post]
 redirects: [/method/]
 voice: evidence
 navigation:
@@ -81,6 +81,15 @@ wording acceptance, factual review, and publication are tracked separately.
 a locally finished chapter can still need its author’s review. a merged change
 needs deployment verification before it can be described as live.
 
+the original post matters for terminology, too. Karpathy introduced “vibe
+coding” through a description of his own workflow. keeping his words attached
+to the term helps a reader see what he meant.
+
+<div class="publication-embed" data-media-id="karpathy-vibe-coding-post">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1886192184808149383&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Karpathy introduces vibe coding (February 2025)" width="550" height="345" style="--embed-height: 345px; --embed-height-mobile: 361px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/karpathy/status/1886192184808149383" target="_blank" rel="noopener noreferrer">Andrej Karpathy (@karpathy)</a>, february 2025.</p>
+</div>
+
 ## use examples within their limits
 
 a useful example includes enough context to repeat the relevant behavior. a
@@ -91,3 +100,13 @@ historical launch posts describe a release at that time. current product docs
 and dated checks support current behavior. vendor benchmarks describe their own
 conditions. the practical question throughout the handbook is what the evidence
 lets a reader conclude and what they should still verify in their own setup.
+
+Pieter Levels’ early flight simulator post shows a concrete result built with
+Cursor, along with his account of asking questions and making changes. a
+recording can show that result; evaluating reliability or maintainability
+would require examining the project and testing it.
+
+<div class="publication-embed" data-media-id="levels-cursor-flight-simulator-post">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1893350391158292550&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Pieter Levels shows his early Cursor flight simulator (February 2025)" width="550" height="1606" style="--embed-height: 1606px; --embed-height-mobile: 1177px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/levelsio/status/1893350391158292550" target="_blank" rel="noopener noreferrer">Pieter Levels (@levelsio)</a>, february 2025.</p>
+</div>

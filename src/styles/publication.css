@@ -72,10 +72,10 @@ html[data-theme='dark'] .sl-markdown-content pre code span { color: var(--shiki-
 .surface-bento a { display: block; text-decoration: none; }
 .surface-bento :is(img, video) { display: block; inline-size: 100%; block-size: auto; background: transparent; }
 .surface-bento.intro-visual { grid-template-columns: minmax(0, 1fr); margin-top: 1rem; }
-.publication-embed { max-inline-size: 550px; margin: 1.5rem auto 2rem; }
-.publication-embed iframe { display: block; inline-size: 100%; block-size: 824px; border: 0; color-scheme: light; }
+.publication-embed { inline-size: min(100%, 550px); margin: 1.5rem auto 2rem; }
+.publication-embed iframe { display: block; inline-size: 100%; block-size: var(--embed-height, 824px); border: 0; color-scheme: light; }
 .publication-embed .publication-embed-credit { margin: .625rem 0 0; color: var(--slate); }
-@media (max-width: 30rem) { .publication-embed iframe { block-size: 620px; } }
+@media (max-width: 30rem) { .publication-embed iframe { block-size: var(--embed-height-mobile, 620px); } }
 .sl-markdown-content figure:has(img, video) figcaption { display: none; }
 .publication-image-trigger { position: relative; display: block; inline-size: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
 .publication-image-dialog { inline-size: min(70rem, calc(100vw - 2rem)); max-inline-size: calc(100vw - 2rem); max-block-size: calc(100dvh - 2rem); padding: 0; overflow: auto; }
@@ -134,6 +134,7 @@ html[data-theme='dark'] .sl-markdown-content pre code span { color: var(--shiki-
 .history-timeline .history-year { grid-row: 1 / span 3; margin: .35rem 0 0; }
 .history-timeline h2 { grid-column: 2; margin: 0; padding: 0; border: 0; }
 .history-timeline li > p:not(.history-year) { grid-column: 2; max-width: 42rem; margin: .35rem 0 0; }
+.history-timeline .publication-embed { grid-column: 2; }
 .history-timeline cite { font-style: normal; }
 .history-timeline figure { grid-column: 2; max-width: 42rem; margin: 1rem 0 0; border-radius: var(--radius-ui); overflow: hidden; background: var(--soft); }
 .history-timeline figure img { display: block; inline-size: 100%; max-block-size: 20rem; object-fit: cover; }
@@ -149,6 +150,7 @@ html[data-theme='dark'] .history-timeline figcaption a { color: var(--accent-str
   .history-timeline .history-year,
   .history-timeline h2,
   .history-timeline li > p:not(.history-year),
+  .history-timeline .publication-embed,
   .history-timeline figure { grid-column: 1; grid-row: auto; }
 }
 

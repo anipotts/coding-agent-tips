@@ -2,6 +2,48 @@
 
 This file tracks Ani's manual review of every currently public canonical page and each H1, H2, and H3 block. It is editorial working state, not public content. A section stays `unreviewed` until Ani has directly reviewed it. Git history, validation, publication status, and a lack of recent changes do not count as approval.
 
+## embedded demonstrations: September 7, 2026
+
+Ani approved the proposed distribution of 12 X posts across eight pages and
+requested matching source dropdown entries. Eleven posts are on seven public
+pages; autoresearch is in the hidden Codex workflow draft. The existing Grok
+capture remains in place. Seven hidden chapters remain hidden.
+
+The source registry records each original post, creator, date, and the scope
+of its evidence. Each placement declares its source in page frontmatter. The
+media manifest records native text, image, or video embeds, visible credits,
+responsive dimensions, and original-post fallbacks. New explanatory bridges
+remain agent proposals; this placement approval does not approve surrounding
+chapter wording or establish Ani's experience with the demonstrations.
+
+The live map derives the new media and links from Markdown. The first-task
+section's existing review-started fingerprint becomes stale because it now
+includes the Ricky Robinett demonstration. The reviewed Grok Zoom paragraph
+and homepage wording are unchanged.
+
+Verification: 24 public embed presentations passed source-dropdown, fallback,
+width, and overflow checks at 319 and 1440 pixels. All seven video posts played
+after a tap with autoplay disabled. Content, UI ownership, editorial inventory,
+build, routes, source contracts, agent surfaces, navigation, and development
+search passed. The compressed HTML cap increased from 24 to 25 KiB for the
+expanded chapter content (Claude extensions: 24,717 bytes); CSS, JavaScript,
+font, and image caps remain unchanged.
+
+The full 306-case accessibility sweep reports vendor-owned failures inside
+X's frames: low contrast on the show-more links in the claws, Devin, vibe
+coding, and flight simulator posts, plus an unnamed affiliation link in the
+OpenAI Developers post. Host-page checks passed. These failures remain in
+`test:a11y`; no rule was disabled or exception added. Native embed settings
+cannot repair the unnamed control. Launch accessibility remains unresolved
+while these frames are included. The original-post fallbacks remain available.
+
+Fresh performance audit passed: three cold mobile Lighthouse runs per homepage,
+Codex, Claude Code, and Grok route over verified local HTTP/2, without CDN
+caching or compression. Median scores were 100, 97, 97, and 99; median LCP was
+1526, 2409, 2483, and 1957 ms. Warm Codex-to-Claude route paint was 44.1 ms
+(synthetic interaction, not field INP). Artifacts are in
+`/tmp/handbook-posts-performance/summary.json`.
+
 ## states
 
 - `unreviewed`: Ani has not reviewed the current wording.

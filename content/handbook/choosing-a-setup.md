@@ -2,11 +2,11 @@
 title: choosing a coding agent setup
 description: compare surfaces, harnesses, models, orchestration, and hardware before choosing a setup.
 products: [market]
-updatedAt: "2026-09-07T16:33:00-04:00"
+updatedAt: "2026-09-07T22:03:00-04:00"
 checkedAt: "2026-09-07T15:05:08-04:00"
 status: current
 evidence: [official-source, analysis]
-sources: [cursor-docs, cursor-pricing, opencode, git-worktrees, openai-remote-connections, openai-codex-cloud]
+sources: [cursor-docs, cursor-pricing, opencode, git-worktrees, openai-remote-connections, openai-codex-cloud, karpathy-mac-mini-claws]
 redirects: [/market/, /market/hardware/]
 voice: evidence
 navigation:
@@ -112,6 +112,15 @@ files, and each may accumulate dependencies or build output. local models add
 weights and runtime memory. estimate those needs from the model and runner you
 intend to use, then test the actual workload. a hardware specification alone
 cannot tell you whether a particular agent setup will feel responsive.
+
+Karpathy posted about buying a Mac mini to experiment with claws. his post
+also raises the question of what private data and credentials to give an agent.
+your workload and access requirements should guide that choice.
+
+<div class="publication-embed" data-media-id="karpathy-mac-mini-claws">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2024987174077432126&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Karpathy on a Mac mini and claws (February 2026)" width="550" height="369" style="--embed-height: 369px; --embed-height-mobile: 380px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/karpathy/status/2024987174077432126" target="_blank" rel="noopener noreferrer">Andrej Karpathy (@karpathy)</a>, february 2026.</p>
+</div>
 
 <span id="move-execution-for-a-concrete-reason" class="heading-alias" aria-hidden="true"></span>
 

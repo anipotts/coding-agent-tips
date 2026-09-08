@@ -2,13 +2,13 @@
 title: what else can it do?
 description: choosing and combining claude code extensions by the job they do.
 products: [claude-code]
-updatedAt: "2026-09-07T16:33:00-04:00"
+updatedAt: "2026-09-07T22:03:00-04:00"
 checkedAt: "2026-09-07T15:02:34-04:00"
 status: current
 completion: complete
 draft: false
 evidence: [official-source, analysis, open-question]
-sources: [anthropic-features-overview, anthropic-skills, anthropic-subagents, anthropic-mcp, anthropic-hooks, anthropic-plugins, anthropic-function-hooks-proposal]
+sources: [anthropic-features-overview, anthropic-skills, anthropic-subagents, anthropic-mcp, anthropic-hooks, anthropic-plugins, anthropic-function-hooks-proposal, alex-albert-mcp-github-demo-post]
 redirects: []
 voice: personal
 navigation:
@@ -135,6 +135,14 @@ then decide whether the workflow needs writes. adding access to comments,
 records, or messages changes what the session can do on another system. match
 the service permissions to the intended operations, and keep returned content
 separate from instructions that authorize the task.
+
+Alex Albert’s 2024 demo shows Claude desktop using MCP to create a GitHub
+repository and pull request.
+
+<div class="publication-embed" data-media-id="alex-albert-mcp-github-demo-post">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1861079874385203522&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Alex Albert demonstrates MCP with GitHub (November 2024)" width="550" height="752" style="--embed-height: 752px; --embed-height-mobile: 593px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/alexalbert__/status/1861079874385203522" target="_blank" rel="noopener noreferrer">Alex Albert (@alexalbert__)</a>, november 2024.</p>
+</div>
 
 <span id="run-hooks-at-meaningful-events" class="heading-alias" aria-hidden="true"></span>
 

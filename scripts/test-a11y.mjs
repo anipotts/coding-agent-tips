@@ -116,16 +116,22 @@ try {
       }
 
       // A lazy external post can still be hydrating after the host's fonts
-      // are ready. Audit the loaded screenshot, including its iframe links.
+      // are ready. Audit loaded text, image, and video posts and their links.
       for (const iframe of await page.locator('.publication-embed iframe').elementHandles()) {
         await iframe.scrollIntoViewIfNeeded();
         const frame = await iframe.contentFrame();
         if (!frame) throw new Error(`${route}: external media frame is unavailable`);
         await frame.waitForFunction(() => {
-          const images = [...document.querySelectorAll('img[src*="/media/"]')];
-          return images.length > 0 && images.every((image) => image.complete && image.naturalWidth > 0);
+          const images = [...document.querySelectorAll('img')];
+          return document.querySelector('article') && images.every((image) => image.complete && image.naturalWidth > 0);
         });
         await frame.evaluate(() => document.fonts.ready);
+        // Wait for the official resize message to reach the host so axe sees
+        // the final frame, rather than a clipped or still-expanding post.
+        await frame.waitForFunction(() => {
+          const height = document.querySelector('article')?.getBoundingClientRect().height;
+          return height && innerHeight >= height && innerHeight - height < 8;
+        });
       }
       await page.evaluate(() => scrollTo(0, 0));
       const report = await new AxeBuilder({ page }).analyze();

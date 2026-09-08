@@ -33,10 +33,10 @@ function handbookFiles(rootDirectory = root) {
   return ['handbook', 'guides', 'archive'].flatMap((directory) => markdownFiles(resolve(rootDirectory, 'content', directory)));
 }
 
-export function canonicalContentFiles(rootDirectory = root) {
+export function canonicalContentFiles(rootDirectory = root, { includeDrafts = false } = {}) {
   return [
     { route: '/', file: resolve(rootDirectory, 'content/home.md'), kind: 'home' },
-    ...handbookFiles(rootDirectory).filter((file) => !isDraft(file)).map((file) => ({
+    ...handbookFiles(rootDirectory).filter((file) => includeDrafts || !isDraft(file)).map((file) => ({
       route: routeForFile(file, rootDirectory),
       file,
       kind: relative(resolve(rootDirectory, 'content'), file).startsWith('archive/') ? 'archive' : 'guide',
