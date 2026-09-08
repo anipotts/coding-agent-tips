@@ -13,7 +13,7 @@ The aim is a professional publication that feels personal, current, and technica
 
 Coding agent tips is an opinionated, source backed handbook about using coding agents in real work.
 
-Its primary readers are experienced builders, staff engineers, hiring managers, and technically serious newcomers who may land on one page without prior context. A page must support two reading modes:
+Its primary readers know basic coding but are new to agents. They may feel lost among unfamiliar tools and terms, or arrive with one specific question. Keep the initial crash course brief and optional, embed primary references for deeper study, and use short headings that make questions and concerns easy to locate. Ani's observations, examples, humor, and stated limits give the handbook its personal perspective. A page must support two reading modes:
 
 1. A first pass that establishes the subject, the recommendation, and why it matters.
 2. A study pass that exposes structure, evidence, sources, technical detail, and open questions.
@@ -95,11 +95,42 @@ Compare matching routes, viewport sizes, themes, scroll positions, focus states,
 
 The homepage introduces one clear thesis and routes the reader into the handbook. Its hierarchy comes from a strong opening, compact guide groups, and direct shared-guide links.
 
+The selected homepage uses a visible “browse guides” menu in the slim header
+and compact neutral provider buttons after the subtitle. Each button contains
+a real provider mark, provider name, and arrow, with the same `8px` radius as
+the “coding agents” highlight. At `60rem` and wider the buttons are `56px`
+high; below that they are `40px` high and wrap naturally. The desktop hero
+uses an `82rem` maximum container and a fluid display size capped at `86px`.
+Homepage prose is `22px` on desktop and retains the shared `18px` reading
+size below `60rem`. Guide article typography retains its existing roles.
+
 Keep the first screen legible without decorative hero art. Use open rows and restrained cards only where a group needs a boundary. Provider groups may share a grid because they have the same conceptual structure. Shared guides remain a simple publication list.
+
+Below `48rem`, provider cards use native horizontal scrolling with snap points
+and manual previous/next controls. They never rotate automatically. Preserve
+keyboard access to every card link, including without JavaScript. The mobile
+homepage display size is `clamp(32px, 8.5vw, 44px)`; the words and reading type
+remain unchanged. The footer stacks brand, links, and update date on mobile.
 
 ### provider guide pages
 
 A provider page opens with its title, update state, page actions, and first useful claim. The guide rail provides chapter navigation; the active page may reveal a compact indented heading outline.
+
+At narrow widths, give the title its reading space: below `30rem`, the copy
+action uses its icon and full accessible name. Below `40rem`, dates use a
+compact date with the full ET timestamp available on the time element. Example
+labels, text, and the copy action share one compact colored card; the copy
+action sits beside the label, with space reserved for wrapping labels. Ordinary
+code blocks keep their copy action below the code. Search transitions preserve stable control width
+and respect reduced motion.
+
+Below `48rem`, search results use the viewport width minus the shared page
+gutters, centered below the inline header input. The results scroll within
+the available viewport height. In the mobile page picker, chapter icons and
+labels sit one indentation level beneath their provider label.
+
+The Claude overview places Ani's terminal recording immediately below
+“this is claude code,” before the explanatory paragraphs.
 
 Do not add a permanent right table of contents or a second intermediate navigation bar. The article remains the visual center. Media can become wider than prose when comparison or interface detail needs it.
 
@@ -107,9 +138,30 @@ Do not add a permanent right table of contents or a second intermediate navigati
 
 Shared pages use the same publication shell without pretending to belong to a provider. Chronology, comparisons, and methods may use timelines, tables, or aligned evidence rows when those structures improve retrieval.
 
+Archived Claude Code tools belong to the Claude Code navigation group, including
+the mobile page picker. The archive URL and compatibility text remain stable.
+Navigation scope comes from each page's canonical frontmatter.
+
+The rail starts with the shared guide picker and its collapse control. The
+picker labels the current guide and exposes all public guides with indented
+chapters. The same component powers the homepage “browse guides” menu and
+mobile Sheet picker. The site logo appears in the main header; provider
+pickers retain their product identity. Native X embeds are centered at a maximum width of 360px,
+with responsive height, readable native controls, and an adjacent source link.
+
 ### editorial review
 
 Review happens in canonical Markdown and the normal Astro preview. The retired copy-review application is not part of the system.
+
+Ani requested a live local writing map on September 7, 2026. `/__progress/`
+is a read-only development view of the canonical files, including hidden
+chapters. It derives headings, content presence, media, code examples, and
+links on file saves. It reads exact review and provenance records from the
+machine-readable block in `editorial/review-ledger.md`; counts are generated.
+The map never infers approval from layout feedback, file changes, or voice
+frontmatter. Unique body fingerprints survive a heading rename; changed or
+ambiguous accepted wording is flagged. The map does not edit or publish prose,
+and its route, ledger, and assets are excluded from production builds.
 
 The current schema has three separate axes:
 
@@ -152,9 +204,9 @@ The site header has two intentional compositions:
 | viewport | header contract |
 | --- | --- |
 | `60rem` and wider | one row, exactly `64px` high |
-| below `60rem` | two rows, exactly `92px` high |
+| below `60rem` | one row, exactly `52px` high |
 
-The second row keeps all four provider tabs centered, horizontally reachable, and visually compact. It is not a substitute for guide navigation.
+The header contains the site identity and utilities. The homepage adds the visible guide picker; guide pages place it at the top of their rail or mobile Sheet. There is one shared route hierarchy. Both responsive placements are present in static HTML, so the guide HTML budget is `28 KiB` compressed (the largest current chapter is about `26.4 KiB`). CSS, JavaScript, font, and media budgets remain unchanged.
 
 The guide shell has two modes:
 
@@ -242,7 +294,7 @@ Do not wrap ordinary prose, recommendations, sources, or every navigation item i
 
 The three navigation layers answer different questions:
 
-- provider tabs: which agent family am I reading?
+- guide picker: which guide am I reading, and which chapters can I open?
 - guide chapters: which part of this provider handbook am I reading?
 - active page outline: which section of this page am I reading?
 
@@ -255,6 +307,10 @@ The desktop rail may collapse to icons with accessible names and tooltips. On mo
 ### icons and provider identity
 
 Use Tabler icons supplied by the Starwind setup for interface actions. Use the verified provider product marks configured by the site. Keep optical size consistent within a control group, including search, theme, GitHub, page actions, menu, and sidebar triggers.
+
+Provider rail icons use the same 28px rounded frame. Compensate for transparent
+asset padding when matching visible size; retain the original mark. Use original
+high resolution assets for raster marks, including the 338px Claude app icon.
 
 An icon supplements a known action or identity. Prefer text when the symbol would require explanation. Keep decorative icons out of prose and metadata. Never approximate provider logos or use a mark to fill empty space.
 
@@ -282,6 +338,7 @@ Classify media before adding it:
 
 - **Ani owned**: Ani created or supplied it. It may be stored locally, optimized, and served through responsive derivatives. Preserve provenance in the media manifest.
 - **licensed or explicitly permitted third party**: local storage is allowed only within the documented license or permission. Record the original URL, source page, permission basis, and derivative inventory.
+- **source-hosted image selected by Ani**: a directly requested image may load from its original public media URL. Record the exact URL, dimensions, selection, and source. Keep the creator and original-post link in the expanded caption and a normal image link before JavaScript enhancement. This does not establish a reusable license or permission to store a copy locally.
 - **unlicensed third party**: do not rehost it. For X content, default to the official lazy embed or a credited link to the original post. For other sources, prefer the original page or an official embed.
 
 Never turn technical ability to download an asset into permission to republish it.
@@ -295,7 +352,12 @@ Credited third-party media shows:
 - a link to the original post or canonical source;
 - a natural, specific shoutout explaining why the work is useful here.
 
-Creator identity and the original-post link remain adjacent to the media in the inline publication layout. The expanded view may repeat that credit for context, but it cannot be the only place the credit appears. Credit never implies sponsorship, endorsement, partnership, affiliation, or permission beyond what is documented.
+Keep creator attribution and the original-post link in nearby prose for post embeds. For an image-only presentation selected by Ani, keep both in the expanded caption. Image captions appear in the expanded view, with their source links intact. Credit never implies sponsorship, endorsement, partnership, affiliation, or permission beyond what is documented.
+
+Onward links describe the question or example at their destination. Prefer
+“give a Bot a changelog-watching job” or “compare options and take over a filter”
+to generic chapter names or “continue here.” Keep these transitions brief and
+specific to content the linked page actually covers.
 
 ### images, captions, and enlargement
 
@@ -303,7 +365,9 @@ Provide intrinsic dimensions, responsive sources where useful, asynchronous deco
 
 An image opens in a Starwind Dialog only when the larger view reveals useful detail. The trigger is a button with an accessible action name. Escape closes the dialog, focus is contained and restored, and the original page remains usable without the enhancement.
 
-Captions are hidden in the inline publication layout by default for dialog-enabled images. The complete caption appears with the enlarged image. If a caption contains essential information that the reader needs without opening the image, move that information into nearby prose instead of relying on the hidden caption.
+Captions are hidden in the inline publication layout from the initial render, including before enhancement scripts load. The complete caption appears beneath the enlarged image. If a caption contains essential information that the reader needs without opening the image, move that information into nearby prose instead of relying on the hidden caption.
+
+Place screenshots beside the sections they illustrate. Group images only when seeing them together helps comparison; use a compact bento grid with consistent gaps and no empty final cell. Preserve image proportions and reflow to one column when necessary for legibility. Ani's supplied Claude Code terminal recording introduces the CLI near the opening. This silent recording autoplays and loops like a GIF, with no playback controls or play overlay. Clicking opens the larger viewer and caption. Honor reduced motion by showing a still frame until the reader opens the viewer.
 
 A caption explains relevance, provenance, or credit. It does not repeat the alt text.
 
@@ -325,6 +389,10 @@ When an image is too information dense for useful alt text, provide the concise 
 Third-party embeds load lazily and never block the first useful article content. Reserve their aspect ratio to prevent layout shift. Do not autoplay media. Avoid loading tracking-heavy embed runtimes before the reader approaches or requests the content.
 
 Every embed includes an ordinary link to the original post or source. If the runtime is blocked, the post is deleted, the network is unavailable, or JavaScript is disabled, the reader still sees the creator identity, a useful description, and the source link. The surrounding argument cannot depend on the embed remaining available.
+
+Use X's official post embed for text, screenshots, and video demonstrations, with the original presentation and nearby creator credit. Keep posts centered at up to 360 pixels, one per section, with at most two per page except the longer history timeline. Reserve measured desktop and mobile heights before loading, accept height changes only from that iframe's official origin, and keep the source link independent of the embedded runtime. Videos play after a reader's action and may open fullscreen. Register every embedded post as a page source so it appears in the bottom source dropdown. Draft placements receive the same source and media checks while staying out of public routes.
+
+On product overviews, keep optional crash-course navigation in the guide rail and mobile menu footer, outside article prose. Other chapters retain the shared handbook navigation.
 
 ## interaction contracts
 
@@ -388,9 +456,9 @@ Responsive design recomposes the shell; it does not shrink every element.
 
 | range | required behavior |
 | --- | --- |
-| below `48rem` | `92px` two-row header, centered compact provider tabs, compact utility group, mobile Sheet, no permanent rail, local scrolling for wide tables |
-| `48rem` through `59.99rem` | `92px` two-row header, persistent collapsible guide rail, icon search control, no intermediate dual dropdown bar |
-| `60rem` through `71.99rem` | `64px` one-row header, tighter provider and utility spacing, persistent guide rail |
+| below `48rem` | `52px` one-row header, homepage guide picker, compact utility group, guide mobile Sheet, no permanent rail, local scrolling for wide tables |
+| `48rem` through `59.99rem` | `52px` one-row header, persistent collapsible guide rail, icon search control, no intermediate dual dropdown bar |
+| `60rem` through `71.99rem` | `64px` one-row header, compact utilities and a shared guide picker, persistent guide rail |
 | `72rem` and wider | `64px` full publication shell with wider article breathing room |
 
 Required viewport checks are `375`, `768`, `1024`, and `1440` pixels. Add `320`, `942`, `959`, `960`, and widths immediately around `48rem` when a change touches boundaries.
@@ -400,7 +468,7 @@ At every width:
 - no page-level horizontal overflow;
 - no overlap between brand, provider navigation, utilities, title, and actions;
 - title and page actions share a justified row whenever the available measure permits, including mobile;
-- provider tabs remain centered, compact, and horizontally reachable;
+- the guide picker exposes all public chapters with clear indentation;
 - the active provider and chapter remain clear;
 - controls remain operable by touch and keyboard;
 - prose remains readable and tables retain lookup through local scrolling;
@@ -537,7 +605,7 @@ The consistency coverage inventory is:
 
 | surface | owner and regression coverage |
 | --- | --- |
-| header, provider tabs, theme, mobile Sheet | SiteHeader; navigation and accessibility checks |
+| header, guide pickers, theme, mobile Sheet | SiteHeader; navigation and accessibility checks |
 | search trigger, input, results, clear and dismissal | upstream Starlight with shell styles; navigation and development search checks |
 | chapter rail, outline, collapse and progress | StarlightSidebar; navigation and accessibility checks |
 | page actions, portaled menu, clipboard and toast | StarlightPageTitle; navigation checks including scroll dismissal and typography |

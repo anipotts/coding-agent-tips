@@ -16,10 +16,13 @@ const text = (html) => html
   .replace(/&(?:amp|#x26|#38);/g, (entity) => ampersandEntities.has(entity) ? '&' : entity)
   .replace(/\s+/g, ' ')
   .trim();
+const hasRetiredGuideLabel = (html) => />\s*product guides\s*</i.test(html);
+if (!hasRetiredGuideLabel('<span class="sidebar-label">product guides</span>')) failures.push('retired label check must reject the old navigation label');
+if (hasRetiredGuideLabel('<p>the product guides carry the current details.</p>')) failures.push('retired label check must allow ordinary prose about the guides');
 const homeSource = await readFile(path.join(root, 'content/home.md'), 'utf8');
 const canonicalH1 = text(homeSource.match(/^#\s+(.+)$/m)?.[1] ?? '');
 const routeFile = (route) => route === '/' ? path.join(dist, 'index.html') : path.join(dist, route.replace(/^\//, ''), 'index.html');
-const publicFile = (pathname) => pathname.endsWith('.md') ? path.join(dist, pathname.replace(/^\//, '')) : routeFile(pathname.endsWith('/') ? pathname : `${pathname}/`);
+const publicFile = (pathname) => path.extname(pathname) ? path.join(dist, pathname.replace(/^\//, '')) : routeFile(pathname.endsWith('/') ? pathname : `${pathname}/`);
 const markdownFiles = async (directory) => (await Promise.all((await readdir(directory, { withFileTypes: true })).map(async (entry) => {
   const absolute = path.join(directory, entry.name);
   if (entry.isDirectory()) return markdownFiles(absolute);
@@ -37,6 +40,9 @@ for (const icon of ['codex-light.png', 'codex-dark.png', 'claude-code.png', 'gro
 
 const registry = JSON.parse(await readFile(path.join(root, 'editorial/sources.json'), 'utf8'));
 const metadata = [];
+for (const privatePath of ['__progress', 'editorial/progress', 'editorial/review-ledger.md']) {
+  try { await access(path.join(dist, privatePath)); failures.push(`local writing map leaked into production: ${privatePath}`); } catch { /* Development-only files must be absent. */ }
+}
 for (const [route, source] of contentFiles) {
   const markdown = await readFile(source, 'utf8');
   const title = scalar(markdown, 'title');
@@ -50,6 +56,15 @@ for (const [route, source] of contentFiles) {
   const publicText = text(html);
   const canonical = html.match(/<link\s+rel="canonical"\s+href="([^"]+)"/)?.[1];
   if (canonical !== `${origin}${route}`) failures.push(`${route}: canonical url is missing or incorrect`);
+  if ((html.match(/<meta name="author" content="Ani Potts"/g) ?? []).length !== 1) failures.push(`${route}: expected one consistent author meta tag`);
+  if (!html.includes('<link rel="author" href="https://anipotts.com/"')) failures.push(`${route}: personal author link is missing from metadata`);
+  const bylines = [...html.matchAll(/<p\b[^>]*class="author-attribution"[^>]*>(.*?)<\/p>/gs)];
+  if (bylines.length !== 1 || text(bylines[0][1]) !== 'by ani potts' || !bylines[0][1].includes('href="https://anipotts.com/"')) failures.push(`${route}: visible author attribution is missing or inconsistent`);
+  try {
+    const identities = [...html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs)].map((match) => JSON.parse(match[1]));
+    const websites = identities.filter((entry) => entry['@type'] === 'WebSite');
+    if (websites.length !== 1 || websites[0]['@id'] !== `${origin}/#website` || websites[0].url !== `${origin}/` || websites[0].name !== 'coding agent tips' || websites[0].author?.['@id'] !== 'https://anipotts.com/#person' || websites[0].author?.name !== 'Ani Potts' || websites[0].author?.url !== 'https://anipotts.com/') failures.push(`${route}: structured website authorship is missing or inconsistent`);
+  } catch { failures.push(`${route}: structured identity is not valid JSON`); }
   if (!html.includes('<meta property="og:title"')) failures.push(`${route}: open graph title is missing`);
   if (!html.includes(`<meta property="og:image" content="${origin}/social-card.png"`)) failures.push(`${route}: social preview image is missing`);
   if (!html.includes(`<meta name="twitter:image" content="${origin}/social-card.png"`)) failures.push(`${route}: twitter preview image is missing`);
@@ -67,8 +82,8 @@ for (const [route, source] of contentFiles) {
   }
   if (!publicText.includes('last updated')) failures.push(`${route}: exact update metadata is missing`);
   if ((route.startsWith('/guides/codex') || route.startsWith('/guides/claude-code')) && publicText.includes('last checked')) failures.push(`${route}: internal source check metadata is exposed in the public page header`);
-  for (const label of ['handbook', 'codex', 'claude code', 'grok']) if (!publicText.includes(label)) failures.push(`${route}: provider scope tab is missing: ${label}`);
-  if (/\bproduct guides\b/i.test(publicText)) failures.push(`${route}: retired product guides label appears in public output`);
+  for (const label of ['handbook', 'codex', 'claude code', 'grok']) if (!publicText.includes(label)) failures.push(`${route}: guide picker scope is missing: ${label}`);
+  if (hasRetiredGuideLabel(html)) failures.push(`${route}: retired product guides label appears in public output`);
   if (html.includes('·')) failures.push(`${route}: mid dot appears in public output`);
   if (!html.includes('coding agent tips on GitHub')) failures.push(`${route}: GitHub link is missing from the site header`);
   if (/GitHub stars|github-stars|\d+ stars, checked/i.test(html)) failures.push(`${route}: stale GitHub star metadata appears in the site header`);
@@ -115,7 +130,27 @@ try {
   if (homepageMarkdown !== `${canonicalBody}\n`) failures.push('/index.md: generated homepage Markdown differs from canonical content');
 } catch { failures.push('/index.md: generated homepage Markdown is missing'); }
 
-const activeGuideText = (await Promise.all(contentFiles.map(([, source]) => readFile(source, 'utf8')))).join('\n');
+// Dated test environments must retain the version actually exercised. Only
+// exempt the version in that explicit test claim; later current-version prose
+// in the same paragraph still goes through the duplication check.
+const withoutDatedTestVersions = (markdown) => markdown.replace(
+  /\bon (?:January|February|March|April|May|June|July|August|September|October|November|December) \d{1,2}, \d{4},?\s+(?:i|an agent run for this guide) (?:tested|verified|reproduced) [^.!?`]*?`\d+\.\d+\.\d+(?:-[\w.-]+)?`/gi,
+  (claim) => claim.replace(/`[^`]+`$/, '`recorded test version`'),
+);
+const versionFixture = '2.1.261';
+for (const [fixture, remains] of [
+  ['on September 5, 2026, i tested Claude Code `2.1.261` in isolation.', false],
+  ['on September 5, 2026, an agent run for this guide tested Claude Code `2.1.261` in isolation.', false],
+  ['an agent run for this guide tested Claude Code `2.1.261` in isolation.', true],
+  ['i tested Claude Code `2.1.261` in isolation.', true],
+  ['on September 5, 2026, the current Claude Code version is `2.1.261`.', true],
+  ['on September 5, 2026, i tested Claude Code `2.1.261`. use 2.1.261 today.', true],
+]) {
+  if (withoutDatedTestVersions(fixture).includes(versionFixture) !== remains) {
+    failures.push('dated test version classification failed');
+  }
+}
+const activeGuideText = (await Promise.all(contentFiles.map(([, source]) => readFile(source, 'utf8')))).map(withoutDatedTestVersions).join('\n');
 for (const version of Object.values(registry.product_versions)) {
   const occurrences = activeGuideText.split(String(version)).length - 1;
   if (occurrences > 0) failures.push(`current product version ${version} is duplicated outside editorial/sources.json`);
@@ -138,6 +173,10 @@ if (text(home).includes('across agents')) failures.push('/: retired shared-guide
 for (const icon of ['codex-light.png', 'claude-code.png', 'grok.png']) {
   if (!home.includes(`/icons/products/${icon}`)) failures.push(`/: product icon is absent from the homepage: ${icon}`);
 }
+for (const slug of ['codex', 'claude-code', 'grok']) {
+  if (!new RegExp(`<a[^>]+href="/guides/${slug}/"[^>]+class="hero-provider-link`).test(home)) failures.push(`/: missing hero provider link for ${slug}`);
+}
+if (home.indexOf('class="hero-provider-actions"') > home.indexOf('id="why-i-made-this"')) failures.push('/: provider actions must follow the introduction before why i made this');
 const draftGuides = (await Promise.all((await markdownFiles(path.join(root, 'content'))).map(async (file) => ({ file, markdown: await readFile(file, 'utf8') }))))
   .filter(({ markdown }) => scalar(markdown, 'draft') === 'true')
   .map(({ file }) => `/${path.relative(path.join(root, 'content'), file).replace(/\.md$/, '')}/`);

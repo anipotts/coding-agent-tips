@@ -1,10 +1,11 @@
 # coding agent tips
 
-this repository is an opinionated, source backed handbook for experienced coding agent users. codex and claude code are coequal primary guides. archived claude code plugins remain available only for the compatibility window documented in `content/archive/claude-code-tools.md`.
+this repository is an opinionated, source backed handbook for people who know basic coding and are learning to work with agents. codex and claude code are coequal primary guides. archived claude code plugins remain available only for the compatibility window documented in `content/archive/claude-code-tools.md`.
 
 ## public standard
 
-- write for a staff engineer, hiring manager, or technically serious builder who may encounter one page without prior context.
+- assume basic coding knowledge and little agent experience. give a brief, optional crash course with embedded primary references. explain unfamiliar agent terms where they matter and let fluent readers move straight to practical material.
+- use short headings that help readers find a question, worry, or curiosity. preserve clear topic names and Ani's adopted headings. personal judgments require his words; a question heading does not establish his experience.
 - separate tested behavior, official product facts, analysis, and open questions.
 - prefer primary sources and record them in `editorial/sources.json`.
 - do not use generated activity, commit frequency, or vendor benchmarks as evidence of quality.
@@ -29,6 +30,15 @@ this repository is an opinionated, source backed handbook for experienced coding
 - run `bun run sync:readme` after changing a principal guide title or evidence label. the generated README blocks must match before validation passes.
 - edit public prose in its canonical Markdown file and review the affected route in the normal Astro development server.
 - normal public prose does not use hyphens. preserve them only for syntax, routes, filenames, commands, URLs, version identifiers, and official product names.
+
+## working checkout
+
+For the remaining handbook completion work, use the saved project checkout on
+local `main`. Keep the development preview and ongoing edits in that checkout.
+GitHub's protected `main` still requires a pull request and passing checks;
+create a temporary submission branch from the current work when needed, then
+fast forward local `main` to the verified merge. Preserve other worktrees as
+recovery copies until their remaining work is accounted for.
 
 ## verification
 

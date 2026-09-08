@@ -4,8 +4,9 @@ import starlight from '@astrojs/starlight';
 import { unified } from '@astrojs/markdown-remark';
 import { defineConfig } from 'astro/config';
 import { contentRedirects } from './src/content-manifest.mjs';
-import { site } from './src/site';
+import { authorshipHead, navigationScopes, site } from './src/site';
 import starlightDevSearch from './src/integrations/starlight-dev-search.mjs';
+import editorialProgress from './src/integrations/editorial-progress.mjs';
 import linkMetadata from './src/rehype/link-metadata.mjs';
 import publicationElements from './src/rehype/publication-elements.mjs';
 
@@ -21,7 +22,17 @@ export default defineConfig({
   site: site.url,
   output: 'static',
   prefetch: { prefetchAll: false, defaultStrategy: 'hover' },
-  markdown: { processor: unified({ rehypePlugins: [linkMetadata, publicationElements] }) },
+  markdown: {
+    processor: unified({ rehypePlugins: [linkMetadata, [publicationElements, {
+      // Explicit options participate in Astro's content cache digest.
+      providerGuides: navigationScopes.filter((scope) => scope.id !== 'handbook'),
+      providerGuidesLabel: site.interfaceCopy.providerGuides,
+    }]] }),
+    shikiConfig: {
+      themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' },
+      defaultColor: false,
+    },
+  },
   redirects,
   integrations: [
     sitemap({ filter: (page) => {
@@ -30,8 +41,11 @@ export default defineConfig({
     } }),
     starlight({
       title: site.name,
+      // Publication code frames already provide syntax highlighting and copy controls.
+      expressiveCode: false,
       customCss: ['./src/styles/starwind.css', './src/styles/global.css'],
       head: [
+        ...authorshipHead,
         { tag: 'meta', attrs: { property: 'og:image', content: socialImage } },
         { tag: 'meta', attrs: { property: 'og:image:width', content: '1280' } },
         { tag: 'meta', attrs: { property: 'og:image:height', content: '640' } },
@@ -56,6 +70,19 @@ export default defineConfig({
   ],
 
   vite: {
-    plugins: [starlightDevSearch(), tailwindcss()],
+    plugins: [starlightDevSearch(), editorialProgress(), tailwindcss()],
+    build: {
+      rolldownOptions: {
+        output: {
+          codeSplitting: {
+            groups: [{
+              // These wrappers share lifecycle code and ship together on every page.
+              name: 'interface-primitives',
+              test: (id) => id.includes('@starwind-ui/astro/') && id.includes('?astro&type=script'),
+            }],
+          },
+        },
+      },
+    },
   },
 });

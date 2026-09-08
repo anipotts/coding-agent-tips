@@ -1,11 +1,11 @@
 ---
-title: configuration
-description: the current official configuration surfaces for grok build.
+title: settings and memory
+description: configure grok build by scope, inspect what it loads, and give grok bots a clear role.
 products: [grok]
-updatedAt: "2026-08-29T19:04:00-04:00"
+updatedAt: "2026-09-07T16:33:00-04:00"
 status: pending
-evidence: [official-source, open-question]
-sources: [grok-build, grok-build-settings, grok-build-permissions]
+evidence: [tested, official-source, analysis]
+sources: [grok-build, grok-build-settings, grok-build-settings-reference, grok-build-permissions, grok-build-sandbox, grok-bot-profiles, grok-bot-approvals]
 redirects: []
 voice: evidence
 navigation:
@@ -13,21 +13,101 @@ navigation:
   order: 30
 ---
 
-## the current configuration map
+<span id="put-each-setting-where-it-belongs" class="heading-alias" aria-hidden="true"></span>
+
+## where do the settings go?
+
+Grok Build loads configuration from your machine and the current project.
+Grok Bot uses profiles and account settings for persistent agents. start by
+identifying which one you are changing.
 
 | scope | canonical place |
 |---|---|
 | personal defaults | `~/.grok/config.toml` |
-| repository tools and permission rules | `.grok/config.toml` |
+| repository MCP servers, plugins, and permission rules | `.grok/config.toml` |
 | shared agent instructions | `AGENTS.md` |
 | extensions | `.grok/` skills, plugins, hooks, and MCP servers |
 
-`grok inspect` shows the configuration discovered for the current directory.
-project configuration is intentionally narrower than user configuration.
-Grok Build [documents these settings](https://docs.x.ai/build/settings).
+the [settings guide](https://docs.x.ai/build/settings) limits project
+configuration to those three jobs. model choices and interface preferences
+belong in your user configuration. `GROK_HOME` can change the location of that
+personal directory. managed configuration and requirements can also constrain
+the effective settings on an organization managed machine.
 
-Grok documents approval mode and sandbox access as separate controls. ask,
-auto, and always approve decide which tool calls may run. the sandbox still
-limits what an approved call can reach. Grok Build [documents that permission boundary](https://docs.x.ai/build/features/permissions).
+<span id="try-one-inspectable-configuration" class="heading-alias" aria-hidden="true"></span>
 
-this page records the official shape. field tested defaults are coming later.
+## which settings did it load?
+
+for a session where you want to review tool approvals, the documented user
+setting is:
+
+```toml
+# ~/.grok/config.toml
+[ui]
+permission_mode = "ask"
+```
+
+a repository can add a targeted command rule:
+
+```toml
+# .grok/config.toml
+[permission]
+rules = [
+  { action = "deny", tool = "bash", pattern = "git push *" }
+]
+```
+
+then inspect discovery from that repository:
+
+```sh
+grok --version
+grok inspect
+```
+
+check the listed user configuration, project configuration, instructions, and
+permission sources. the rule above demonstrates command matching. publishing
+can happen through other commands or tools, so a repository policy needs to
+cover the actual available paths. the [permission documentation](https://docs.x.ai/build/features/permissions)
+explains how deny, ask, and allow rules interact.
+
+on September 7, 2026, an agent run for this guide tested configuration discovery
+with Grok Build `0.2.22` on macOS, using a disposable project and a separate
+`GROK_HOME`. `grok inspect` found the project rule and both configuration files.
+it also discovered existing compatibility settings from the host. this was a
+discovery test; enforcement and model behavior were outside its scope.
+
+that extra discovery matters when a fresh directory behaves like an old setup.
+Grok can also load Claude and Cursor configuration through compatibility
+scanners. inspect the loaded sources before assuming a setting came from
+`.grok/`. the [settings reference](https://docs.x.ai/build/settings/reference)
+lists those scanners and their controls.
+
+<span id="check-permission-and-sandbox-separately" class="heading-alias" aria-hidden="true"></span>
+
+## what can it actually access?
+
+ask, auto, and always approve control tool permission decisions. auto uses a
+classifier where the feature is available; deny rules and hooks still apply.
+a [sandbox](https://docs.x.ai/build/features/sandbox) limits filesystem and
+network access when active. its profile and enforcement determine what an
+approved command can reach. inspect both controls before unattended work.
+
+<span id="give-a-bot-a-role-and-a-task-a-finish-line" class="heading-alias" aria-hidden="true"></span>
+
+## how should i set up a Bot?
+
+Grok Bot [profiles](https://docs.x.ai/grok-bot/bots) hold a name, description,
+avatar, and ongoing instructions. a useful role might be “collect documentation
+changes for these three libraries.” put the specific libraries, date range,
+and expected output in the conversation for this run.
+
+for example:
+
+> check these three official changelogs since last friday. save a summary with
+> links and dates. flag anything that could change our setup. return the file
+> for review before sending it anywhere.
+
+keep the Bot's identity separate from its access. names and avatars help you
+recognize the worker; [account permissions and connected sessions](https://docs.x.ai/grok-bot/approvals-security-and-privacy)
+determine what it can do. hiding a Bot keeps its history and can leave ongoing
+work running. use the actual work controls when you intend to stop a task.

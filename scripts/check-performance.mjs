@@ -1,10 +1,19 @@
 import { createHash } from 'node:crypto';
+import assert from 'node:assert/strict';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { gzipSync } from 'node:zlib';
 import sharp from 'sharp';
+import { parse as parseYaml } from 'yaml';
 import { canonicalContentFiles } from '../src/content-manifest.mjs';
+import { captionText } from './lib/caption-text.mjs';
+
+assert.equal(captionText('credit <a href="https://example.com">Ani</a>.'), 'credit Ani.');
+assert.equal(captionText('Ani &amp; co'), 'Ani & co');
+assert.equal(captionText('&amp;lt;script&amp;gt;'), '&lt;script&gt;', 'caption entities decode once');
+assert.equal(captionText('visible<script>hidden</script><style>hidden</style><template>hidden</template>'), 'visible');
+assert.equal(captionText('<scr<script>ipt>credit'), 'ipt>credit', 'malformed tags must not join into new markup');
 
 const root = process.cwd();
 const mediaRoot = path.join(root, 'public/media/publications');
@@ -14,17 +23,112 @@ const failures = [];
 const maxDerivativeBytes = 150 * 1024;
 const maxProviderBytes = 400 * 1024;
 const maxFeaturedProviderBytes = 1024 * 1024;
-const maxGuideHtmlGzipBytes = 24 * 1024;
+// The shared guide picker exposes every chapter in both desktop and mobile
+// navigation. The largest chapter is 26.4 KiB compressed with that markup;
+// allow 28 KiB while retaining the CSS, JavaScript, font, and media budgets.
+const maxGuideHtmlGzipBytes = 28 * 1024;
 const maxGuideCssGzipBytes = 32 * 1024;
 const maxGuideJavaScriptGzipBytes = 72 * 1024;
 const maxFontBytes = 80 * 1024;
 const maxFontFiles = 4;
-const maxAgentIndexGzipBytes = 32 * 1024;
-const canonicalRoutes = new Set(canonicalContentFiles().map(({ route }) => route));
+const maxAgentCatalogGzipBytes = 32 * 1024;
+const maxAgentPageGzipBytes = 32 * 1024;
+// Draft assets need the same provenance checks without publishing their routes.
+const editorialPages = canonicalContentFiles(root, { includeDrafts: true });
+const canonicalRoutes = new Set(editorialPages.map(({ route }) => route));
+const sourceRegistry = JSON.parse(await readFile(path.join(root, 'editorial/sources.json'), 'utf8'));
 const providerRoutes = ['/guides/codex/', '/guides/claude-code/', '/guides/grok/'];
 const providerRouteSet = new Set(providerRoutes);
 const sha256 = (buffer) => createHash('sha256').update(buffer).digest('hex');
+for (const video of manifest.videos ?? []) {
+  const buffer = await readFile(path.join(root, 'public', video.path.replace(/^\//, '')));
+  if (buffer.length !== video.bytes || sha256(buffer) !== video.sha256) failures.push(`${video.id}: video file differs from its manifest`);
+  if (video.ownership !== 'owner-supplied' || !video.source || !video.poster || video.durationSeconds <= 0) failures.push(`${video.id}: recording provenance or playback metadata is incomplete`);
+  for (const route of video.canonicalPages) {
+    const page = canonicalContentFiles().find((entry) => entry.route === route);
+    const source = page ? await readFile(page.file, 'utf8') : '';
+    if (!source.includes(`src="${video.path}"`) || !source.includes(`href="${video.path}"`) || !source.includes(`poster="${video.poster}"`)) failures.push(`${video.id}: recording trigger, poster, or fallback link is missing`);
+  }
+}
 const attribute = (tag, name) => tag.match(new RegExp(`\\s${name}="([^"]*)"`))?.[1];
+const mediaRecords = [...(manifest.featuredImages ?? []), ...(manifest.assets ?? []), ...(manifest.externalMedia ?? [])];
+const ownershipClasses = new Set(['owner-supplied', 'provider-published', 'third-party', 'unknown']);
+const permissionStatuses = new Set(['owner-supplied', 'not-recorded', 'permission-granted']);
+const licenseStatuses = new Set(['not-recorded', 'reusable-license']);
+const publicationStatuses = new Set(['rehosted-file', 'official-embed', 'credited-link', 'remote-image']);
+const expectedMediaPolicy = {
+  thirdPartyUseRequirements: ['official-embed', 'credited-link', 'permission-granted', 'reusable-license', 'remote-image'],
+  rehostedDisallowedStatuses: ['official-embed', 'credited-link', 'remote-image'],
+  visibleCreditRequires: ['creator.name', 'creator.handle', 'originalPostUrl'],
+  embedRequirements: { reservedDimensions: true, autoplay: false, reducedMotion: true, originalPostFallback: true },
+};
+const hasCompleteThirdPartyCredit = (record) => record.creditVisible === true
+  && typeof record.creator?.name === 'string'
+  && record.creator.name.length > 0
+  && typeof record.creator?.handle === 'string'
+  && /^@[^\s]+$/.test(record.creator.handle)
+  && typeof record.originalPostUrl === 'string'
+  && /^https:\/\//.test(record.originalPostUrl);
+
+const thirdPartyCreditRegressionCases = [
+  { expected: false, record: { creditVisible: false, creator: { name: 'Creator', handle: '@creator' }, originalPostUrl: 'https://x.com/creator/status/1' } },
+  { expected: false, record: { creditVisible: true, creator: { name: 'Creator', handle: null }, originalPostUrl: 'https://x.com/creator/status/1' } },
+  { expected: false, record: { creditVisible: true, creator: { name: 'Creator', handle: '@creator' }, originalPostUrl: null } },
+  { expected: true, record: { creditVisible: true, creator: { name: 'Creator', handle: '@creator' }, originalPostUrl: 'https://x.com/creator/status/1' } },
+];
+if (thirdPartyCreditRegressionCases.some(({ expected, record }) => hasCompleteThirdPartyCredit(record) !== expected)) failures.push('third-party visible-credit regression cases failed');
+
+if (manifest.schemaVersion !== 2) failures.push('media manifest schema version must be 2');
+if (JSON.stringify(manifest.mediaPolicy) !== JSON.stringify(expectedMediaPolicy)) failures.push('media manifest policy differs from the locked creator-media policy');
+if (!Array.isArray(manifest.externalMedia)) failures.push('media manifest externalMedia must be an array');
+const mediaIds = new Set();
+for (const record of mediaRecords) {
+  if (mediaIds.has(record.id)) failures.push(`${record.id}: media id is duplicated`);
+  mediaIds.add(record.id);
+}
+
+function validateEditorialMetadata(record, { rehosted }) {
+  if (!record.id || typeof record.id !== 'string') failures.push('media record id is missing');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(record.retrievedAt ?? '')) failures.push(`${record.id}: retrieval date is missing or invalid`);
+  if (!record.creator || !Object.hasOwn(record.creator, 'name') || !Object.hasOwn(record.creator, 'handle')) failures.push(`${record.id}: creator name and handle must be explicit, nullable fields`);
+  if (record.creator?.name !== null && typeof record.creator?.name !== 'string') failures.push(`${record.id}: creator name must be a string or null`);
+  if (record.creator?.handle !== null && !/^@[^\s]+$/.test(record.creator?.handle ?? '')) failures.push(`${record.id}: creator handle must begin with @ or be null`);
+  if (record.originalPostUrl !== null && !/^https:\/\//.test(record.originalPostUrl ?? '')) failures.push(`${record.id}: original post URL must be https or null`);
+  if (!ownershipClasses.has(record.ownership)) failures.push(`${record.id}: ownership classification is invalid`);
+  if (!permissionStatuses.has(record.permissionStatus)) failures.push(`${record.id}: permission status is invalid`);
+  if (!licenseStatuses.has(record.licenseStatus)) failures.push(`${record.id}: license status is invalid`);
+  if (!publicationStatuses.has(record.publicationStatus)) failures.push(`${record.id}: publication status is invalid`);
+  if (typeof record.creditVisible !== 'boolean') failures.push(`${record.id}: visible-credit status must be boolean`);
+  if (!Array.isArray(record.canonicalPages) || record.canonicalPages.length === 0) failures.push(`${record.id}: canonical pages are missing`);
+  for (const route of record.canonicalPages ?? []) if (!canonicalRoutes.has(route)) failures.push(`${record.id}: unknown canonical page ${route}`);
+  if (!Array.isArray(record.presentations)) failures.push(`${record.id}: current presentations must be an array`);
+
+  for (const presentation of record.presentations ?? []) {
+    if (!canonicalRoutes.has(presentation.route)) failures.push(`${record.id}: presentation uses unknown canonical route ${presentation.route}`);
+    if (typeof presentation.alt !== 'string' || presentation.alt.length === 0) failures.push(`${record.id}: presentation alt text must be exact and nonempty`);
+    if (presentation.caption !== null && typeof presentation.caption !== 'string') failures.push(`${record.id}: presentation caption must be a string or null`);
+    const registeredVideo = (manifest.videos ?? []).some((video) => video.path === presentation.linkUrl);
+    if (presentation.linkUrl !== null && !/^https:\/\//.test(presentation.linkUrl ?? '') && !registeredVideo) failures.push(`${record.id}: presentation link must be https, a registered recording, or null`);
+  }
+
+  if (record.creditVisible && (!record.creator?.name || !record.creator?.handle || !record.originalPostUrl)) failures.push(`${record.id}: visible credit requires creator name, @handle, and original post URL`);
+
+  const thirdPartyUseAllowed = ['official-embed', 'credited-link', 'remote-image'].includes(record.publicationStatus)
+    || record.permissionStatus === 'permission-granted'
+    || record.licenseStatus === 'reusable-license';
+  if (record.ownership === 'third-party' && !thirdPartyUseAllowed) failures.push(`${record.id}: third-party creator media needs an embed, credited link, permission, or reusable license`);
+  if (record.ownership === 'third-party' && !hasCompleteThirdPartyCredit(record)) failures.push(`${record.id}: third-party creator media requires visible creator name, @handle, and original post URL`);
+
+  if (rehosted) {
+    if (record.publicationStatus !== 'rehosted-file') failures.push(`${record.id}: rehosted media cannot claim embed or link status`);
+    if (record.embed !== null) failures.push(`${record.id}: rehosted media cannot carry embed configuration`);
+  } else if (record.publicationStatus === 'official-embed') {
+    if (!record.embed || !Number.isInteger(record.embed.width) || record.embed.width <= 0 || !Number.isInteger(record.embed.height) || record.embed.height <= 0) failures.push(`${record.id}: embeds must reserve positive integer dimensions`);
+    if (record.embed?.autoplay !== false) failures.push(`${record.id}: embeds must disable autoplay`);
+    if (record.embed?.reducedMotion !== true) failures.push(`${record.id}: embeds must require reduced-motion behavior`);
+    if (!record.originalPostUrl || record.embed?.fallbackUrl !== record.originalPostUrl) failures.push(`${record.id}: embeds must retain the original-post fallback`);
+  } else if (record.embed !== null) failures.push(`${record.id}: non-embed media cannot carry embed configuration`);
+}
 
 if (!/^\d{4}-\d{2}-\d{2}$/.test(manifest.retrievedAt)) failures.push('media manifest retrieval date is missing or invalid');
 if (manifest.derivativeFormat !== 'webp') failures.push('media manifest derivative format must be webp');
@@ -52,6 +156,7 @@ for (const [setId, derivatives] of Object.entries(manifest.derivativeSets)) {
 }
 
 for (const image of manifest.featuredImages ?? []) {
+  validateEditorialMetadata(image, { rehosted: true });
   const file = path.join(root, 'public', image.path.replace(/^\//, ''));
   featuredImageByPath.set(image.path, image);
   let buffer;
@@ -60,8 +165,10 @@ for (const image of manifest.featuredImages ?? []) {
   if (buffer.length !== image.bytes) failures.push(`${image.path}: byte count differs from the manifest`);
   if (buffer.length > maxFeaturedProviderBytes) failures.push(`${image.path}: ${buffer.length} bytes exceeds 1 MiB`);
   if (sha256(buffer) !== image.sha256) failures.push(`${image.path}: sha256 differs from the manifest`);
-  if (metadata.format !== 'png') failures.push(`${image.path}: expected png, received ${metadata.format}`);
+  const expectedFormat = path.extname(image.path).slice(1);
+  if (!['png', 'webp'].includes(expectedFormat) || metadata.format !== expectedFormat) failures.push(`${image.path}: unexpected image format ${metadata.format}`);
   if (metadata.width !== image.width || metadata.height !== image.height) failures.push(`${image.path}: intrinsic dimensions differ from the manifest`);
+  if (image.derivativeSet && !manifest.derivativeSets[image.derivativeSet]) failures.push(`${image.id}: responsive derivative set is missing`);
   for (const route of image.canonicalPages ?? []) if (!canonicalRoutes.has(route)) failures.push(`${image.id}: unknown canonical page ${route}`);
 }
 
@@ -72,6 +179,7 @@ for (const file of derivativePaths) if (!trackedMedia.includes(file)) failures.p
 const originalUrls = new Set();
 const sourceAssetIds = new Set(manifest.assets.map((asset) => asset.id));
 for (const asset of manifest.assets) {
+  validateEditorialMetadata(asset, { rehosted: true });
   if (originalUrls.has(asset.originalUrl)) failures.push(`${asset.id}: original URL is duplicated in the manifest`);
   originalUrls.add(asset.originalUrl);
   if (!Array.isArray(asset.sourcePages) || asset.sourcePages.length === 0) failures.push(`${asset.id}: source pages are missing`);
@@ -80,19 +188,99 @@ for (const asset of manifest.assets) {
   if (!asset.original?.width || !asset.original?.height || !/^[a-f0-9]{64}$/.test(asset.original?.sha256 ?? '')) failures.push(`${asset.id}: original dimensions or hash are invalid`);
   if (!manifest.derivativeSets[asset.derivativeSet]) failures.push(`${asset.id}: derivative set ${asset.derivativeSet} is missing`);
 }
+for (const external of manifest.externalMedia ?? []) {
+  validateEditorialMetadata(external, { rehosted: false });
+  if (external.publicationStatus === 'remote-image') {
+    if (external.mediaType !== 'image' || !/^https:\/\/pbs\.twimg\.com\/media\/[A-Za-z0-9_-]+\?format=(?:jpg|png|webp)&name=(?:small|medium|large|orig)$/.test(external.mediaUrl ?? '')
+      || !Number.isInteger(external.width) || external.width <= 0 || !Number.isInteger(external.height) || external.height <= 0
+      || !Number.isInteger(external.observedBytes) || external.observedBytes <= 0 || external.observedBytes > maxDerivativeBytes
+      || !external.selectionSource?.trim() || external.creditPlacement !== 'expanded-caption') failures.push(`${external.id}: remote image needs the original media host, dimensions, measured byte budget, explicit selection, and expanded creator credit`);
+  }
+  if ((external.presentations ?? []).length && external.publicationStatus === 'official-embed' && (!['text', 'image', 'video'].includes(external.mediaType) || !/^https:\/\/platform\.twitter\.com\/embed\/Tweet\.html\?id=\d+&dnt=true&hideThread=true&theme=(?:light|dark)$/.test(external.embed?.url ?? ''))) failures.push(`${external.id}: renderer requires an official X text, image, or video embed`);
+  if (['official-embed', 'credited-link', 'remote-image'].includes(external.publicationStatus)) {
+    const source = sourceRegistry.sources.find(({ id }) => id === external.sourceId);
+    if (!source || source.url !== external.originalPostUrl) failures.push(`${external.id}: original post is missing from the source registry`);
+    if (external.publicationStatus === 'official-embed' && new URL(external.embed.url).searchParams.get('id') !== external.originalPostUrl.match(/\/status\/(\d+)/)?.[1]) failures.push(`${external.id}: embedded post differs from the credited original`);
+  }
+}
+
+const recordByRenderedPath = new Map();
+const actualPresentationsById = new Map(mediaRecords.map((record) => [record.id, []]));
+for (const image of manifest.featuredImages ?? []) recordByRenderedPath.set(image.path, image);
+for (const asset of manifest.assets ?? []) {
+  for (const derivative of manifest.derivativeSets[asset.derivativeSet] ?? []) recordByRenderedPath.set(derivative.path, asset);
+}
+for (const external of manifest.externalMedia ?? []) {
+  if (external.publicationStatus === 'remote-image') recordByRenderedPath.set(external.mediaUrl, external);
+}
 const tagsByRoute = new Map();
-for (const { route, file } of canonicalContentFiles()) {
+for (const { route, file } of editorialPages) {
   const source = await readFile(file, 'utf8');
+  const metadata = parseYaml(source.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '') ?? {};
   const tags = [...source.matchAll(/<img\b[^>]*>/g)].map(([tag]) => tag);
   tagsByRoute.set(route, tags);
+  for (const [, id, body] of source.matchAll(/<div class="publication-embed(?: publication-post-link)?" data-media-id="([^"]+)">([\s\S]*?)<\/div>/g)) {
+    const record = (manifest.externalMedia ?? []).find((entry) => entry.id === id);
+    if (!record) { failures.push(`${route}: unregistered external media ${id}`); continue; }
+    const frame = body.match(/<iframe\b[^>]*>/)?.[0] ?? '';
+    const fallback = body.match(/<a\b[^>]*>/)?.[0] ?? '';
+    if (record.publicationStatus === 'credited-link') {
+      if (frame || record.embed !== null) failures.push(`${id}: a credited link must not load a player`);
+      const label = body.match(/<a class="publication-post-action"[^>]*>([\s\S]*?)<\/a>/)?.[1];
+      if (!label?.trim() || attribute(fallback, 'href') !== record.originalPostUrl
+        || !captionText(body).includes(record.creator.name) || !captionText(body).includes(record.creator.handle)) failures.push(`${id}: credited post link needs a named action and creator attribution`);
+      if (!(metadata.sources ?? []).includes(record.sourceId)) failures.push(`${id}: original post is missing from the page source dropdown`);
+      actualPresentationsById.get(id).push({ route, alt: label ? captionText(label) : null, caption: null, linkUrl: attribute(fallback, 'href') ?? null });
+      continue;
+    }
+    const permissions = record.mediaType === 'video' ? "fullscreen; autoplay 'none'" : "autoplay 'none'";
+    if (captionText(attribute(frame, 'src') ?? '') !== record.embed?.url || attribute(frame, 'loading') !== 'lazy' || attribute(frame, 'allow') !== permissions) failures.push(`${id}: embed source, lazy loading, or autoplay policy differs`);
+    if (attribute(frame, 'sandbox') !== 'allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox' || attribute(frame, 'referrerpolicy') !== 'no-referrer') failures.push(`${id}: external frame isolation differs`);
+    if (!(metadata.sources ?? []).includes(record.sourceId)) failures.push(`${id}: original post is missing from the page source dropdown`);
+    if (record.embed?.mobileHeight && (!Number.isInteger(record.embed.mobileHeight) || record.embed.mobileHeight <= 0 || attribute(frame, 'style') !== `--embed-height: ${record.embed.height}px; --embed-height-mobile: ${record.embed.mobileHeight}px`)) failures.push(`${id}: responsive reserved dimensions differ`);
+    if (Number(attribute(frame, 'width')) !== record.embed?.width || Number(attribute(frame, 'height')) !== record.embed?.height) failures.push(`${id}: embed must reserve its recorded dimensions`);
+    if (attribute(fallback, 'href') !== record.originalPostUrl || !captionText(body).includes(record.creator.name) || !captionText(body).includes(record.creator.handle)) failures.push(`${id}: visible creator credit or original-post fallback is missing`);
+    actualPresentationsById.get(id).push({ route, alt: attribute(frame, 'title') ?? null, caption: null, linkUrl: attribute(fallback, 'href') ?? null });
+  }
+  for (const [, figure] of source.matchAll(/<figure>([\s\S]*?)<\/figure>/g)) {
+    const imageTag = figure.match(/<img\b[^>]*>/)?.[0];
+    const src = imageTag ? captionText(attribute(imageTag, 'src') ?? '') : undefined;
+    const record = src ? recordByRenderedPath.get(src) : undefined;
+    if (!record || !imageTag) continue;
+    const captionMatch = figure.match(/<figcaption>([\s\S]*?)<\/figcaption>/);
+    const linkTag = figure.match(/<a\b[^>]*>/)?.[0];
+    actualPresentationsById.get(record.id).push({
+      route,
+      alt: attribute(imageTag, 'alt') ?? null,
+      caption: captionMatch ? captionText(captionMatch[1]) : null,
+      linkUrl: linkTag ? attribute(linkTag, 'href') ?? null : null,
+    });
+  }
   for (const tag of tags) {
     const src = attribute(tag, 'src');
-    if (providerRouteSet.has(route) && /^https?:\/\//.test(src ?? '')) failures.push(`${route}: external raster image remains in provider overview`);
+    if (providerRouteSet.has(route) && /^https?:\/\//.test(src ?? '')) {
+      const record = recordByRenderedPath.get(captionText(src));
+      if (record?.publicationStatus !== 'remote-image') failures.push(`${route}: unregistered external raster image`);
+      else {
+        if (!(metadata.sources ?? []).includes(record.sourceId)) failures.push(`${record.id}: remote image source is missing from the page source dropdown`);
+        if (Number(attribute(tag, 'width')) !== record.width || Number(attribute(tag, 'height')) !== record.height
+          || attribute(tag, 'decoding') !== 'async' || attribute(tag, 'referrerpolicy') !== 'no-referrer') failures.push(`${record.id}: remote image dimensions, decoding, or referrer policy differs`);
+      }
+    }
     if (featuredImageByPath.has(src)) {
       const image = featuredImageByPath.get(src);
       if (attribute(tag, 'decoding') !== 'async') failures.push(`${route}: ${src} must decode asynchronously`);
       if (!['eager', 'lazy'].includes(attribute(tag, 'loading'))) failures.push(`${route}: ${src} has no loading policy`);
       if (Number(attribute(tag, 'width')) !== image.width || Number(attribute(tag, 'height')) !== image.height) failures.push(`${route}: ${src} markup dimensions differ from the featured image manifest`);
+      if (image.derivativeSet) {
+        const expected = manifest.derivativeSets[image.derivativeSet] ?? [];
+        const srcset = attribute(tag, 'srcset') ?? '';
+        for (const derivative of expected) {
+          if (!srcset.split(',').some((candidate) => candidate.trim() === `${derivative.path} ${derivative.width}w`)) failures.push(`${route}: featured image lacks its ${derivative.width}w derivative`);
+        }
+        if (!attribute(tag, 'sizes')) failures.push(`${route}: featured responsive image must declare sizes`);
+        if (attribute(tag, 'data-full-src') !== image.path) failures.push(`${route}: featured image must retain its original for enlargement`);
+      }
       continue;
     }
     if (!src?.startsWith('/media/publications/')) continue;
@@ -110,7 +298,15 @@ for (const { route, file } of canonicalContentFiles()) {
   }
 }
 
-const imageLcpRoutes = new Set(providerRoutes);
+const presentationSort = (left, right) => JSON.stringify(left).localeCompare(JSON.stringify(right));
+for (const record of mediaRecords) {
+  const expected = [...(record.presentations ?? [])].sort(presentationSort);
+  const actual = [...(actualPresentationsById.get(record.id) ?? [])].sort(presentationSort);
+  if (JSON.stringify(actual) !== JSON.stringify(expected)) failures.push(`${record.id}: manifest alt, caption, link, or route differs from canonical Markdown`);
+}
+
+// Both introductions now place a real screenshot before the first paragraph.
+const imageLcpRoutes = new Set(['/guides/codex/', '/guides/grok/']);
 for (const route of providerRoutes) {
   const tags = tagsByRoute.get(route) ?? [];
   const eager = tags.filter((tag) => attribute(tag, 'loading') === 'eager');
@@ -124,9 +320,14 @@ for (const route of providerRoutes) {
   for (const file of mobileFiles) bytes += (await stat(path.join(root, 'public', file.replace(/^\//, '')))).size;
   for (const tag of tags) {
     const src = attribute(tag, 'src');
-    if (featuredImageByPath.has(src)) bytes += (await stat(path.join(root, 'public', src.replace(/^\//, '')))).size;
+    const remote = recordByRenderedPath.get(captionText(src ?? ''));
+    if (remote?.publicationStatus === 'remote-image') bytes += remote.observedBytes;
+    if (featuredImageByPath.has(src) && !featuredImageByPath.get(src).derivativeSet) bytes += (await stat(path.join(root, 'public', src.replace(/^\//, '')))).size;
   }
-  const providerBudget = tags.some((tag) => featuredImageByPath.has(attribute(tag, 'src'))) ? maxFeaturedProviderBytes : maxProviderBytes;
+  const providerBudget = tags.some((tag) => {
+    const image = featuredImageByPath.get(attribute(tag, 'src'));
+    return image && !image.derivativeSet;
+  }) ? maxFeaturedProviderBytes : maxProviderBytes;
   if (bytes > providerBudget) failures.push(`${route}: ${bytes} mobile image bytes exceeds ${providerBudget / 1024} KiB`);
 }
 
@@ -137,7 +338,16 @@ for (const tag of tagsByRoute.get('/handbook/history/') ?? []) {
 
 const distRoot = path.join(root, 'dist');
 const agentIndexGzipBytes = gzipSync(await readFile(path.join(distRoot, 'agent-index.json'))).length;
-if (agentIndexGzipBytes > maxAgentIndexGzipBytes) failures.push(`${agentIndexGzipBytes} compressed agent index bytes exceeds 32 KiB`);
+const catalogBuffer = await readFile(path.join(distRoot, 'agent-catalog.json'));
+const agentCatalogGzipBytes = gzipSync(catalogBuffer).length;
+if (agentCatalogGzipBytes > maxAgentCatalogGzipBytes) failures.push(`${agentCatalogGzipBytes} compressed agent catalog bytes exceeds 32 KiB`);
+const catalog = JSON.parse(catalogBuffer);
+let maxAgentPageBytes = 0;
+for (const page of catalog.pages) {
+  const bytes = gzipSync(await readFile(path.join(distRoot, page.contentUrl.replace(/^\//, '')))).length;
+  maxAgentPageBytes = Math.max(maxAgentPageBytes, bytes);
+  if (bytes > maxAgentPageGzipBytes) failures.push(`${page.route}: ${bytes} compressed agent page bytes exceeds 32 KiB`);
+}
 const assetRoot = path.join(distRoot, '_astro');
 const guideStylesheets = new Set();
 const guideScripts = new Set();
@@ -145,7 +355,7 @@ for (const { route } of canonicalContentFiles().filter(({ route }) => route.star
   const htmlPath = path.join(distRoot, route.replace(/^\//, ''), 'index.html');
   const html = await readFile(htmlPath);
   const htmlGzipBytes = gzipSync(html).length;
-  if (htmlGzipBytes > maxGuideHtmlGzipBytes) failures.push(`${route}: ${htmlGzipBytes} compressed HTML bytes exceeds 24 KiB`);
+  if (htmlGzipBytes > maxGuideHtmlGzipBytes) failures.push(`${route}: ${htmlGzipBytes} compressed HTML bytes exceeds 28 KiB`);
   const source = html.toString();
   if (new RegExp(`origin${'-'}trial|navigator\\.modelContext`).test(source)) failures.push(`${route}: unsupported WebMCP compatibility code is present`);
   if (source.includes('--surface-canvas:') || source.includes('--rail-expanded-width:')) failures.push(`${route}: shared site CSS is inlined into generated HTML`);
@@ -192,4 +402,4 @@ if (failures.length > 0) {
   process.exit(1);
 }
 
-console.log(`validated media, guide HTML, ${agentIndexGzipBytes} compressed agent-index bytes, ${guideStylesheets.size} shared stylesheets, ${reachableScripts.size} reachable scripts, and ${fontFiles.length} font files against performance budgets`);
+console.log(`validated media, guide HTML, ${agentCatalogGzipBytes} compressed catalog bytes, ${maxAgentPageBytes} largest page chunk bytes, ${guideStylesheets.size} shared stylesheets (${guideCssGzipBytes} compressed bytes), ${reachableScripts.size} reachable scripts (${guideJavaScriptGzipBytes} compressed bytes), and ${fontFiles.length} font files (${fontBytes} bytes) against performance budgets; compatibility full index: ${agentIndexGzipBytes} compressed bytes`);

@@ -1,14 +1,14 @@
 {
   "schema_version": 2,
-  "checked_on": "2026-08-30",
+  "checked_on": "2026-09-07",
   "product_versions": {
-    "codex": "0.149.0",
-    "claude_code": "2.1.240"
+    "codex": "0.153.4",
+    "claude_code": "2.1.263"
   },
   "evidence_labels": {
     "tested": {
       "label": "tested",
-      "description": "reproduced by the author in a named environment and version"
+      "description": "reproduced in a named environment and version, with the tester and limits stated"
     },
     "official-source": {
       "label": "official source",
@@ -24,6 +24,18 @@
     }
   },
   "sources": [
+    {
+      "id": "grok-bot-mobile-trackpad-capture",
+      "title": "Grok Bot mobile trackpad screenshot",
+      "publisher": "will-oldgram",
+      "product": "grok",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/old_pgmrs_will/status/2094265782054367651",
+      "last_checked": "2026-09-08",
+      "evidence": "analysis",
+      "notes": "Third-party screenshot inspected through the original X embed September 8, 2026. The requested image-only presentation uses its original pbs.twimg.com image URL, with dimensions 680 by 646; credit is in the expanded caption. Shows the Japanese trackpad menu, file browser, and Chrome icon. No personal test, recording, reusable license, or independent VM per Bot is established."
+    },
     {
       "id": "openai-codex-manual",
       "title": "Codex documentation",
@@ -77,7 +89,7 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://learn.chatgpt.com/docs/codex/cli",
-      "last_checked": "2026-08-27",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -110,7 +122,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://learn.chatgpt.com/docs/agent-configuration/agents-md",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -121,7 +133,7 @@
       "layer": "orchestration",
       "status": "watchlist",
       "url": "https://learn.chatgpt.com/docs/agent-configuration/subagents",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -132,7 +144,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://learn.chatgpt.com/docs/extend/mcp",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -143,7 +155,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://learn.chatgpt.com/docs/build-skills",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -154,7 +166,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://learn.chatgpt.com/docs/build-plugins",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -165,7 +177,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://learn.chatgpt.com/docs/hooks",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -176,7 +188,7 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://learn.chatgpt.com/docs/cloud",
-      "last_checked": "2026-08-27",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -190,7 +202,7 @@
       "aliases": [
         "https://learn.chatgpt.com/docs/remote-connections.md"
       ],
-      "last_checked": "2026-08-30",
+      "last_checked": "2026-09-08",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -199,7 +211,8 @@
           "SSH host",
           "Remote"
         ]
-      }
+      },
+      "notes": "Rechecked September 8, 2026 for mobile task steering, approval, terminal output, screenshots, and host execution. Supports the described remote workflow; silence about a live viewer is not proof it is unavailable in every release."
     },
     {
       "id": "anthropic-claude-overview",
@@ -212,7 +225,7 @@
       "aliases": [
         "https://code.claude.com/docs/en/overview"
       ],
-      "last_checked": "2026-08-11",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -231,8 +244,9 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/how-claude-code-works",
-      "last_checked": "2026-08-27",
-      "evidence": "official-source"
+      "last_checked": "2026-09-08",
+      "evidence": "official-source",
+      "notes": "Rechecked September 8, 2026 for models, tools, the agent loop, context, permissions, and Claude Code as the harness around Claude."
     },
     {
       "id": "anthropic-platforms",
@@ -242,7 +256,7 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/platforms",
-      "last_checked": "2026-08-27",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -253,7 +267,7 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/claude-code-on-the-web",
-      "last_checked": "2026-08-27",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -264,7 +278,7 @@
       "layer": "harness",
       "status": "core",
       "url": "https://code.claude.com/docs/en/changelog",
-      "last_checked": "2026-08-11",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -283,7 +297,7 @@
       "layer": "harness",
       "status": "core",
       "url": "https://code.claude.com/docs/en/features-overview",
-      "last_checked": "2026-08-11",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -302,7 +316,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/skills",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -313,7 +327,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/mcp",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -324,7 +338,7 @@
       "layer": "orchestration",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/sub-agents",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -335,8 +349,27 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/hooks",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
+    },
+    {
+      "id": "anthropic-function-hooks-proposal",
+      "title": "Function Hooks: internal proposal and architecture",
+      "publisher": "anthropic",
+      "product": "claude-code",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://github.com/anthropics/claude-code/issues/91870",
+      "last_checked": "2026-09-07",
+      "evidence": "open-question",
+      "watch": {
+        "kind": "terms",
+        "terms": [
+          "Function Hooks",
+          "internal proposal",
+          "ui.press"
+        ]
+      }
     },
     {
       "id": "anthropic-plugins",
@@ -346,7 +379,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/plugins",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -357,7 +390,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/settings",
-      "last_checked": "2026-08-29",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -368,7 +401,7 @@
       "layer": "surface",
       "status": "core",
       "url": "https://code.claude.com/docs/en/desktop",
-      "last_checked": "2026-08-11",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -387,7 +420,7 @@
       "layer": "harness",
       "status": "core",
       "url": "https://code.claude.com/docs/en/permissions",
-      "last_checked": "2026-08-11",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -406,7 +439,7 @@
       "layer": "harness",
       "status": "core",
       "url": "https://code.claude.com/docs/en/memory",
-      "last_checked": "2026-08-11",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -425,7 +458,7 @@
       "layer": "surface",
       "status": "core",
       "url": "https://code.claude.com/docs/en/remote-control",
-      "last_checked": "2026-08-30",
+      "last_checked": "2026-09-08",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -434,7 +467,8 @@
           "available on all plans",
           "running locally"
         ]
-      }
+      },
+      "notes": "Rechecked September 8, 2026: connected phone/browser conversations, subagent progress, attachments, approvals, and execution on the local machine. Mobile live-view comparison in Grok is Ani-reported, not inferred from undocumented absence."
     },
     {
       "id": "anthropic-commands",
@@ -444,7 +478,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/commands",
-      "last_checked": "2026-08-28",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -463,7 +497,7 @@
       "layer": "orchestration",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/desktop-scheduled-tasks",
-      "last_checked": "2026-08-28",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -474,7 +508,7 @@
       "layer": "orchestration",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/routines",
-      "last_checked": "2026-08-28",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -485,7 +519,7 @@
       "layer": "orchestration",
       "status": "watchlist",
       "url": "https://code.claude.com/docs/en/agents",
-      "last_checked": "2026-08-28",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -518,7 +552,7 @@
       "layer": "surface",
       "status": "pricing",
       "url": "https://cursor.com/pricing",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -529,7 +563,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://cursor.com/docs",
-      "last_checked": "2026-08-07",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -562,7 +596,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://github.com/anomalyco/opencode",
-      "last_checked": "2026-08-07",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -617,7 +651,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://docs.x.ai/build/overview",
-      "last_checked": "2026-08-07",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -661,7 +695,7 @@
       "layer": "harness",
       "status": "stable",
       "url": "https://aider.chat/docs/",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -679,7 +713,7 @@
       "layer": "surface",
       "status": "stable",
       "url": "https://www.cursor.com/blog/problems-2023",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -697,7 +731,7 @@
       "layer": "surface",
       "status": "stable",
       "url": "https://github.blog/news-insights/product-news/github-copilot-workspace/",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -715,7 +749,7 @@
       "layer": "surface",
       "status": "stable",
       "url": "https://cursor.com/blog/cursor-3",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -733,7 +767,7 @@
       "layer": "model",
       "status": "stable",
       "url": "https://arxiv.org/abs/1706.03762",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -751,7 +785,7 @@
       "layer": "model",
       "status": "stable",
       "url": "https://arxiv.org/abs/2005.14165",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -769,7 +803,7 @@
       "layer": "model",
       "status": "stable",
       "url": "https://arxiv.org/abs/2107.03374",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -787,7 +821,7 @@
       "layer": "surface",
       "status": "stable",
       "url": "https://github.blog/news-insights/product-news/introducing-github-copilot-ai-pair-programmer/",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -805,7 +839,7 @@
       "layer": "harness",
       "status": "stable",
       "url": "https://arxiv.org/abs/2210.03629",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -823,7 +857,7 @@
       "layer": "harness",
       "status": "stable",
       "url": "https://arxiv.org/abs/2310.06770",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -841,7 +875,7 @@
       "layer": "harness",
       "status": "stable",
       "url": "https://arxiv.org/abs/2405.15793",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -859,7 +893,7 @@
       "layer": "orchestration",
       "status": "stable",
       "url": "https://www.anthropic.com/news/model-context-protocol",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -877,7 +911,7 @@
       "layer": "surface",
       "status": "stable",
       "url": "https://github.blog/news-insights/product-news/github-copilot-the-agent-awakens/",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -895,7 +929,7 @@
       "layer": "harness",
       "status": "stable",
       "url": "https://www.anthropic.com/news/claude-3-7-sonnet",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -913,7 +947,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://openai.com/index/introducing-codex/",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -924,7 +958,7 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://openai.com/index/introducing-the-codex-app/",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -935,18 +969,18 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://learn.chatgpt.com/docs/config-file/config-reference",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
       "id": "openai-codex-security",
-      "title": "Codex security",
+      "title": "Codex Security",
       "publisher": "openai",
       "product": "codex",
       "layer": "harness",
       "status": "watchlist",
       "url": "https://learn.chatgpt.com/docs/security",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -968,8 +1002,9 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://help.openai.com/en/articles/20001275-chatgpt-work-and-codex",
-      "last_checked": "2026-08-22",
-      "evidence": "official-source"
+      "last_checked": "2026-09-08",
+      "evidence": "official-source",
+      "notes": "Rechecked September 8, 2026 for ChatGPT as a product using models and Codex as its software development experience. The foundations explanation uses this distinction without enumerating rollout-dependent model versions."
     },
     {
       "id": "openai-cursor-contract",
@@ -1000,7 +1035,7 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -1011,7 +1046,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://docs.x.ai/build/settings",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -1022,7 +1057,7 @@
       "layer": "harness",
       "status": "watchlist",
       "url": "https://docs.x.ai/build/features/permissions",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -1033,7 +1068,7 @@
       "layer": "surface",
       "status": "watchlist",
       "url": "https://docs.x.ai/grok-bot/overview",
-      "last_checked": "2026-08-22",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -1044,7 +1079,7 @@
       "layer": "orchestration",
       "status": "stable",
       "url": "https://git-scm.com/docs/git-worktree",
-      "last_checked": "2026-08-07",
+      "last_checked": "2026-09-07",
       "evidence": "official-source",
       "watch": {
         "kind": "terms",
@@ -1066,7 +1101,7 @@
       "aliases": [
         "https://1password.com/press/2026/may/openai-codex-integration"
       ],
-      "last_checked": "2026-08-28",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -1080,7 +1115,7 @@
       "aliases": [
         "https://1password.com/press/2026/july/1password-for-claude"
       ],
-      "last_checked": "2026-08-28",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
     },
     {
@@ -1094,11 +1129,536 @@
       "aliases": [
         "https://www.1password.dev/cli/secrets-scripts"
       ],
-      "last_checked": "2026-08-28",
+      "last_checked": "2026-09-07",
       "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-app-server",
+      "title": "Codex App Server",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/app-server",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-mcp-server",
+      "title": "Use Codex with the Agents SDK",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/mcp-server",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "grok-bot-mobile",
+      "title": "Grok Bot for Mobile",
+      "publisher": "xai",
+      "product": "grok",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://docs.x.ai/grok-bot/mobile",
+      "last_checked": "2026-09-08",
+      "evidence": "official-source",
+      "notes": "Rechecked 2026-09-08 for the mobile computer view, human takeover, and return of control. Exact fingertip/cursor and phone keyboard wording remains grounded in Ani's account; the documentation corroborates the general takeover flow."
+    },
+    {
+      "id": "grok-bot-computer",
+      "title": "Use the computer and apps",
+      "publisher": "xai",
+      "product": "grok",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://docs.x.ai/grok-bot/computer-and-apps",
+      "last_checked": "2026-09-08",
+      "evidence": "official-source",
+      "notes": "Rechecked 2026-09-08: one persistent computer per account, separate Bot screens, shared files/browser sessions/CLI credentials, background work, and the instruction to return control and tell the Bot to continue. This is documented behavior, not an independent product test."
+    },
+    {
+      "id": "grok-bot-approvals",
+      "title": "Approvals, security, and privacy",
+      "publisher": "xai",
+      "product": "grok",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://docs.x.ai/grok-bot/approvals-security-and-privacy",
+      "last_checked": "2026-09-08",
+      "evidence": "official-source",
+      "notes": "Rechecked 2026-09-08 for action approvals, human entry of sensitive values, supported masked secret requests, and the shared-computer boundary. This is source review, not Ani's wording acceptance or a hands-on security evaluation."
+    },
+    {
+      "id": "grok-bot-profiles",
+      "title": "Create and manage Bots",
+      "publisher": "xai",
+      "product": "grok",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://docs.x.ai/grok-bot/bots",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "x-api",
+      "title": "X API",
+      "publisher": "xai",
+      "product": "x",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://docs.x.com/x-api/introduction",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "grok-assistant",
+      "title": "Grok and SuperGrok",
+      "publisher": "xai",
+      "product": "grok",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.ai/grok",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-open-source",
+      "title": "Codex open source components",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/open-source",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "grok-build-settings-reference",
+      "title": "Grok Build settings reference",
+      "publisher": "xai",
+      "product": "grok",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://docs.x.ai/build/settings/reference",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "grok-build-sandbox",
+      "title": "Grok Build sandbox",
+      "publisher": "xai",
+      "product": "grok",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://docs.x.ai/build/features/sandbox",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "grok-bot-routines",
+      "title": "Grok Bot skills and routines",
+      "publisher": "xai",
+      "product": "grok",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://docs.x.ai/grok-bot/skills-routines-and-automations",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-config-basic",
+      "title": "Codex configuration basics",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-basic",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-config-advanced",
+      "title": "Codex advanced configuration",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/config-file/config-advanced",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-memories",
+      "title": "Local Codex memories",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/customization/memories",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-approvals",
+      "title": "Codex agent approvals and security",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/agent-approvals-security",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-permissions",
+      "title": "Codex permission profiles",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/permissions",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-worktrees",
+      "title": "Codex worktrees",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/environments/git-worktrees",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-automations",
+      "title": "Codex scheduled tasks",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/automations",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-image-generation",
+      "title": "Image generation in Codex",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/image-generation",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "anthropic-sandboxing",
+      "title": "Configure the sandboxed Bash tool",
+      "publisher": "anthropic",
+      "product": "claude-code",
+      "layer": "harness",
+      "status": "core",
+      "url": "https://code.claude.com/docs/en/sandboxing",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source",
+      "watch": {
+        "kind": "terms",
+        "terms": [
+          "filesystem",
+          "network",
+          "sandbox"
+        ]
+      }
+    },
+    {
+      "id": "anthropic-session-scheduling",
+      "title": "Run prompts on a schedule",
+      "publisher": "anthropic",
+      "product": "claude-code",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://code.claude.com/docs/en/scheduled-tasks",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "github-protected-branches",
+      "title": "GitHub protected branches",
+      "publisher": "github",
+      "product": "git",
+      "layer": "orchestration",
+      "status": "stable",
+      "url": "https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/about-protected-branches",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source",
+      "watch": {
+        "kind": "terms",
+        "terms": [
+          "pull request",
+          "status checks"
+        ]
+      }
+    },
+    {
+      "id": "onepassword-service-accounts",
+      "title": "1Password Service Accounts",
+      "publisher": "1password",
+      "product": "onepassword",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://www.1password.dev/service-accounts",
+      "aliases": [
+        "https://developer.1password.com/docs/service-accounts/"
+      ],
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "aider-early-release",
+      "title": "aider early release README and package record",
+      "publisher": "aider",
+      "product": "aider",
+      "layer": "surface",
+      "status": "stable",
+      "url": "https://github.com/Aider-AI/aider/blob/v0.5.0/README.md",
+      "aliases": [
+        "https://raw.githubusercontent.com/Aider-AI/aider/v0.5.0/README.md",
+        "https://pypi.org/project/aider-chat/0.5.0/"
+      ],
+      "last_checked": "2026-09-07",
+      "evidence": "official-source",
+      "watch": {
+        "kind": "terms",
+        "terms": [
+          "aider",
+          "commit",
+          "undo"
+        ]
+      }
+    },
+    {
+      "id": "handbook-source-registry",
+      "title": "Handbook source and evidence registry",
+      "publisher": "github",
+      "product": "cross-runtime",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://github.com/anipotts/coding-agent-tips/blob/main/editorial/sources.json",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "handbook-source-checker",
+      "title": "Handbook source validation and freshness checks",
+      "publisher": "github",
+      "product": "cross-runtime",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://github.com/anipotts/coding-agent-tips/blob/main/.github/scripts/check_sources.py",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "handbook-freshness-workflow",
+      "title": "Handbook scheduled freshness and draft workflow",
+      "publisher": "github",
+      "product": "cross-runtime",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://github.com/anipotts/coding-agent-tips/blob/main/.github/workflows/freshness-draft.yml",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "openai-codex-prompting",
+      "title": "Prompting",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://learn.chatgpt.com/docs/prompting",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "anthropic-best-practices",
+      "title": "Best practices for Claude Code",
+      "publisher": "anthropic",
+      "product": "claude-code",
+      "layer": "harness",
+      "status": "watchlist",
+      "url": "https://code.claude.com/docs/en/best-practices",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source"
+    },
+    {
+      "id": "karpathy-programming-english",
+      "title": "Karpathy on programming in English (January 2023)",
+      "publisher": "karpathy",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/karpathy/status/1617979122625712128",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2023-01-24. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "ricky-cursor-coding-session",
+      "title": "Ricky Robinett shares a Cursor coding session (August 2024)",
+      "publisher": "rickyrobinett",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/rickyrobinett/status/1825581674870055189",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2024-08-19. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "karpathy-mac-mini-claws",
+      "title": "Karpathy on a Mac mini and claws (February 2026)",
+      "publisher": "karpathy",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/karpathy/status/2024987174077432126",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2026-02-20. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "cognition-devin-launch-post",
+      "title": "Devin launch demonstration (March 2024)",
+      "publisher": "cognition",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/cognition/status/1767548763134964000",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2024-03-12. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical provider demonstration; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "anthropic-computer-use-demo-post",
+      "title": "Claude computer use demonstration (October 2024)",
+      "publisher": "anthropic",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/AnthropicAI/status/1848742752403476488",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2024-10-22. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical provider demonstration; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "anthropic-claude-code-launch-post",
+      "title": "Claude Code terminal launch demonstration (February 2025)",
+      "publisher": "anthropic",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/AnthropicAI/status/1894095276740055364",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2025-02-24. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical provider demonstration; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "openai-codex-app-walkthrough-post",
+      "title": "Codex app walkthrough (February 2026)",
+      "publisher": "openai",
+      "product": "codex",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/OpenAIDevs/status/2018385663457116379",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2026-02-02. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical provider demonstration; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "karpathy-autoresearch-post",
+      "title": "Karpathy introduces autoresearch (March 2026)",
+      "publisher": "karpathy",
+      "product": "codex",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://x.com/karpathy/status/2030371219518931079",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2026-03-07. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "boris-parallel-claude-post",
+      "title": "Boris Cherny shows five parallel Claude sessions (January 2026)",
+      "publisher": "bcherny",
+      "product": "claude-code",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://x.com/bcherny/status/2007179833990885678",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2026-01-02. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "alex-albert-mcp-github-demo-post",
+      "title": "Alex Albert demonstrates MCP with GitHub (November 2024)",
+      "publisher": "alexalbert__",
+      "product": "claude-code",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/alexalbert__/status/1861079874385203522",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2024-11-25. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "karpathy-vibe-coding-post",
+      "title": "Karpathy introduces vibe coding (February 2025)",
+      "publisher": "karpathy",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/karpathy/status/1886192184808149383",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2025-02-02. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "levels-cursor-flight-simulator-post",
+      "title": "Pieter Levels shows his early Cursor flight simulator (February 2025)",
+      "publisher": "levelsio",
+      "product": "cross runtime",
+      "layer": "surface",
+      "status": "watchlist",
+      "url": "https://x.com/levelsio/status/1893350391158292550",
+      "last_checked": "2026-09-07",
+      "evidence": "analysis",
+      "notes": "Original post dated 2025-02-22. Author, date, text excerpt, and attached media type checked against X public syndication data. Historical creator account; surrounding analysis is editorial. This does not establish present product behavior, independent reproduction, or Ani's personal experience. Native embed retains the original post and a separate credited fallback."
+    },
+    {
+      "id": "karpathy-autoresearch-repository",
+      "title": "autoresearch experiment loop and setup",
+      "publisher": "karpathy",
+      "product": "cross runtime",
+      "layer": "orchestration",
+      "status": "watchlist",
+      "url": "https://github.com/karpathy/autoresearch",
+      "last_checked": "2026-09-07",
+      "evidence": "official-source",
+      "notes": "Read README setup, fixed experiment time budget, agent-edited train.py, human-edited program.md, metric, and platform limits. No local research experiment was run for this handbook."
     }
   ],
   "publishers": [
+    {
+      "id": "will-oldgram",
+      "label": "Will Oldgram",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
     {
       "id": "openai",
       "label": "OpenAI",
@@ -1176,6 +1736,42 @@
       "label": "Git",
       "domain": "git-scm.com",
       "icon": "/icons/publishers/git.png"
+    },
+    {
+      "id": "karpathy",
+      "label": "Andrej Karpathy",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
+    {
+      "id": "rickyrobinett",
+      "label": "Ricky Robinett",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
+    {
+      "id": "cognition",
+      "label": "Cognition",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
+    {
+      "id": "bcherny",
+      "label": "Boris Cherny",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
+    {
+      "id": "alexalbert__",
+      "label": "Alex Albert",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
+    },
+    {
+      "id": "levelsio",
+      "label": "Pieter Levels",
+      "domain": "x.com",
+      "icon": "/icons/publishers/independent-creator.svg"
     }
   ]
 }

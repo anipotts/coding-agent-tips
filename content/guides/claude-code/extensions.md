@@ -1,14 +1,14 @@
 ---
-title: extensions
+title: what else can it do?
 description: choosing and combining claude code extensions by the job they do.
 products: [claude-code]
-updatedAt: "2026-08-27T12:00:00-04:00"
-checkedAt: "2026-08-28T00:00:00-04:00"
-status: pending
-completion: outline
-draft: true
-evidence: [official-source, open-question]
-sources: [anthropic-features-overview, anthropic-memory, anthropic-skills, anthropic-mcp, anthropic-subagents, anthropic-hooks, anthropic-plugins]
+updatedAt: "2026-09-07T22:03:00-04:00"
+checkedAt: "2026-09-07T15:02:34-04:00"
+status: current
+completion: complete
+draft: false
+evidence: [official-source, analysis, open-question]
+sources: [anthropic-features-overview, anthropic-skills, anthropic-subagents, anthropic-mcp, anthropic-hooks, anthropic-plugins, anthropic-function-hooks-proposal, alex-albert-mcp-github-demo-post]
 redirects: []
 voice: personal
 navigation:
@@ -16,70 +16,211 @@ navigation:
   order: 50
 ---
 
-## make repository context durable
+<span id="choosing-an-extension" class="heading-alias" aria-hidden="true"></span>
 
-### CLAUDE.md and rules establish context
+## what do i want to add?
 
-<!-- Ani voice pass follows this approved structure. -->
+an extension should have a specific job. instructions provide context, a skill
+carries a procedure, MCP connects a system, a subagent owns a separate problem,
+and a hook responds to an event. a plugin can package those pieces for reuse.
+Anthropic’s [feature overview](https://code.claude.com/docs/en/features-overview)
+explains how they compose.
 
-### skills carry procedures
+start with a repeated problem from actual work. “the agent keeps missing the
+same review step” gives you something to improve and a result to evaluate.
+“add more extensions” leaves both of those unclear.
 
-<!-- Ani voice pass follows this approved structure. -->
+<span id="a-scratch-project-for-the-examples" class="heading-alias" aria-hidden="true"></span>
 
-### imports keep shared knowledge singular
+### a project to try this in
 
-<!-- Ani voice pass follows this approved structure. -->
+create an empty folder with Node available. save this as `label.mjs`:
 
-## connect a real system
+```js
+export function displayLabel(value) {
+  return value.replace(/\s+/g, ' ').trim();
+}
+```
 
-### MCP exposes tools and resources
+save this as `label.test.mjs`:
 
-<!-- Ani voice pass follows this approved structure. -->
+```js
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { displayLabel } from './label.mjs';
 
-### authentication and reach stay explicit
+test('labels preserve words and normalize whitespace', () => {
+  assert.equal(displayLabel('  two   words  '), 'two words');
+  assert.equal(displayLabel('already clear'), 'already clear');
+});
+```
 
-<!-- Ani voice pass follows this approved structure. -->
+run `node --test label.test.mjs` once before adding an extension. these are
+small instructional fixtures, so you can see exactly which behavior each
+extension adds.
 
-## make events deterministic
+<span id="turn-a-procedure-into-a-skill" class="heading-alias" aria-hidden="true"></span>
 
-### hooks run code at defined moments
+## how do i teach it a repeatable task?
 
-<!-- Ani voice pass follows this approved structure. -->
+[skills](https://code.claude.com/docs/en/skills) use `SKILL.md` with a name,
+description, and instructions. supporting files can carry examples or scripts.
+write a description that makes the intended task recognizable.
 
-### failure should remain visible
+for a manually invoked review of the label exercise, save this at
+`.claude/skills/check-label/SKILL.md`:
 
-<!-- Ani voice pass follows this approved structure. -->
+```markdown
+---
+name: check-label
+description: Review displayLabel against its string input contract and tests.
+disable-model-invocation: true
+---
 
-## give work its own context
+Read label.mjs and label.test.mjs.
+Check edge whitespace, internal whitespace, empty output, and unchanged casing.
+Run node --test label.test.mjs.
+Return the command result and any missing behavioral case with an example input.
+Keep this pass limited to inspection and reporting.
+```
 
-### subagents need a bounded problem
+invoke it with `/check-label`. the explicit invocation setting keeps this
+procedure under your control; it does not establish a tool permission boundary.
+review the actual result to see whether the skill gave a clearer report than
+the ordinary prompt. keep it when repeated use justifies the extra file.
 
-<!-- Ani voice pass follows this approved structure. -->
+<span id="give-a-subagent-a-bounded-question" class="heading-alias" aria-hidden="true"></span>
 
-### the return contract matters
+## when should i bring in a subagent?
 
-<!-- Ani voice pass follows this approved structure. -->
+[subagents](https://code.claude.com/docs/en/sub-agents) can have their own prompt
+and tool list. a project definition belongs under `.claude/agents/`. for
+example, `.claude/agents/contract-reviewer.md` can contain:
 
-## package behavior for reuse
+```markdown
+---
+name: contract-reviewer
+description: Inspect the label function and tests for a mismatch with the stated contract.
+tools: Read, Grep, Glob
+---
 
-### plugins move related behavior together
+Inspect label.mjs and label.test.mjs using the contract supplied with the task.
+Return a concrete counterexample for each mismatch, with file references.
+If the stated cases are covered, say which cases you checked.
+```
 
-<!-- Ani voice pass follows this approved structure. -->
+ask Claude to use `contract-reviewer` for the label function. the narrow tool
+list supports a source inspection. this agent has no shell tool for executing
+the test; the main session can run it and compare the evidence. label those
+two kinds of review accurately.
 
-### portable behavior needs an owner and version
+separate context is useful for a question whose investigation would otherwise
+crowd the main conversation. include the exact contract and files in the
+handoff. a worker can only use the context and tools it receives.
 
-<!-- Ani voice pass follows this approved structure. -->
+<span id="connect-the-service-the-task-needs" class="heading-alias" aria-hidden="true"></span>
 
-## compose without losing the plot
+## how do i connect another service?
 
-### precedence decides which layer wins
+[MCP](https://code.claude.com/docs/en/mcp) exposes tools and resources from other
+systems. a skill can explain how to use an issue tracker; its MCP server
+provides the operations that read or change issues.
 
-<!-- Ani voice pass follows this approved structure. -->
+begin with one inspectable operation, such as reading a known issue by its
+identifier. check the active account, expected result, and permissions in the
+environment where Claude runs. a connector configured locally can need separate
+setup in a cloud session.
 
-### context cost is part of the design
+then decide whether the workflow needs writes. adding access to comments,
+records, or messages changes what the session can do on another system. match
+the service permissions to the intended operations, and keep returned content
+separate from instructions that authorize the task.
 
-<!-- Ani voice pass follows this approved structure. -->
+Alex Albert’s 2024 demo shows Claude desktop using MCP to create a GitHub
+repository and pull request.
 
-### ownership makes removal possible
+<div class="publication-embed" data-media-id="alex-albert-mcp-github-demo-post">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=1861079874385203522&amp;dnt=true&amp;hideThread=true&amp;theme=dark" title="Alex Albert demonstrates MCP with GitHub (November 2024)" width="360" height="730" style="--embed-height: 730px; --embed-height-mobile: 593px" loading="lazy" allow="fullscreen; autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/alexalbert__/status/1861079874385203522" target="_blank" rel="noopener noreferrer">Alex Albert (@alexalbert__)</a>, november 2024.</p>
+</div>
 
-<!-- Ani voice pass follows this approved structure. -->
+<span id="run-hooks-at-meaningful-events" class="heading-alias" aria-hidden="true"></span>
+
+## can it run a check after each edit?
+
+[hooks](https://code.claude.com/docs/en/hooks) attach handlers to lifecycle events.
+`PreToolUse` runs before a tool action; `PostToolUse` runs after a successful
+one. current handlers include command, HTTP, MCP tool, prompt, and agent types,
+with event specific support. command handlers suit deterministic checks;
+model based handlers add judgment and another model call.
+
+<span id="a-small-hook-you-can-exercise" class="heading-alias" aria-hidden="true"></span>
+
+### try a hook
+
+in the scratch project, this `.claude/settings.json` entry runs the label test
+after an Edit or Write tool call:
+
+```json
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node --test \"$CLAUDE_PROJECT_DIR/label.test.mjs\" >&2 || exit 2"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
+this deliberately small example runs after every matching edit in the scratch
+project. exit code 2 shows the failed check’s stderr to Claude; the edit has
+already happened. running the command directly checks the test and shell
+behavior. triggering an actual Edit call is a separate check of the hook’s
+registration and delivery.
+
+for a real repository, narrow the event or script to the relevant files and
+measure the delay it adds. a slow hook makes each matching action slower.
+record success, failure, and timeout behavior so a quiet handler has an
+explanation.
+
+## plugins
+
+[plugins](https://code.claude.com/docs/en/plugins) distribute related skills,
+agents, hooks, and MCP configuration. begin with standalone files while the
+workflow is changing. package them when several projects need the same tested
+procedure and you can describe what updating it will change.
+
+a small plugin might contain a manifest in `.claude-plugin/plugin.json`, a
+review skill under `skills/`, a specialist under `agents/`, and event handlers
+under `hooks/`. the manifest names the plugin; these component directories
+belong at the plugin root.
+
+use `claude plugin validate ./my-plugin` to check the package, then load it in
+a disposable project with `claude --plugin-dir ./my-plugin`. test one expected
+invocation and one failure. package validation checks structure; an actual run
+checks whether the pieces work together.
+
+## function hooks are a proposal
+
+i'm interested in how much an agent can change about its own setup, including
+the harness around it. that's why the Function Hooks proposal caught my
+attention: it could expose more of Claude Code's internals to extensions.
+
+as checked September 7, 2026, [Function Hooks](https://github.com/anthropics/claude-code/issues/91870)
+remain an open proposal shared for feedback. the design describes JavaScript
+or TypeScript callbacks with an engine capability interface named `$`, an
+event, and a `next` continuation. callbacks could wrap later handlers, inspect
+results, or change what proceeds. the discussion also explores UI rendering
+and administrator controls. shipping and the final interface remain open.
+
+the interesting test for deeper customization is concrete: can a plugin observe
+one intended event, make a visible change, and recover cleanly when its callback
+fails? keep the proposed API separate from the supported hook mechanisms above
+while those contracts develop.

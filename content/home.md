@@ -1,6 +1,6 @@
 ---
 title: coding agent tips
-description: practical guidance for operating coding agents under constraints and tradeoffs of the real world.
+description: practical guidance for working with AI under constraints and tradeoffs of the real world.
 products: [cross runtime]
 updatedAt: "2026-08-27T01:36:11-04:00"
 status: current
@@ -16,8 +16,10 @@ navigation:
 
 # a casual guide to <mark class="keyword-highlight">coding agents</mark> in production software (projects, startups & big tech)
 
-practical guidance for operating coding agents under constraints and tradeoffs
+practical guidance for working with AI under constraints and tradeoffs
 of the real world.
+
+<nav class="hero-provider-actions"></nav>
 
 ## why i made this
 

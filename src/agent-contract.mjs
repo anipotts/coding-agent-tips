@@ -1,4 +1,4 @@
-import { AGENT_INDEX_VERSION } from './agent-index-version.mjs';
+import { AGENT_INDEX_VERSION, AGENT_CATALOG_VERSION } from './agent-index-version.mjs';
 
 export const AGENT_TOOL_NAMES = [
   'list_handbook_pages',
@@ -73,13 +73,25 @@ const snippet = (text, query, maximum = 180) => {
   return `${start > 0 ? '…' : ''}${normalized.slice(start, end).trim()}${end < normalized.length ? '…' : ''}`;
 };
 
-export function createHandbookTools({ loadIndex, navigate }) {
+export function createHandbookTools({ loadIndex, loadPage, navigate }) {
+  const readPage = async (page, signal) => {
+    signal?.throwIfAborted();
+    if (typeof page.text === 'string') return page;
+    if (!loadPage) throw new Error('page content loader is unavailable');
+    const content = await loadPage(page, signal);
+    signal?.throwIfAborted();
+    if (content?.route !== page.route || typeof content.text !== 'string' || !Array.isArray(content.sections)) throw new Error('page content is invalid');
+    return content;
+  };
   const withIndex = (execute) => async (input, options = {}) => {
     if (options.signal?.aborted) return fail('aborted', 'The tool call was cancelled.');
     try {
       const index = await loadIndex(options.signal);
-      if (index?.schemaVersion !== AGENT_INDEX_VERSION) return fail('unavailable', 'The handbook index version is unavailable.');
-      return await execute(input, index, options);
+      options.signal?.throwIfAborted();
+      if (![AGENT_INDEX_VERSION, AGENT_CATALOG_VERSION].includes(index?.schemaVersion)) return fail('unavailable', 'The handbook index version is unavailable.');
+      const result = await execute(input, index, options);
+      options.signal?.throwIfAborted();
+      return result;
     } catch (error) {
       if (options.signal?.aborted || error?.name === 'AbortError') return fail('aborted', 'The tool call was cancelled.');
       return fail('unavailable', 'The handbook index could not be loaded.');
@@ -108,15 +120,15 @@ export function createHandbookTools({ loadIndex, navigate }) {
       description: 'Searches canonical public handbook text locally and returns bounded matches with provenance and normal URLs.',
       inputSchema: AGENT_TOOL_SCHEMAS.search_handbook,
       annotations: { readOnlyHint: true, untrustedContentHint: true },
-      execute: withIndex((input, index) => {
+      execute: withIndex(async (input, index, options) => {
         if (!plainObject(input) || !exactKeys(input, ['query', 'scope', 'limit'])) return fail('invalid_input', 'Use only query, scope, and limit.');
         const query = cleanString(input.query, 120, true);
         const scope = cleanString(input.scope, 32);
         const limit = boundedInteger(input.limit, 5, 8);
         if (query === null || scope === null || (scope !== undefined && !scopes.includes(scope)) || limit === null) return fail('invalid_input', 'Query, scope, or limit is invalid.');
         const needle = query.toLocaleLowerCase();
-        const results = index.pages
-          .filter((page) => !scope || page.scope === scope)
+        const pages = await Promise.all(index.pages.filter((page) => !scope || page.scope === scope).map((page) => readPage(page, options.signal)));
+        const results = pages
           .map((page) => {
             const title = page.title.toLocaleLowerCase();
             const description = page.description.toLocaleLowerCase();
@@ -138,7 +150,7 @@ export function createHandbookTools({ loadIndex, navigate }) {
       description: 'Reads one public section by canonical route and heading anchor, returning bounded text and source provenance.',
       inputSchema: AGENT_TOOL_SCHEMAS.read_handbook_section,
       annotations: { readOnlyHint: true, untrustedContentHint: true },
-      execute: withIndex((input, index) => {
+      execute: withIndex(async (input, index, options) => {
         if (!plainObject(input) || !exactKeys(input, ['route', 'anchor', 'maxCharacters'])) return fail('invalid_input', 'Use only route, anchor, and maxCharacters.');
         const route = cleanString(input.route, 200, true);
         const anchor = cleanString(input.anchor, 160, true);
@@ -147,8 +159,11 @@ export function createHandbookTools({ loadIndex, navigate }) {
         const page = findPage(index, route);
         if (!page) return fail('not_found', 'The canonical handbook route was not found.');
         const normalizedAnchor = anchor.replace(/^#/, '').toLocaleLowerCase();
-        const section = page.sections.find((candidate) => candidate.anchor.toLocaleLowerCase() === normalizedAnchor || candidate.title.toLocaleLowerCase() === normalizedAnchor);
-        if (!section) return fail('not_found', 'The heading was not found on that page.');
+        const heading = page.sections.find((candidate) => candidate.anchor.toLocaleLowerCase() === normalizedAnchor || candidate.title.toLocaleLowerCase() === normalizedAnchor);
+        if (!heading) return fail('not_found', 'The heading was not found on that page.');
+        const content = await readPage(page, options.signal);
+        const section = content.sections.find((candidate) => candidate.anchor === heading.anchor);
+        if (!section || typeof section.text !== 'string') throw new Error('section content is unavailable');
         const text = section.text.slice(0, maxCharacters);
         return ok({ ...pageSummary(page), section: { anchor: section.anchor, title: section.title, depth: section.depth, text, truncated: text.length < section.text.length } });
       }),

@@ -2,11 +2,11 @@
 title: choosing a coding agent setup
 description: compare surfaces, harnesses, models, orchestration, and hardware before choosing a setup.
 products: [market]
-updatedAt: "2026-08-29T19:04:00-04:00"
-checkedAt: "2026-08-29T18:57:04-04:00"
+updatedAt: "2026-09-07T22:03:00-04:00"
+checkedAt: "2026-09-07T15:05:08-04:00"
 status: current
-evidence: [tested, official-source, analysis, open-question]
-sources: [openai-codex-manual, anthropic-claude-overview, vscode-agent-host, cursor-docs, openai-cursor-contract, conductor-harnesses, t3-code, opencode, kimi-code, qwen-code, git-worktrees]
+evidence: [official-source, analysis]
+sources: [cursor-docs, cursor-pricing, opencode, git-worktrees, openai-remote-connections, openai-codex-cloud, karpathy-mac-mini-claws]
 redirects: [/market/, /market/hardware/]
 voice: evidence
 navigation:
@@ -14,81 +14,130 @@ navigation:
   order: 20
 ---
 
-choose the setup around the work you need to review, the machines you already
-own, and the amount of parallel state you can supervise.
+choose a setup around the work you need to finish and how you want to inspect
+it. a useful comparison includes the agent, its tools, the execution environment,
+and the time you spend steering and reviewing the result.
 
-## choose the layer first
+<span id="separate-the-choices" class="heading-alias" aria-hidden="true"></span>
 
-| layer | question | examples |
-|---|---|---|
-| surface | where do you direct and review work? | terminal, app, IDE, web |
-| harness | what runs the agent loop and tools? | Codex, Claude Code, OpenCode, Qwen Code |
-| model | what supplies reasoning and generation? | hosted, open weight, local |
-| orchestration | what coordinates parallel work? | worktrees, subagents, dashboards, control planes |
+## what am i choosing?
 
-one product can occupy several layers. Cursor combines an editor with an agent
-harness. Codex and Claude Code span several surfaces. Grok now has its own
-[product guide](/guides/grok/) so its model, coding harness, and cloud agents do
-not get flattened into one row here.
+| choice | question it answers |
+| --- | --- |
+| surface | where will you prompt, intervene, and review? |
+| harness | what runs the agent loop, tools, context, and permissions? |
+| model | what supplies the reasoning and generation? |
+| execution host | where will files, commands, and services run? |
+| coordination | how will independent tasks exchange context and results? |
 
-model access inside a third party harness can also change independently of the
-editor or agent loop. on august 28, 2026, OpenAI said it had [proposed winding
-down its custom model access contract](https://openai.com/index/our-decision-on-cursor-following-its-acquisition-by-spacex/)
-with Cursor on november 12, 2026 and would not provide future models. that is a
-contract change with a proposed cutoff date, not evidence that every OpenAI
-model disappeared from Cursor immediately. it is one reason I treat the editor,
-harness, and model as separate choices.
+one product can cover several of these choices. [Codex](/guides/codex/) and
+[Claude Code](/guides/claude-code/) each provide several ways to work with their
+agent. [Cursor](https://cursor.com/docs) combines editor features with agent
+workflows. [OpenCode](https://github.com/anomalyco/opencode) provides an open
+source agent with several model provider options. the
+[Grok guide](/guides/grok/) separates its conversational, coding, and Bot
+experiences.
 
-## common setups
+changing one part can change the result. the same model receives different
+context and tools through different harnesses. a familiar editor may help you
+review faster. a remote host may have a dependency your laptop lacks. record
+those differences when comparing products.
 
-| setup | good fit | cost to notice |
-|---|---|---|
-| terminal plus first party app | deep local control with a visual supervision surface | another application and more execution state |
-| IDE centered agent | selection context, diagnostics, and inline review | editor coupling and local resource pressure |
-| terminal only agent | low interface overhead and scriptability | more manual coordination across concurrent work |
-| provider flexible harness | model choice and infrastructure control | more evaluation and configuration ownership |
+<span id="choose-a-surface-you-can-judge-the-work-through" class="heading-alias" aria-hidden="true"></span>
 
-begin with the simplest setup that makes the final diff, tests, and outstanding
-questions easy to inspect. add an orchestration layer after independent tasks
-actually compete for your attention.
+## which app should i use?
 
-## hardware and local analysis
+| your main activity | a useful surface to try | tradeoff to inspect |
+| --- | --- | --- |
+| tracing code and reviewing small patches | terminal or editor | how easily you can see commands, failures, and the complete diff |
+| steering several independent tasks | desktop task view | whether ownership and blocked work remain visible |
+| checking work away from your desk | mobile access to the relevant task | how much review the smaller screen supports |
+| running work in a separate environment | cloud or remote project | dependency setup, access, and reproducibility |
 
-hosting the model moves inference away from your computer. local repositories
-still use memory, storage, CPU, and network for worktrees, builds, browsers,
-language servers, terminals, and file indexing.
+begin with one outcome in a surface you already understand. add coordination
+when there are independent tasks to manage. a task list becomes
+useful when it helps you make the next decision about the work.
 
-| execution pattern | model compute | code execution | main local pressure |
-|---|---|---|---|
-| hosted model, local agent | provider | your machine | builds, browsers, worktrees, and indexing |
-| hosted model, remote agent | provider | remote environment | local review is light, environment parity is harder |
-| local model, local agent | your machine | your machine | model weights, cache, memory, builds, and terminals |
-| hosted model, many local agents | provider | your machine | duplicated workspaces and simultaneous processes |
+<span id="run-a-small-comparison" class="heading-alias" aria-hidden="true"></span>
 
-### memory
+## how do i compare them?
 
-browser tabs, an IDE, language servers, local databases, containers, and several
-agent worktrees can pressure a machine before model inference becomes relevant.
-local models add weights and runtime cache to the same memory budget.
+choose a representative task with a known starting state. for example, use the
+same repository revision and ask each setup to fix the same search navigation
+bug. provide the same expected behavior and checks. give each attempt its own
+checkout, and keep the results separate until you review them.
 
-### storage
+record:
 
-worktrees duplicate checked out files. build output, package caches, container
-images, model weights, logs, and browser profiles can grow faster than source
-code. leave enough free space for temporary build output and operating system
-updates.
+- the product, model selection, and settings you used.
+- the repository revision, environment, and information supplied.
+- time to a reviewable result and any interventions you made.
+- whether the change passed the relevant checks and browser flow.
+- remaining mistakes, unnecessary changes, and work needed to finish.
 
-### attention
+one attempt can expose a problem or a useful capability. try several tasks
+that resemble your work before treating the outcome as a reliable preference.
+change one major variable at a time when you want to understand why a result
+improved.
 
-parallel agents multiply review queues as well as compute. a desktop app can
-reduce switching between terminals, while an IDE keeps code context close.
-choose the surface that makes it easiest to notice a bad assumption before it
-spreads across several branches.
+for a paid option, compare the value of completed, reviewed work against the
+cost and constraints shown in your account and the provider's current pricing,
+such as [Cursor's plan page](https://cursor.com/pricing). model availability, included usage,
+and provider integrations change; inspect those terms before committing to a
+workflow that depends on them.
 
-## a practical default
+<span id="measure-the-machine-before-replacing-it" class="heading-alias" aria-hidden="true"></span>
 
-use a hosted model, local repository, one first party harness, and the review
-surface you already understand. keep a terminal available for deterministic
-checks. move execution remote when local resources or environment consistency
-become the measured bottleneck. run models locally when privacy, offline use, or
-inference control justifies the hardware and evaluation work.
+## do i need a better computer?
+
+with a hosted model, inference happens at the provider. local builds, browsers,
+containers, language servers, and tests still run wherever the task's execution
+host is. several agents can put pressure on that host even while all their
+models run remotely.
+
+| pattern | where model inference runs | where project commands run |
+| --- | --- | --- |
+| hosted model with local tools | provider | your computer |
+| hosted model with a remote project | provider | remote host |
+| cloud coding task | provider | configured cloud environment |
+| local model with local tools | your computer | your computer |
+
+measure a representative workload while it is running. inspect memory
+pressure, CPU use, available storage, and the processes using them. identify
+whether the delay comes from model responses, dependency installation, builds,
+browser work, or waiting for your review.
+
+[worktrees](https://git-scm.com/docs/git-worktree) keep separate checked out
+files, and each may accumulate dependencies or build output. local models add
+weights and runtime memory. estimate those needs from the model and runner you
+intend to use, then test the actual workload. a hardware specification alone
+cannot tell you whether a particular agent setup will feel responsive.
+
+Karpathy posted about buying a Mac mini to experiment with claws. his post
+also raises the question of what private data and credentials to give an agent.
+your workload and access requirements should guide that choice.
+
+<div class="publication-embed" data-media-id="karpathy-mac-mini-claws">
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2024987174077432126&amp;dnt=true&amp;hideThread=true&amp;theme=dark" title="Karpathy on a Mac mini and claws (February 2026)" width="360" height="441" style="--embed-height: 441px; --embed-height-mobile: 380px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <p class="publication-embed-credit"><a href="https://x.com/karpathy/status/2024987174077432126" target="_blank" rel="noopener noreferrer">Andrej Karpathy (@karpathy)</a>, february 2026.</p>
+</div>
+
+<span id="move-execution-for-a-concrete-reason" class="heading-alias" aria-hidden="true"></span>
+
+## should it run somewhere else?
+
+remote execution can help when the necessary environment already lives on
+another machine, local resources are constrained, or the task should continue
+in a hosted environment. check how setup, files, permissions, and results move
+between the machines. [Codex Remote](https://learn.chatgpt.com/docs/remote-connections)
+controls a connected host; [Codex cloud](https://learn.chatgpt.com/docs/cloud)
+uses a separately configured environment.
+
+local model execution gives you another deployment choice, with responsibility
+for model selection, runtime configuration, hardware, and evaluation. inspect
+all other connections as well when privacy or offline use is the reason for
+choosing it. the model's location describes only one part of the data flow.
+
+keep the setup whose benefits recur in your actual work. expand it when a
+specific limitation appears, and make the added component earn the time spent
+configuring, reviewing, and maintaining it.

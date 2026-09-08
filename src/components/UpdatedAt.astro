@@ -1,0 +1,15 @@
+---
+import { formatUpdatedAt } from '../date';
+
+interface Props { value: string }
+const { value } = Astro.props;
+const fullDate = formatUpdatedAt(value);
+const shortDate = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'America/New_York', month: 'short', day: 'numeric', year: 'numeric',
+}).format(new Date(value));
+---
+
+<time datetime={value} title={fullDate}>
+  <span class="updated-at-full">{fullDate}</span>
+  <span class="updated-at-short">{shortDate}</span>
+</time>

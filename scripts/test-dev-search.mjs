@@ -1,5 +1,6 @@
 import { spawn, spawnSync } from 'node:child_process';
 import { once } from 'node:events';
+import { readFile, writeFile, unlink } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 import { chromium } from '@playwright/test';
@@ -20,10 +21,16 @@ try {
   } catch {}
 
   if (origin === isolatedOrigin) {
-    server = spawn(process.execPath, [astro, 'dev', '--host', '127.0.0.1', '--port', '4177'], { stdio: 'inherit' });
+    // Astro 7 auto-backgrounds agent runs. Keep this owned test process in the
+    // foreground and leave any editor's dev server and lock file untouched.
+    server = spawn(process.execPath, [astro, 'dev', '--ignore-lock', '--host', '127.0.0.1', '--port', '4177'], {
+      stdio: 'inherit',
+      env: { ...process.env, ASTRO_DEV_BACKGROUND: '1' },
+    });
     serverExit = once(server, 'exit');
     for (let attempt = 0; attempt < 40; attempt += 1) {
       try { if ((await fetch(origin)).ok) break; } catch {}
+      if (server.exitCode !== null || server.signalCode !== null) throw new Error('isolated astro development server exited before becoming ready');
       if (attempt === 39) throw new Error('astro development server did not become ready');
       await new Promise((resolve) => setTimeout(resolve, 250));
     }
@@ -79,10 +86,43 @@ try {
   await result.waitFor({ state: 'visible', timeout: 5000 });
   if (!(await result.textContent())?.toLowerCase().includes('configuration')) throw new Error('local search did not return the expected guide result');
   if (errors.length) throw new Error(`local search console errors: ${errors.join(' | ')}`);
+  // Exercise the same save -> SSE -> map path used during writing. The temporary
+  // chapter is hidden, uniquely owned by this test, and removed even on failure.
+  if (server) {
+    const map = await browser.newPage({ viewport: { width: 1000, height: 900 } });
+    await map.goto(`${origin}/__progress/`);
+    await map.locator('#connection[data-live="true"]').waitFor();
+    const before = await (await fetch(`${origin}/__progress/data.json`)).json();
+    const relative = `content/handbook/editorial-map-test-${process.pid}.md`;
+    const fixture = path.join(process.cwd(), relative);
+    const raw = (await readFile('content/handbook/operating-agents.md', 'utf8')).match(/^---[\s\S]*?---/)[0];
+    const front = raw.replace(/^title:.*$/m, 'title: editorial save test').replace(/^redirects:.*$/m, 'redirects: []');
+    const body = '\n\n## live save\n\nFirst saved wording.\n';
+    const source = front.replace(/\n---$/, '\ndraft: true\n---') + body;
+    let owned = false;
+    try {
+      await writeFile(fixture, source, { flag: 'wx' }); owned = true;
+      const button = map.locator(`.page-button[data-page="${relative}"]`);
+      await button.waitFor(); await button.click();
+      const section = map.locator(`[id="${relative}#live-save"]`);
+      await section.locator(':scope > summary').click();
+      await section.locator('.excerpt').waitFor({ state: 'attached' });
+      await writeFile(fixture, source.replace('First saved wording.', 'Second saved wording.'));
+      await map.waitForFunction(() => [...document.querySelectorAll('.excerpt')].some(e => e.textContent.includes('Second saved wording.')));
+      const data = await (await fetch(`${origin}/__progress/data.json`)).json();
+      if (data.summary.pages !== before.summary.pages + 1 || data.summary.reviewedBodies !== before.summary.reviewedBodies) throw new Error('live save changed unrelated inventory or review state');
+      const response = await fetch(`${origin}/__progress/data.json`, { method: 'POST' });
+      if (response.status !== 405) throw new Error('writing map must remain read only');
+    } finally {
+      if (owned) await unlink(fixture);
+      await map.close();
+    }
+  }
+
 } finally {
   await browser?.close();
   if (server && server.exitCode === null && server.signalCode === null) server.kill('SIGTERM');
   if (serverExit) await serverExit;
 }
 
-console.log('local development search loaded the Pagefind index and returned results');
+console.log('local development search and live writing-map save updates passed');

@@ -8,7 +8,7 @@ this is my evidence backed guide to working with coding agents, whether you are 
 - [codex](https://agents.anipotts.com/guides/codex/)
 - [claude code](https://agents.anipotts.com/guides/claude-code/)
 - [grok](https://agents.anipotts.com/guides/grok/)
-- [techniques to operate agents](https://agents.anipotts.com/handbook/operating-agents/)
+- [start here](https://agents.anipotts.com/handbook/operating-agents/)
 - [choosing a coding agent setup](https://agents.anipotts.com/handbook/choosing-a-setup/)
 - [how coding agents got here](https://agents.anipotts.com/handbook/history/)
 - [where this comes from](https://agents.anipotts.com/handbook/method-and-sources/)
@@ -21,7 +21,7 @@ the handbook separates the surface where you steer work, the harness that runs t
 ## evidence principle
 
 <!-- generated:evidence:start -->
-- `tested`: reproduced by the author in a named environment and version
+- `tested`: reproduced in a named environment and version, with the tester and limits stated
 - `official source`: confirmed in current primary documentation or source code
 - `analysis`: a judgment derived from stated evidence
 - `open question`: current evidence is missing or incomplete

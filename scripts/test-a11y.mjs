@@ -11,6 +11,7 @@ const origin = `http://127.0.0.1:${previewPort}`;
 const vite = path.join(process.cwd(), 'node_modules/vite/bin/vite.js');
 const routes = canonicalContentFiles().map((entry) => entry.route);
 const viewports = [
+  { name: 'annotated mobile', width: 319, height: 856 },
   { name: 'reflow narrow', width: 320, height: 800 },
   { name: 'mobile small', width: 375, height: 812 },
   { name: '200% browser zoom equivalent', width: 720, height: 500 },
@@ -24,6 +25,8 @@ const server = spawn(process.execPath, [vite, 'preview', '--host', '127.0.0.1', 
 const serverExit = once(server, 'exit');
 const failures = [];
 let browser;
+let activeCase = 'starting preview';
+let completedCases = 0;
 
 try {
   for (let attempt = 0; attempt < 40; attempt += 1) {
@@ -35,12 +38,18 @@ try {
   for (const colorScheme of ['light', 'dark']) {
   for (const viewport of viewports) {
     const context = await browser.newContext({ viewport, colorScheme });
+    context.setDefaultTimeout(15_000);
+    context.setDefaultNavigationTimeout(30_000);
     const page = await context.newPage();
     for (const route of routes) {
+      activeCase = `${colorScheme} ${viewport.width}px ${route}`;
+      const started = performance.now();
+      const previousFailures = failures.length;
+      console.log(`[a11y] checking ${activeCase}`);
       await page.goto(`${origin}${route}`, { waitUntil: 'domcontentloaded' });
       await page.evaluate(() => document.fonts.ready);
-      // Expressive Code adds keyboard focus after its resize/idle observation.
-      await page.waitForFunction(() => [...document.querySelectorAll('.expressive-code pre')].every((pre) => pre.scrollWidth <= pre.clientWidth || pre.tabIndex === 0));
+      // Publication code frames make overflowing examples keyboard scrollable.
+      await page.waitForFunction(() => [...document.querySelectorAll('.code-frame pre')].every((pre) => pre.scrollWidth <= pre.clientWidth || pre.tabIndex === 0));
       if (await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)) failures.push(`${viewport.name} ${route}: horizontal overflow`);
       const typographyFailures = await page.evaluate(({ route, viewportWidth }) => {
         const findings = [];
@@ -71,46 +80,83 @@ try {
           if (computed.fontFamily.includes('Instrument Sans') && !['400', '600'].includes(computed.fontWeight)) findings.push(`unsupported sans weight ${computed.fontWeight}: ${element.textContent.trim().slice(0, 60)}`);
         }
 
-        const displaySize = Math.min(64, Math.max(44, viewportWidth * .05));
+        const displaySize = viewportWidth < 768
+          ? Math.min(44, Math.max(32, viewportWidth * .085))
+          : viewportWidth < 960 ? Math.min(64, Math.max(44, viewportWidth * .05)) : Math.min(86, Math.max(56, viewportWidth * .0577));
         const titleSize = Math.min(48, Math.max(36, viewportWidth * .04));
         const headingSize = Math.min(32, Math.max(28, viewportWidth * .02));
         if (route === '/') checkRole(elements('.home-content h1'), { size: displaySize, line: displaySize, weight: 600, family: 'Instrument Sans', color: ink }, 'display h1');
         else checkRole(elements('main h1'), { size: titleSize, line: titleSize * 1.05, weight: 600, family: 'Instrument Sans', color: ink }, 'page h1');
         if (route !== '/' && elements('.home-content h1').length > 0) findings.push('display h1 appears outside the homepage');
-        checkRole(elements('main h2'), { size: headingSize, line: headingSize * 1.15, weight: 600, family: 'Instrument Sans', color: ink }, 'content h2');
+        checkRole(elements('main h2').filter((el) => viewportWidth < 960 || !el.closest('.home-content')), { size: headingSize, line: headingSize * 1.15, weight: 600, family: 'Instrument Sans', color: ink }, 'content h2');
+        if (viewportWidth >= 960) checkRole(elements('.home-content h2'), { size: 40, line: 46, weight: 600, family: 'Instrument Sans', color: ink }, 'homepage h2');
         checkRole(elements('main h3:not(.source-publisher h3)'), { size: 22, line: 27.5, weight: 600, family: 'Instrument Sans', color: ink }, 'content h3');
         checkRole(elements('.source-publisher h3'), { size: 16, line: 24, weight: 600, family: 'Instrument Sans', color: ink }, 'source publisher heading');
 
         const reading = elements('.home-content p, .home-guides p, .sl-markdown-content p, .run-page p, .source-groups > p')
-          .filter((element) => !element.matches('.section-label, .history-year, .run-header > p:first-child, .source-kinds, .page-meta, [data-slot="item-description"]'));
-        checkRole(reading, { size: 18, line: 30, weight: 400, family: 'Instrument Sans', color: ink }, 'reading prose');
-        for (const element of reading.filter(visible)) if (element.getBoundingClientRect().width > 816) findings.push(`reading measure exceeds 68ch: ${element.textContent.trim().slice(0, 60)}`);
+          .filter((element) => !element.matches('.section-label, .example-label, .publication-embed-credit, .history-year, .run-header > p:first-child, .source-kinds, .page-meta, [data-slot="item-description"]'));
+        if (viewportWidth >= 960) {
+          checkRole(reading.filter((el) => el.closest('.home-content') && !el.matches('.home-content > p:first-of-type')), { size: 22, line: 32, weight: 400, family: 'Instrument Sans', color: ink }, 'homepage prose');
+          const subtitleSize = Math.min(26, Math.max(18, viewportWidth * .0175));
+          checkRole(elements('.home-content > p:first-of-type'), { size: subtitleSize, line: subtitleSize * 1.5, weight: 400, family: 'Instrument Sans', color: ink }, 'homepage subtitle');
+        }
+        checkRole(reading.filter((el) => viewportWidth < 960 || !el.closest('.home-content')), { size: 18, line: 30, weight: 400, family: 'Instrument Sans', color: ink }, 'reading prose');
+        checkRole(elements('.author-attribution, .author-attribution a'), { size: 12, line: 18, weight: 400, family: 'Instrument Sans', color: slate }, 'author attribution');
+        checkRole(elements('.publication-embed-credit'), { size: 12, line: 18, weight: 400, family: 'Instrument Sans', color: slate }, 'external media credit');
+        checkRole(elements('.example-good .example-label'), { size: 14, line: 21, weight: 600, family: 'Instrument Sans', color: dark ? 'rgb(140, 219, 172)' : 'rgb(23, 97, 57)' }, 'good example label');
+        checkRole(elements('.example-bad .example-label'), { size: 14, line: 21, weight: 600, family: 'Instrument Sans', color: dark ? 'rgb(255, 167, 167)' : 'rgb(163, 43, 43)' }, 'bad example label');
+        for (const element of reading.filter(visible)) if (!element.matches('.home-content > p:first-of-type') && element.getBoundingClientRect().width > (element.closest('.home-content') && viewportWidth >= 960 ? 1000 : 816)) findings.push(`reading measure exceeds 68ch: ${element.textContent.trim().slice(0, 60)}`);
 
         checkRole(elements('td, .run-inventory li, .artifact-list li, .run-page dd'), { size: 16, line: 24, weight: 400, family: 'Instrument Sans', color: ink }, 'dense content');
         checkRole(elements('.page-sources li'), { size: 12, line: 16, weight: 400, family: 'Instrument Sans', color: ink }, 'source links');
         checkRole(elements('[data-slot="item-description"]'), { size: 16, line: 24, weight: 400, family: 'Instrument Sans', color: slate }, 'guide description');
         const metadata = elements('.section-label, .home-guide-list span, .footer-meta, .sidebar-label, .page-meta, figcaption, .history-year, .run-header > p:first-child, .run-page dt, .run-evidence, .run-inventory span, .source-kinds, th');
         checkRole(metadata, { size: 12, line: 18, weight: 400, family: 'IBM Plex Mono', color: slate }, 'metadata');
-        checkRole(elements('.site-name, .provider-tabs a, .search-trigger, .right-sidebar a, .right-sidebar h2, .site-footer a'), { size: 12, line: 16, family: 'Instrument Sans' }, 'navigation');
+        checkRole(elements('.site-name, .guide-picker-trigger, .search-trigger, .right-sidebar a, .right-sidebar h2, .site-footer a:not(.author-attribution a)').filter((el) => viewportWidth < 960 || !el.matches('.homepage-header .site-name, .homepage-header .guide-picker-trigger')), { size: 12, line: 16, family: 'Instrument Sans' }, 'navigation');
+        if (viewportWidth >= 960) {
+          checkRole(elements('.homepage-header .site-name'), { size: 18, line: 16, family: 'Instrument Sans' }, 'homepage brand');
+          checkRole(elements('.homepage-header .guide-picker-trigger'), { size: 16, line: 16, family: 'Instrument Sans' }, 'homepage browse');
+        }
         checkRole(elements('.publication-sidebar [data-sidebar="menu-button"], .publication-sidebar [data-sidebar="menu-sub-button"]'), { size: 12, line: 18, family: 'Instrument Sans' }, 'guide navigation');
         return findings;
       }, { route, viewportWidth: viewport.width });
       for (const finding of typographyFailures) failures.push(`${viewport.name} ${route}: ${finding}`);
 
       if (viewport.width === 375 && route === '/') {
-        const menu = page.locator('.mobile-site-menu-trigger');
-        const sheet = page.locator('.mobile-site-menu[role="dialog"]');
+        const menu = page.locator('.header-guide-picker-trigger');
+        const sheet = page.locator('.guide-page-options:visible');
         await menu.focus();
         await page.keyboard.press('Enter');
         await sheet.waitFor({ state: 'visible' });
-        if (await sheet.getAttribute('data-state') !== 'open') failures.push(`${viewport.name} ${route}: mobile Sheet does not open with Enter`);
+        if (await sheet.getAttribute('data-state') !== 'open') failures.push(`${viewport.name} ${route}: homepage picker does not open with Enter`);
         await page.keyboard.press('Escape');
         await sheet.waitFor({ state: 'hidden' });
-        if (!(await menu.evaluate((trigger) => document.activeElement === trigger))) failures.push(`${viewport.name} ${route}: mobile Sheet does not restore focus after Escape`);
+        if (!(await menu.evaluate((trigger) => document.activeElement === trigger))) failures.push(`${viewport.name} ${route}: homepage picker does not restore focus after Escape`);
       }
 
+      // A lazy external post can still be hydrating after the host's fonts
+      // are ready. Audit loaded text, image, and video posts and their links.
+      for (const iframe of await page.locator('.publication-embed iframe').elementHandles()) {
+        await iframe.scrollIntoViewIfNeeded();
+        const frame = await iframe.contentFrame();
+        if (!frame) throw new Error(`${route}: external media frame is unavailable`);
+        await frame.waitForFunction(() => {
+          const images = [...document.querySelectorAll('img')];
+          return document.querySelector('article') && images.every((image) => image.complete && image.naturalWidth > 0);
+        });
+        await frame.evaluate(() => document.fonts.ready);
+        // Wait for the official resize message to reach the host so axe sees
+        // the final frame, rather than a clipped or still-expanding post.
+        await frame.waitForFunction(() => {
+          const height = document.querySelector('article')?.getBoundingClientRect().height;
+          return height && innerHeight >= height && innerHeight - height < 8;
+        });
+      }
+      await page.evaluate(() => scrollTo(0, 0));
       const report = await new AxeBuilder({ page }).analyze();
-      for (const violation of report.violations.filter((item) => item.impact === 'serious' || item.impact === 'critical')) failures.push(`${viewport.name} ${route}: ${violation.impact} ${violation.id}`);
+      for (const violation of report.violations.filter((item) => item.impact === 'serious' || item.impact === 'critical')) {
+        for (const node of violation.nodes) failures.push(`${colorScheme} ${viewport.name} ${route}: ${violation.impact} ${violation.id} at ${node.target.join(' -> ')}\n${node.failureSummary}`);
+      }
 
       const checkClipping = async (label) => {
         if (await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth)) failures.push(`${viewport.name} ${route}: ${label} causes horizontal overflow`);
@@ -143,15 +189,20 @@ try {
       }
 
       if (viewport.width === 720) await checkClipping('200% browser zoom equivalent');
+      for (const failure of failures.slice(previousFailures)) console.error(failure);
+      completedCases += 1;
+      console.log(`[a11y] ${completedCases}/${routes.length * viewports.length * 2} checked (${Math.round(performance.now() - started)}ms, ${failures.length - previousFailures} findings)`);
     }
     await context.close();
   }
   }
+} catch (error) {
+  throw new Error(`[a11y] stopped during ${activeCase} after ${completedCases} completed cases: ${error.message}`, { cause: error });
 } finally {
   await browser?.close();
   if (server.exitCode === null && server.signalCode === null) server.kill('SIGTERM');
   await serverExit;
 }
 
-if (failures.length > 0) { console.error(failures.join('\n')); process.exit(1); }
+if (failures.length > 0) { console.error(`[a11y] ${failures.length} findings across ${completedCases} completed cases; see the per-case diagnostics above.`); process.exit(1); }
 console.log(`typography, reflow, text spacing, text resize, and axe checks passed across ${routes.length} routes at ${viewports.length} required widths in both themes`);

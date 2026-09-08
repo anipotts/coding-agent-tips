@@ -1,17 +1,587 @@
 {
+  "schemaVersion": 2,
   "retrievedAt": "2026-08-27",
   "derivativeFormat": "webp",
   "derivativeWidths": [640, 1200],
+  "mediaPolicy": {
+    "thirdPartyUseRequirements": ["official-embed", "credited-link", "permission-granted", "reusable-license", "remote-image"],
+    "rehostedDisallowedStatuses": ["official-embed", "credited-link", "remote-image"],
+    "visibleCreditRequires": ["creator.name", "creator.handle", "originalPostUrl"],
+    "embedRequirements": {
+      "reservedDimensions": true,
+      "autoplay": false,
+      "reducedMotion": true,
+      "originalPostFallback": true
+    }
+  },
+  "externalMedia": [
+    {
+      "id": "grok-bot-mobile-trackpad",
+      "sourceId": "grok-bot-mobile-trackpad-capture",
+      "retrievedAt": "2026-09-08",
+      "creator": {
+        "name": "Will Oldgram",
+        "handle": "@old_pgmrs_will"
+      },
+      "originalPostUrl": "https://x.com/old_pgmrs_will/status/2094265782054367651",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "remote-image",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/guides/grok/"
+      ],
+      "mediaType": "image",
+      "embed": null,
+      "presentations": [
+        {
+          "route": "/guides/grok/",
+          "alt": "Grok Bot mobile computer view with a file browser, Chrome icon, and trackpad controls in Japanese",
+          "caption": "Grok Bot's mobile computer and trackpad menu. screenshot shared by Will Oldgram (@old_pgmrs_will) on X.",
+          "linkUrl": "https://x.com/old_pgmrs_will/status/2094265782054367651"
+        }
+      ],
+      "creditPlacement": "expanded-caption",
+      "mediaUrl": "https://pbs.twimg.com/media/HRBSyy5bcAAh2mc?format=jpg&name=small",
+      "observedBytes": 41593,
+      "width": 680,
+      "height": 646,
+      "selectionSource": "Ani browser comments September 8, 2026: show only the image from this post and place real Grok UI beneath the opening heading. Credit belongs in the expanded caption.",
+      "notes": "Image URL and intrinsic dimensions inspected in the existing official X embed. Loaded directly from X media hosting; no file is rehosted and no creator license or permission is inferred."
+    },
+    {
+      "id": "karpathy-programming-english",
+      "sourceId": "karpathy-programming-english",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Andrej Karpathy",
+        "handle": "@karpathy"
+      },
+      "originalPostUrl": "https://x.com/karpathy/status/1617979122625712128",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/operating-agents/"
+      ],
+      "mediaType": "text",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1617979122625712128&dnt=true&hideThread=true&theme=dark",
+        "width": 360,
+        "height": 249,
+        "mobileHeight": 228,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/karpathy/status/1617979122625712128"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/operating-agents/",
+          "alt": "Karpathy on programming in English (January 2023)",
+          "caption": null,
+          "linkUrl": "https://x.com/karpathy/status/1617979122625712128"
+        }
+      ]
+    },
+    {
+      "id": "ricky-cursor-coding-session",
+      "sourceId": "ricky-cursor-coding-session",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Ricky Robinett",
+        "handle": "@rickyrobinett"
+      },
+      "originalPostUrl": "https://x.com/rickyrobinett/status/1825581674870055189",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/operating-agents/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1825581674870055189&dnt=true&hideThread=true&theme=light",
+        "width": 360,
+        "height": 696,
+        "mobileHeight": 581,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/rickyrobinett/status/1825581674870055189"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/operating-agents/",
+          "alt": "Ricky Robinett shares a Cursor coding session (August 2024)",
+          "caption": null,
+          "linkUrl": "https://x.com/rickyrobinett/status/1825581674870055189"
+        }
+      ]
+    },
+    {
+      "id": "karpathy-mac-mini-claws",
+      "sourceId": "karpathy-mac-mini-claws",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Andrej Karpathy",
+        "handle": "@karpathy"
+      },
+      "originalPostUrl": "https://x.com/karpathy/status/2024987174077432126",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/choosing-a-setup/"
+      ],
+      "mediaType": "text",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2024987174077432126&dnt=true&hideThread=true&theme=dark",
+        "width": 360,
+        "height": 441,
+        "mobileHeight": 380,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/karpathy/status/2024987174077432126"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/choosing-a-setup/",
+          "alt": "Karpathy on a Mac mini and claws (February 2026)",
+          "caption": null,
+          "linkUrl": "https://x.com/karpathy/status/2024987174077432126"
+        }
+      ]
+    },
+    {
+      "id": "cognition-devin-launch-post",
+      "sourceId": "cognition-devin-launch-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Cognition",
+        "handle": "@cognition"
+      },
+      "originalPostUrl": "https://x.com/cognition/status/1767548763134964000",
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/history/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1767548763134964000&dnt=true&hideThread=true&theme=dark",
+        "width": 360,
+        "height": 662,
+        "mobileHeight": 555,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/cognition/status/1767548763134964000"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/history/",
+          "alt": "Devin launch demonstration (March 2024)",
+          "caption": null,
+          "linkUrl": "https://x.com/cognition/status/1767548763134964000"
+        }
+      ]
+    },
+    {
+      "id": "anthropic-computer-use-demo-post",
+      "sourceId": "anthropic-computer-use-demo-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Anthropic",
+        "handle": "@AnthropicAI"
+      },
+      "originalPostUrl": "https://x.com/AnthropicAI/status/1848742752403476488",
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/history/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1848742752403476488&dnt=true&hideThread=true&theme=dark",
+        "width": 360,
+        "height": 662,
+        "mobileHeight": 540,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/AnthropicAI/status/1848742752403476488"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/history/",
+          "alt": "Claude computer use demonstration (October 2024)",
+          "caption": null,
+          "linkUrl": "https://x.com/AnthropicAI/status/1848742752403476488"
+        }
+      ]
+    },
+    {
+      "id": "anthropic-claude-code-launch-post",
+      "sourceId": "anthropic-claude-code-launch-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Anthropic",
+        "handle": "@AnthropicAI"
+      },
+      "originalPostUrl": "https://x.com/AnthropicAI/status/1894095276740055364",
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/history/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1894095276740055364&dnt=true&hideThread=true&theme=dark",
+        "width": 360,
+        "height": 710,
+        "mobileHeight": 597,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/AnthropicAI/status/1894095276740055364"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/history/",
+          "alt": "Claude Code terminal launch demonstration (February 2025)",
+          "caption": null,
+          "linkUrl": "https://x.com/AnthropicAI/status/1894095276740055364"
+        }
+      ]
+    },
+    {
+      "id": "openai-codex-app-walkthrough-post",
+      "sourceId": "openai-codex-app-walkthrough-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "OpenAI Developers",
+        "handle": "@OpenAIDevs"
+      },
+      "originalPostUrl": "https://x.com/OpenAIDevs/status/2018385663457116379",
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "credited-link",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/guides/codex/"
+      ],
+      "mediaType": "video",
+      "embed": null,
+      "presentations": [
+        {
+          "route": "/guides/codex/",
+          "alt": "watch the Codex walkthrough ↗",
+          "caption": null,
+          "linkUrl": "https://x.com/OpenAIDevs/status/2018385663457116379"
+        }
+      ],
+      "publicationNote": "September 8, 2026: use the original post link while the native X affiliation link has no accessible name in either supported theme."
+    },
+    {
+      "id": "karpathy-autoresearch-post",
+      "sourceId": "karpathy-autoresearch-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Andrej Karpathy",
+        "handle": "@karpathy"
+      },
+      "originalPostUrl": "https://x.com/karpathy/status/2030371219518931079",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/guides/codex/workflows/"
+      ],
+      "mediaType": "image",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2030371219518931079&dnt=true&hideThread=true&theme=dark",
+        "width": 360,
+        "height": 701,
+        "mobileHeight": 566,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/karpathy/status/2030371219518931079"
+      },
+      "presentations": [
+        {
+          "route": "/guides/codex/workflows/",
+          "alt": "Karpathy introduces autoresearch (March 2026)",
+          "caption": null,
+          "linkUrl": "https://x.com/karpathy/status/2030371219518931079"
+        }
+      ]
+    },
+    {
+      "id": "boris-parallel-claude-post",
+      "sourceId": "boris-parallel-claude-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Boris Cherny",
+        "handle": "@bcherny"
+      },
+      "originalPostUrl": "https://x.com/bcherny/status/2007179833990885678",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/guides/claude-code/recommendations/"
+      ],
+      "mediaType": "image",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=2007179833990885678&dnt=true&hideThread=true&theme=light",
+        "width": 360,
+        "height": 572,
+        "mobileHeight": 487,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/bcherny/status/2007179833990885678"
+      },
+      "presentations": [
+        {
+          "route": "/guides/claude-code/recommendations/",
+          "alt": "Boris Cherny shows five parallel Claude sessions (January 2026)",
+          "caption": null,
+          "linkUrl": "https://x.com/bcherny/status/2007179833990885678"
+        }
+      ]
+    },
+    {
+      "id": "alex-albert-mcp-github-demo-post",
+      "sourceId": "alex-albert-mcp-github-demo-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Alex Albert",
+        "handle": "@alexalbert__"
+      },
+      "originalPostUrl": "https://x.com/alexalbert__/status/1861079874385203522",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/guides/claude-code/extensions/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1861079874385203522&dnt=true&hideThread=true&theme=dark",
+        "width": 360,
+        "height": 730,
+        "mobileHeight": 593,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/alexalbert__/status/1861079874385203522"
+      },
+      "presentations": [
+        {
+          "route": "/guides/claude-code/extensions/",
+          "alt": "Alex Albert demonstrates MCP with GitHub (November 2024)",
+          "caption": null,
+          "linkUrl": "https://x.com/alexalbert__/status/1861079874385203522"
+        }
+      ]
+    },
+    {
+      "id": "karpathy-vibe-coding-post",
+      "sourceId": "karpathy-vibe-coding-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Andrej Karpathy",
+        "handle": "@karpathy"
+      },
+      "originalPostUrl": "https://x.com/karpathy/status/1886192184808149383",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/method-and-sources/"
+      ],
+      "mediaType": "text",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1886192184808149383&dnt=true&hideThread=true&theme=dark",
+        "width": 360,
+        "height": 417,
+        "mobileHeight": 361,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/karpathy/status/1886192184808149383"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/method-and-sources/",
+          "alt": "Karpathy introduces vibe coding (February 2025)",
+          "caption": null,
+          "linkUrl": "https://x.com/karpathy/status/1886192184808149383"
+        }
+      ]
+    },
+    {
+      "id": "levels-cursor-flight-simulator-post",
+      "sourceId": "levels-cursor-flight-simulator-post",
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Pieter Levels",
+        "handle": "@levelsio"
+      },
+      "originalPostUrl": "https://x.com/levelsio/status/1893350391158292550",
+      "ownership": "third-party",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "official-embed",
+      "creditVisible": true,
+      "canonicalPages": [
+        "/handbook/method-and-sources/"
+      ],
+      "mediaType": "video",
+      "embed": {
+        "url": "https://platform.twitter.com/embed/Tweet.html?id=1893350391158292550&dnt=true&hideThread=true&theme=dark",
+        "width": 360,
+        "height": 1348,
+        "mobileHeight": 1177,
+        "autoplay": false,
+        "reducedMotion": true,
+        "fallbackUrl": "https://x.com/levelsio/status/1893350391158292550"
+      },
+      "presentations": [
+        {
+          "route": "/handbook/method-and-sources/",
+          "alt": "Pieter Levels shows his early Cursor flight simulator (February 2025)",
+          "caption": null,
+          "linkUrl": "https://x.com/levelsio/status/1893350391158292550"
+        }
+      ]
+    }
+  ],
+  "videos": [
+    {
+      "id": "claude-terminal-recording",
+      "path": "/media/guides/claude-terminal-recording.mp4",
+      "bytes": 2749627,
+      "sha256": "3ed0999347d744d484c9f245cf9b0bc1a7a94cd90c3a025c19cba89a06523edf",
+      "width": 2414,
+      "height": 1392,
+      "durationSeconds": 12.85,
+      "hasAudio": false,
+      "ownership": "owner-supplied",
+      "source": "Ani supplied terminal recording",
+      "retrievedAt": "2026-09-07",
+      "canonicalPages": [
+        "/guides/claude-code/"
+      ],
+      "poster": "/media/publications/claude-terminal-poster-1200.webp"
+    }
+  ],
   "featuredImages": [
     {
       "id": "codex-handbook-workspace",
+      "derivativeSet": "codex-handbook-workspace",
       "path": "/media/guides/codex-handbook-workspace.png",
       "width": 3600,
       "height": 2260,
       "bytes": 977228,
       "sha256": "abcf82246f99ba8193901a175f655e0a02786ec77e5d847e49ef08ef9218bcd4",
       "source": "Ani supplied screenshot",
-      "canonicalPages": ["/guides/codex/"]
+      "canonicalPages": ["/guides/codex/"],
+      "retrievedAt": "2026-08-27",
+      "creator": { "name": "Ani Potts", "handle": null },
+      "originalPostUrl": null,
+      "ownership": "owner-supplied",
+      "permissionStatus": "owner-supplied",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [
+        {
+          "route": "/guides/codex/",
+          "alt": "Codex beside a coding agent tips task and its GitHub pull request with passing checks",
+          "caption": "a screenshot of me working on some personal projects and some content for a brand deal.",
+          "linkUrl": null
+        }
+      ]
+    },
+    {
+      "id": "claude-terminal-poster",
+      "derivativeSet": "claude-terminal-poster",
+      "path": "/media/guides/claude-terminal-poster.webp",
+      "width": 2414,
+      "height": 1392,
+      "bytes": 112680,
+      "sha256": "29543199cd42dac8cb30da577ff31106c5be6b3fbef7af06e2829a845b356292",
+      "source": "Ani supplied recording frame",
+      "canonicalPages": [
+        "/guides/claude-code/"
+      ],
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Ani Potts",
+        "handle": null
+      },
+      "originalPostUrl": null,
+      "ownership": "owner-supplied",
+      "permissionStatus": "owner-supplied",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": []
+    },
+    {
+      "id": "claude-agent-wall",
+      "derivativeSet": "claude-agent-wall",
+      "path": "/media/guides/claude-agent-wall.png",
+      "width": 3840,
+      "height": 1080,
+      "bytes": 880528,
+      "sha256": "e30ebe54048744f9d98bdba03ddaafa335606ec3c36f80102db832a42455630d",
+      "source": "Ani supplied screenshot",
+      "canonicalPages": [
+        "/guides/claude-code/"
+      ],
+      "retrievedAt": "2026-09-07",
+      "creator": {
+        "name": "Ani Potts",
+        "handle": null
+      },
+      "originalPostUrl": null,
+      "ownership": "owner-supplied",
+      "permissionStatus": "owner-supplied",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [
+        {
+          "route": "/guides/claude-code/",
+          "alt": "a wall of Claude Code agents running in tiled terminal panes",
+          "caption": "i did this for a TikTok and went through my five hour usage window in 15 minutes.",
+          "linkUrl": null
+        }
+      ]
     }
   ],
   "assets": [
@@ -20,6 +590,16 @@
       "originalUrl": "https://raw.githubusercontent.com/openai/codex/main/.github/codex-cli-splash.png",
       "sourcePages": ["https://github.com/openai/codex"],
       "canonicalPages": ["/guides/codex/"],
+      "retrievedAt": "2026-08-27",
+      "creator": { "name": "OpenAI", "handle": null },
+      "originalPostUrl": null,
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [],
       "original": { "width": 1898, "height": 1190, "sha256": "15b86fa9c0790a779ecdd84f1e7dee029ab79bfb093bd3c4876998696925b013" },
       "derivativeSet": "codex-cli"
     },
@@ -28,6 +608,16 @@
       "originalUrl": "https://images.ctfassets.net/kftzwdyauwt9/7eyalGUXstkzzzJ3Pb008m/9f71260a3f127dc142cc8c479d0cf68f/Installer4.png?fm=webp&q=90&w=1600",
       "sourcePages": ["https://openai.com/index/introducing-the-codex-app/", "https://openai.com/codex/"],
       "canonicalPages": ["/guides/codex/"],
+      "retrievedAt": "2026-08-27",
+      "creator": { "name": "OpenAI", "handle": null },
+      "originalPostUrl": null,
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [],
       "original": { "width": 1600, "height": 962, "sha256": "3c41d5bacd12bd6ddfe2a1c9df028674357a7156e273c1d52d77797b95721102" },
       "derivativeSet": "codex-app"
     },
@@ -36,6 +626,16 @@
       "originalUrl": "https://images.ctfassets.net/kftzwdyauwt9/4i08f39LTE7HOZ0R3EKaKA/74f6008bbde015cfef96a14209f7673b/16_9.png",
       "sourcePages": ["https://openai.com/index/work-with-codex-from-anywhere/"],
       "canonicalPages": ["/guides/codex/"],
+      "retrievedAt": "2026-08-27",
+      "creator": { "name": "OpenAI", "handle": null },
+      "originalPostUrl": null,
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [],
       "original": { "width": 1920, "height": 1080, "sha256": "4f013749c0b8e232a5c5a63b67a8bc37a65d056b8ccdf578faafe73b141769a9" },
       "derivativeSet": "codex-mobile"
     },
@@ -44,6 +644,23 @@
       "originalUrl": "https://cdn.prod.website-files.com/68a44d4040f98a4adf2207b6/699e1b736d83c9fb55a56d2a_698be3342261cf694fdae301_698bdd78a6031117e6bb41d6_Screenshot%2525202026-02-09%252520at%25252012.52.07%2525E2%252580%2525AFPM.png",
       "sourcePages": ["https://code.claude.com/docs/en/overview"],
       "canonicalPages": ["/guides/claude-code/"],
+      "retrievedAt": "2026-08-27",
+      "creator": { "name": "Anthropic", "handle": null },
+      "originalPostUrl": null,
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [
+        {
+          "route": "/guides/claude-code/",
+          "alt": "the Code tab in the Claude desktop app",
+          "caption": "Claude Code in the desktop app. screenshot from Anthropic’s overview.",
+          "linkUrl": "https://code.claude.com/docs/en/desktop"
+        }
+      ],
       "original": { "width": 2064, "height": 1252, "sha256": "40fbc77a34b0790f53acda7cc3b7ed0476ac386e6ca57f6131800573f424fb32" },
       "derivativeSet": "claude-code"
     },
@@ -52,6 +669,16 @@
       "originalUrl": "https://academy.claude.com/assets/media/6fcef3fffebbdcc24dfe51c43e57196dcec0402c986c32bb803a2bd6a6fcdffc.png",
       "sourcePages": ["https://claude.com/resources/tutorials/navigating-the-claude-desktop-app", "https://code.claude.com/docs/en/remote-control"],
       "canonicalPages": ["/guides/claude-code/"],
+      "retrievedAt": "2026-08-27",
+      "creator": { "name": "Anthropic", "handle": null },
+      "originalPostUrl": null,
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [],
       "original": { "width": 2064, "height": 1252, "sha256": "6fcef3fffebbdcc24dfe51c43e57196dcec0402c986c32bb803a2bd6a6fcdffc" },
       "derivativeSet": "claude-chat"
     },
@@ -60,6 +687,23 @@
       "originalUrl": "https://academy.claude.com/assets/media/782ff424a16217adc2bf15d89f81250e2d2c9c4f112ddad39a28942c6ae43386.png",
       "sourcePages": ["https://code.claude.com/docs/en/desktop"],
       "canonicalPages": ["/guides/claude-code/"],
+      "retrievedAt": "2026-08-27",
+      "creator": { "name": "Anthropic", "handle": null },
+      "originalPostUrl": null,
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [
+        {
+          "route": "/guides/claude-code/",
+          "alt": "the Cowork tab in the Claude desktop app",
+          "caption": "the Cowork task interface in Claude. Anthropic’s Cowork guide.",
+          "linkUrl": "https://support.claude.com/en/articles/13345190-get-started-with-claude-cowork"
+        }
+      ],
       "original": { "width": 2304, "height": 1616, "sha256": "782ff424a16217adc2bf15d89f81250e2d2c9c4f112ddad39a28942c6ae43386" },
       "derivativeSet": "claude-cowork"
     },
@@ -68,6 +712,16 @@
       "originalUrl": "https://media.x.ai/v1/website/grok-build-mode-og-1454d1ce.png",
       "sourcePages": ["https://docs.x.ai/build/overview"],
       "canonicalPages": ["/guides/grok/"],
+      "retrievedAt": "2026-08-27",
+      "creator": { "name": "xAI", "handle": null },
+      "originalPostUrl": null,
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [],
       "original": { "width": 1200, "height": 630, "sha256": "df1fc4b220ca48749f61d9959446a39f1a118423d8acea47bb1d5f9417202894" },
       "derivativeSet": "grok-build"
     },
@@ -76,11 +730,57 @@
       "originalUrl": "https://media.x.ai/v1/website/open-source-cover-930d1067.png",
       "sourcePages": ["https://docs.x.ai/grok-bot/overview"],
       "canonicalPages": ["/guides/grok/"],
+      "retrievedAt": "2026-08-27",
+      "creator": { "name": "xAI", "handle": null },
+      "originalPostUrl": null,
+      "ownership": "provider-published",
+      "permissionStatus": "not-recorded",
+      "licenseStatus": "not-recorded",
+      "publicationStatus": "rehosted-file",
+      "creditVisible": false,
+      "embed": null,
+      "presentations": [],
       "original": { "width": 1200, "height": 630, "sha256": "a0589b382026d4ee6120dd91f582c17ba79c914a5a51040550ead128711232a8" },
       "derivativeSet": "grok-bot"
     }
   ],
   "derivativeSets": {
+    "claude-agent-wall": [
+      {
+        "path": "/media/publications/claude-agent-wall-640.webp",
+        "width": 640,
+        "height": 180,
+        "bytes": 22640,
+        "sha256": "fcd79983a41a40674a80e344dbb9d732362208b3cd86ce216158c4973b284b23"
+      },
+      {
+        "path": "/media/publications/claude-agent-wall-1200.webp",
+        "width": 1200,
+        "height": 338,
+        "bytes": 63678,
+        "sha256": "efe7656d32c9d176e5c3add352ce3080f4daee879ab592a6dee9f7f57b47e566"
+      }
+    ],
+    "claude-terminal-poster": [
+      {
+        "path": "/media/publications/claude-terminal-poster-640.webp",
+        "width": 640,
+        "height": 369,
+        "bytes": 19824,
+        "sha256": "4ccc72297e1ef98029c525c18939985ba9614011a812050cef6f830b62fa2d83"
+      },
+      {
+        "path": "/media/publications/claude-terminal-poster-1200.webp",
+        "width": 1200,
+        "height": 692,
+        "bytes": 47238,
+        "sha256": "eac53052759d68aee13ce279996afccde38120dfac681023a6de3fba6c9b59c9"
+      }
+    ],
+    "codex-handbook-workspace": [
+      { "path": "/media/publications/codex-handbook-workspace-640.webp", "width": 640, "height": 402, "bytes": 27690, "sha256": "3d27593d104812a6ed66b48ff60de19c3730509b7b77950dd3bfe82cc325a8e0" },
+      { "path": "/media/publications/codex-handbook-workspace-1200.webp", "width": 1200, "height": 753, "bytes": 76658, "sha256": "40f344e87f614ebf7d51d711c9cecae97d0c8d1a328f90f88fe92eb1e1f5c74a" }
+    ],
     "claude-chat": [
       { "path": "/media/publications/claude-chat-640.webp", "width": 640, "height": 389, "bytes": 9456, "sha256": "3f71cb9fd4b5a3e8d6bde417b95c930c8048cd0ad754fbb6e06ccb0b460e9108" },
       { "path": "/media/publications/claude-chat-1200.webp", "width": 1200, "height": 728, "bytes": 41278, "sha256": "3304233750961a282ecb9da7ff59cea05f4b9a52574861ca71728bd65788e5da" }

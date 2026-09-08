@@ -17,7 +17,9 @@ concurrency:
 jobs:
   site:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    # The full 306-case browser matrix follows dependency setup and builds.
+    # Individual browser waits are bounded in test-a11y.mjs.
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
 
@@ -30,6 +32,15 @@ jobs:
 
       - name: validate generated handbook index
         run: bun run check:readme
+
+      - name: validate handbook structure and public completeness
+        run: |
+          bun run check:handbook
+          bun run check:completeness
+          bun run check:links
+
+      - name: verify writing inventory and review boundaries
+        run: bun run test:editorial
 
       - name: type check and build
         run: |
@@ -48,6 +59,11 @@ jobs:
 
       - name: verify client navigation
         run: bun run test:navigation
+
+      - name: verify progressive agent surface and development search
+        run: |
+          bun run test:agent
+          bun run test:dev-search
 
       - name: check documentation links
         uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2

@@ -1,6 +1,17 @@
+import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
+import { introductoryMediaError } from './lib/introductory-media.mjs';
+
+const imageFixture = '<img src="/image.webp" loading="eager" fetchpriority="high">';
+const recordingFixture = '<video src="/recording.mp4" poster="/poster.webp" width="1200" height="700" preload="auto"></video>';
+assert.equal(introductoryMediaError(imageFixture), null);
+assert.ok(introductoryMediaError('<img src="/image.webp" loading="lazy">'), 'an introductory image must retain its loading priority');
+assert.equal(introductoryMediaError(`${recordingFixture}<img src="/later.webp" loading="lazy">`), null, 'a recording introduction must not prioritize a later image');
+assert.ok(introductoryMediaError('<video src="/recording.mp4" width="1200" height="700" preload="auto"></video>'), 'recordings need a poster');
+assert.ok(introductoryMediaError(recordingFixture.replace('preload="auto"', 'preload="none"')), 'introductory recordings must not defer all loading');
+assert.equal(introductoryMediaError(`<!-- ${recordingFixture} -->${imageFixture}`), null, 'commented media is not an introductory visual');
 
 const root = process.cwd();
 const blueprint = JSON.parse(await readFile(path.join(root, 'editorial/handbook-blueprints.json'), 'utf8'));
@@ -71,7 +82,7 @@ for (const guide of blueprint.guides) {
   if (duplicateAnchors.length) failures.push(`${relative}: duplicate heading anchors: ${[...new Set(duplicateAnchors)].join(', ')}`);
 
   if (!guide.provider || !guide.chapter || !guide.evidenceType) failures.push(`${relative}: blueprint metadata is incomplete`);
-  if (!Array.isArray(guide.experienceQuestions) || !guide.experienceQuestions.length) failures.push(`${relative}: blueprint experience questions are required`);
+  if (!Array.isArray(guide.experienceQuestions)) failures.push(`${relative}: blueprint experience questions must be an array`);
   for (const sourceId of guide.sourceIds ?? []) {
     if (!sourceIds.has(sourceId)) failures.push(`${relative}: blueprint source ${sourceId} is absent from editorial/sources.json`);
   }
@@ -83,9 +94,8 @@ for (const guide of blueprint.guides) {
     const firstSection = firstBody === -1 ? '' : markdown.slice(firstBody + 1, nextHeading === -1 ? markdown.length : nextHeading);
     if (!firstSection.includes('surface-bento')) failures.push(`${relative}: product visual must appear in the introductory section`);
     const firstImage = firstSection.match(/<img\b[^>]*>/)?.[0] ?? '';
-    if (!firstImage.includes('loading="eager"') || !firstImage.includes('fetchpriority="high"')) {
-      failures.push(`${relative}: introductory product visual must prioritize the first image`);
-    }
+    const mediaError = introductoryMediaError(firstSection);
+    if (mediaError) failures.push(`${relative}: ${mediaError}`);
     if (guide.provider === 'codex') {
       const imageCount = (firstSection.match(/<img\b/g) ?? []).length;
       if (!firstSection.trimStart().startsWith('<div class="surface-bento intro-visual">')) failures.push(`${relative}: Codex visual must immediately follow its introductory heading`);

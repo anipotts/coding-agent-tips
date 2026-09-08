@@ -69,6 +69,10 @@ const wrapSourceLink = (link, { icon, kind, publisherLabel, title, domain }) => 
 ]);
 
 function annotate(node) {
+  // The post already provides its own preview. Keep the creator fallback a
+  // plain link instead of nesting a second source preview beneath the embed.
+  const classes = node?.properties?.className;
+  if ((Array.isArray(classes) ? classes : String(classes ?? '').split(/\s+/)).includes('publication-embed-credit')) return;
   if (node?.type === 'element' && node.tagName === 'a' && typeof node.properties?.href === 'string') {
     const href = node.properties.href;
     const label = textContent(node) || humanize(href);
