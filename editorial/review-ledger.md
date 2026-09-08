@@ -68,6 +68,29 @@ The full local rerun completed all 306 cases and reported the same 90
 X-controlled findings, with no new site-owned violations. Source validation
 passed for 123 entries and the editorial inventory tests passed all nine cases.
 
+## September 8 compact examples and embeds
+
+Applied Ani's layout annotations: example copy controls share the label row,
+native X embeds use a 360px maximum width, and the shared handbook rail uses
+“contents” without repeating the header logo. Remeasured all thirteen native
+posts at 360px and 287px and updated their reserved dimensions and media
+registry. Post sources, credit links, and publication boundaries are unchanged.
+
+Shortened the first good prompt at `what-should-i-ask-first` into direct
+instructions in response to Ani's text annotation. This is candidate wording;
+the request to revise it does not approve the new text or surrounding section.
+The previous prompt remains available in Git history.
+
+The normal local preview was restarted to pick up the current Markdown.
+Playwright checks passed at 319, 375, 939, and 1440px in light and dark themes:
+exact clipboard output, compact cards, wrapping labels, keyboard rail collapse,
+native video playback, visible credits, and no page overflow or app errors.
+Scoped accessibility checks for the cards and sidebar passed. The navigation,
+site, content, editorial inventory, and performance budget checks passed.
+Browser plugin is unavailable; QA uses repository Playwright. Evidence is in
+`/tmp/handbook-compact-qa/summary.json`. The prior X-owned accessibility findings
+remain separate release issues; this pass does not claim a clean full audit.
+
 ## states
 
 - `unreviewed`: Ani has not reviewed the current wording.

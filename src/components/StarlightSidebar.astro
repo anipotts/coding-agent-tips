@@ -52,8 +52,14 @@ const providerIconDark = activeScopeMetadata && 'providerIconDark' in activeScop
     <div class={sidebarInner({ variant: 'sidebar' })} data-sidebar="sidebar" data-slot="sidebar-inner">
     <div class="handbook-rail-head">
       <div class="guide-rail-identity">
-        <ProviderProductIcon class="sidebar-provider-icon" light={providerIcon} dark={providerIconDark} size={28} />
-        <p class="sidebar-label"><span>{label}</span><span class="sidebar-kind">guide</span></p>
+        {activeScope === 'handbook' ? (
+          <p class="sidebar-label"><span>{site.interfaceCopy.contents}</span></p>
+        ) : (
+          <>
+            <ProviderProductIcon class="sidebar-provider-icon" light={providerIcon} dark={providerIconDark} size={28} />
+            <p class="sidebar-label"><span>{label}</span><span class="sidebar-kind">guide</span></p>
+          </>
+        )}
       </div>
       <SidebarTrigger />
     </div>

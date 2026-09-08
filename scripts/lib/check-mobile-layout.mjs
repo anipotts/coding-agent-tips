@@ -51,11 +51,12 @@ export async function verifyMobileLayout({ browser, origin }) {
         const geometry = await example.evaluate((el) => {
           const frame = el.getBoundingClientRect();
           const pre = el.querySelector('pre').getBoundingClientRect();
+          const label = el.querySelector('.example-label').getBoundingClientRect();
           const button = el.querySelector('[data-code-copy]').getBoundingClientRect();
-          return { inside: button.left >= frame.left && button.right <= frame.right && button.bottom < frame.bottom, below: button.top >= pre.bottom, height: frame.height };
+          return { inside: button.left >= frame.left && button.right <= frame.right && button.bottom < frame.bottom, header: button.top >= label.top && button.bottom <= pre.top, height: frame.height };
         });
-        assert.ok(geometry.inside && geometry.below, 'example copy stays below its text within the card');
-        assert.ok(geometry.height < 120, 'one-line example remains compact');
+        assert.ok(geometry.inside && geometry.header, 'example copy shares the label row and clears the prompt');
+        assert.ok(geometry.height < 100, 'one-line example remains compact');
         await example.locator('[data-code-copy]').click();
         assert.equal((await page.evaluate(() => navigator.clipboard.readText())).trim(), code.trim(), 'example copy preserves exact prompt');
         await page.evaluate(() => scrollTo(0, 0));

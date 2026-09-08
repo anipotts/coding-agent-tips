@@ -111,7 +111,8 @@ At narrow widths, give the title its reading space: below `30rem`, the copy
 action uses its icon and full accessible name. Below `40rem`, dates use a
 compact date with the full ET timestamp available on the time element. Example
 labels, text, and the copy action share one compact colored card; the copy
-action stays below the text. Search transitions preserve stable control width
+action sits beside the label, with space reserved for wrapping labels. Ordinary
+code blocks keep their copy action below the code. Search transitions preserve stable control width
 and respect reduced motion.
 
 Below `48rem`, search results use the viewport width minus the shared page
@@ -127,6 +128,11 @@ Do not add a permanent right table of contents or a second intermediate navigati
 ### shared handbook pages
 
 Shared pages use the same publication shell without pretending to belong to a provider. Chronology, comparisons, and methods may use timelines, tables, or aligned evidence rows when those structures improve retrieval.
+
+The shared handbook rail starts with a quiet “contents” label and its collapse
+control. The site logo appears in the main header; provider rails retain their
+product identity. Native X embeds are centered at a maximum width of 360px,
+with responsive height, readable native controls, and an adjacent source link.
 
 ### editorial review
 
@@ -359,7 +365,7 @@ Third-party embeds load lazily and never block the first useful article content.
 
 Every embed includes an ordinary link to the original post or source. If the runtime is blocked, the post is deleted, the network is unavailable, or JavaScript is disabled, the reader still sees the creator identity, a useful description, and the source link. The surrounding argument cannot depend on the embed remaining available.
 
-Use X's official post embed for text, screenshots, and video demonstrations, with the original presentation and nearby creator credit. Keep posts centered at up to 550 pixels, one per section, with at most two per page except the longer history timeline. Reserve measured desktop and mobile heights before loading, accept height changes only from that iframe's official origin, and keep the source link independent of the embedded runtime. Videos play after a reader's action and may open fullscreen. Register every embedded post as a page source so it appears in the bottom source dropdown. Draft placements receive the same source and media checks while staying out of public routes.
+Use X's official post embed for text, screenshots, and video demonstrations, with the original presentation and nearby creator credit. Keep posts centered at up to 360 pixels, one per section, with at most two per page except the longer history timeline. Reserve measured desktop and mobile heights before loading, accept height changes only from that iframe's official origin, and keep the source link independent of the embedded runtime. Videos play after a reader's action and may open fullscreen. Register every embedded post as a page source so it appears in the bottom source dropdown. Draft placements receive the same source and media checks while staying out of public routes.
 
 On product overviews, keep optional crash-course navigation in the guide rail and mobile menu footer, outside article prose. Other chapters retain the shared handbook navigation.
 

@@ -118,7 +118,7 @@ also raises the question of what private data and credentials to give an agent.
 your workload and access requirements should guide that choice.
 
 <div class="publication-embed" data-media-id="karpathy-mac-mini-claws">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2024987174077432126&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Karpathy on a Mac mini and claws (February 2026)" width="550" height="369" style="--embed-height: 369px; --embed-height-mobile: 380px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2024987174077432126&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Karpathy on a Mac mini and claws (February 2026)" width="360" height="441" style="--embed-height: 441px; --embed-height-mobile: 380px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit"><a href="https://x.com/karpathy/status/2024987174077432126" target="_blank" rel="noopener noreferrer">Andrej Karpathy (@karpathy)</a>, february 2026.</p>
 </div>
 

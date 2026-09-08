@@ -94,7 +94,7 @@ numbered terminal tabs, with notifications when one needs input. the useful
 detail is how he keeps track of work that needs his attention.
 
 <div class="publication-embed" data-media-id="boris-parallel-claude-post">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2007179833990885678&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Boris Cherny shows five parallel Claude sessions (January 2026)" width="550" height="648" style="--embed-height: 648px; --embed-height-mobile: 487px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2007179833990885678&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Boris Cherny shows five parallel Claude sessions (January 2026)" width="360" height="572" style="--embed-height: 572px; --embed-height-mobile: 487px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit"><a href="https://x.com/bcherny/status/2007179833990885678" target="_blank" rel="noopener noreferrer">Boris Cherny (@bcherny)</a>, january 2026.</p>
 </div>
 

@@ -56,7 +56,7 @@ those details give the whole experience a different personality.
 ## cooperative computer use
 
 <div class="publication-embed" data-media-id="grok-bot-mobile-trackpad">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2094265782054367651&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Grok Bot mobile screenshot showing the virtual desktop and trackpad menu, in Japanese" width="550" height="824" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2094265782054367651&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Grok Bot mobile screenshot showing the virtual desktop and trackpad menu, in Japanese" width="360" height="716" style="--embed-height: 716px; --embed-height-mobile: 596px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit">mobile desktop and trackpad menu, shared by <a href="https://x.com/old_pgmrs_will/status/2094265782054367651" target="_blank" rel="noopener noreferrer">Will Oldgram (@old_pgmrs_will) on X</a>.</p>
 </div>
 

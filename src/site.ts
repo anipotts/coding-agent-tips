@@ -20,6 +20,7 @@ export const site = {
     github: 'coding agent tips on GitHub',
     home: 'coding agent tips home',
     guides: 'guides',
+    contents: 'contents',
     archive: 'archive',
     lastUpdated: 'last updated',
     releases: 'releases',

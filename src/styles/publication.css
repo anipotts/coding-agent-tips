@@ -72,7 +72,7 @@ html[data-theme='dark'] .sl-markdown-content pre code span { color: var(--shiki-
 .surface-bento a { display: block; text-decoration: none; }
 .surface-bento :is(img, video) { display: block; inline-size: 100%; block-size: auto; background: transparent; }
 .surface-bento.intro-visual { grid-template-columns: minmax(0, 1fr); margin-top: 1rem; }
-.publication-embed { inline-size: min(100%, 550px); margin: 1.5rem auto 2rem; }
+.publication-embed { inline-size: min(100%, 360px); margin: 1.25rem auto 1.5rem; }
 .publication-embed iframe { display: block; inline-size: 100%; block-size: var(--embed-height, 824px); border: 0; color-scheme: light; }
 .publication-embed .publication-embed-credit { margin: .625rem 0 0; color: var(--slate); }
 @media (max-width: 30rem) { .publication-embed iframe { block-size: var(--embed-height-mobile, 620px); } }
@@ -118,11 +118,11 @@ html[data-theme='dark'] .sl-markdown-content pre code span { color: var(--shiki-
 
 .example-good { --example-ink: var(--example-good-ink); --example-fill: var(--example-good-fill); }
 .example-bad { --example-ink: var(--example-bad-ink); --example-fill: var(--example-bad-fill); }
-.example-block { margin-block: 1.5rem; padding: .75rem; border: 1px solid color-mix(in srgb, var(--example-ink) 30%, var(--rule)); border-inline-start: .2rem solid var(--example-ink); border-radius: var(--radius-ui); background: var(--example-fill); }
-.sl-markdown-content .example-label { margin-block: 0 .5rem; color: var(--example-ink); }
-.example-block .code-frame { margin-block: 0; gap: .25rem; }
+.example-block { position: relative; margin-block: 1rem; padding: .5rem .75rem; border: 1px solid color-mix(in srgb, var(--example-ink) 30%, var(--rule)); border-inline-start: .2rem solid var(--example-ink); border-radius: var(--radius-ui); background: var(--example-fill); }
+.sl-markdown-content .example-label { display: flex; align-items: center; min-block-size: 2rem; padding-inline-end: 3.5rem; margin-block: 0 .25rem; color: var(--example-ink); }
+.example-block .code-frame { position: static; margin-block: 0; gap: 0; }
 .sl-markdown-content .example-block pre { padding: 0; border: 0; border-radius: 0; background: transparent !important; }
-.example-block .code-copy { min-block-size: 2rem; block-size: 2rem; padding-inline: .5rem; border: 1px solid transparent; background: transparent; color: var(--example-ink); box-shadow: none; }
+.example-block .code-copy { position: absolute; inset-block-start: .5rem; inset-inline-end: .5rem; min-block-size: 2rem; block-size: 2rem; padding-inline: .5rem; border: 1px solid transparent; background: transparent; color: var(--example-ink); box-shadow: none; }
 .example-block .code-copy:hover { border-color: color-mix(in srgb, var(--example-ink) 30%, transparent); background: color-mix(in srgb, var(--example-ink) 8%, transparent); }
 .example-block pre, .example-block pre code { white-space: pre-wrap; overflow-wrap: anywhere; }
 .sl-markdown-content mark:is(.example-good, .example-bad) { padding: .04em .16em; border-radius: .15em; background: var(--example-fill); color: var(--example-ink); box-decoration-break: clone; -webkit-box-decoration-break: clone; }

@@ -41,7 +41,7 @@ set a time budget, and preserve the baseline for comparison. autoresearch’s
 GPU training setup has its own requirements; the repository explains those.
 
 <div class="publication-embed" data-media-id="karpathy-autoresearch-post">
-  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2030371219518931079&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Karpathy introduces autoresearch (March 2026)" width="550" height="772" style="--embed-height: 772px; --embed-height-mobile: 566px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
+  <iframe src="https://platform.twitter.com/embed/Tweet.html?id=2030371219518931079&amp;dnt=true&amp;hideThread=true&amp;theme=light" title="Karpathy introduces autoresearch (March 2026)" width="360" height="701" style="--embed-height: 701px; --embed-height-mobile: 566px" loading="lazy" allow="autoplay 'none'" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe>
   <p class="publication-embed-credit"><a href="https://x.com/karpathy/status/2030371219518931079" target="_blank" rel="noopener noreferrer">Andrej Karpathy (@karpathy)</a>, march 2026.</p>
 </div>
 
