@@ -7,6 +7,7 @@ import AxeBuilder from '@axe-core/playwright';
 import { canonicalContentFiles } from '../src/content-manifest.mjs';
 import { verifyChapterDisclosures } from './lib/check-chapter-navigation.mjs';
 import { verifyPublicationMedia } from './lib/check-publication-media.mjs';
+import { verifyGuidePickers } from './lib/check-guide-pickers.mjs';
 import { verifyMobileLayout } from './lib/check-mobile-layout.mjs';
 
 const previewPort = 4175;
@@ -15,8 +16,10 @@ const astro = path.join(process.cwd(), 'node_modules/astro/bin/astro.mjs');
 const vite = path.join(process.cwd(), 'node_modules/vite/bin/vite.js');
 const failures = [];
 const expect = (condition, message) => { if (!condition) failures.push(message); };
-const build = spawnSync(process.execPath, [astro, 'build'], { stdio: 'inherit' });
-if (build.status !== 0) process.exit(build.status ?? 1);
+if (!process.argv.includes('--skip-build')) {
+  const build = spawnSync(process.execPath, [astro, 'build'], { stdio: 'inherit' });
+  if (build.status !== 0) process.exit(build.status ?? 1);
+}
 const server = spawn(process.execPath, [vite, 'preview', '--host', '127.0.0.1', '--port', String(previewPort), '--strictPort'], { stdio: 'inherit' });
 const serverExit = once(server, 'exit');
 let browser;
@@ -45,7 +48,7 @@ try {
   const documentToken = await page.evaluate(() => window.__navigationDocumentToken);
   expect(await page.title() === 'codex | coding agent tips', 'guide title is incorrect');
   expect(await page.locator('meta[name="astro-view-transitions-enabled"]').count() === 1, 'ClientRouter marker is missing');
-  expect(await page.locator('.provider-tabs a[data-astro-prefetch="hover"]').count() === 4, 'provider tabs are missing selective hover prefetching');
+  expect(await page.locator('.publication-sidebar .guide-page-options a[data-astro-prefetch="hover"]').count() >= 13, 'desktop guide picker must expose all public chapters');
   const expectedCodexRoutes = canonicalContentFiles().filter(({ route }) => route.startsWith('/guides/codex/')).map(({ route }) => route).sort();
   const prefetchedCodexRoutes = await page.locator('.publication-sidebar [data-sidebar="menu-button"][data-astro-prefetch="hover"]').evaluateAll((links) => links.map((link) => link.getAttribute('href')).sort());
   expect(JSON.stringify(prefetchedCodexRoutes) === JSON.stringify(expectedCodexRoutes), 'public desktop chapters are missing selective hover prefetching');
@@ -68,7 +71,6 @@ try {
       progress: getComputedStyle(document.querySelector('.reading-progress-rail')).display,
       dualBar: document.querySelectorAll('.mobile-toc, .guide-context-bar').length,
       headerHeight: document.querySelector('.site-header').getBoundingClientRect().height,
-      tabsHeight: Math.max(...[...document.querySelectorAll('.provider-tabs a')].map((link) => link.getBoundingClientRect().height)),
       searchHeight: document.querySelector('.header-search site-search > button').getBoundingClientRect().height,
       headerControlHeights: [...document.querySelectorAll('.site-header-control')]
         .map((control) => control.getBoundingClientRect())
@@ -76,7 +78,7 @@ try {
         .map((bounds) => bounds.height),
       pageActionHeights: [...document.querySelectorAll('.page-actions button')].map((control) => control.getBoundingClientRect().height),
       headerGroupsOverlap: (() => {
-        const groups = [...document.querySelectorAll('.site-name, .provider-tabs, .header-actions')]
+        const groups = [...document.querySelectorAll('.site-header .site-name, .header-actions')]
           .map((element) => element.getBoundingClientRect());
         return groups.some((first, index) => groups.slice(index + 1).some((second) =>
           first.left < second.right && first.right > second.left && first.top < second.bottom && first.bottom > second.top
@@ -85,12 +87,11 @@ try {
     }));
     expect(layout.overflow === 0, `${viewport.width}px layout has horizontal overflow: ${layout.overflow}`);
     expect(layout.dualBar === 0, `${viewport.width}px layout renders the retired intermediate navigation bar`);
-    expect(layout.tabsHeight <= 32, `${viewport.width}px provider tabs exceed the compact 32px rhythm`);
     expect(layout.searchHeight === 32, `${viewport.width}px search trigger does not use the compact 32px height`);
     expect(layout.headerControlHeights.every((height) => height === 32), `${viewport.width}px header actions do not share the compact 32px height`);
     expect(layout.pageActionHeights.every((height) => height === 32), `${viewport.width}px page actions do not share the compact 32px height`);
     expect(!layout.headerGroupsOverlap, `${viewport.width}px header groups overlap`);
-    expect(Math.abs(layout.headerHeight - (viewport.width < 960 ? 92 : 64)) <= 1, `${viewport.width}px header height does not match its responsive row layout`);
+    expect(Math.abs(layout.headerHeight - (viewport.width < 960 ? 52 : 64)) <= 1, `${viewport.width}px header height does not match its responsive row layout`);
     if (viewport.width < 768) {
       expect(layout.sidebar === 'none', 'mobile layout renders the desktop sidebar');
       expect(layout.mobileTrigger !== 'none', 'mobile layout hides the Sheet trigger');
@@ -328,14 +329,14 @@ try {
   expect(await sidebar.getAttribute('data-state') === 'expanded', 'desktop sidebar did not expand');
 
   const desktopDocumentToken = await page.evaluate(() => window.__navigationDocumentToken);
-  await page.locator('.publication-sidebar a[href="/guides/codex/configuration/"]').click();
+  await page.locator('.publication-sidebar .chapter-menu a[href="/guides/codex/configuration/"]').click();
   await page.waitForURL('**/guides/codex/configuration/');
   expect(desktopDocumentToken === await page.evaluate(() => window.__navigationDocumentToken), 'chapter navigation caused a full reload');
   expect(await page.locator('html').evaluate((root) => root.classList.contains('dark') === (root.dataset.theme === 'dark')), 'Starwind and Starlight theme state diverged after chapter navigation');
-  expect((await page.locator('.publication-sidebar [aria-current="page"]').textContent())?.trim() === 'settings and memory', 'sidebar active chapter did not update');
+  expect((await page.locator('.publication-sidebar .chapter-menu [aria-current="page"]').textContent())?.trim() === 'settings and memory', 'sidebar active chapter did not update');
   await page.goBack();
   await page.waitForURL('**/guides/codex/');
-  await page.waitForFunction(() => document.querySelector('.publication-sidebar [aria-current="page"]')?.getAttribute('href') === '/guides/codex/');
+  await page.waitForFunction(() => document.querySelector('.publication-sidebar .chapter-menu [aria-current="page"]')?.getAttribute('href') === '/guides/codex/');
   const hash = await page.locator('.publication-sidebar .is-current-chapter .sidebar-page-outline a[href^="#"]').first().getAttribute('href');
   expect(Boolean(hash), 'page outline has no heading links');
   if (hash) {
@@ -355,8 +356,8 @@ try {
   for (const width of [375, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(`${origin}/archive/claude-code-tools/`, { waitUntil: 'networkidle' });
-    expect(await page.locator('.provider-tabs [aria-current="page"]').getAttribute('href') === '/guides/claude-code/', 'archive must activate Claude Code rather than the shared handbook');
-    expect(await page.locator('.publication-sidebar [aria-current="page"]').getAttribute('href') === '/archive/claude-code-tools/', 'archive must remain reachable and active in the Claude Code chapter list');
+    expect((await page.locator('.sidebar-guide-picker-trigger').textContent()).trim() === 'claude code', 'archive must activate Claude Code in the guide picker');
+    expect(await page.locator('.publication-sidebar .chapter-menu [aria-current="page"]').getAttribute('href') === '/archive/claude-code-tools/', 'archive must remain reachable and active in the Claude Code chapter list');
     const archiveGroup = page.locator('.mobile-page-options [data-slot="dropdown-group"]').filter({ has: page.locator('a[href="/archive/claude-code-tools/"]') });
     expect((await archiveGroup.locator('[data-slot="dropdown-label"]').textContent())?.trim() === 'claude code', 'mobile archive entry must be grouped under Claude Code');
     await page.mouse.move(0, 0);
@@ -385,11 +386,12 @@ try {
   const reducedContext = await browser.newContext({ viewport: { width: 1024, height: 900 }, reducedMotion: 'reduce' });
   const reducedPage = await reducedContext.newPage();
   await reducedPage.goto(`${origin}/guides/codex/`, { waitUntil: 'networkidle' });
-  expect(await reducedPage.locator('.provider-tabs a').first().evaluate((link) => Number.parseFloat(getComputedStyle(link).transitionDuration) <= .001), 'reduced motion does not suppress interface transitions');
+  expect(await reducedPage.locator('.sidebar-guide-picker-trigger').first().evaluate((link) => Number.parseFloat(getComputedStyle(link).transitionDuration) <= .001), 'reduced motion does not suppress interface transitions');
   await reducedContext.close();
 
   await verifyChapterDisclosures({ browser, origin });
   await verifyPublicationMedia({ browser, origin });
+  await verifyGuidePickers({ browser, origin });
   await verifyMobileLayout({ browser, origin });
 
   expect(consoleErrors.length === 0, `browser console errors: ${consoleErrors.join(' | ')}`);

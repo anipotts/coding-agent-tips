@@ -41,7 +41,7 @@ html:has(.publication-sidebar[data-state='collapsed']) { --left-rail-width: var(
   border-bottom: 1px solid var(--rule);
 }
 
-.guide-rail-identity { min-inline-size: 0; display: flex; align-items: center; gap: .55rem; }
+.guide-rail-identity { flex: 1; min-inline-size: 0; display: flex; align-items: center; gap: .55rem; }
 .guide-rail-identity .sidebar-label { min-inline-size: 0; margin: 0; display: flex; gap: .25rem; }
 .provider-product-icon.sidebar-provider-icon {
   --provider-product-icon-size: 1.75rem;
@@ -218,16 +218,21 @@ html:has(.publication-sidebar[data-state='collapsed']) { --left-rail-width: var(
 .mobile-menu-heading [data-slot='sheet-title'] { margin: 0; }
 .mobile-site-menu [data-slot='sheet-close'] { inset-block-start: .75rem; inset-inline-end: .75rem; inline-size: var(--control-size); border-radius: var(--radius-md); }
 .mobile-site-menu [data-slot='sheet-close'] svg { inline-size: 1rem; block-size: 1rem; }
-.mobile-page-picker-trigger { inline-size: 100%; justify-content: space-between; }
+.guide-picker-trigger { inline-size: 100%; justify-content: space-between; gap: .5rem; }
+.guide-rail-identity > [data-slot="dropdown"] { display: flex; inline-size: 100%; }
+.sidebar-guide-picker-trigger { block-size: 2rem; border: 0; background: transparent; box-shadow: none; padding-inline: 0; }
+.sidebar-guide-picker-trigger > span:not(.provider-product-icon) { flex: 1; text-align: start; }
+.guide-picker-trigger > svg { inline-size: 1rem; block-size: 1rem; flex: none; }
 .mobile-page-picker { padding-block-end: .25rem; }
-.mobile-page-picker-trigger span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.mobile-page-options { overflow: hidden; inline-size: min(20.5rem, calc(100dvw - 2.5rem)); }
-.mobile-page-options-scroll { max-block-size: min(30rem, calc(100dvh - 8rem)); overflow-y: auto; }
-.mobile-page-options-scroll:focus-visible { outline: 2px solid var(--cobalt); outline-offset: -2px; }
-.mobile-page-options [data-slot='dropdown-link-item'] { padding-inline-start: 1.5rem; text-decoration: none; }
-.mobile-page-options [data-slot='dropdown-group'] + [data-slot='dropdown-group'] { margin-block-start: .75rem; }
-.mobile-page-options [data-slot='dropdown-label'] { display: flex; align-items: center; gap: .5rem; color: var(--slate); }
-.mobile-page-options [aria-current='page'] { background: var(--accent-soft); color: var(--accent-strong); }
+.guide-picker-trigger span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.guide-page-options { overflow: hidden; inline-size: min(20.5rem, calc(100dvw - 2.5rem)); }
+.guide-page-options-scroll { max-block-size: min(42rem, calc(100dvh - 8rem)); overflow-y: auto; }
+.guide-page-options-scroll:focus-visible { outline: 2px solid var(--cobalt); outline-offset: -2px; }
+.guide-page-options [data-slot='dropdown-link-item'] { padding-inline-start: 1.5rem; text-decoration: none; }
+.guide-page-options [data-slot='dropdown-group'] + [data-slot='dropdown-group'] { margin-block-start: .75rem; }
+.guide-page-options [data-slot='dropdown-label'] { display: flex; align-items: center; gap: .5rem; color: var(--slate); }
+.guide-page-options a:focus-visible { outline-offset: -3px; }
+.guide-page-options [aria-current='page'] { background: var(--accent-soft); color: var(--accent-strong); }
 .mobile-page-navigation { flex: 1; min-block-size: 0; overflow-y: auto; overscroll-behavior: contain; }
 .mobile-page-outline { list-style: none; margin: .375rem 0 .625rem 1.5rem; padding: 0; }
 .mobile-page-outline li { list-style: none; margin: 0; padding-inline-start: calc(var(--heading-depth) * .7rem); }
@@ -238,3 +243,12 @@ html:has(.publication-sidebar[data-state='collapsed']) { --left-rail-width: var(
 .guide-help { border-block-start: 1px solid var(--rule); }
 .mobile-menu-footer { display: grid; gap: .25rem; padding-block-start: .5rem; border-block-start: 1px solid var(--rule); }
 .mobile-menu-footer a { text-decoration: none; }
+
+@media (max-width: 47.99rem) {
+  /* The header trigger sits between the logo and utilities. Use the viewport
+     gutters for this menu so end alignment cannot clip its left edge. */
+  .header-guide-page-options {
+    left: var(--site-gutter) !important;
+    inline-size: calc(100dvw - 2 * var(--site-gutter));
+  }
+}

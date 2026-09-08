@@ -18,6 +18,8 @@ export const site = {
   interfaceCopy: {
     menu: 'menu',
     choosePage: 'choose page',
+    browseGuides: 'browse guides',
+    providerGuides: 'provider guides',
     onThisPage: 'on this page',
     search: 'search',
     sources: 'sources',
@@ -76,7 +78,7 @@ export const handbookScopes = [
   },
   {
     id: 'claude-code', label: 'claude code', href: '/guides/claude-code/', order: 30, public: true,
-    providerIcon: '/icons/products/claude-code.png', providerIconDark: '/icons/products/claude-code.png',
+    heroIcon: '/icons/products/claude.svg', providerIcon: '/icons/products/claude-code.png', providerIconDark: '/icons/products/claude-code.png',
     providerIconSource: 'https://claude.ai/images/claude_app_icon.png', providerIconCheckedAt: '2026-09-08',
   },
   {

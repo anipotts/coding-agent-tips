@@ -95,6 +95,15 @@ Compare matching routes, viewport sizes, themes, scroll positions, focus states,
 
 The homepage introduces one clear thesis and routes the reader into the handbook. Its hierarchy comes from a strong opening, compact guide groups, and direct shared-guide links.
 
+The selected homepage uses a visible “browse guides” menu in the slim header
+and compact neutral provider buttons after the subtitle. Each button contains
+a real provider mark, provider name, and arrow, with the same `8px` radius as
+the “coding agents” highlight. At `60rem` and wider the buttons are `56px`
+high; below that they are `40px` high and wrap naturally. The desktop hero
+uses an `82rem` maximum container and a fluid display size capped at `86px`.
+Homepage prose is `22px` on desktop and retains the shared `18px` reading
+size below `60rem`. Guide article typography retains its existing roles.
+
 Keep the first screen legible without decorative hero art. Use open rows and restrained cards only where a group needs a boundary. Provider groups may share a grid because they have the same conceptual structure. Shared guides remain a simple publication list.
 
 Below `48rem`, provider cards use native horizontal scrolling with snap points
@@ -133,9 +142,11 @@ Archived Claude Code tools belong to the Claude Code navigation group, including
 the mobile page picker. The archive URL and compatibility text remain stable.
 Navigation scope comes from each page's canonical frontmatter.
 
-The shared handbook rail starts with a quiet “contents” label and its collapse
-control. The site logo appears in the main header; provider rails retain their
-product identity. Native X embeds are centered at a maximum width of 360px,
+The rail starts with the shared guide picker and its collapse control. The
+picker labels the current guide and exposes all public guides with indented
+chapters. The same component powers the homepage “browse guides” menu and
+mobile Sheet picker. The site logo appears in the main header; provider
+pickers retain their product identity. Native X embeds are centered at a maximum width of 360px,
 with responsive height, readable native controls, and an adjacent source link.
 
 ### editorial review
@@ -193,9 +204,9 @@ The site header has two intentional compositions:
 | viewport | header contract |
 | --- | --- |
 | `60rem` and wider | one row, exactly `64px` high |
-| below `60rem` | two rows, exactly `92px` high |
+| below `60rem` | one row, exactly `52px` high |
 
-The second row keeps all four provider tabs centered, horizontally reachable, and visually compact. It is not a substitute for guide navigation.
+The header contains the site identity and utilities. The homepage adds the visible guide picker; guide pages place it at the top of their rail or mobile Sheet. There is one shared route hierarchy. Both responsive placements are present in static HTML, so the guide HTML budget is `28 KiB` compressed (the largest current chapter is about `26.4 KiB`). CSS, JavaScript, font, and media budgets remain unchanged.
 
 The guide shell has two modes:
 
@@ -283,7 +294,7 @@ Do not wrap ordinary prose, recommendations, sources, or every navigation item i
 
 The three navigation layers answer different questions:
 
-- provider tabs: which agent family am I reading?
+- guide picker: which guide am I reading, and which chapters can I open?
 - guide chapters: which part of this provider handbook am I reading?
 - active page outline: which section of this page am I reading?
 
@@ -445,9 +456,9 @@ Responsive design recomposes the shell; it does not shrink every element.
 
 | range | required behavior |
 | --- | --- |
-| below `48rem` | `92px` two-row header, centered compact provider tabs, compact utility group, mobile Sheet, no permanent rail, local scrolling for wide tables |
-| `48rem` through `59.99rem` | `92px` two-row header, persistent collapsible guide rail, icon search control, no intermediate dual dropdown bar |
-| `60rem` through `71.99rem` | `64px` one-row header, tighter provider and utility spacing, persistent guide rail |
+| below `48rem` | `52px` one-row header, homepage guide picker, compact utility group, guide mobile Sheet, no permanent rail, local scrolling for wide tables |
+| `48rem` through `59.99rem` | `52px` one-row header, persistent collapsible guide rail, icon search control, no intermediate dual dropdown bar |
+| `60rem` through `71.99rem` | `64px` one-row header, compact utilities and a shared guide picker, persistent guide rail |
 | `72rem` and wider | `64px` full publication shell with wider article breathing room |
 
 Required viewport checks are `375`, `768`, `1024`, and `1440` pixels. Add `320`, `942`, `959`, `960`, and widths immediately around `48rem` when a change touches boundaries.
@@ -457,7 +468,7 @@ At every width:
 - no page-level horizontal overflow;
 - no overlap between brand, provider navigation, utilities, title, and actions;
 - title and page actions share a justified row whenever the available measure permits, including mobile;
-- provider tabs remain centered, compact, and horizontally reachable;
+- the guide picker exposes all public chapters with clear indentation;
 - the active provider and chapter remain clear;
 - controls remain operable by touch and keyboard;
 - prose remains readable and tables retain lookup through local scrolling;
@@ -594,7 +605,7 @@ The consistency coverage inventory is:
 
 | surface | owner and regression coverage |
 | --- | --- |
-| header, provider tabs, theme, mobile Sheet | SiteHeader; navigation and accessibility checks |
+| header, guide pickers, theme, mobile Sheet | SiteHeader; navigation and accessibility checks |
 | search trigger, input, results, clear and dismissal | upstream Starlight with shell styles; navigation and development search checks |
 | chapter rail, outline, collapse and progress | StarlightSidebar; navigation and accessibility checks |
 | page actions, portaled menu, clipboard and toast | StarlightPageTitle; navigation checks including scroll dismissal and typography |

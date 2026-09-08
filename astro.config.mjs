@@ -4,7 +4,7 @@ import starlight from '@astrojs/starlight';
 import { unified } from '@astrojs/markdown-remark';
 import { defineConfig } from 'astro/config';
 import { contentRedirects } from './src/content-manifest.mjs';
-import { authorshipHead, site } from './src/site';
+import { authorshipHead, navigationScopes, site } from './src/site';
 import starlightDevSearch from './src/integrations/starlight-dev-search.mjs';
 import editorialProgress from './src/integrations/editorial-progress.mjs';
 import linkMetadata from './src/rehype/link-metadata.mjs';
@@ -23,7 +23,11 @@ export default defineConfig({
   output: 'static',
   prefetch: { prefetchAll: false, defaultStrategy: 'hover' },
   markdown: {
-    processor: unified({ rehypePlugins: [linkMetadata, publicationElements] }),
+    processor: unified({ rehypePlugins: [linkMetadata, [publicationElements, {
+      // Explicit options participate in Astro's content cache digest.
+      providerGuides: navigationScopes.filter((scope) => scope.id !== 'handbook'),
+      providerGuidesLabel: site.interfaceCopy.providerGuides,
+    }]] }),
     shikiConfig: {
       themes: { light: 'github-light-high-contrast', dark: 'github-dark-high-contrast' },
       defaultColor: false,

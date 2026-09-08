@@ -1,11 +1,25 @@
 const element = (tagName, properties = {}, children = []) => ({ type: 'element', tagName, properties, children });
 
-function transformChildren(parent) {
+function transformChildren(parent, options) {
   if (!Array.isArray(parent?.children)) return;
   const next = [];
 
-  for (const child of parent.children) {
-    transformChildren(child);
+  for (let child of parent.children) {
+    if (child.type === 'raw' && child.value.trim() === '<nav class="hero-provider-actions"></nav>') {
+      child = element('nav', { className: ['hero-provider-actions'] });
+    }
+    transformChildren(child, options);
+
+    if (child?.type === 'element' && child.tagName === 'nav' && child.properties?.className?.includes('hero-provider-actions')) {
+      child.properties.ariaLabel = options.providerGuidesLabel;
+      child.children = options.providerGuides.map((scope) => element('a', {
+        href: scope.href, className: ['hero-provider-link', `hero-provider-${scope.id}`], 'data-astro-prefetch': 'hover',
+      }, [
+        element('img', { src: scope.heroIcon ?? scope.providerIcon, alt: '', width: 24, height: 24, className: ['hero-provider-mark'] }),
+        element('span', {}, [{ type: 'text', value: scope.label }]),
+        element('span', { className: ['hero-provider-arrow'], ariaHidden: 'true' }),
+      ]));
+    }
 
     if (child?.type === 'element' && child.tagName === 'table') {
       child.properties = {
@@ -115,6 +129,6 @@ function transformChildren(parent) {
   parent.children = next;
 }
 
-export default function publicationElements() {
-  return (tree) => transformChildren(tree);
+export default function publicationElements(options = { providerGuides: [], providerGuidesLabel: '' }) {
+  return (tree) => transformChildren(tree, options);
 }

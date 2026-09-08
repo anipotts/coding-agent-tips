@@ -23,9 +23,10 @@ const failures = [];
 const maxDerivativeBytes = 150 * 1024;
 const maxProviderBytes = 400 * 1024;
 const maxFeaturedProviderBytes = 1024 * 1024;
-// Complete chapters now include attributed external demonstrations and their
-// source groups. Keep a 25 KiB cap; CSS, JavaScript, and media budgets are unchanged.
-const maxGuideHtmlGzipBytes = 25 * 1024;
+// The shared guide picker exposes every chapter in both desktop and mobile
+// navigation. The largest chapter is 26.4 KiB compressed with that markup;
+// allow 28 KiB while retaining the CSS, JavaScript, font, and media budgets.
+const maxGuideHtmlGzipBytes = 28 * 1024;
 const maxGuideCssGzipBytes = 32 * 1024;
 const maxGuideJavaScriptGzipBytes = 72 * 1024;
 const maxFontBytes = 80 * 1024;
@@ -354,7 +355,7 @@ for (const { route } of canonicalContentFiles().filter(({ route }) => route.star
   const htmlPath = path.join(distRoot, route.replace(/^\//, ''), 'index.html');
   const html = await readFile(htmlPath);
   const htmlGzipBytes = gzipSync(html).length;
-  if (htmlGzipBytes > maxGuideHtmlGzipBytes) failures.push(`${route}: ${htmlGzipBytes} compressed HTML bytes exceeds 25 KiB`);
+  if (htmlGzipBytes > maxGuideHtmlGzipBytes) failures.push(`${route}: ${htmlGzipBytes} compressed HTML bytes exceeds 28 KiB`);
   const source = html.toString();
   if (new RegExp(`origin${'-'}trial|navigator\\.modelContext`).test(source)) failures.push(`${route}: unsupported WebMCP compatibility code is present`);
   if (source.includes('--surface-canvas:') || source.includes('--rail-expanded-width:')) failures.push(`${route}: shared site CSS is inlined into generated HTML`);

@@ -82,7 +82,7 @@ for (const [route, source] of contentFiles) {
   }
   if (!publicText.includes('last updated')) failures.push(`${route}: exact update metadata is missing`);
   if ((route.startsWith('/guides/codex') || route.startsWith('/guides/claude-code')) && publicText.includes('last checked')) failures.push(`${route}: internal source check metadata is exposed in the public page header`);
-  for (const label of ['handbook', 'codex', 'claude code', 'grok']) if (!publicText.includes(label)) failures.push(`${route}: provider scope tab is missing: ${label}`);
+  for (const label of ['handbook', 'codex', 'claude code', 'grok']) if (!publicText.includes(label)) failures.push(`${route}: guide picker scope is missing: ${label}`);
   if (hasRetiredGuideLabel(html)) failures.push(`${route}: retired product guides label appears in public output`);
   if (html.includes('·')) failures.push(`${route}: mid dot appears in public output`);
   if (!html.includes('coding agent tips on GitHub')) failures.push(`${route}: GitHub link is missing from the site header`);
@@ -173,6 +173,10 @@ if (text(home).includes('across agents')) failures.push('/: retired shared-guide
 for (const icon of ['codex-light.png', 'claude-code.png', 'grok.png']) {
   if (!home.includes(`/icons/products/${icon}`)) failures.push(`/: product icon is absent from the homepage: ${icon}`);
 }
+for (const slug of ['codex', 'claude-code', 'grok']) {
+  if (!new RegExp(`<a[^>]+href="/guides/${slug}/"[^>]+class="hero-provider-link`).test(home)) failures.push(`/: missing hero provider link for ${slug}`);
+}
+if (home.indexOf('class="hero-provider-actions"') > home.indexOf('id="why-i-made-this"')) failures.push('/: provider actions must follow the introduction before why i made this');
 const draftGuides = (await Promise.all((await markdownFiles(path.join(root, 'content'))).map(async (file) => ({ file, markdown: await readFile(file, 'utf8') }))))
   .filter(({ markdown }) => scalar(markdown, 'draft') === 'true')
   .map(({ file }) => `/${path.relative(path.join(root, 'content'), file).replace(/\.md$/, '')}/`);
