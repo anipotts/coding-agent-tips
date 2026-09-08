@@ -897,11 +897,11 @@ The unclear “why am i repeating myself?” heading is now “why does my agent
       "file": "content/archive/claude-code-tools.md",
       "status": "preserve",
       "match": "file",
-      "hash": "ee7bb88ea0571522e77a52f8496f34a7f9f36ce5d9d5387983a91a43de3104f5",
+      "hash": "f83d1f5a764cc553567ccc13170576d676ef6b036d3252e5fd4c90a98adcb939",
       "origin": "frozen-compatibility-unknown-authorship",
       "date": "2026-09-07",
       "source": "editorial/review-ledger.md:34 Archived Claude tools: preserved compatibility text; preserve frozen scope",
-      "note": "Preservation requirement and compatibility scope; no claim Ani authored or explicitly approved every sentence. Exclude from ordinary voice rewrite demand."
+      "note": "Preservation requirement and compatibility scope; no claim Ani authored or explicitly approved every sentence. Exclude from ordinary voice rewrite demand. On September 8 Ani requested moving this page into Claude Code navigation; only navigation.scope changed, and the compatibility prose remains identical."
     },
     {
       "id": "grok-computer-view-accepted-body",

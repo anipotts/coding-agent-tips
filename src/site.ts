@@ -47,7 +47,7 @@ export const handbookScopes = [
   {
     id: 'claude-code', label: 'claude code', href: '/guides/claude-code/', order: 30, public: true,
     providerIcon: '/icons/products/claude-code.png', providerIconDark: '/icons/products/claude-code.png',
-    providerIconSource: 'https://code.claude.com/docs/en/overview', providerIconCheckedAt: '2026-08-29',
+    providerIconSource: 'https://claude.ai/images/claude_app_icon.png', providerIconCheckedAt: '2026-09-08',
   },
   {
     id: 'grok', label: 'grok', href: '/guides/grok/', order: 40, public: true,
@@ -90,10 +90,4 @@ export function homepageHighlightsForScope(scope: NavigationScope) {
 
 export function chapterForOrder(order: number): HandbookChapter | undefined {
   return handbookChapters.find((chapter) => chapter.order === order);
-}
-
-export function scopeForPath(pathname: string): NavigationScope {
-  const provider = handbookScopes.find((scope) => scope.id !== 'handbook' && pathname.startsWith(`/guides/${scope.id}/`));
-  if (provider) return provider.id;
-  return 'handbook';
 }

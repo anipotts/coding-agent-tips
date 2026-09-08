@@ -45,11 +45,13 @@ html:has(.publication-sidebar[data-state='collapsed']) { --left-rail-width: var(
 .guide-rail-identity .sidebar-label { min-inline-size: 0; margin: 0; display: flex; gap: .25rem; }
 .provider-product-icon.sidebar-provider-icon {
   --provider-product-icon-size: 1.75rem;
-  overflow: visible;
+  overflow: hidden;
   border: 0;
-  border-radius: 0;
+  border-radius: var(--radius-sm);
   background: transparent;
 }
+/* The Codex assets include an 18px transparent inset on a 192px canvas. */
+.sidebar-provider-icon-codex img { transform: scale(1.2); }
 
 .publication-sidebar [data-sw-sidebar-trigger] {
   inline-size: 2rem;

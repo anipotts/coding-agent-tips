@@ -6,7 +6,7 @@ import Edit from '@tabler/icons/outline/edit.svg';
 import FileText from '@tabler/icons/outline/file-text.svg';
 import Link from '@tabler/icons/outline/link.svg';
 import UpdatedAt from './UpdatedAt.astro';
-import { scopeForPath, site } from '../site';
+import { site } from '../site';
 import { Button } from './starwind/button';
 import { ButtonGroup } from './starwind/button-group';
 import {
@@ -21,7 +21,7 @@ const entry = Astro.locals.starlightRoute.entry;
 const { title, updatedAt, draft } = entry.data;
 const markdownPath = `${Astro.url.pathname.replace(/\/$/, '') || '/index'}.md`;
 const editPath = `${site.repository}/edit/main/content/${entry.id}.md`;
-const isProviderGuide = scopeForPath(Astro.url.pathname) !== 'handbook';
+const isProviderGuide = entry.data.navigation.scope !== 'handbook';
 ---
 
 <div class:list={['page-title-row', { 'provider-guide-title-row': isProviderGuide }]}>

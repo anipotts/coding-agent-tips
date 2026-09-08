@@ -5,6 +5,12 @@ export type HandbookEntry = CollectionEntry<'docs'>;
 
 export const routeForEntry = (entry: HandbookEntry) => `/${entry.id.replace(/\/$/, '')}/`;
 
+export async function scopeForPath(pathname: string): Promise<NavigationScope> {
+  const route = `${pathname.replace(/\/$/, '')}/`;
+  const entries = await getCollection('docs');
+  return entries.find((entry) => routeForEntry(entry) === route)?.data.navigation.scope ?? 'handbook';
+}
+
 export async function getHandbookPages(options: { includeHidden?: boolean; includeArchive?: boolean; includeDrafts?: boolean; scope?: NavigationScope } = {}) {
   const { includeHidden = false, includeArchive = true, includeDrafts = false, scope } = options;
   const scopeOrder = new Map(handbookScopes.map((item) => [item.id, item.order]));

@@ -129,6 +129,10 @@ Do not add a permanent right table of contents or a second intermediate navigati
 
 Shared pages use the same publication shell without pretending to belong to a provider. Chronology, comparisons, and methods may use timelines, tables, or aligned evidence rows when those structures improve retrieval.
 
+Archived Claude Code tools belong to the Claude Code navigation group, including
+the mobile page picker. The archive URL and compatibility text remain stable.
+Navigation scope comes from each page's canonical frontmatter.
+
 The shared handbook rail starts with a quiet “contents” label and its collapse
 control. The site logo appears in the main header; provider rails retain their
 product identity. Native X embeds are centered at a maximum width of 360px,
@@ -292,6 +296,10 @@ The desktop rail may collapse to icons with accessible names and tooltips. On mo
 ### icons and provider identity
 
 Use Tabler icons supplied by the Starwind setup for interface actions. Use the verified provider product marks configured by the site. Keep optical size consistent within a control group, including search, theme, GitHub, page actions, menu, and sidebar triggers.
+
+Provider rail icons use the same 28px rounded frame. Compensate for transparent
+asset padding when matching visible size; retain the original mark. Use original
+high resolution assets for raster marks, including the 338px Claude app icon.
 
 An icon supplements a known action or identity. Prefer text when the symbol would require explanation. Keep decorative icons out of prose and metadata. Never approximate provider logos or use a mark to fill empty space.
 

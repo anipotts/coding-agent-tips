@@ -9,7 +9,7 @@ sources: [anthropic-features-overview]
 redirects: [/archive/, /legacy/]
 voice: frozen
 navigation:
-  scope: handbook
+  scope: claude-code
   order: 90
 ---
 

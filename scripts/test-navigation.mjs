@@ -355,6 +355,10 @@ try {
   for (const width of [375, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto(`${origin}/archive/claude-code-tools/`, { waitUntil: 'networkidle' });
+    expect(await page.locator('.provider-tabs [aria-current="page"]').getAttribute('href') === '/guides/claude-code/', 'archive must activate Claude Code rather than the shared handbook');
+    expect(await page.locator('.publication-sidebar [aria-current="page"]').getAttribute('href') === '/archive/claude-code-tools/', 'archive must remain reachable and active in the Claude Code chapter list');
+    const archiveGroup = page.locator('.mobile-page-options [data-slot="dropdown-group"]').filter({ has: page.locator('a[href="/archive/claude-code-tools/"]') });
+    expect((await archiveGroup.locator('[data-slot="dropdown-label"]').textContent())?.trim() === 'claude code', 'mobile archive entry must be grouped under Claude Code');
     await page.mouse.move(0, 0);
     await codeCopy.hover();
     const tooltip = page.locator('.code-copy-tooltip:not([hidden])');

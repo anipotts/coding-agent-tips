@@ -1,6 +1,6 @@
 ---
-import { getHandbookPages } from '../content';
-import { handbookScopes, scopeForPath, site } from '../site';
+import { getHandbookPages, scopeForPath } from '../content';
+import { handbookScopes, site } from '../site';
 import Book from '@tabler/icons/outline/book.svg';
 import ProviderProductIcon from './ProviderProductIcon.astro';
 import ChapterMenu from './ChapterMenu.astro';
@@ -15,7 +15,7 @@ import {
 } from './starwind/sidebar';
 
 const current = Astro.url.pathname;
-const activeScope = scopeForPath(current);
+const activeScope = await scopeForPath(current);
 const pages = await getHandbookPages({ scope: activeScope });
 const label = handbookScopes.find((scope) => scope.id === activeScope)?.label ?? 'handbook';
 const activeScopeMetadata = handbookScopes.find((scope) => scope.id === activeScope);
@@ -56,7 +56,7 @@ const providerIconDark = activeScopeMetadata && 'providerIconDark' in activeScop
           <p class="sidebar-label"><span>{site.interfaceCopy.contents}</span></p>
         ) : (
           <>
-            <ProviderProductIcon class="sidebar-provider-icon" light={providerIcon} dark={providerIconDark} size={28} />
+            <ProviderProductIcon class={`sidebar-provider-icon sidebar-provider-icon-${activeScope}`} light={providerIcon} dark={providerIconDark} size={28} />
             <p class="sidebar-label"><span>{label}</span><span class="sidebar-kind">guide</span></p>
           </>
         )}

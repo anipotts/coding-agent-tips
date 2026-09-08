@@ -11,10 +11,10 @@ import Compass from '@tabler/icons/outline/compass.svg';
 import GitBranch from '@tabler/icons/outline/git-branch.svg';
 import Home from '@tabler/icons/outline/home.svg';
 import ShieldCheck from '@tabler/icons/outline/shield-check.svg';
-import { getHandbookPages, routeForEntry } from '../content';
+import { getHandbookPages, routeForEntry, scopeForPath } from '../content';
 import ChapterMenu from './ChapterMenu.astro';
 import ProviderProductIcon from './ProviderProductIcon.astro';
-import { chapterForOrder, navigationScopes, scopeForPath, site } from '../site';
+import { chapterForOrder, navigationScopes, site } from '../site';
 import { Button } from './starwind/button';
 import { Dropdown, DropdownContent, DropdownGroup, DropdownLabel, DropdownLinkItem, DropdownTrigger } from './starwind/dropdown';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from './starwind/sheet';
@@ -24,10 +24,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from './starwind/tooltip';
 
 const current = Astro.url.pathname;
 const HeaderTag = Astro.props.embedded ? 'div' : 'header';
-const activeScope = scopeForPath(current);
-const pages = await getHandbookPages({ includeArchive: false });
+const activeScope = await scopeForPath(current);
+const pages = await getHandbookPages();
 const activeScopeLabel = navigationScopes.find((scope) => scope.id === activeScope)?.label ?? 'handbook';
-const mobileNavigationLabel = (page: (typeof pages)[number]) => scopeForPath(routeForEntry(page)) === 'handbook'
+const mobileNavigationLabel = (page: (typeof pages)[number]) => page.data.navigation.scope === 'handbook'
   ? page.data.title
   : chapterForOrder(page.data.navigation.order)?.label ?? page.data.title;
 const activePage = pages.find((page) => routeForEntry(page) === current);
@@ -94,7 +94,7 @@ const chapterIcons = {
                       <span>{scope.label}</span>
                     </DropdownLabel>
                     {scope.id === 'handbook' && <DropdownLinkItem href="/" closeOnClick data-sw-drawer-close><Home aria-hidden="true" /><span>handbook home</span></DropdownLinkItem>}
-                    {pages.filter((page) => scopeForPath(routeForEntry(page)) === scope.id).map((page) => {
+                    {pages.filter((page) => page.data.navigation.scope === scope.id).map((page) => {
                       const chapter = chapterForOrder(page.data.navigation.order);
                       const PageIcon = chapter ? chapterIcons[chapter.icon] : Book;
                       return (
