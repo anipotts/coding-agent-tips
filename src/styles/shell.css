@@ -170,7 +170,6 @@ html[data-theme='dark'] .hero-provider-grok .hero-provider-mark { filter: none; 
 }
 
 .home-content > p:first-of-type { max-width: 68ch; }
-.home-content h2 + p { max-width: 68ch; }
 .home-content table { width: 100%; margin-top: 1.5rem; border-collapse: collapse; }
 .home-content th { padding: .75rem 1rem; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--rule); text-align: left; }
 .home-content td { padding: .75rem 1rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
