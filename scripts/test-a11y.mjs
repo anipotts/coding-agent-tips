@@ -81,8 +81,8 @@ try {
         }
 
         const displaySize = viewportWidth < 768
-          ? Math.min(44, Math.max(32, viewportWidth * .085))
-          : viewportWidth < 960 ? Math.min(64, Math.max(44, viewportWidth * .05)) : Math.min(86, Math.max(56, viewportWidth * .0577));
+          ? Math.min(36, Math.max(32, viewportWidth * .085))
+          : Math.min(60, Math.max(44, viewportWidth * .042));
         const titleSize = Math.min(48, Math.max(36, viewportWidth * .04));
         const headingSize = Math.min(32, Math.max(28, viewportWidth * .02));
         if (route === '/') checkRole(elements('.home-content h1'), { size: displaySize, line: displaySize, weight: 600, family: 'Instrument Sans', color: ink }, 'display h1');

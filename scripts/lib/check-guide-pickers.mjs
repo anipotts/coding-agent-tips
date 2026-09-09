@@ -13,11 +13,15 @@ export async function verifyGuidePickers({ browser, origin }) {
         await page.goto(origin, { waitUntil: 'networkidle' });
         assert.equal(await page.locator('.provider-tabs').count(), 0, 'retired tabs are absent');
         assert.equal(await page.locator('.hero-provider-link').count(), 3);
-        assert.equal(await page.locator('.home-content > p').first().textContent().then((s) => s.replace(/\s+/g, ' ').trim()), 'practical guidance for working with AI under constraints and tradeoffs of the real world.');
+        assert.equal(await page.locator('.home-content h1 + p').textContent().then((s) => s.replace(/\s+/g, ' ').trim()), 'practical guidance for working with ai under real world constraints and tradeoffs.');
+        assert.equal(await page.locator('.hero-scope').count(), 0);
+        assert.deepEqual(await page.locator('h1 .hero-heading-line').allTextContents(), ['a casual guide to', 'coding agents', 'in real software']);
         const geometry = await page.evaluate(() => {
           const highlight = document.querySelector('.keyword-highlight');
           return {
             overflow: document.documentElement.scrollWidth - innerWidth,
+            highlightColor: getComputedStyle(highlight).color,
+            highlightBackground: getComputedStyle(highlight).backgroundColor,
             buttons: [...document.querySelectorAll('.hero-provider-link')].map((button) => ({
               label: button.textContent.trim(), href: button.getAttribute('href'),
               radius: getComputedStyle(button).borderRadius,
@@ -26,8 +30,10 @@ export async function verifyGuidePickers({ browser, origin }) {
             })),
           };
         });
+        assert.equal(geometry.highlightColor, colorScheme === 'dark' ? 'rgb(255, 255, 255)' : 'rgb(18, 71, 230)');
+        assert.equal(geometry.highlightBackground, colorScheme === 'dark' ? 'rgb(36, 84, 244)' : 'rgba(0, 0, 0, 0)');
         assert.equal(geometry.overflow, 0, `${width}px homepage overflows`);
-        assert.deepEqual(geometry.buttons.map(({ label }) => label), ['codex', 'claude code', 'grok']);
+        assert.deepEqual(geometry.buttons.map(({ label }) => label), ['codex', 'claude', 'grok']);
         assert.deepEqual(geometry.buttons.map(({ href }) => href), ['/guides/codex/', '/guides/claude-code/', '/guides/grok/']);
         assert.ok(geometry.buttons.every((button) => button.inView && button.radius === button.highlightRadius));
         const trigger = page.locator('.header-guide-picker-trigger');

@@ -1,171 +1,43 @@
 ---
-import Adjustments from '@tabler/icons/outline/adjustments.svg';
-import AppWindow from '@tabler/icons/outline/app-window.svg';
 import ArrowRight from '@tabler/icons/outline/arrow-right.svg';
-import Book from '@tabler/icons/outline/book.svg';
 import BrandGithub from '@tabler/icons/outline/brand-github.svg';
-import ChevronLeft from '@tabler/icons/outline/chevron-left.svg';
-import ChevronRight from '@tabler/icons/outline/chevron-right.svg';
-import Compass from '@tabler/icons/outline/compass.svg';
 import { getEntry, render } from 'astro:content';
 import { getHomepagePages, routeForEntry } from '../content';
-import ProviderProductIcon from '../components/ProviderProductIcon.astro';
 import UpdatedAt from '../components/UpdatedAt.astro';
 import AuthorAttribution from '../components/AuthorAttribution.astro';
-import { Button } from '../components/starwind/button';
-import { Card } from '../components/starwind/card';
-import { Item, ItemContent, ItemDescription, ItemTitle } from '../components/starwind/item';
-import { Separator } from '../components/starwind/separator';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { homepageHighlightsForScope, navigationScopes, site } from '../site';
+import { site } from '../site';
 
 const home = await getEntry('home', 'home');
 if (!home) throw new Error('content/home.md is required');
 const { Content } = await render(home);
-const guides = await getHomepagePages();
-const providerGroups = navigationScopes
-  .filter((scope) => scope.id !== 'handbook')
-  .map((scope) => {
-    const pages = guides.filter((guide) => guide.data.navigation.scope === scope.id);
-    return {
-      ...scope,
-      pages,
-      overview: pages.find((page) => page.data.navigation.order === 10),
-      highlights: homepageHighlightsForScope(scope.id),
-      providerIconDark: 'providerIconDark' in scope ? scope.providerIconDark : undefined,
-    };
-  })
-  .filter((scope) => scope.pages.length > 0);
-const sharedGuides = guides.filter((guide) => guide.data.navigation.scope === 'handbook');
-const highlightIcons = {
-  'ph:app-window': AppWindow,
-  'ph:sliders-horizontal': Adjustments,
-  'ph:arrow-right': ArrowRight,
-  'ph:book-open-text': Book,
-  'ph:compass': Compass,
-} as const;
+const sharedGuides = (await getHomepagePages()).filter((guide) => guide.data.navigation.scope === 'handbook');
 ---
 
 <BaseLayout title={home.data.title} description={home.data.description}>
   <main id="main">
     <article class="home-content"><Content /></article>
-
-    <section class="home-guides" id="guides" aria-labelledby="guide-title">
-      <header class="home-guides-heading">
-        <p class="section-label">{site.interfaceCopy.guides}</p>
-        <h2 id="guide-title">choose where to begin</h2>
-      </header>
-      <div class="provider-handbook-grid" id="provider-guides" role="group" aria-label="coding agent guides" tabindex="0">
-        {providerGroups.map((group) => (
-          <section class="provider-handbook" aria-labelledby={`provider-${group.id}`}>
-            <Card class="provider-handbook-card" size="sm">
-            <header>
-              <h3 id={`provider-${group.id}`}>
-                <ProviderProductIcon light={group.providerIcon} dark={group.providerIconDark} />
-                {group.label}
-              </h3>
-              {group.overview && <p>{group.overview.data.description}</p>}
-            </header>
-            <nav aria-label={`${group.label} distinct guide entry points`}>
-              <ul>
-                {group.highlights.map((highlight) => (
-                  <li>
-                    <Item as="a" href={highlight.href} size="sm">
-                      <span class="provider-chapter-icon" aria-hidden="true">
-                        {(() => { const HighlightIcon = highlightIcons[highlight.icon]; return <HighlightIcon />; })()}
-                      </span>
-                      <ItemContent><ItemTitle>{highlight.label}</ItemTitle></ItemContent>
-                      <ArrowRight class="provider-chapter-arrow" aria-hidden="true" />
-                    </Item>
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            </Card>
-          </section>
+    <nav class="home-guides" id="guides" aria-label={site.interfaceCopy.sharedFoundations}>
+      <ul class="home-guide-list">
+        {sharedGuides.map((guide) => (
+          <li><a href={routeForEntry(guide)}><span>{guide.data.title}</span><ArrowRight aria-hidden="true" /></a></li>
         ))}
-      </div>
-      <div class="guide-carousel-controls" hidden>
-        <Button variant="outline" size="icon-sm" data-guide-previous aria-label="previous guide" aria-controls="provider-guides"><ChevronLeft aria-hidden="true" /></Button>
-        <span data-guide-position aria-live="polite" aria-atomic="true">1 / {providerGroups.length}</span>
-        <Button variant="outline" size="icon-sm" data-guide-next aria-label="next guide" aria-controls="provider-guides"><ChevronRight aria-hidden="true" /></Button>
-      </div>
-      <section class="shared-handbook" aria-labelledby="shared-guides">
-        <h3 id="shared-guides">{site.interfaceCopy.sharedFoundations}</h3>
-        <div class="home-guide-list">
-          {sharedGuides.map((guide) => (
-            <>
-              <Item as="a" href={routeForEntry(guide)} size="md">
-                <ItemContent>
-                  <ItemTitle>{guide.data.title}</ItemTitle>
-                  <ItemDescription class="home-guide-description">{guide.data.description}</ItemDescription>
-                </ItemContent>
-                <ArrowRight aria-hidden="true" />
-              </Item>
-              <Separator />
-            </>
-          ))}
-        </div>
-      </section>
-    </section>
-
+      </ul>
+    </nav>
   </main>
   <footer class="site-footer" id="site-footer">
     <div class="footer-identity">
-    <a class="site-name footer-site-name" href="/" aria-label={site.interfaceCopy.home}>
-      <img src="/favicon.svg" alt="" width="24" height="24" />
-      <span>{site.name}</span>
-    </a>
-    <AuthorAttribution />
+      <a class="site-name footer-site-name" href="/" aria-label={site.interfaceCopy.home}>
+        <img src="/favicon.svg" alt="" width="24" height="24" />
+        <span>{site.name}</span>
+      </a>
+      <AuthorAttribution />
     </div>
-    <p class="footer-meta">{site.interfaceCopy.lastUpdated} <UpdatedAt value={home.data.updatedAt} /></p>
     <nav aria-label="footer">
       <a href="/archive/">{site.interfaceCopy.archive}</a>
       <a href={site.releaseHistory}>{site.interfaceCopy.releases}</a>
       <a class="footer-github" href={site.repository} aria-label={site.interfaceCopy.github}><BrandGithub aria-hidden="true" /></a>
     </nav>
+    <p class="footer-meta">{site.interfaceCopy.lastUpdated} <UpdatedAt value={home.data.updatedAt} /></p>
   </footer>
 </BaseLayout>
-
-<script>
-  let cleanupGuideCarousel = () => {};
-  const setupGuideCarousel = () => {
-    cleanupGuideCarousel();
-    const track = document.querySelector<HTMLElement>('#provider-guides');
-    const controls = document.querySelector<HTMLElement>('.guide-carousel-controls');
-    const previous = controls?.querySelector<HTMLButtonElement>('[data-guide-previous]');
-    const next = controls?.querySelector<HTMLButtonElement>('[data-guide-next]');
-    const position = controls?.querySelector<HTMLElement>('[data-guide-position]');
-    if (!track || !controls || !previous || !next || !position) return;
-    const cards = [...track.querySelectorAll<HTMLElement>('.provider-handbook')];
-    const controller = new AbortController();
-    const mobile = matchMedia('(max-width: 47.99rem)');
-    let current = -1;
-    const offsets = () => cards.map((card) => card.getBoundingClientRect().left - track.getBoundingClientRect().left + track.scrollLeft);
-    const update = () => {
-      track.tabIndex = mobile.matches ? 0 : -1;
-      controls.hidden = !mobile.matches || cards.length < 2;
-      const locations = offsets();
-      const closest = locations.reduce((best, left, index) => Math.abs(left - track.scrollLeft) < Math.abs(locations[best] - track.scrollLeft) ? index : best, 0);
-      previous.disabled = closest === 0;
-      next.disabled = closest === cards.length - 1;
-      if (current === closest) return;
-      current = closest;
-      position.textContent = `${current + 1} / ${cards.length}`;
-    };
-    const move = (direction: number) => {
-      const index = Math.max(0, Math.min(cards.length - 1, current + direction));
-      track.scrollTo({ left: offsets()[index], behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
-    };
-    previous.addEventListener('click', () => move(-1), { signal: controller.signal });
-    next.addEventListener('click', () => move(1), { signal: controller.signal });
-    track.addEventListener('scroll', update, { passive: true, signal: controller.signal });
-    const observer = new ResizeObserver(update);
-    observer.observe(track);
-    update();
-    cleanupGuideCarousel = () => { controller.abort(); observer.disconnect(); };
-  };
-  document.addEventListener('astro:page-load', setupGuideCarousel);
-  document.addEventListener('astro:before-swap', () => cleanupGuideCarousel());
-  setupGuideCarousel();
-</script>

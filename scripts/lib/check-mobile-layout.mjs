@@ -11,30 +11,19 @@ export async function verifyMobileLayout({ browser, origin }) {
       page.on('pageerror', (error) => errors.push(error.message));
       try {
         await page.goto(origin, { waitUntil: 'networkidle' });
-        const track = page.locator('#provider-guides');
-        const next = page.getByRole('button', { name: 'next guide', exact: true });
-        const previous = page.getByRole('button', { name: 'previous guide', exact: true });
-        const position = page.locator('[data-guide-position]');
-        assert.ok(await previous.isDisabled(), 'first carousel card disables previous');
-        assert.equal(await track.evaluate((el) => getComputedStyle(el).scrollSnapType), 'x mandatory');
-        await next.focus();
-        await page.keyboard.press('Enter');
-        await page.waitForFunction(() => document.querySelector('[data-guide-position]')?.textContent === '2 / 3');
-        await page.keyboard.press('Enter');
-        await page.waitForFunction(() => document.querySelector('[data-guide-position]')?.textContent === '3 / 3');
-        assert.ok(await next.isDisabled(), 'last carousel card disables next');
-        await previous.focus();
-        await page.keyboard.press('Space');
-        await page.waitForFunction(() => document.querySelector('[data-guide-position]')?.textContent === '2 / 3');
-        await track.locator('a').first().focus();
-        await page.waitForFunction(() => document.querySelector('[data-guide-position]')?.textContent === '1 / 3');
-        assert.equal(await position.textContent(), '1 / 3', 'focusing a card link reveals that card and updates position');
+        assert.equal(await page.locator('.hero-provider-link').count(), 3);
+        assert.equal(await page.locator('.home-guide-list a').count(), 4);
+        await page.locator('.hero-provider-link').first().focus();
+        await page.keyboard.press('Tab');
+        assert.ok(await page.locator('.hero-provider-claude-code').evaluate((el) => el === document.activeElement));
+        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'homepage reflows without horizontal scrolling');
         assert.ok(await page.locator('.footer-site-name span').isVisible(), 'footer keeps its site name at 319px');
         assert.equal(await page.locator('.footer-meta').evaluate((el) => el.getBoundingClientRect().height), 18, 'compact footer timestamp uses one line');
         assert.ok((await page.locator('.footer-meta time').getAttribute('title')).includes('ET'), 'full timestamp remains available');
-        await page.setViewportSize({ width: 907, height: 856 });
-        assert.ok(await next.isHidden(), 'carousel buttons hide when cards form the desktop grid');
-        assert.equal(await track.getAttribute('tabindex'), '-1', 'desktop grid has no redundant keyboard stop');
+        await page.setViewportSize({ width: 320, height: 856 });
+        const spacing = await page.addStyleTag({ content: 'html{font-size:200%!important} *{line-height:1.5!important;letter-spacing:.12em!important;word-spacing:.16em!important} p{margin-bottom:2em!important}' });
+        assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), 'homepage supports 200% root text and WCAG spacing at 320px');
+        await spacing.evaluate((el) => el.remove());
         await page.setViewportSize({ width: 319, height: 856 });
         await page.goto(`${origin}/handbook/operating-agents/`, { waitUntil: 'networkidle' });
         const titleGeometry = await page.locator('.page-title-row').evaluate((el) => {
@@ -94,5 +83,5 @@ export async function verifyMobileLayout({ browser, origin }) {
       } finally { await context.close(); }
     }
   }
-  console.log('319px carousel, keyboard, metadata, page/prompt copy, search focus, and picker icons passed in both themes and motion preferences');
+  console.log('319px foundations index, keyboard, metadata, page/prompt copy, search focus, and picker icons passed in both themes and motion preferences');
 }
