@@ -392,3 +392,5 @@ body > main, body > .page, .site-footer { background: var(--surface-canvas); }
 @media (max-width: 47.99rem) {
   .hero-heading-line { display: block; }
 }
+
+html[data-theme="dark"] .homepage-header .guide-picker-trigger { color: color-mix(in srgb, var(--cobalt) 90%, #fff); }
