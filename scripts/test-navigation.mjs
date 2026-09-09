@@ -289,12 +289,14 @@ try {
     probe.style.color = 'var(--surface-subtle)';
     document.body.append(probe);
     const surfaceSubtle = getComputedStyle(probe).color;
+    probe.style.color = 'var(--surface-canvas)';
+    const canvasBackground = getComputedStyle(probe).color;
     probe.remove();
     return {
       kbdBackground: getComputedStyle(document.querySelector('.header-search kbd')).backgroundColor,
       surfaceSubtle,
       sidebarBackground: getComputedStyle(document.querySelector('.publication-sidebar [data-slot="sidebar-inner"]')).backgroundColor,
-      canvasBackground: getComputedStyle(document.body).backgroundColor,
+      canvasBackground,
     };
   });
   expect(darkChrome.kbdBackground === darkChrome.surfaceSubtle, 'dark search shortcut does not use the dark subtle surface');

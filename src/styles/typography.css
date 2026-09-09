@@ -53,13 +53,13 @@ body {
 }
 
 .home-content h1 {
-  font-size: var(--type-display-size);
+  font-size: clamp(2.75rem, 4.2vw, 3.75rem);
   letter-spacing: -.035em;
   line-height: 1;
 }
 
 @media (max-width: 47.99rem) {
-  :root { --type-display-size: clamp(2rem, 8.5vw, 2.75rem); }
+  .home-content h1 { font-size: clamp(2rem, 8.5vw, 2.25rem); }
 }
 
 :where(main, .run-inventory, .page-sources) h2 {
@@ -90,7 +90,7 @@ body {
 }
 
 .home-content h1 { margin-block: 0 1.5rem; }
-.home-content > p:first-of-type { margin-block: 0; }
+.home-content h1 + p { margin-block: 0; }
 .home-content h2 { margin-block: 3rem 1rem; }
 .home-guides h2 { margin-block: 0; }
 .home-guide-list h3, .home-guide-list p { margin: 0; }
@@ -161,9 +161,8 @@ body {
 }
 
 @media (min-width: 60rem) {
-  .home-content { --type-display-size: clamp(3.5rem, 5.77vw, 5.375rem); }
   .home-content :where(p, ul, ol) { font-size: 1.375rem; line-height: 2rem; }
-  .home-content > p:first-of-type { font-size: clamp(1.125rem, 1.75vw, 1.625rem); line-height: 1.5; }
+  .home-content h1 + p { font-size: clamp(1.125rem, 1.75vw, 1.625rem); line-height: 1.5; }
   .home-content h2 { font-size: 2.5rem; }
   .homepage-header .site-name { font-size: 1.125rem; }
   .homepage-header .guide-picker-trigger { font-size: 1rem; }
@@ -374,3 +373,5 @@ body {
 .sidebar-page-outline [data-active='true'] { font-weight: 600; }
 
 .publication-post-action { font-size: 16px; line-height: 1.5; font-weight: 600; }
+
+.home-guide-list a { font-weight: 600; }
