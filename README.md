@@ -9,7 +9,7 @@ this is my evidence backed guide to working with coding agents, whether you are 
 - [claude code](https://agents.anipotts.com/guides/claude-code/)
 - [grok](https://agents.anipotts.com/guides/grok/)
 - [start here](https://agents.anipotts.com/handbook/operating-agents/)
-- [choosing a coding agent setup](https://agents.anipotts.com/handbook/choosing-a-setup/)
+- [choosing an agent setup](https://agents.anipotts.com/handbook/choosing-a-setup/)
 - [how coding agents got here](https://agents.anipotts.com/handbook/history/)
 - [where this comes from](https://agents.anipotts.com/handbook/method-and-sources/)
 <!-- generated:guides:end -->

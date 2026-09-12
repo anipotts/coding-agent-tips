@@ -34,7 +34,7 @@ const contentFiles = canonicalContentFiles().map(({ route, file }) => [route, fi
 try { await access(path.join(root, 'public/favicon.svg')); } catch { failures.push('favicon source is missing'); }
 try { await access(path.join(root, 'public/social-card.png')); } catch { failures.push('social card source is missing'); }
 try { await access(path.join(root, 'public/robots.txt')); } catch { failures.push('robots source is missing'); }
-for (const icon of ['codex-light.png', 'codex-dark.png', 'claude-code.png', 'grok.png']) {
+for (const icon of ['codex.png', 'claude-code.png', 'grok.png']) {
   try { await access(path.join(root, 'public/icons/products', icon)); } catch { failures.push(`product icon is missing: ${icon}`); }
 }
 
@@ -157,20 +157,10 @@ for (const version of Object.values(registry.product_versions)) {
 }
 
 const home = await readFile(routeFile('/'), 'utf8');
-for (const expected of [
-  'control rooms and surfaces',
-  'config.toml, trust, and approvals',
-  'remote, cloud, and mobile steering',
-  'repository context and interfaces',
-  'config, settings, rules, and memory',
-  'web, Remote Control, and mobile',
-  'Grok Build and Grok Bot',
-  'settings and permissions',
-  'what still needs hands on testing',
-  'shared foundations',
-]) if (!text(home).includes(expected)) failures.push(`/: homepage comparison is missing: ${expected}`);
+if ((home.match(/class="home-guide-list"/g) ?? []).length !== 1) failures.push('/: missing foundations index');
+if (home.includes('provider-handbook-card') || home.includes('data-guide-next')) failures.push('/: retired directory carousel remains');
 if (text(home).includes('across agents')) failures.push('/: retired shared-guide framing appears on the homepage');
-for (const icon of ['codex-light.png', 'claude-code.png', 'grok.png']) {
+for (const icon of ['codex.png', 'claude-code.png', 'grok.png']) {
   if (!home.includes(`/icons/products/${icon}`)) failures.push(`/: product icon is absent from the homepage: ${icon}`);
 }
 for (const slug of ['codex', 'claude-code', 'grok']) {
@@ -184,11 +174,13 @@ for (const route of draftGuides) {
   try { await access(routeFile(route)); failures.push(`${route}: draft route exists in production output`); } catch {}
   if (home.includes(`href="${route}"`)) failures.push(`${route}: draft route is linked from the production homepage`);
 }
+if (home.includes('hero-scope')) failures.push('/: retired hero scope must be absent');
+if ((home.match(/class="hero-heading-line"/g) ?? []).length !== 3) failures.push('/: hero requires three reflowable heading parts');
 const h1Values = [...home.matchAll(/<h1\b[^>]*>(.*?)<\/h1>/gs)].map((match) => text(match[1]));
 if (h1Values.length !== 1 || h1Values[0] !== canonicalH1) failures.push(`/: expected one exact canonical h1, received ${JSON.stringify(h1Values)}`);
 for (const item of metadata.filter((item) => item.route !== '/' && !item.source.includes(`${path.sep}archive${path.sep}`) && (item.scope === 'handbook' || item.order === 10))) {
   if (!home.includes(`href="${item.route}"`)) failures.push(`/: canonical guide link is missing: ${item.route}`);
-  if (!text(home).includes(item.description)) failures.push(`/: canonical guide description is missing: ${item.description}`);
+  // The foundations index intentionally renders titles only; descriptions remain canonical metadata.
 }
 
 for (const [alias] of Object.entries(contentRedirects())) {

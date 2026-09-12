@@ -1,5 +1,5 @@
 ---
-title: choosing a coding agent setup
+title: choosing an agent setup
 description: compare surfaces, harnesses, models, orchestration, and hardware before choosing a setup.
 products: [market]
 updatedAt: "2026-09-07T22:03:00-04:00"
