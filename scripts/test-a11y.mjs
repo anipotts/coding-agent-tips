@@ -81,8 +81,8 @@ try {
         }
 
         const displaySize = viewportWidth < 768
-          ? Math.min(44, Math.max(32, viewportWidth * .085))
-          : viewportWidth < 960 ? Math.min(64, Math.max(44, viewportWidth * .05)) : Math.min(86, Math.max(56, viewportWidth * .0577));
+          ? Math.min(36, Math.max(32, viewportWidth * .085))
+          : Math.min(60, Math.max(44, viewportWidth * .042));
         const titleSize = Math.min(48, Math.max(36, viewportWidth * .04));
         const headingSize = Math.min(32, Math.max(28, viewportWidth * .02));
         if (route === '/') checkRole(elements('.home-content h1'), { size: displaySize, line: displaySize, weight: 600, family: 'Instrument Sans', color: ink }, 'display h1');
@@ -110,7 +110,8 @@ try {
         checkRole(elements('td, .run-inventory li, .artifact-list li, .run-page dd'), { size: 16, line: 24, weight: 400, family: 'Instrument Sans', color: ink }, 'dense content');
         checkRole(elements('.page-sources li'), { size: 12, line: 16, weight: 400, family: 'Instrument Sans', color: ink }, 'source links');
         checkRole(elements('[data-slot="item-description"]'), { size: 16, line: 24, weight: 400, family: 'Instrument Sans', color: slate }, 'guide description');
-        const metadata = elements('.section-label, .home-guide-list span, .footer-meta, .sidebar-label, .page-meta, figcaption, .history-year, .run-header > p:first-child, .run-page dt, .run-evidence, .run-inventory span, .source-kinds, th');
+        checkRole(elements('.home-guide-list a'), { size: 18, line: 30, weight: 600, family: 'Instrument Sans', color: ink }, 'foundations links');
+        const metadata = elements('.section-label, .footer-meta, .sidebar-label, .page-meta, figcaption, .history-year, .run-header > p:first-child, .run-page dt, .run-evidence, .run-inventory span, .source-kinds, th');
         checkRole(metadata, { size: 12, line: 18, weight: 400, family: 'IBM Plex Mono', color: slate }, 'metadata');
         checkRole(elements('.site-name, .guide-picker-trigger, .search-trigger, .right-sidebar a, .right-sidebar h2, .site-footer a:not(.author-attribution a)').filter((el) => viewportWidth < 960 || !el.matches('.homepage-header .site-name, .homepage-header .guide-picker-trigger')), { size: 12, line: 16, family: 'Instrument Sans' }, 'navigation');
         if (viewportWidth >= 960) {

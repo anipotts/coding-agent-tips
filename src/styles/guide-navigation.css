@@ -50,8 +50,8 @@ html:has(.publication-sidebar[data-state='collapsed']) { --left-rail-width: var(
   border-radius: var(--radius-sm);
   background: transparent;
 }
-/* The Codex assets include an 18px transparent inset on a 192px canvas. */
-.sidebar-provider-icon-codex img { transform: scale(1.2); }
+
+
 
 .publication-sidebar [data-sw-sidebar-trigger] {
   inline-size: 2rem;
@@ -252,3 +252,7 @@ html:has(.publication-sidebar[data-state='collapsed']) { --left-rail-width: var(
     inline-size: calc(100dvw - 2 * var(--site-gutter));
   }
 }
+
+/* The header label remains readable under independent text enlargement. */
+.header-guide-picker-trigger { gap: .25em; padding-inline: .45em; }
+.header-guide-picker-trigger span { white-space: normal; overflow: visible; text-overflow: clip; overflow-wrap: anywhere; }

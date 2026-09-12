@@ -27,8 +27,8 @@ const scopePages = pages.filter((page) => page.data.navigation.scope === activeS
       <img src="/favicon.svg" alt="" width="24" height="24" />
       <span>{site.name}</span>
     </a>
+    {!Astro.props.embedded && <div class="header-guide-picker"><GuidePicker placement="header" /></div>}
     <div class="header-actions">
-      {!Astro.props.embedded && <div class="header-guide-picker"><GuidePicker placement="header" /></div>}
       <div class="header-search" transition:persist><Search /></div>
       <ThemeToggle class="site-header-control" variant="default" size="sm" ariaLabel="toggle color theme" />
       <Tooltip class="header-github">

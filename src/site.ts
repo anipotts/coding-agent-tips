@@ -73,17 +73,17 @@ export const handbookScopes = [
   { id: 'handbook', label: 'handbook', href: '/', order: 10, public: true, providerIcon: '/favicon.svg' },
   {
     id: 'codex', label: 'codex', href: '/guides/codex/', order: 20, public: true,
-    providerIcon: '/icons/products/codex-light.png', providerIconDark: '/icons/products/codex-dark.png',
+    providerIcon: '/icons/products/codex.png',
     providerIconSource: 'https://openai.com/index/introducing-the-codex-app/', providerIconCheckedAt: '2026-08-29',
   },
   {
-    id: 'claude-code', label: 'claude code', href: '/guides/claude-code/', order: 30, public: true,
+    id: 'claude-code', label: 'claude code', heroLabel: 'claude', href: '/guides/claude-code/', order: 30, public: true,
     heroIcon: '/icons/products/claude.svg', providerIcon: '/icons/products/claude-code.png', providerIconDark: '/icons/products/claude-code.png',
     providerIconSource: 'https://claude.ai/images/claude_app_icon.png', providerIconCheckedAt: '2026-09-08',
   },
   {
     id: 'grok', label: 'grok', href: '/guides/grok/', order: 40, public: true,
-    providerIcon: '/icons/products/grok.png', providerIconDark: '/icons/products/grok.png',
+    heroIcon: '/icons/products/grok.svg', providerIcon: '/icons/products/grok.png', providerIconDark: '/icons/products/grok.png',
     providerIconSource: 'https://grok.com/', providerIconCheckedAt: '2026-08-29',
   },
   { id: 'opencode', label: 'opencode', href: '/guides/opencode/', order: 50, public: false, providerIcon: '/favicon.svg' },
