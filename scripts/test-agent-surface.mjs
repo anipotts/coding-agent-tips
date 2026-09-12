@@ -184,7 +184,11 @@ try {
   assert.equal(await page.evaluate(() => window.__webmcpTest.maximumActive()), 5, 'registrations must abort before replacement');
   assert.deepEqual(await page.evaluate(() => window.__webmcpTest.activeNames()), AGENT_TOOL_NAMES);
   assert.deepEqual(errors, []);
-  const supportedText = (await page.locator('body').innerText()).replace(/\s+/g, ' ').trim();
+  // ClientRouter announces its destination separately from the public page copy.
+  const publicText = async (target) => (await target.locator('body').innerText()).replace(
+    (await target.locator('.astro-route-announcer').allTextContents()).join(''), ''
+  ).replace(/\s+/g, ' ').trim();
+  const supportedText = await publicText(page);
   await supported.close();
 
   const unsupported = await browser.newContext();
@@ -195,7 +199,7 @@ try {
   await fallbackPage.goto(`${origin}/guides/codex/configuration/`, { waitUntil: 'networkidle' });
   assert.equal(await fallbackPage.evaluate(() => document.modelContext), undefined);
   assert.equal(await fallbackPage.locator('[data-webmcp], webmcp').count(), 0, 'agent surface must render no visible UI');
-  assert.equal((await fallbackPage.locator('body').innerText()).replace(/\s+/g, ' ').trim(), supportedText, 'WebMCP support must not alter public text');
+  assert.equal(await publicText(fallbackPage), supportedText, 'WebMCP support must not alter public text');
   assert.deepEqual(fallbackErrors, []);
   await unsupported.close();
 

@@ -93,24 +93,31 @@ Compare matching routes, viewport sizes, themes, scroll positions, focus states,
 
 ### homepage
 
+The homepage hero uses one compact editorial H1. Its first two parts share a
+line when space permits; mobile separates the three parts and allows natural
+reflow under enlargement. “coding agents” uses blue text in light mode and
+white text on a cobalt highlight in dark mode. The subtitle and existing grey
+provider buttons follow directly, with a compact transition into the introduction.
+
 The homepage introduces one clear thesis and routes the reader into the handbook. Its hierarchy comes from a strong opening, compact guide groups, and direct shared-guide links.
 
-The selected homepage uses a visible “browse guides” menu in the slim header
-and compact neutral provider buttons after the subtitle. Each button contains
-a real provider mark, provider name, and arrow, with the same `8px` radius as
-the “coding agents” highlight. At `60rem` and wider the buttons are `56px`
-high; below that they are `40px` high and wrap naturally. The desktop hero
-uses an `82rem` maximum container and a fluid display size capped at `86px`.
-Homepage prose is `22px` on desktop and retains the shared `18px` reading
-size below `60rem`. Guide article typography retains its existing roles.
+The homepage uses the selected foundations index composition: grey provider buttons with transparent marks,
+names, and arrows beneath the subtitle, then the personal introduction and four
+shared handbook rows with titles and arrows. The header guide picker exposes all
+chapters. No lower provider cards, descriptions, or carousel duplicate those paths.
+Provider marks are 40px on desktop and 32px on phones; the links wrap as complete units
+with consistent gaps and the original grey surfaces and 8px rounding. Preserve natural row heights,
+ordinary text wrapping, and the highlight's ability to wrap during enlargement.
+Use Instrument Sans, the existing reading sizes, and progressive pretty paragraph
+wrapping. Use the official Grok vector from https://x.ai/legal/brand-guidelines.
 
-Keep the first screen legible without decorative hero art. Use open rows and restrained cards only where a group needs a boundary. Provider groups may share a grid because they have the same conceptual structure. Shared guides remain a simple publication list.
-
-Below `48rem`, provider cards use native horizontal scrolling with snap points
-and manual previous/next controls. They never rotate automatically. Preserve
-keyboard access to every card link, including without JavaScript. The mobile
-homepage display size is `clamp(32px, 8.5vw, 44px)`; the words and reading type
-remain unchanged. The footer stacks brand, links, and update date on mobile.
+The homepage footer shares the `82rem` content measure and `1rem` minimum
+side gutters, with one full width divider in both themes. Keep the site identity
+and author together, utility links opposite, and the quieter update date below.
+Below `30rem`, center the identity, links, and date in that reading order. This
+breakpoint follows the footer's content rather than the guide carousel: the
+two column footer still fits at tablet and larger phone widths. Allow wrapping
+when text is enlarged, and retain the footer site name at every width.
 
 ### provider guide pages
 
@@ -634,3 +641,7 @@ A design change is complete when:
 - repository and provider states are reported separately.
 
 The final test is simple: the page should feel more like coding agent tips after the change: clearer, more personal, more useful, and more technically credible without looking busier or manufactured.
+
+The homepage header centers the browse guides control between equal flexible side
+columns. It uses the existing soft control surface and 8px rounding, wrapping its
+label and utilities when enlarged rather than truncating navigation text.

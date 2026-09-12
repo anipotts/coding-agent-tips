@@ -15,8 +15,8 @@ function transformChildren(parent, options) {
       child.children = options.providerGuides.map((scope) => element('a', {
         href: scope.href, className: ['hero-provider-link', `hero-provider-${scope.id}`], 'data-astro-prefetch': 'hover',
       }, [
-        element('img', { src: scope.heroIcon ?? scope.providerIcon, alt: '', width: 24, height: 24, className: ['hero-provider-mark'] }),
-        element('span', {}, [{ type: 'text', value: scope.label }]),
+        element('img', { src: scope.heroIcon ?? scope.providerIcon, alt: '', width: 40, height: 40, className: ['hero-provider-mark'] }),
+        element('span', {}, [{ type: 'text', value: scope.heroLabel ?? scope.label }]),
         element('span', { className: ['hero-provider-arrow'], ariaHidden: 'true' }),
       ]));
     }
